@@ -43,31 +43,35 @@ Digital, reforça esse movimento de organização e monitoramento da transforma�
 digital na administração pública federal \cite{brasil2022decreto11260}.
 
 A avaliação da experiência digital, porém, não depende apenas de perguntar ao
-usuário se ele ficou satisfeito ao final do atendimento. Em serviços digitais, a
-dificuldade pode aparecer durante a navegação: excesso de cliques, permanência
-por tempo acima do esperado, retorno repetido a páginas anteriores, busca por
-serviços prioritários e abandono antes da conclusão. Métricas de uso, quando
-coletadas com finalidade clara e com cuidado em relação à privacidade, ajudam a
-identificar gargalos que um formulário isolado dificilmente revela
+usuário se ele ficou satisfeito ao final do atendimento. Em serviços digitais,
+excesso de cliques, permanência por tempo acima do esperado, retorno repetido a
+páginas anteriores e abandono antes da conclusão constituem evidências
+comportamentais de possível dificuldade. Esses sinais não medem qualidade
+percebida e não autorizam, isoladamente, concluir que a experiência foi ruim.
+Quando coletados com finalidade clara e com cuidado em relação à privacidade,
+eles ajudam a localizar pontos da jornada que devem ser investigados e
+confrontados com a percepção declarada pelo usuário
 \cite{deloneMclean2003,govuk2021completionRate,brasil2018lgpd}.
 
 A proposta deste TCC é criar um avaliador de serviços públicos para ambientes
-digitais que una dois tipos de evidência. O primeiro tipo é comportamental: a API
-do protótipo registra cliques, página acessada, serviço associado, origem e tempo
-de navegação, calculando sinais de dificuldade a partir de faixas esperadas. O
-segundo tipo é declarativo: quando o usuário apresenta sinais de dificuldade ou
-permanece mais tempo que a média, o sistema pode abrir uma página simples de
-feedback com avaliação por estrelas, características do problema e uma pergunta
-de NPS. Para serviços marcados como prioritários ou de alto tráfego, como Imposto
-de Renda, o protótipo pode sugerir um redirecionamento ao caminho correto antes
-de solicitar o feedback.
+digitais que integre dois tipos de evidência sem tratá-los como equivalentes. O
+primeiro tipo é comportamental: a API do protótipo registra cliques, página
+acessada, serviço associado, origem e tempo de navegação, calculando sinais de
+possível dificuldade a partir de faixas esperadas. O segundo tipo é declarado ou
+perceptivo: quando um sinal comportamental aciona o convite, o usuário pode
+informar sua avaliação por estrelas, características do problema, NPS e
+comentário. Somente essa manifestação declarada permite analisar satisfação e
+qualidade percebida; a telemetria informa o contexto em que a percepção foi
+coletada. Para serviços marcados como prioritários ou de alto tráfego, como
+Imposto de Renda, o protótipo pode sugerir um redirecionamento ao caminho correto
+antes de solicitar o feedback.
 
 A ideia se inspira na simplicidade de avaliações presentes em plataformas
 digitais conhecidas pelo público, mas não pretende copiar sua lógica comercial.
 Em serviços públicos, a avaliação precisa apoiar participação social,
 transparência, melhoria contínua e priorização de correções. Por isso, o
-avaliador proposto combina interface simples para o cidadão, registro silencioso
-de sinais de dificuldade e visualização administrativa de alertas, sessões
+avaliador proposto combina interface simples para o cidadão, telemetria mínima
+de interação e visualização administrativa de alertas, sessões
 críticas, notas, NPS e pontos de melhoria. A versão desenvolvida neste TCC foi
 definida por meio de Lean Inception, usada para delimitar o MVP, suas personas,
 jornadas, funcionalidades e critérios de validação
@@ -96,10 +100,19 @@ sucesso de sistemas de informação
 \cite{delightedResponseRate,surveymonkeyResponseRate,govuk2021usingData,deloneMclean2003}.
 
 Este trabalho parte da seguinte questão de pesquisa: como propor e prototipar um
-avaliador de serviços públicos digitais que identifique sinais de dificuldade na
-navegação, colete feedback contextual de baixo esforço e organize informações
-mais úteis para a melhoria dos serviços avaliados do que um formulário estático
-exibido apenas ao final da jornada?
+avaliador de serviços públicos digitais que identifique sinais de possível
+dificuldade na navegação, colete feedback contextual de baixo esforço e organize
+informações úteis para a melhoria dos serviços avaliados?
+
+A comparação entre os fluxos foi formalizada como hipótese de pesquisa: o
+feedback solicitado de forma contextual, próximo ao sinal de possível
+dificuldade, pode produzir maior participação e evidências declaradas mais
+específicas do que um formulário apresentado somente ao final da jornada. As
+variáveis dependentes previstas são taxa de resposta, taxa de conclusão, esforço
+percebido, qualidade e especificidade dos comentários, abandono ou interrupção
+provocada pelo convite e percepção de adequação do momento da pergunta. A
+avaliação com oito participantes observa apenas indícios iniciais dessas
+variáveis; a hipótese permanece pendente de teste controlado com amostra maior.
 
 \section{Objetivo Geral}
 
@@ -149,14 +162,14 @@ finalidades compatíveis com o interesse público. Além disso, a combinação e
 eventos de navegação e feedback declarado permite que o gestor observe tanto o
 que o usuário informou quanto o que ocorreu durante a jornada digital.
 
-Do ponto de vista técnico-científico, o trabalho aproxima qualidade de serviço,
-experiência do usuário, design centrado no usuário, sucesso de sistemas de
-informação, prototipação e melhoria pública. Essa aproximação é relevante porque
-o problema não é apenas criar mais um formulário, mas projetar um artefato capaz
-de transformar sinais de navegação e percepções declaradas em dados úteis para
-decisão. Na prática, a contribuição ganha forma em uma API, em telas navegáveis,
-em regras de detecção de dificuldade e em indicadores administrativos que podem
-ser avaliados, criticados e refinados a partir de uma base técnica explícita
+Do ponto de vista científico, o trabalho explicita uma hipótese e um modelo de
+análise que mantêm separados os indícios comportamentais da percepção declarada,
+permitindo investigar como sua combinação pode tornar o feedback mais situado e
+acionável. Do ponto de vista tecnológico, a contribuição é um artefato auditável
+composto por API, telas navegáveis, regras explícitas de acionamento e painel
+administrativo. A contribuição, portanto, não é apenas um formulário ou um
+``avaliador'', mas a integração rastreável entre contexto de navegação e relato
+do cidadão, passível de avaliação, crítica e refinamento
 \cite{deloneMclean2003,hevner2004designscience,Sommerville2007}.
 
 \section{Escopo Inicial}
@@ -172,8 +185,11 @@ prototipação como forma de reduzir incertezas antes de uma solução definitiv
 mantém cuidado com minimização de dados pessoais
 \cite{Sommerville2007,brasil2018lgpd}.
 
-A validação prevista para esta etapa será preliminar, por análise do protótipo,
-demonstração de uso e revisão da coerência entre o fluxo proposto, os fundamentos
-teóricos e os dados coletados. Testes com usuários reais, integração com portais
-governamentais, calibração estatística das faixas esperadas e avaliação de
-impacto ficam como evolução possível para etapas posteriores.
+A validação desta etapa é caracterizada como uma avaliação exploratória
+preliminar em ambiente controlado. Ela combina verificação funcional, avaliação
+heurística interna/preliminar conduzida pelos autores e sessões com oito
+participantes externos ao grupo de desenvolvimento. Esse procedimento produz
+indícios sobre o artefato, mas não equivale a validação em contexto real de
+prestação de serviço público nem permite generalização estatística. Integração
+com portais governamentais, calibração dos limiares e avaliação de impacto ficam
+como evolução para etapas posteriores.

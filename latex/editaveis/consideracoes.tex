@@ -1,19 +1,21 @@
 \chapter{Considerações Finais}
 
-Este trabalho teve como objetivo propor e desenvolver um protótipo inicial de
-Avaliador de Serviços Públicos digitais, capaz de registrar sinais de dificuldade
-na navegação, solicitar feedback contextual de baixo esforço e apresentar
-indicadores agregados para apoiar a melhoria dos serviços avaliados. A proposta
-partiu de um problema prático: avaliações exibidas apenas ao final da jornada nem
-sempre capturam o momento em que o usuário se perde, demora ou abandona a busca
-por um serviço.
+Este trabalho teve como objetivo conceber e desenvolver um protótipo inicial de
+avaliação contextual de serviços públicos digitais, capaz de registrar sinais de
+possível dificuldade na navegação, solicitar feedback de baixo esforço e
+apresentar indicadores agregados para apoiar a melhoria dos serviços avaliados.
+A proposta partiu de um problema prático: avaliações exibidas apenas ao final da
+jornada nem sempre capturam o contexto em que o usuário se perde, demora ou
+abandona a busca por um serviço.
 
 A revisão teórica indicou que a avaliação de serviços públicos precisa combinar
 satisfação, qualidade percebida, efetividade, usabilidade e orientação para
 melhoria. Também reforçou que uma nota geral, isoladamente, explica pouco sobre o
-problema vivido pelo cidadão. Por isso, o protótipo combina dois tipos de dado:
-sinais comportamentais, como cliques e tempo de permanência, e feedback
-declarado, como estrelas, atributos do problema, NPS e comentário opcional.
+problema vivido pelo cidadão. Por isso, o protótipo relaciona dois tipos de
+evidência sem tratá-los como equivalentes: evidências comportamentais de contexto,
+como cliques e tempo de permanência, e evidências declaradas, como estrelas,
+atributos do problema, NPS e comentário opcional. As primeiras indicam possíveis
+pontos de investigação; somente as segundas expressam a percepção do usuário.
 
 A Lean Inception contribuiu para transformar a ideia inicial em um MVP mais
 delimitado. As dinâmicas de escopo, objetivos, personas, jornadas,
@@ -25,10 +27,12 @@ governamentais.
 
 O protótipo desenvolvido demonstrou a viabilidade técnica do fluxo proposto. A
 solução local registra eventos de navegação, aplica regras explícitas de
-detecção, exibe popup de redirecionamento para serviços prioritários, abre uma
-página de feedback e apresenta dados administrativos agregados. A contribuição do
-artefato está em mostrar como o momento da dificuldade pode ser associado ao
-serviço acessado, ao tipo de sinal observado e ao motivo declarado pelo usuário.
+acionamento, exibe popup de redirecionamento para serviços prioritários, abre uma
+página de feedback e apresenta dados administrativos agregados. A contribuição
+científica está na hipótese e no modelo de análise que distinguem comportamento
+observado de percepção declarada. A contribuição tecnológica está no artefato que
+associa essas fontes de evidência ao serviço e ao ponto da jornada em que o
+convite foi acionado.
 
 \section{Resultados em Relação aos Objetivos}
 
@@ -60,16 +64,19 @@ avaliações, NPS e pontos recorrentes de melhoria. O protótipo já organiza es
 dados em eventos de clique, eventos de tempo, alertas administrativos e
 feedbacks estruturados. Também disponibiliza endpoints de consulta para o painel.
 A comparação entre avaliação estática e feedback contextual, entretanto, ainda
-não possui resultado estatístico, pois depende de coleta com participantes em
-cenário controlado. Nesta etapa, o resultado concreto foi deixar a estrutura
-técnica preparada para medir essa comparação em uma validação posterior.
+não possui resultado estatístico. A avaliação exploratória com oito participantes
+produziu indícios iniciais em cenário controlado e demonstrou que a estrutura
+técnica permite medir a comparação, mas não confirmou superioridade de um fluxo.
 
 \section{Limitações}
 
-A principal limitação é a ausência de validação com uma amostra real de usuários
-finais. O protótipo permite executar o fluxo completo, mas ainda não mede, com
-base empírica suficiente, se o feedback contextual aumenta a taxa de resposta ou
-melhora a qualidade dos dados quando comparado a um formulário estático.
+A principal limitação é o tamanho e a seleção da amostra. A avaliação exploratória
+preliminar com oito participantes permitiu observar indícios sobre o uso do
+protótipo, mas não oferece base empírica suficiente para afirmar que o feedback
+contextual aumenta a taxa de resposta ou melhora a qualidade dos dados quando
+comparado a um formulário estático. Além disso, a avaliação heurística foi
+interna/preliminar, conduzida pelos autores, e não substitui inspeção independente
+por especialistas ou avaliação com gestores públicos.
 
 O desenvolvimento também evidencia uma limitação organizacional. A tecnologia,
 isoladamente, não garante melhoria de serviços públicos. Para que o Avaliador
@@ -101,15 +108,15 @@ comprovação de impacto em produção.
 
 \section{Trabalhos Futuros}
 
-Os trabalhos futuros devem avançar em três frentes. A primeira é a validação com
-usuários. Para isso, recomenda-se organizar um estudo controlado com dois fluxos:
-no fluxo A, o usuário navega e recebe apenas um formulário estático ao final; no
-fluxo B, o sistema monitora sinais de dificuldade e solicita feedback contextual.
-Essa comparação deve medir taxa de resposta, tempo até a resposta, quantidade de
-atributos selecionados, qualidade dos comentários, taxa de abandono e clareza dos
-dados gerados para o gestor. Só depois dessa coleta será possível afirmar, com
-base empírica, se o feedback contextual supera o formulário estático no cenário
-avaliado.
+Os trabalhos futuros devem avançar em três frentes. A primeira é testar a
+hipótese comparativa com amostra maior, participantes mais diversos e protocolo
+previamente definido. No fluxo A, o usuário recebe um formulário estático ao
+final; no fluxo B, o sistema usa sinais comportamentais para solicitar feedback
+contextual. As variáveis dependentes devem incluir taxa de resposta, taxa de
+conclusão, esforço percebido, qualidade e especificidade dos comentários,
+abandono ou interrupção provocada e percepção de adequação do momento da
+pergunta. Só depois dessa coleta será possível avaliar, com evidência mais
+consistente, se um fluxo apresenta vantagens no cenário estudado.
 
 A segunda frente é a calibração técnica. Os limiares atuais de clique e tempo
 foram definidos para demonstrar o funcionamento do protótipo. Em uma evolução, o
@@ -128,6 +135,13 @@ Também seria necessário validar se os indicadores gerados realmente apoiam a
 decisão administrativa, por exemplo, priorização de páginas confusas, revisão de
 linguagem, redução de etapas e reorganização de menus.
 
+Uma quarta frente é a avaliação externa do artefato. A avaliação heurística
+interna/preliminar deve ser complementada por inspeção independente de
+especialistas em usabilidade, Engenharia de Software ou governo digital e por
+walkthrough com gestores públicos. Essa etapa deve permanecer separada do teste
+de usabilidade com cidadãos, pois responde a perguntas técnicas e gerenciais
+distintas.
+
 \section{Conclusão}
 
 Conclui-se que o Avaliador de Serviços Públicos proposto é uma alternativa
@@ -142,9 +156,11 @@ melhorada.
 O artefato desenvolvido mostra que é tecnicamente possível registrar eventos de
 navegação em uma sessão anônima, aplicar regras de detecção, sugerir
 redirecionamento em serviços prioritários, solicitar feedback de baixo esforço e
-organizar os dados em indicadores administrativos. Mesmo sem validação
-estatística ampla nesta etapa, o protótipo deixa pronta uma base mensurável para
-testar a hipótese em etapa posterior.
+organizar os dados em indicadores administrativos. A avaliação exploratória
+preliminar com oito participantes produziu indícios favoráveis a aspectos do
+fluxo contextual, mas não permite generalização, atribuição causal ou afirmação de
+superioridade. Seu resultado principal foi demonstrar a exequibilidade do
+protocolo e deixar uma base mensurável para testar a hipótese posteriormente.
 
 O percurso do trabalho também mostra que a solução não nasce apenas de uma
 decisão técnica de implementação. Ela foi delimitada por fundamentos de governo
@@ -154,10 +170,11 @@ sequenciamento e critérios de verificação. Isso torna a proposta mais defens�
 como trabalho de Engenharia de Software, pois conecta problema, método, protótipo
 e indicadores.
 
-A principal contribuição do trabalho está na integração entre fundamentos de
-avaliação de serviços públicos, Lean Inception, design centrado no usuário,
-prototipação de software e uma API demonstrável para análise da experiência
-digital. A proposta torna mais concreta a ideia de que a melhoria de serviços
-públicos digitais pode ser apoiada por dados de contexto, desde que esses dados
-sejam coletados com finalidade clara, baixo esforço para o cidadão e respeito à
-privacidade.
+A principal contribuição científica do trabalho é organizar uma hipótese
+avaliável sobre o momento da coleta e distinguir explicitamente evidências
+comportamentais de evidências declaradas de qualidade percebida. A contribuição
+tecnológica é um protótipo auditável que integra telemetria de interação,
+acionamento contextual, feedback estruturado e visualização administrativa. A
+proposta torna concreta a combinação dessas fontes, desde que os dados sejam
+coletados com finalidade clara, baixo esforço para o cidadão, interpretação
+cautelosa e respeito à privacidade.

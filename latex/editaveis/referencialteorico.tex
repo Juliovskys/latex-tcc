@@ -133,29 +133,28 @@ trabalho.
 \caption{Marcos legais nacionais sobre avaliação de serviços públicos digitais}
 \label{tab:marcos-legais-avaliacao}
 \small
-\begin{tabular}{p{3.2cm} p{1.4cm} p{8.2cm}}
+\begin{tabular}{|p{3.2cm}|p{1.4cm}|p{8.2cm}|}
 \hline
 \textbf{Instrumento} & \textbf{Ano} & \textbf{Principais disposições relevantes} \\
 \hline
 Lei n\textsuperscript{o} 12.527 (LAI) \cite{brasil2011lei12527} & 2011 &
 Transparência ativa e passiva; base para acesso a informações públicas e dados
-sobre desempenho de serviços. \\
+sobre desempenho de serviços. \\ \hline
 Lei n\textsuperscript{o} 13.460 \cite{brasil2017lei13460} & 2017 &
 Direitos do usuário, participação na avaliação dos serviços e uso dos resultados
-para reorientação da prestação pública. \\
+para reorientação da prestação pública. \\ \hline
 Decreto n\textsuperscript{o} 9.094 \cite{brasil2017decreto9094} & 2017 &
 Simplificação do atendimento, Carta de Serviços ao Usuário e racionalização de
-exigências feitas ao cidadão. \\
+exigências feitas ao cidadão. \\ \hline
 Lei n\textsuperscript{o} 14.129 \cite{brasil2021lei14129} & 2021 &
 Governo digital, eficiência pública, desburocratização, canais digitais de
-participação e melhoria da prestação estatal. \\
+participação e melhoria da prestação estatal. \\ \hline
 Decreto n\textsuperscript{o} 11.260 \cite{brasil2022decreto11260} & 2022 &
 Elaboração e encaminhamento da Estratégia Nacional de Governo Digital, com
-organização das diretrizes de transformação digital. \\
+organização das diretrizes de transformação digital. \\ \hline
 Portaria SGD/ME n\textsuperscript{o} 548 \cite{brasil2022portaria548} & 2022 &
 Avaliação de satisfação dos usuários e padrões de qualidade para serviços
-públicos digitais. \\
-\hline
+públicos digitais. \\ \hline
 \end{tabular}
 
 \footnotesize Fonte: elaborada pelos autores com base na legislação federal
@@ -265,7 +264,7 @@ percepção global. A proposta não é transformar métricas privadas em objetiv
 público, mas usar instrumentos simples para gerar dados interpretáveis pelo
 gestor.
 
-\section{Experiência do Usuário e Avaliações Inspiradas em Plataformas Digitais}
+\section[Experiência do Usuário e Avaliações Digitais]{Experiência do Usuário e Avaliações Inspiradas em Plataformas Digitais}
 
 Plataformas digitais privadas popularizaram formas de avaliação de baixo esforço:
 nota de uma a cinco estrelas, comentários curtos, seleção de motivos e
@@ -296,6 +295,69 @@ as avaliações devem alimentar ciclos de melhoria contínua, funcionando como l
 de base para decisões e como indicador para acompanhar a evolução do serviço
 \cite{limaPereira2020modulo4,govuk2021usingData,govbrFerramentaAvaliacao}.
 
+\subsection{Posicionamento em relação a soluções existentes}
+
+Embora o protótipo dialogue com ferramentas existentes de avaliação e análise de
+experiência, sua contribuição não está em substituí-las nem em afirmar
+superioridade. A contribuição está em combinar, em um MVP auditável e voltado a
+serviços públicos, sinais simples de possível dificuldade durante a navegação,
+coleta contextual de baixo esforço e organização administrativa dos dados por
+serviço e atributo.
+
+A ferramenta oficial de avaliação do gov.br constitui uma referência
+institucional para medir satisfação em serviços públicos digitais. Ferramentas
+comerciais como Hotjar e Microsoft Clarity oferecem funcionalidades de analytics
+comportamental, mapas de calor, gravações de sessão e feedback. Suas páginas de
+documentação são utilizadas neste trabalho somente para caracterização
+tecnológica das funcionalidades declaradas, e não como evidência científica de
+eficácia ou adequação ao setor público \cite{govbrFerramentaAvaliacao,hotjar2026,microsoftClarity2026}.
+O Government Digital Service, por sua vez, é uma fonte institucional e
+metodológica sobre uso de dados de desempenho na melhoria de serviços digitais
+\cite{govuk2021usingData}.
+
+A Tabela \ref{tab:posicionamento-solucoes} sintetiza esse posicionamento.
+
+\begin{table}[htbp]
+\centering
+\caption{Posicionamento da proposta em relação a soluções existentes}
+\label{tab:posicionamento-solucoes}
+\small
+\begin{tabular}{|p{3.0cm}|p{3.0cm}|p{3.4cm}|p{3.4cm}|}
+\hline
+\textbf{Solução} & \textbf{Foco principal} & \textbf{Contribuição} &
+\textbf{Limite em relação a este TCC} \\
+\hline
+Ferramenta de avaliação do gov.br & Avaliação institucional de satisfação &
+Padronização oficial no governo digital brasileiro & Não enfatiza, no escopo
+analisado, gatilhos baseados em cliques e tempo durante a jornada. \\
+\hline
+Hotjar & Analytics comportamental, mapas de calor, gravações e feedback &
+Observação de comportamento em sites & Documentação comercial; requer adaptação
+à governança pública e à minimização de dados. \\
+\hline
+Microsoft Clarity & Análise de sessões, mapas de calor e navegação &
+Observabilidade detalhada de páginas web & Documentação comercial; não constitui
+modelo de avaliação de serviço público. \\
+\hline
+GDS UK & Medição e melhoria de serviços digitais & Referência metodológica
+institucional para uso de dados & Contexto institucional distinto e sem
+equivalência direta ao protótipo. \\
+\hline
+Protótipo deste TCC & Feedback contextual em serviços públicos digitais
+simulados & Integra evidências comportamentais, feedback declarado e painel &
+MVP acadêmico com avaliação exploratória preliminar em ambiente controlado,
+ainda sem validação em contexto real de prestação de serviço público. \\
+\hline
+\end{tabular}
+
+\footnotesize Fonte: elaborada pelos autores (2026).
+\end{table}
+
+A comparação é documental e de posicionamento: baseia-se nas funcionalidades
+declaradas pelas fontes institucionais e comerciais, sem teste independente ou
+auditoria técnica das soluções. Assim, delimita a lacuna explorada pelo trabalho
+sem transformar documentação de ferramentas em evidência científica.
+
 \section{Métricas de Navegação e Sinais de Dificuldade}
 
 Além do feedback declarado pelo usuário, serviços digitais podem ser avaliados
@@ -310,10 +372,12 @@ O uso dessas métricas aproxima a avaliação de serviços públicos da avaliaç
 sistemas de informação. O modelo de sucesso de sistemas de informação de
 \citeonline{deloneMclean2003} relaciona qualidade do sistema, qualidade da
 informação, qualidade do serviço, uso, satisfação do usuário e benefícios
-líquidos. Para a solução proposta, cliques e tempo de navegação funcionam como
-indícios de uso e esforço; estrelas, atributos e NPS funcionam como percepção
-declarada; e o painel administrativo busca transformar esses registros em
-benefícios para a gestão.
+líquidos. Para a solução proposta, cliques, tempo e sequência de navegação são
+evidências comportamentais de possível esforço ou dificuldade. Eles não medem
+qualidade percebida. Estrelas, atributos, NPS e comentários constituem evidências
+declaradas da percepção do usuário. A contribuição analítica está em relacionar
+essas fontes sem fundi-las: a telemetria localiza o contexto e o feedback permite
+interpretar a percepção.
 
 O registro de eventos de navegação exige cuidado metodológico e jurídico. A
 coleta deve ser limitada ao necessário para a finalidade de melhoria do serviço,

@@ -11,8 +11,9 @@ a implementação técnica avançassem de forma coerente.
 A pesquisa é aplicada, pois busca propor uma solução computacional para um
 problema associado à avaliação e melhoria de serviços públicos digitais. Quanto
 aos objetivos, possui caráter exploratório, uma vez que organiza fundamentos
-existentes e os transforma em um artefato inicial, ainda sujeito a validação com
-usuários reais.
+existentes e os transforma em um artefato inicial. O artefato foi submetido a uma
+avaliação exploratória preliminar em ambiente controlado, ainda sem validação em
+contexto real de prestação de serviço público.
 
 A estratégia metodológica se aproxima da Design Science Research. Para
 \citeonline{hevner2004designscience}, pesquisas em sistemas de informação podem
@@ -21,10 +22,15 @@ modelos, métodos, arquiteturas e sistemas. O artefato deste TCC é um protótip
 composto por API, páginas simuladas, formulário de feedback e painel
 administrativo.
 
-Foram usadas fontes legais, técnicas e acadêmicas. As fontes legais sustentam a
-avaliação de serviços públicos, governo digital e proteção de dados. As fontes
-técnicas e acadêmicas sustentam qualidade percebida, usabilidade, experiência do
-usuário, avaliação de sistemas de informação, Lean Inception e prototipação.
+As referências foram usadas de acordo com sua natureza. A literatura científica
+sustenta os conceitos, relações teóricas e escolhas metodológicas; as normas
+técnicas fornecem definições e critérios; a legislação estabelece obrigações e
+princípios jurídicos; documentos institucionais caracterizam políticas, modelos
+e práticas governamentais; e a documentação de ferramentas comerciais descreve
+somente funcionalidades declaradas pelos fornecedores. Páginas de Hotjar e
+Microsoft Clarity, portanto, não são tratadas como evidência científica de
+eficácia, mas como fontes de caracterização tecnológica para o posicionamento do
+protótipo.
 
 \section{Lean Inception}
 
@@ -36,8 +42,8 @@ em compreender funcionalidades, clientes e Canvas MVP. Neste trabalho, a técnic
 organizou a definição do Avaliador de Serviços Públicos e ajudou a transformar a
 ideia inicial em um conjunto priorizado de funcionalidades.
 
-Participaram quatro perfis, cada um com uma perspectiva relevante para o
-problema:
+Foram considerados internamente quatro perfis de discussão, cada um com uma
+perspectiva relevante para o problema:
 
 \begin{itemize}
     \item \textbf{Felipe}, atendimento público, representando dúvidas
@@ -50,10 +56,10 @@ problema:
     jornada, clareza de interface e validação.
 \end{itemize}
 
-As decisões da Lean Inception orientaram o escopo do MVP, mas não substituem
-testes de usabilidade, coleta com usuários finais ou implantação em portal
-público real. Esses pontos permanecem como etapas necessárias para validação
-externa da solução.
+Essa dinâmica foi uma atividade interna de alinhamento e delimitação do produto,
+e não uma validação externa do artefato. As decisões da Lean Inception orientaram
+o escopo do MVP, mas não substituem teste de usabilidade, avaliação por
+especialistas independentes ou implantação em portal público real.
 
 \section{Etapas da Lean Inception}
 
@@ -98,8 +104,11 @@ a existência de mecanismos oficiais de avaliação de serviços públicos digit
 
 O desenvolvimento adotou prototipação incremental. Segundo
 \citeonline{Sommerville2007}, protótipos ajudam a explorar requisitos e reduzir
-incertezas antes de uma solução definitiva. A implementação foi dividida em
-ondas, seguindo o sequenciador da Lean Inception.
+incertezas antes de uma solução definitiva. Uma versão funcional inicial já
+existia cerca de três semanas antes da avaliação. A Lean Inception foi conduzida
+entre 18 e 27 de junho de 2026 para revisar e delimitar o MVP, e os ajustes finais
+usados na avaliação exploratória foram realizados em 28 de junho de 2026. A
+implementação foi dividida em ondas, seguindo o sequenciador da Lean Inception.
 
 \begin{enumerate}
     \item \textbf{Onda 1 -- Base técnica de coleta}: sessão técnica anônima,
@@ -121,14 +130,23 @@ testar o fluxo ponta a ponta: o cidadão navega, o sistema detecta dificuldade, 
 feedback contextual é solicitado, os dados são armazenados e o gestor visualiza
 indicadores agregados.
 
-\section{Critérios de Validação}
+\section{Hipótese e Critérios da Avaliação Preliminar}
 
-A hipótese central do MVP é: se o sistema detectar sinais de dificuldade durante
-a navegação e solicitar feedback de baixo esforço no momento certo, então a taxa
-de resposta e a qualidade dos dados coletados serão maiores do que em formulários
-estáticos exibidos apenas ao final da jornada.
+A hipótese comparativa do trabalho é que o feedback solicitado de forma
+contextual, próximo a um sinal de possível dificuldade, pode produzir maior
+participação e evidências declaradas mais específicas do que um formulário
+apresentado somente ao final da jornada. Essa hipótese não foi considerada
+confirmada pela avaliação exploratória. Sua verificação robusta requer amostra
+maior, controle de cenário e análise previamente definida.
 
-Foram definidos os seguintes critérios de validação preliminar:
+As variáveis dependentes previstas para o estudo comparativo são: taxa de
+resposta; taxa de conclusão da tarefa; esforço percebido; qualidade e
+especificidade do comentário; abandono ou interrupção associado ao convite; e
+percepção de adequação do momento da pergunta. Tempo e quantidade de cliques são
+variáveis comportamentais auxiliares de contexto, não medidas de qualidade
+percebida.
+
+Foram definidos os seguintes critérios de verificação e avaliação preliminar:
 
 \begin{itemize}
     \item o protótipo deve registrar cliques, tempo e eventos em uma sessão
@@ -139,22 +157,38 @@ Foram definidos os seguintes critérios de validação preliminar:
     o fluxo B, com feedback contextual;
     \item o painel deve apresentar pelo menos um gargalo identificável no
     protótipo;
-    \item a meta preliminar de resposta contextual é de aproximadamente 20\% no
-    cenário de demonstração, valor usado como limiar operacional e não como
-    comprovação estatística definitiva.
+    \item os resultados dos dois fluxos devem ser descritos como indícios
+    exploratórios, sem afirmação de superioridade ou generalização estatística.
 \end{itemize}
 
-A meta de 20\% foi adotada porque referências de mercado sobre pesquisas online
-indicam variações amplas de taxa de resposta, com faixas comuns entre 5\% e 30\%
-\cite{delightedResponseRate,surveymonkeyResponseRate}. O valor serve apenas como
-parâmetro inicial para a demonstração.
+\section{Procedimentos da Avaliação Exploratória}
+
+A avaliação do artefato combinou três procedimentos. O primeiro foi a verificação
+funcional do fluxo, observando registro de eventos, acionamento das regras,
+abertura do feedback e apresentação de indicadores. O segundo foi uma
+\textbf{avaliação heurística interna/preliminar}, conduzida pelos próprios
+autores a partir das telas e decisões do protótipo. Essa inspeção não é
+apresentada como avaliação externa por especialistas.
+
+O terceiro procedimento foi uma avaliação exploratória preliminar de usabilidade
+com oito participantes externos ao grupo de desenvolvimento, realizada em 28 de
+junho de 2026. Quatro participantes executaram o fluxo A, com formulário ao final
+da jornada, e quatro executaram o fluxo B, com convite de feedback contextual.
+A tarefa consistiu em localizar e iniciar a declaração do IRPF 2026 no protótipo,
+com limite de dez minutos. As sessões foram individuais e moderadas; todos os
+participantes eram maiores de 18 anos e assinaram Termo de Consentimento Livre e
+Esclarecido. O tamanho e a seleção da amostra permitem apenas descrição e
+interpretação exploratória, sem inferência estatística.
 
 \section{Tratamento dos Dados}
 
-Os dados do protótipo foram organizados em dois grupos. O primeiro grupo contém
-eventos comportamentais: identificador de sessão, página, serviço, origem do
-evento, clique e tempo de permanência. O segundo contém feedback declarado:
-estrelas, atributos do problema, NPS e comentário opcional.
+Os dados do protótipo foram organizados em dois grupos. O primeiro contém
+evidências comportamentais produzidas pela telemetria de interação:
+identificador técnico de sessão, página, serviço, origem do evento, clique e
+tempo de permanência. Esses dados indicam contexto e possível esforço, mas não
+medem qualidade percebida. O segundo contém evidências declaradas pelo usuário:
+estrelas, atributos do problema, NPS e comentário opcional. É nesse segundo grupo
+que se situam satisfação e qualidade percebida.
 
 A análise foi pensada para apoiar o gestor público com indicadores agregados,
 como sessões com dificuldade, alertas por serviço, média de estrelas, NPS e
