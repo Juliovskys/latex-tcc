@@ -19,6 +19,6 @@ test_rule_uses_new_configuration_and_records_version (test_governance.Governance
 test_unknown_item_versions_are_not_pooled (test_governance.GovernanceTest.test_unknown_item_versions_are_not_pooled) ... ok
 
 ----------------------------------------------------------------------
-Ran 19 tests in 11.285s
+Ran 19 tests in 13.325s
 
 OK
