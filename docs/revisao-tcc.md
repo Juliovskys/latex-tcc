@@ -241,6 +241,6 @@ Até a conclusão da compilação, não havia sido feito commit, publicação ou
 
 ### Versionamento do curto prazo — 15/10/2026
 
-O usuário autorizou o commit em uma branch específica antes da conclusão do novo relatório CopySpider. A revisão de curto prazo fica registrada na branch `codex/tcc-curto-prazo`, com o Markdown aprovado, as bibliografias, as fontes LaTeX sincronizadas, a capa e as rotinas de sincronização/compilação. O PDF compilado e os intermediários permanecem como arquivos locais, conforme as regras de exclusão do repositório.
+O usuário autorizou o commit em uma branch específica antes da conclusão do novo relatório CopySpider. A revisão de curto prazo fica registrada na branch `docs/tcc-curto-prazo`, com o Markdown aprovado, as bibliografias, as fontes LaTeX sincronizadas, a capa e as rotinas de sincronização/compilação. O PDF compilado e os intermediários permanecem como arquivos locais, conforme as regras de exclusão do repositório.
 
 O novo relatório CopySpider continua pendente e será analisado posteriormente. Esse registro não representa aprovação de similaridade, aprovação da banca ou conclusão das revisões de médio prazo. Não foi solicitada publicação da branch no repositório remoto.
