@@ -1,48 +1,30 @@
-# Fluxograma: avaliador de serviços públicos
+# Fluxo do protótipo atual
 
-Este fluxograma descreve a proposta atual do TCC: criar um mecanismo próprio para ambientes públicos digitais, em vez de adaptar diretamente um sistema já existente no mercado.
+Este fluxo descreve a aplicação Python, não as sessões históricas Figma/Useberry. Duração é informada à API, com envio simulado na demonstração; não há cronômetro automático. Indicadores não comprovam dificuldade ou impacto. O painel e os controles têm alcance local.
 
 ```mermaid
 flowchart TD
-    A["Usuário acessa página inicial do órgão público ou página de serviço"] --> B["Script cliente inicia sessão anônima ou identificada"]
-    B --> C["API registra clique, página, serviço, origem e instante"]
-    C --> D["API atualiza métricas da sessão: total de cliques, páginas visitadas e tempo"]
-    D --> E{"Cliques ou tempo acima da faixa esperada?"}
-
-    E -- "Não" --> F["Fluxo normal da navegação"]
-    F --> C
-
-    E -- "Sim" --> G["Registrar dificuldade silenciosamente para o admin"]
-    G --> H{"Serviço é marcado como muito importante ou de alto tráfego?"}
-
-    H -- "Sim" --> I["API retorna ação: exibir popup de sugestão"]
-    I --> J{"Usuário aceita ir para o serviço sugerido?"}
-    J -- "Sim" --> K["Frontend redireciona para página do serviço prioritário"]
-    J -- "Não" --> L["Usuário continua navegação atual"]
-
-    H -- "Não" --> M["API mantém navegação sem popup"]
-
-    G --> N{"Usuário com dificuldade ou tempo acima da média?"}
-    K --> N
-    L --> N
-    M --> N
-
-    N -- "Não" --> O["Admin acompanha indicadores agregados"]
-    N -- "Sim" --> P["API retorna ação: abrir página simples de feedback"]
-
-    P --> Q["Usuário avalia por estrelas"]
-    Q --> R["Usuário seleciona características: clareza, tempo, esforço, usabilidade, atendimento, eficácia"]
-    R --> S["Usuário responde NPS: chance de recomendar o serviço"]
-    S --> T["API salva feedback estruturado"]
-    T --> U["Admin visualiza alertas, sessões críticas, notas, NPS e pontos de melhoria"]
-    O --> U
+    A["Cidadão acessa página simulada"] --> P{"Autoriza telemetria nesta aba?"}
+    P -- Não --> V["Navegar sem telemetria; feedback voluntário disponível"]
+    P -- Sim --> B["Cliques instrumentados e duração informada; contexto mínimo"]
+    B --> C["API verifica autorização e regra vigente por serviço"]
+    C --> E{"Regra de acionamento satisfeita?"}
+    E -- Não --> B
+    E -- Sim --> G["Alerta: indício comportamental com versão da configuração"]
+    G --> H["Sugestão de redirecionamento quando aplicável"]
+    G --> I["Convite opcional conforme condição específica"]
+    I --> J{"Deseja avaliar?"}
+    J -- Não --> V
+    J -- Sim --> K["Satisfação; atributos; CES opcional 1–7; comentário opcional"]
+    V -- Se deseja avaliar --> K
+    K --> L["API valida e armazena resposta e versões dos itens"]
+    L --> M["Painel com chave: indicadores, denominadores, ausências e distribuição"]
+    M --> N["Interpretação contextual: hipótese a investigar"]
+    N --> O["Ação, papel responsável, prazo e retrato inicial"]
+    O --> Q["Acompanhamento: situação, nota e novo retrato; sem inferência causal"]
+    R["Gestão: parâmetros, justificativa e nova versão"] --> C
+    S["Privacidade: interromper coleta"] --> V
+    T["Gestão: retenção com prévia e execução manual"] --> M
 ```
 
-## Decisões do fluxo
-
-- O registro de cliques é contínuo e silencioso.
-- Quando a faixa esperada é ultrapassada, a API registra uma dificuldade para análise administrativa.
-- Para serviços comuns, a navegação continua sem interrupção.
-- Para serviços de alto tráfego ou alta importância, a API retorna uma ação para o frontend exibir um popup de direcionamento.
-- Para usuários com sinais de dificuldade, a API retorna uma ação para abrir uma página simples de feedback.
-- O feedback combina três entradas: estrelas, características do problema e NPS.
+Requisitos e critérios estão nos Apêndices H–K de [tcc.md](tcc.md). A versão `.tex` deste fluxograma é histórica e não acompanha automaticamente o Markdown; será reconciliada na transposição aprovada ao LaTeX.

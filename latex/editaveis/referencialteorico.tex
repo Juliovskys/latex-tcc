@@ -13,6 +13,14 @@ No setor público, o serviço é parte do relacionamento entre cidadão e Estado
 
 Com a digitalização, muitos serviços passaram a ser acessados por portais, aplicativos e sistemas integrados. Essa mudança amplia o alcance da prestação pública, mas também cria novas exigências de usabilidade, clareza, confiabilidade e disponibilidade. A usabilidade pode ser entendida como resultado de uso associado à efetividade, eficiência e satisfação em um contexto definido \cite{iso9241112018}. O usuário não avalia apenas o resultado final do serviço; ele também avalia o caminho percorrido, a linguagem utilizada, o esforço exigido, a facilidade de navegação e a capacidade do canal digital de resolver sua demanda.
 
+\subsection{Serviço digital, interação e resultado pretendido}\label{serviuxe7o-digital-interauxe7uxe3o-e-resultado-pretendido}
+
+Neste trabalho, serviço público digital é o arranjo de informações, procedimentos, pessoas, regras e recursos tecnológicos pelo qual o cidadão busca um resultado de interesse público. O portal é um canal desse arranjo. Encontrar uma página ou concluir uma interação não significa necessariamente obter o documento, benefício ou solução pretendida. A orientação institucional de resolver o problema completo do usuário ajuda a delimitar essa diferença \cite{govuk2026wholeProblem}.
+
+A avaliação distingue quatro objetos: \textbf{qualidade do software}, relativa às propriedades da aplicação e da API; \textbf{qualidade da interação}, relativa às condições e resultados do uso da interface; \textbf{qualidade percebida do serviço}, relativa ao julgamento declarado sobre aspectos da prestação; e \textbf{efetividade do serviço}, relativa ao alcance do resultado pretendido. A primeira é tratada pelo modelo de qualidade de produto ISO/IEC 25010:2023; a usabilidade em contexto considera efetividade, eficiência e satisfação conforme ISO 9241-11; os atributos de serviço e a conclusão real exigem evidências próprias \cite{iso250102023,iso9241112018}.
+
+Por exemplo, uma API pode aceitar e armazenar corretamente uma avaliação sem que o cidadão tenha conseguido declarar o imposto. Uma interface pode ser fácil de navegar, mas conduzir à consulta quando a necessidade era declarar. Uma nota favorável não prova que a obrigação foi cumprida. A conclusão de tarefa registrada no Figma é efetividade da tarefa simulada, não entrega de um serviço público real. O avaliador apoia investigação sobre a jornada; não executa nem certifica essa entrega.
+
 \section{Avaliação de Serviços}\label{avaliauxe7uxe3o-de-serviuxe7os}
 
 A avaliação de serviços pode ser entendida como uma investigação qualitativa ou quantitativa sobre a qualidade do serviço e a satisfação do usuário, considerando a relação entre expectativa e experiência concreta \cite{limaPereira2020modulo1}. Em outras palavras, avaliar um serviço significa observar se a entrega realizada corresponde ao que o usuário precisava, esperava ou considerava adequado. Modelos clássicos de qualidade de serviço indicam que a percepção do usuário é formada por lacunas entre o serviço esperado e o serviço recebido. O modelo de qualidade percebida de \citeonline{gronroos1984service} e o modelo SERVQUAL de \citeonline{parasuraman1988servqual} consolidaram a ideia de que qualidade em serviços depende de fatores como confiabilidade, responsividade, segurança, empatia e aspectos tangíveis. Embora esses modelos tenham origem no setor privado, eles influenciaram diversas iniciativas posteriores de avaliação de serviços públicos e serviços digitais.
@@ -29,21 +37,36 @@ No contexto público, a distinção entre satisfação e qualidade percebida é 
 
 Essa lógica aparece na evolução dos instrumentos brasileiros de avaliação. O BRASP considera a qualidade percebida como um elemento central para compreender a experiência do usuário e apoiar o aprimoramento dos serviços \cite{silva2019brasp}. A proposta de modelo unificado busca integrar qualidade técnica, qualidade percebida, efetividade e satisfação, reduzindo o custo de resposta para o cidadão e tornando os resultados mais úteis para a gestão \cite{silva2022modeloUnificado}.
 
+\section{Qualidade de Serviços Eletrônicos e Governo Eletrônico: E-S-QUAL, E-RecS-QUAL e e-GovQual}\label{qualidade-de-serviuxe7os-eletruxf4nicos-e-governo-eletruxf4nico-e-s-qual-e-recs-qual-e-e-govqual}
+
+A passagem dos modelos gerais para os serviços eletrônicos exige considerar a prestação mediada por sistemas. \citeonline{parasuraman2005esqual} desenvolveram E-S-QUAL para sites de compras, com 22 itens e quatro dimensões: eficiência, cumprimento da prestação, disponibilidade do sistema e privacidade. E-RecS-QUAL trata situações não rotineiras e recuperação do serviço, com 11 itens em responsividade, compensação e contato. São escalas distintas; uma avaliação de recuperação pressupõe que tenha ocorrido uma situação pertinente.
+
+A aplicação ao presente artefato é uma decisão de análise, não a aplicação integral dessas escalas. Eficiência motiva examinar caminhos e facilidade declarada; disponibilidade motiva testes técnicos; cumprimento motiva separar navegação de resultado; privacidade motiva requisitos de coleta. Na recuperação, responsividade e contato orientam investigar suporte e retorno ao cidadão. Compensação depende da natureza do serviço e de seu enquadramento institucional; não é inferida dos cliques ou de um comentário.
+
+Os seis atributos do formulário não reproduzem os itens de E-S-QUAL/E-RecS-QUAL nem geram seus escores. O CES é outro indicador, e não uma dimensão substituta dessas escalas. Para serviços públicos, a interpretação precisa considerar direitos, obrigações, continuidade entre canais e ausência de escolha de prestador. Essa delimitação conduz aos modelos brasileiros apresentados nas seções seguintes, preservando a progressão qualidade de serviços \ensuremath{\rightarrow} serviços eletrônicos \ensuremath{\rightarrow} serviços públicos digitais \ensuremath{\rightarrow} BRASP e modelos nacionais.
+
+No domínio governamental, \citeonline{papadomichelaki2012egovqual} desenvolveram e-GovQual para sites públicos nos quais o cidadão procura informação ou serviço. A escala final reúne 21 itens em confiabilidade, eficiência, suporte ao cidadão e confiança. Esse modelo oferece o elo entre qualidade eletrônica e prestação pública digital, sem reduzir a avaliação à transação comercial.
+
+Neste trabalho, e-GovQual orienta examinar a consistência da prestação, a facilidade de acesso à informação, os caminhos de suporte e a confiança na coleta. São relações conceituais de projeto: o formulário não reproduz seus 21 itens, e os seis atributos não geram um escore e-GovQual. A validação relatada por Papadomichelaki e Mentzas não se transfere ao CES adaptado nem a este protótipo. O modelo internacional antecede, nesta progressão, os instrumentos brasileiros e o BRASP discutidos a seguir.
+
 \section{Avaliação de Serviços Públicos no Brasil}\label{avaliauxe7uxe3o-de-serviuxe7os-puxfablicos-no-brasil}
 
 A avaliação de serviços públicos no Brasil possui base normativa e base técnica. Do ponto de vista normativo, a Lei n\textsuperscript{o} 13.460/2017 estabelece direitos dos usuários e prevê que os resultados de avaliação subsidiem a reorientação dos serviços \cite{brasil2017lei13460}. O Decreto n\textsuperscript{o} 9.094/2017 institui a Carta de Serviços ao Usuário e reforça o uso de ferramenta de pesquisa de satisfação no governo federal \cite{brasil2017decreto9094}. A Lei n\textsuperscript{o} 14.129/2021 relaciona o governo digital à eficiência pública, à desburocratização e à participação do cidadão \cite{brasil2021lei14129}.
 
-A partir desse conjunto normativo, a avaliação deixa de ser apenas uma prática gerencial desejável e passa a compor o próprio modo de prestação dos serviços públicos digitais. A Lei de Acesso à Informação reforça a transparência como base para acompanhamento social; a Lei n\textsuperscript{o} 13.460/2017 vincula avaliação à proteção do usuário; a Lei do Governo Digital incorpora canais digitais de participação; e normas infralegais detalham instrumentos de simplificação, monitoramento e avaliação de satisfação. A Tabela \ref{tab:marcos-legais-avaliacao} resume os marcos mais relevantes para este trabalho.
+A partir desse conjunto normativo, a avaliação deixa de ser apenas uma prática gerencial desejável e passa a compor o próprio modo de prestação dos serviços públicos digitais. A Lei de Acesso à Informação reforça a transparência como base para acompanhamento social; a Lei n\textsuperscript{o} 13.460/2017 vincula avaliação à proteção do usuário; a Lei do Governo Digital incorpora canais digitais de participação; e normas infralegais detalham instrumentos de simplificação, monitoramento e avaliação de satisfação. O Quadro \ref{tab:marcos-legais-avaliacao} resume os marcos mais relevantes para este trabalho.
 
 \begingroup\footnotesize\SingleSpacing
 \setlength{\tabcolsep}{4pt}
+\setlength{\LTpre}{.6\baselineskip}
+\setlength{\LTpost}{.4\baselineskip}
 \setlength{\LTcapwidth}{\textwidth}
 
+\begin{TCCquadro}
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2800}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1200}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.6000}}@{}}
-\caption{Marcos legais nacionais sobre avaliação de serviços públicos digitais}\label{tab:marcos-legais-avaliacao}\tabularnewline
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2800}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1200}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.6000}}@{}}
+\caption[]{\TCCquadroentry{Marcos legais nacionais sobre avaliação de serviços públicos digitais}Marcos legais nacionais sobre avaliação de serviços públicos digitais}\label{tab:marcos-legais-avaliacao}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Instrumento}
@@ -54,6 +77,7 @@ A partir desse conjunto normativo, a avaliação deixa de ser apenas uma prátic
 \end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
+\caption[]{Marcos legais nacionais sobre avaliação de serviços públicos digitais (continuação)}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Instrumento}
@@ -70,9 +94,10 @@ Lei n\textsuperscript{o} 12.527 (LAI) \cite{brasil2011lei12527} & 2011 & Transpa
 Lei n\textsuperscript{o} 13.460 \cite{brasil2017lei13460} & 2017 & Direitos do usuário, participação na avaliação dos serviços e uso dos resultados para reorientação da prestação pública. \\
 Decreto n\textsuperscript{o} 9.094 \cite{brasil2017decreto9094} & 2017 & Simplificação do atendimento, Carta de Serviços ao Usuário e racionalização de exigências feitas ao cidadão. \\
 Lei n\textsuperscript{o} 14.129 \cite{brasil2021lei14129} & 2021 & Governo digital, eficiência pública, desburocratização, canais digitais de participação e melhoria da prestação estatal. \\
-Decreto n\textsuperscript{o} 11.260 \cite{brasil2022decreto11260} & 2022 & Elaboração e encaminhamento da Estratégia Nacional de Governo Digital, com organização das diretrizes de transformação digital. \\
+Decreto n\textsuperscript{o} 11.260 \cite{brasil2022decreto11260} & 2022 & Referência histórica sobre elaboração da estratégia e prorrogação da anterior; revogado em 2024, sem caráter de norma vigente neste trabalho. \\
 Portaria SGD/ME n\textsuperscript{o} 548 \cite{brasil2022portaria548} & 2022 & Avaliação de satisfação dos usuários e padrões de qualidade para serviços públicos digitais. \\
 \end{longtable}
+\end{TCCquadro}
 
 \endgroup
 
@@ -98,13 +123,19 @@ A usabilidade em serviços públicos digitais possui impacto mais amplo do que e
 
 A representatividade também é um ponto relevante. Serviços públicos atendem usuários com diferentes níveis de letramento digital, conectividade, idade, familiaridade com formulários e capacidade de compreender linguagem institucional. Os dados do PPA Participativo 2024-2027 indicam que participação digital em larga escala pode conviver com barreiras de uso e de retorno ao cidadão \cite{brasilMgi2024ppaParticipativo}. Da mesma forma, pesquisas sobre acesso às tecnologias de informação no Brasil mostram que o uso de serviços digitais ainda depende de condições desiguais de acesso, dispositivos e habilidades \cite{cetic2025ticDomicilios2024}. Para este TCC, isso reforça a necessidade de uma coleta de feedback simples, opcional e de baixo esforço.
 
-Métricas como NPS, CSAT e CES ajudam a decompor a experiência. O NPS popularizou a pergunta de recomendação em escala de 0 a 10 \cite{reichheld2003nps}; em serviços públicos, sua leitura precisa ser adaptada, pois o cidadão nem sempre escolhe usar ou recomendar um serviço estatal. O CSAT registra satisfação imediata com uma interação específica, normalmente por uma escala curta. O CES mede o esforço percebido para concluir uma tarefa, aspecto especialmente importante em serviços públicos com muitas etapas ou linguagem burocrática. O momento da coleta pode influenciar a recordação e a interpretação da experiência. Resultados sobre avaliação retrospectiva motivam investigar esse efeito, mas não demonstram, isoladamente, a vantagem de um momento de coleta no cenário deste trabalho \cite{kahneman1993peakEnd}.
+O CSAT e o CES abordam julgamentos diferentes. A satisfação expressa a avaliação do cidadão sobre a experiência com a etapa do serviço; o CES aborda a facilidade ou o esforço percebido nessa interação. A proposta usa estrelas como operacionalização local de satisfação, atributos para detalhar aspectos do serviço e um item CES para facilidade percebida. Nenhum deles é obtido diretamente da telemetria. A discussão profissional de \citeonline{dixon2010effort} motiva atenção ao esforço, mas sua origem em atendimento comercial não demonstra validade em serviços públicos.
 
-No formulário implementado, as estrelas registram uma avaliação geral e os atributos permitem declarar problemas associados a clareza, tempo percebido, esforço, usabilidade, atendimento ou eficácia. A pergunta auxiliar de recomendação, identificada como NPS na interface, permaneceu no instrumento, mas sua média de 0 a 10 não constitui cálculo do escore NPS nem valida sua interpretação no setor público. Sua resposta não é tratada como medida equivalente às estrelas ou aos atributos de qualidade percebida.
+A literatura profissional de \citeonline{dixon2013effortless} desenvolve a abordagem de experiência com menor esforço no atendimento comercial. Para a formulação por concordância, a apresentação de \citeonline[slide 72]{dixon2016ces} mostra o CES 2.0 com afirmação sobre facilidade para lidar com uma questão. Esse material primário distingue a formulação posterior da referência de 2010, que não é utilizada para atribuir origem à redação ou à escala adotadas aqui. A conferência visual desse slide identifica seis opções visíveis, não sete; ele fundamenta a formulação por concordância, não o número de categorias adotado neste projeto. A frase em português, o recorte por etapa e as sete categorias são decisões de adaptação deste projeto, ainda sem validação com cidadãos.
+
+O CES adotado usa a afirmação ``Foi fácil realizar o que eu precisava nesta etapa do serviço'', com sete categorias: 1 --- discordo totalmente; 2 --- discordo; 3 --- discordo parcialmente; 4 --- nem concordo nem discordo; 5 --- concordo parcialmente; 6 --- concordo; 7 --- concordo totalmente. A resposta é opcional. Notas maiores significam maior facilidade declarada e, nessa orientação, menor esforço percebido. Não se inverte o resultado nem se combina essa escala com medidas de outra orientação. Trata-se de adaptação ao contexto deste protótipo, não de uma tradução validada. A documentação de \citeonline{surveymonkey2026ces} é utilizada como apoio comercial complementar à descrição operacional, sem importar alegações comerciais de desempenho ou pontos de corte.
+
+A média CES descritiva é a soma das respostas válidas dividida pelo número de respostas válidas, com apresentação conjunta da distribuição nas sete categorias e do denominador. Ausência de resposta fica nula, nunca zero; na ausência de respostas, a média fica indisponível. A média resume uma escala ordinal por convenção descritiva do protótipo e não comprova intervalos equivalentes entre categorias. Não se adotam faixas universais de ``bom'' ou ``ruim'' nem um escore geral resultante da soma de estrelas, atributos, CES e telemetria.
+
+O item se refere à etapa vivenciada até o convite, inclusive quando a tarefa não foi concluída. A expressão ``realizar o que eu precisava'' pode, porém, ser interpretada como tarefa já concluída; o piloto de compreensão deverá verificar esse risco antes de manter a redação em convite intermediário. Portanto, facilidade declarada não comprova entrega do resultado pretendido pelo cidadão. O momento da coleta pode influenciar recordação e interpretação. Resultados sobre avaliação retrospectiva motivam investigar esse efeito, sem demonstrar a vantagem do acionamento neste cenário \cite{kahneman1993peakEnd}. O esforço para preencher o próprio formulário é outra variável e requer medida específica.
 
 \section{Experiência do Usuário e Avaliações Inspiradas em Plataformas Digitais}\label{experiuxeancia-do-usuuxe1rio-e-avaliauxe7uxf5es-inspiradas-em-plataformas-digitais}
 
-Plataformas digitais privadas popularizaram formas de avaliação de baixo esforço: nota de uma a cinco estrelas, comentários curtos, seleção de motivos e visualização agregada das avaliações. A referência a aplicações como plataformas de entrega deve ser entendida como inspiração de interação, e não como modelo de governança. Em uma plataforma privada, a avaliação frequentemente orienta reputação, consumo e concorrência. Em serviços públicos, ela deve orientar direitos, transparência, participação social e melhoria da entrega estatal. Mecanismos como o NPS, proposto originalmente como pergunta de lealdade e recomendação, também influenciaram práticas de avaliação de experiência por sua simplicidade de aplicação \cite{reichheld2003nps}.
+Plataformas digitais privadas popularizaram formas de avaliação de baixo esforço: nota de uma a cinco estrelas, comentários curtos, seleção de motivos e visualização agregada das avaliações. A referência a aplicações como plataformas de entrega deve ser entendida como inspiração de interação, e não como modelo de governança. Em uma plataforma privada, a avaliação frequentemente orienta reputação, consumo e concorrência. Em serviços públicos, ela deve orientar direitos, transparência, participação social e melhoria da entrega estatal.
 
 Mesmo com essa diferença, a familiaridade do usuário com mecanismos simples de avaliação pode ser aproveitada. Um avaliador de serviços públicos pode reduzir barreiras de participação se oferecer uma interface direta, com poucos passos e linguagem compreensível. A nota geral permite captar a percepção imediata; os atributos permitem interpretar os motivos; e comentários opcionais podem revelar problemas não previstos pelo formulário. Essa escolha está alinhada ao design centrado no usuário, que orienta o desenvolvimento de sistemas interativos a partir das necessidades, capacidades e limitações das pessoas que irão utilizá-los \cite{iso92412102019}.
 
@@ -112,22 +143,25 @@ Para que a avaliação seja útil ao gestor, o sistema também precisa organizar
 
 \subsection{Posicionamento em relação a soluções existentes}\label{posicionamento-em-relauxe7uxe3o-a-soluuxe7uxf5es-existentes}
 
-Embora o protótipo dialogue com ferramentas existentes de avaliação e análise de experiência, sua contribuição não está em substituí-las nem em afirmar superioridade. A contribuição está em combinar, em um MVP com regras explícitas e voltado a serviços públicos, sinais simples de possível dificuldade durante a navegação, coleta contextual de baixo esforço e organização administrativa dos dados por serviço e atributo.
+Embora o protótipo dialogue com ferramentas existentes de avaliação e análise de experiência, sua contribuição não está em substituí-las nem em afirmar superioridade. A contribuição está em combinar, em um MVP com regras explícitas e voltado a serviços públicos, sinais simples de possível dificuldade durante a navegação, coleta contextual por formulário curto e organização administrativa dos dados por serviço e atributo.
 
 A ferramenta oficial de avaliação do gov.br constitui uma referência institucional para medir satisfação em serviços públicos digitais. Ferramentas comerciais como Hotjar e Microsoft Clarity oferecem funcionalidades de analytics comportamental, mapas de calor, gravações de sessão e feedback. Suas páginas de documentação são utilizadas neste trabalho somente para caracterização tecnológica das funcionalidades declaradas, e não como evidência científica de eficácia ou adequação ao setor público \cite{govbrFerramentaAvaliacao,hotjar2026,microsoftClarity2026}. O Government Digital Service, por sua vez, é uma fonte institucional e metodológica sobre uso de dados de desempenho na melhoria de serviços digitais \cite{govuk2021usingData}.
 
-A Tabela \ref{tab:posicionamento-solucoes} sintetiza esse posicionamento.
+O Quadro \ref{tab:posicionamento-solucoes} sintetiza esse posicionamento.
 
 \begingroup\footnotesize\SingleSpacing
 \setlength{\tabcolsep}{4pt}
+\setlength{\LTpre}{.6\baselineskip}
+\setlength{\LTpost}{.4\baselineskip}
 \setlength{\LTcapwidth}{\textwidth}
 
+\begin{TCCquadro}
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1800}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2300}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3400}}@{}}
-\caption{Posicionamento da proposta em relação a soluções existentes}\label{tab:posicionamento-solucoes}\tabularnewline
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1800}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2300}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3400}}@{}}
+\caption[]{\TCCquadroentry{Posicionamento da proposta em relação a soluções existentes}Posicionamento da proposta em relação a soluções existentes}\label{tab:posicionamento-solucoes}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Solução}
@@ -140,6 +174,7 @@ A Tabela \ref{tab:posicionamento-solucoes} sintetiza esse posicionamento.
 \end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
+\caption[]{Posicionamento da proposta em relação a soluções existentes (continuação)}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Solução}
@@ -160,6 +195,7 @@ Microsoft Clarity & Análise de sessões, mapas de calor e navegação & Observa
 GDS UK & Medição e melhoria de serviços digitais & Referência metodológica institucional para uso de dados & Contexto institucional distinto e sem equivalência direta ao protótipo. \\
 Artefato deste TCC & Implementação local Python e interfaces de avaliação no Figma & Implementação parcial de eventos, feedback e painel; observações exploratórias de interface & Inspeção interna da implementação e avaliação de interface Figma/\allowbreak Useberry são procedimentos distintos. O estudo com participantes não verifica a API nem valida o serviço em contexto real. \\
 \end{longtable}
+\end{TCCquadro}
 
 \endgroup
 
@@ -171,7 +207,7 @@ A comparação é documental e de posicionamento: baseia-se nas funcionalidades 
 
 Além do feedback declarado pelo usuário, serviços digitais podem ser avaliados por sinais observados durante a jornada. A taxa de conclusão, por exemplo, mede a proporção de transações iniciadas que chegam ao ponto definido como conclusão do serviço; sua leitura depende de identificar início, etapas intermediárias, abandono e término do fluxo \cite{govuk2021completionRate}. Métricas de tempo, cliques, páginas visitadas e retorno a etapas anteriores também podem indicar dificuldade quando comparadas a faixas esperadas.
 
-O uso dessas métricas aproxima a avaliação de serviços públicos da avaliação de sistemas de informação. O modelo de sucesso de sistemas de informação de \citeonline{deloneMclean2003} relaciona qualidade do sistema, qualidade da informação, qualidade do serviço, uso, satisfação do usuário e benefícios líquidos. Para a solução proposta, cliques, tempo e sequência de navegação são evidências comportamentais de possível esforço ou dificuldade. Eles não medem qualidade percebida. Estrelas, atributos e comentários constituem evidências declaradas sobre a experiência. A pergunta auxiliar de recomendação possui interpretação distinta e não foi validada como medida de qualidade percebida. A contribuição analítica está em relacionar essas fontes sem fundi-las: a telemetria localiza o contexto e o feedback permite interpretar a percepção.
+O uso dessas métricas aproxima a avaliação de serviços públicos da avaliação de sistemas de informação. O modelo de sucesso de sistemas de informação de \citeonline{deloneMclean2003} relaciona qualidade do sistema, qualidade da informação, qualidade do serviço, uso, satisfação do usuário e benefícios líquidos. Para a solução proposta, cliques, tempo e sequência de navegação são evidências comportamentais de possível esforço ou dificuldade. Eles não medem qualidade percebida. Estrelas, atributos e comentários constituem evidências declaradas sobre a experiência. O CES é autorrelato de facilidade percebida, e não uma transformação da quantidade de cliques ou do tempo. A contribuição analítica está em relacionar essas fontes sem fundi-las: a telemetria localiza o contexto e o feedback permite interpretar a percepção.
 
 O registro de eventos de navegação exige cuidado metodológico e jurídico. A coleta deve ser limitada ao necessário para a finalidade de melhoria do serviço, com uso de identificador técnico e minimização dos campos registrados, sem presumir anonimização. A Lei Geral de Proteção de Dados Pessoais estabelece princípios para o tratamento de dados, inclusive em meios digitais, com objetivo de proteger liberdade, privacidade e desenvolvimento da personalidade da pessoa natural \cite{brasil2018lgpd}. Por isso, a proposta deste TCC considera o registro de cliques e tempo como mecanismo de análise agregada, não como instrumento de vigilância individual.
 
@@ -185,7 +221,7 @@ A eventual vantagem de obter um comentário mais específico precisa ser confron
 
 No protótipo deste TCC, os gatilhos comportamentais foram reduzidos a regras simples e explícitas: excesso de cliques, tempo acima da faixa esperada e persistência do sinal após a sugestão de redirecionamento. Esses sinais não substituem a percepção do usuário, mas indicam quando faz sentido solicitar uma avaliação de baixo esforço. A escolha por regras explícitas preserva a rastreabilidade do MVP e evita que a solução dependa de modelos estatísticos complexos antes de haver dados reais suficientes para calibração.
 
-Esse tipo de coleta também precisa respeitar a carga cognitiva do cidadão. Questionários longos ou tecnicamente ambíguos aumentam esforço, erro e abandono. A Teoria da Carga Cognitiva indica que a memória de trabalho humana possui capacidade limitada; portanto, interfaces de feedback devem usar linguagem direta, poucas perguntas, opções de resposta claras e campos textuais opcionais \cite{sweller1988cognitiveLoad}. O formulário reúne estrelas, atributos, pergunta auxiliar de recomendação e comentário opcional. Essa decisão de projeto não demonstra esforço reduzido ou utilidade dos dados, propriedades que dependem de avaliação específica.
+Esse tipo de coleta também precisa respeitar a carga cognitiva do cidadão. Questionários longos ou tecnicamente ambíguos aumentam esforço, erro e abandono. A Teoria da Carga Cognitiva indica que a memória de trabalho humana possui capacidade limitada; portanto, interfaces de feedback devem usar linguagem direta, poucas perguntas, opções de resposta claras e campos textuais opcionais \cite{sweller1988cognitiveLoad}. O formulário atual reúne satisfação por estrelas, atributos, CES opcional e comentário opcional. Essa decisão de projeto não demonstra esforço reduzido ou utilidade dos dados, propriedades que dependem de avaliação específica.
 
 \section{Síntese do Referencial}\label{suxedntese-do-referencial}
 

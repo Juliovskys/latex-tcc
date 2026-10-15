@@ -1,5 +1,13 @@
 # Template TCC FCTE-UnB
 
+## Manuscrito e fase atual
+
+O conteúdo em revisão está em [docs/tcc.md](docs/tcc.md), com bibliografia em [docs/referencias-tcc.bib](docs/referencias-tcc.bib). O [controle de médio prazo](docs/medio-prazo.md) registra o atendimento a todos os itens, as evidências e as avaliações futuras. A [revisão de normalização](docs/normalizacao-medio-prazo.md) discrimina a conferência editorial e a etapa de apresentação reservada ao PDF.
+
+A branch `docs/tcc-curto-prazo` preserva a revisão anterior. Na branch `docs/tcc-medio-prazo`, Markdown, BibTeX e LaTeX foram sincronizados com a revisão de médio prazo. O Apêndice L reúne os quatro registros visuais históricos, contextualizados. O PDF compilado é gerado em `output/pdf/TCC_Avaliacao_Contextual_Medio_Prazo.pdf` e aguarda novo CopySpider. A execução local e os testes do protótipo estão documentados em [prototype-api/README.md](prototype-api/README.md).
+
+## Origem do modelo
+
 Template para Trabalhos de Conclusão de Cursos (TCC) na Faculdade do
 Gama, atual Faculdade de Ciências e Tecnologias em Engenharia (FCTE), em Latex.
 

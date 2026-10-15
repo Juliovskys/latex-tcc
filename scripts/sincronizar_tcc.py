@@ -5,6 +5,7 @@ O Markdown e seu BibTeX são as fontes editoriais; não recria dados empíricos.
 """
 import argparse
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -20,12 +21,47 @@ WIDTHS = {
     10: [.18, .22, .26, .34], 11: [.19, .26, .20, .35],
     12: [.52, .24, .24], 13: [.19, .28, .27, .26],
 }
+TABLE_LABELS = [
+    'marcos-legais-avaliacao', 'posicionamento-solucoes', 'endpoints-prototipo',
+    'formas-coleta-situada', 'sensibilidade-limiares', 'simulacao-sintetica-limiares',
+    'regras-dificuldade', 'atributos-feedback', 'decisoes-design',
+    'criterios-avaliacao-preliminar', 'avaliacao-heuristica-preliminar',
+    'resultados-preliminares-fluxos', 'alternativas-design',
+]
+TABLE_WIDTHS = {'tab:' + label: WIDTHS[i] for i, label in enumerate(TABLE_LABELS, 1)}
+TABLE_WIDTHS['tab:construtos-indicadores-dados'] = [.17, .25, .23, .35]
+TABLE_WIDTHS.update({
+    'qua:requisitos-funcionais': [.10, .29, .61],
+    'qua:requisitos-nao-funcionais': [.10, .28, .62],
+    'qua:rastreabilidade-software': [.15, .14, .27, .11, .33],
+    'qua:catalogo-testes': [.08, .92],
+    'qua:qualidade-produto': [.20, .25, .16, .39],
+    'qua:plano-vv': [.08, .22, .44, .26],
+    'qua:acessibilidade': [.25, .20, .55],
+})
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--pandoc', default='pandoc')
+    parser.add_argument('--sufixos-bbl', type=Path,
+                        help='Harmoniza os anos exibidos no Markdown com os sufixos gerados pelo BibTeX.')
     args = parser.parse_args()
+    if args.sufixos_bbl:
+        bbl = args.sufixos_bbl.read_text(encoding='utf-8')
+        years = dict(re.findall(r'\\bibitem\[[^\]]+\]\{([^}]+)\}\s*\\abntrefinfo\{[^\n]*\}\{(\d{4}[a-z]?)\}', bbl))
+        assert years, 'Nenhum ano bibliográfico encontrado no BBL.'
+        source = ROOT / 'docs/tcc.md'
+        text = source.read_text(encoding='utf-8')
+        def label(match):
+            year = years.get(match[2])
+            content = re.sub(r'\b' + year[:4] + r'[a-z]?\b', year, match[1]) if year else match[1]
+            return '[' + content + '](#ref-' + match[2] + ')'
+        text = re.sub(r'\[([^\]]+)\]\(#ref-([^)]+)\)', label, text)
+        for key, year in years.items():
+            pattern = r'(<a id="ref-' + re.escape(key) + r'"></a>\s*\n)(.*?)(?=\n<a id=|\n# Apêndice|\Z)'
+            text = re.sub(pattern, lambda m: m[1] + re.sub(r'\b' + year[:4] + r'[a-z]\b', year, m[2]), text, flags=re.S)
+        source.write_text(text, encoding='utf-8')
     tokens = {}
 
     def token(latex):
@@ -45,12 +81,16 @@ def main():
             return token('\\cite{' + ','.join(keys) + '}')
 
         text = re.sub(r'\((' + links + r')(?:;\s*' + links + r')*\)', citegroup, text)
-        text = re.sub(r'\[([^\]]+)\]\(#ref-([^)]+)\)',
-                      lambda m: token('\\citeonline{' + m[2] + '}'), text)
-        text = re.sub(r'\[[^\]]+\]\(#((?:tab|fig|sec):[^)]+)\)',
+        def narrative_citation(match):
+            locator = re.search(r',\s*((?:slide|p\.)\s*\d+(?:[–-]\d+)?)', match[1])
+            option = '[' + locator[1] + ']' if locator else ''
+            return token('\\citeonline' + option + '{' + match[2] + '}')
+        text = re.sub(r'\[([^\]]+)\]\(#ref-([^)]+)\)', narrative_citation, text)
+        text = re.sub(r'\[[^\]]+\]\(#((?:tab|qua|fig|sec):[^)]+)\)',
                       lambda m: token('\\ref{' + m[1] + '}'), text)
-        text = re.sub(r'^(#+)\s+(?:\d+(?:\.\d+)*|[A-G]\.\d+)\s+', r'\1 ', text, flags=re.M)
-        text = re.sub(r'^# Apêndice [A-G] — ', '# ', text, flags=re.M)
+        text = re.sub(r'^(#+)\s+(?:\d+(?:\.\d+)*|[A-L](?:\.\d+)+)\s+', r'\1 ', text, flags=re.M)
+        text = re.sub(r'^# Apêndice ([A-L]) — (.+)$',
+                      lambda m: '<a id="sec:apendice-' + m[1].lower() + '"></a>\n\n# ' + m[2], text, flags=re.M)
         return text
 
     def pandoc(data, from_format, to_format):
@@ -67,12 +107,35 @@ def main():
         for key, value in tokens.items():
             latex = latex.replace(key, value)
         latex = latex.replace('Figma/Useberry', r'Figma/\allowbreak Useberry')
+        latex = latex.replace(r'\raggedright\arraybackslash', r'\RaggedRight\arraybackslash')
         for char, value in {'→': r'\ensuremath{\rightarrow}',
                             '≥': r'\ensuremath{\geq}',
                             '≤': r'\ensuremath{\leq}',
                             '×': r'\ensuremath{\times}'}.items():
             latex = latex.replace(char, value)
         return latex
+
+    def inline_code(node):
+        if isinstance(node, list):
+            return [inline_code(item) for item in node]
+        if not isinstance(node, dict):
+            return node
+        if node.get('t') == 'Str' and re.fullmatch(r'(?:RF|RNF|RN)\d+(?:/\d+)+[;,]?', node['c']):
+            return {'t': 'RawInline', 'c': ['latex', node['c'].replace('/', r'/\allowbreak ')]}
+        if node.get('t') == 'Code':
+            escapes = {'\\': r'\textbackslash{}', '{': r'\{', '}': r'\}',
+                       '_': r'\_', '#': r'\#', '$': r'\$', '%': r'\%',
+                       '&': r'\&', '^': r'\textasciicircum{}', '~': r'\textasciitilde{}'}
+            value = ''.join(escapes.get(char, char) for char in node['c'][1])
+            if any(char in value for char in '≥≤→×'):
+                return {'t': 'RawInline', 'c': ['latex', r'\texttt{' + value + '}']}
+            return {'t': 'RawInline', 'c': ['latex', r'\texttt{\seqsplit{' + value + '}}']}
+        if node.get('t') == 'Link':
+            target = node['c'][2][0]
+            if not re.match(r'^(?:https?://|#)', target):
+                target = 'https://github.com/Juliovskys/latex-tcc/blob/docs/tcc-medio-prazo/docs/' + target
+                node['c'][2][0] = target
+        return {key: inline_code(value) for key, value in node.items()}
 
     def plain(node):
         if isinstance(node, list):
@@ -96,6 +159,8 @@ def main():
         output = []
         pending = None
         caption = None
+        kind = None
+        historical = False
         for block in blocks:
             if block['t'] == 'RawBlock' and block['c'][0] == 'html':
                 match = re.fullmatch(r'<a id="([^"]+)"></a>', block['c'][1].strip())
@@ -105,6 +170,11 @@ def main():
             if block['t'] == 'Header' and pending:
                 block['c'][1][0] = pending
                 pending = None
+            if block['t'] == 'Header':
+                if block['c'][0] == 1:
+                    historical = plain(block['c'][2]) == 'Registros históricos da concepção compartilhada'
+                elif historical and block['c'][0] == 2:
+                    output.append(raw('\\clearpage'))
             if block['t'] == 'Para':
                 html = ''.join(n['c'][1] for n in block['c']
                                if n['t'] == 'RawInline' and n['c'][0] == 'html')
@@ -113,8 +183,9 @@ def main():
                     pending = match[1]
                     continue
                 content = plain(block['c'])
-                if re.match(r'^Tabela \d+ — ', content):
-                    caption = re.sub(r'^Tabela \d+ — ', '', content)
+                if re.match(r'^(?:Tabela|Quadro) \d+ — ', content):
+                    kind = content.split()[0]
+                    caption = re.sub(r'^(?:Tabela|Quadro) \d+ — ', '', content)
                     continue
                 if re.match(r'^Figura \d+ — ', content) and block['c'][0]['t'] == 'Strong':
                     continue  # legenda já incorporada na figura
@@ -123,10 +194,12 @@ def main():
                     attr, alt, destination = image['c']
                     title = re.sub(r'^Figura \d+ — ', '', plain(alt)).rstrip('.')
                     title_tex = writer([{'t': 'Plain', 'c': [{'t': 'Str', 'c': title}]}], doc).strip()
-                    path = destination[0].removeprefix('../latex/')
-                    output.append(raw('\\begin{figure}[htbp]\n\\centering\n'
-                                      '\\includegraphics[width=\\textwidth,height=.70\\textheight,keepaspectratio]{' + path + '}\n'
-                                      '\\caption{' + title_tex + '}\\label{' + pending + '}\n'))
+                    absolute = (ROOT / 'docs' / destination[0]).resolve()
+                    path = os.path.relpath(absolute, ROOT / 'latex').replace('\\', '/')
+                    placement = '!ht' if historical else 'htbp'
+                    output.append(raw('\\begin{figure}[' + placement + ']\n\\centering\n'
+                                      '\\caption{' + title_tex + '}\\label{' + pending + '}\n'
+                                      '\\includegraphics[width=\\textwidth,height=.70\\textheight,keepaspectratio]{' + path + '}\n'))
                     pending = None
                     caption = 'figure-source'
                     continue
@@ -137,12 +210,9 @@ def main():
                     continue
             if block['t'] == 'Table':
                 if caption:
-                    # Ordem editorial estável dos treze rótulos, validada ao final.
-                    labels = re.findall(r'<a id="(tab:[^"]+)"></a>\s+\*\*Tabela (\d+)', text)
-                    number = int(dict(labels)[pending])
+                    weights = TABLE_WIDTHS.get(pending, [1 / len(block['c'][2])] * len(block['c'][2]))
                     block['c'][0][0] = pending
                     block['c'][1] = [None, [{'t': 'Plain', 'c': [{'t': 'Str', 'c': caption}]}]]
-                    weights = WIDTHS[number]
                     pending = None
                     caption = None
                 else:
@@ -151,11 +221,24 @@ def main():
                 for spec, width in zip(block['c'][2], weights):
                     spec[0] = {'t': 'AlignLeft'}
                     spec[1] = {'t': 'ColWidth', 'c': width}
+                table_tex = writer([inline_code(block)], doc)
+                caption_text = writer([{'t':'Plain','c':block['c'][1][1][0]['c']}], doc).strip()
+                if kind == 'Quadro':
+                    # A legenda sem entrada automática não polui a lista de tabelas.
+                    # A lista própria recebe a entrada dentro da legenda, já com o contador avançado.
+                    table_tex = table_tex.replace('\\caption{', '\\caption[]{\\TCCquadroentry{' +
+                                                  caption_text + '}', 1)
+                    table_tex = '\\begin{TCCquadro}\n' + table_tex + '\\end{TCCquadro}\n'
+                table_tex = table_tex.replace('\\endfirsthead\n', '\\endfirsthead\n\\caption[]{' +
+                                              caption_text + ' (continuação)}\\tabularnewline\n', 1)
                 output.extend([raw('\\begingroup\\footnotesize\\SingleSpacing\n'
                                    '\\setlength{\\tabcolsep}{4pt}\n'
-                                   '\\setlength{\\LTcapwidth}{\\textwidth}'), block, raw('\\endgroup')])
+                                   '\\setlength{\\LTpre}{.6\\baselineskip}\n'
+                                   '\\setlength{\\LTpost}{.4\\baselineskip}\n'
+                                   '\\setlength{\\LTcapwidth}{\\textwidth}'), raw(table_tex), raw('\\endgroup')])
+                kind = None
                 continue
-            output.append(block)
+            output.append(inline_code(block))
         assert pending is None and caption is None, (pending, caption)
         return HEADER + writer(output, doc)
 
@@ -169,7 +252,7 @@ def main():
         (editable / (name + '.tex')).write_text(convert('# ' + title + '\n' + sections[title]), encoding='utf-8')
     for title, name in [('Resumo', 'resumo'), ('Abstract', 'abstract')]:
         content = sections[title]
-        body, keywords = re.split(r'\*\*(?:Palavras-chave|Key-words)\*\*:', content)
+        body, keywords = re.split(r'\*\*(?:Palavras-chave|Keywords|Key-words)\*\*:', content)
         tex = convert(body) + '\n\\vspace{\\onelineskip}\n\\noindent '
         label = 'Palavras-chave' if title == 'Resumo' else 'Keywords'
         tex += '\\textbf{' + label + ':} ' + convert(keywords).removeprefix(HEADER)
@@ -188,7 +271,9 @@ def main():
     appendices = [(title, body) for title, body in sections.items() if title.startswith('Apêndice ')]
     combined = '\n'.join('# ' + title + '\n' + body for title, body in appendices)
     (editable / 'apendices.tex').write_text(HEADER + '\\begin{apendicesenv}\n\\partapendices\n' + convert(combined) + '\\end{apendicesenv}\n', encoding='utf-8')
-    listing = '\n'.join('\\item[' + title.split(' — ')[0] + '] ' + title.split(' — ')[1] + '.' for title, _ in appendices)
+    listing = '\n'.join('\\item[' + title.split(' — ')[0] + '] ' + title.split(' — ')[1] +
+                        '\\dotfill\\pageref{sec:apendice-' + title.split(' — ')[0][-1].lower() + '}'
+                        for title, _ in appendices)
     (editable / 'listaapendices.tex').write_text(HEADER + '\\pdfbookmark[0]{Lista de apêndices}{listaapendices}\n\\chapter*{Lista de apêndices}\n\\begin{description}\n' + listing + '\n\\end{description}\n\\cleardoublepage\n', encoding='utf-8')
     shutil.copyfile(ROOT / 'docs/referencias-tcc.bib', ROOT / 'latex/bibliografia.bib')
     print('Sincronizados: 11 arquivos de conteúdo e bibliografia. Figuras e dados preservados.')

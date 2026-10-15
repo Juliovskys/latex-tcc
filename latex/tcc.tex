@@ -4,19 +4,27 @@
 \input{fixos/pacotes}
 \input{fixos/comandos}
 \usepackage{fixos/customizacoes}
+\input{fixos/quadros}
 
 \input{editaveis/informacoes}
 \input{fixos/informacoes}
 \input{fixos/setup}
+\bibliographystyle{abntex2-alf-tcc}
 
 % Permite pequenos ajustes de espaçamento para evitar linhas que ultrapassem
 % as margens em títulos, referências e parágrafos com termos técnicos.
 \setlength{\emergencystretch}{2em}
+\setpnumwidth{2.5em}
+\setrmarg{3.5em}
+\widowpenalty=10000
+\clubpenalty=10000
 
 \begin{document}
 
 \frenchspacing 
+\hypersetup{pageanchor=false}
 \imprimircapa
+\hypersetup{pageanchor=true}
 \imprimirfolhaderosto*
 
 \input{fixos/fichaCatalografica}

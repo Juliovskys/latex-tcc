@@ -1,14 +1,20 @@
 from __future__ import annotations
 
 import json
+import hmac
+import math
 import mimetypes
 import os
+import secrets
 import sqlite3
 import uuid
+from contextlib import closing, contextmanager
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
+from typing import Iterator
+import governance
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -16,18 +22,38 @@ ASSET_DIR = BASE_DIR / "assets"
 DB_PATH = Path(os.environ.get("AVALIADOR_DB", BASE_DIR / "avaliador.db"))
 HOST = os.environ.get("AVALIADOR_HOST", "127.0.0.1")
 PORT = int(os.environ.get("AVALIADOR_PORT", "8080"))
+ADMIN_TOKEN = os.environ.get("AVALIADOR_ADMIN_TOKEN") or secrets.token_urlsafe(32)
+NOTICE_VERSION = "transparencia-v1"
+RETENTION_DAYS = int(os.environ.get("AVALIADOR_RETENTION_DAYS", "30"))
 PRIORITY_RECOMMENDATION_SERVICE_ID = "imposto-renda"
 PRIORITY_RECOMMENDATION_CONTEXTS = {"pagina-inicial-governo"}
+CES_ITEM_VERSION = governance.CES_ITEM_VERSION
+SATISFACTION_ITEM_VERSION = governance.SATISFACTION_ITEM_VERSION
+CES_QUESTION = "Foi fácil realizar o que eu precisava nesta etapa do serviço"
+CES_LABELS = {
+    1: "Discordo totalmente",
+    2: "Discordo",
+    3: "Discordo parcialmente",
+    4: "Nem concordo nem discordo",
+    5: "Concordo parcialmente",
+    6: "Concordo",
+    7: "Concordo totalmente",
+}
 
 
 def now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-def connect() -> sqlite3.Connection:
+@contextmanager
+def connect() -> Iterator[sqlite3.Connection]:
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
-    return conn
+    try:
+        with conn:
+            yield conn
+    finally:
+        conn.close()
 
 
 def init_db() -> None:
@@ -93,13 +119,18 @@ def init_db() -> None:
                 user_id text,
                 service_id text,
                 stars integer not null,
-                nps integer not null,
+                stars_item_version text,
+                ces integer check (ces is null or ces between 1 and 7),
+                ces_item_version text,
                 traits_json text not null,
                 comment text,
                 created_at text not null
             );
             """
         )
+
+        migrate_feedback_schema(conn)
+        governance.initialize(conn)
 
         seed_service(
             conn,
@@ -128,6 +159,51 @@ def init_db() -> None:
             click_threshold=12,
             average_duration_seconds=60,
         )
+        governance.seed_history(conn)
+
+
+def migrate_feedback_schema(conn: sqlite3.Connection) -> None:
+    """Preserva a base anterior antes de remover o indicador descontinuado.
+
+    Não há conversão entre escalas: os registros históricos recebem CES nulo.
+    A cópia SQLite fica junto à base e não deve ser publicada.
+    """
+    columns = {row["name"] for row in conn.execute("pragma table_info(feedbacks)")}
+    if "nps" not in columns:
+        if "stars_item_version" not in columns:
+            conn.execute("alter table feedbacks add column stars_item_version text")
+        return
+    backup_path = DB_PATH.with_name(
+        f"{DB_PATH.stem}.pre-ces-{datetime.now(timezone.utc):%Y%m%dT%H%M%S}-{uuid.uuid4().hex[:8]}.db"
+    )
+    with closing(sqlite3.connect(backup_path)) as backup:
+        conn.backup(backup)
+    conn.execute("begin immediate")
+    conn.execute(
+        """create table feedbacks_ces (
+            id integer primary key autoincrement,
+            session_id text not null,
+            user_id text,
+            service_id text,
+            stars integer not null,
+            stars_item_version text,
+            ces integer check (ces is null or ces between 1 and 7),
+            ces_item_version text,
+            traits_json text not null,
+            comment text,
+            created_at text not null
+        )"""
+    )
+    conn.execute(
+        """insert into feedbacks_ces
+            (id, session_id, user_id, service_id, stars, ces, ces_item_version,
+             traits_json, comment, created_at)
+            select id, session_id, user_id, service_id, stars, null, null,
+                   traits_json, comment, created_at from feedbacks"""
+    )
+    conn.execute("drop table feedbacks")
+    conn.execute("alter table feedbacks_ces rename to feedbacks")
+    conn.commit()
 
 
 def seed_service(
@@ -144,12 +220,7 @@ def seed_service(
         insert into services
             (id, name, url, important, click_threshold, average_duration_seconds, created_at)
         values (?, ?, ?, ?, ?, ?, ?)
-        on conflict(id) do update set
-            name = excluded.name,
-            url = excluded.url,
-            important = excluded.important,
-            click_threshold = excluded.click_threshold,
-            average_duration_seconds = excluded.average_duration_seconds
+        on conflict(id) do nothing
         """,
         (
             service_id,
@@ -194,6 +265,8 @@ def get_service(conn: sqlite3.Connection, service_id: str | None) -> dict:
         "important": 0,
         "click_threshold": 12,
         "average_duration_seconds": 60,
+        "duration_multiplier": 1.5,
+        "configuration_version": 1,
     }
 
 
@@ -228,10 +301,11 @@ def create_alert_once(
     conn.execute(
         """
         insert or ignore into admin_alerts
-            (session_id, service_id, severity, reason, click_count, duration_seconds, silent, created_at)
-        values (?, ?, ?, ?, ?, ?, 1, ?)
+            (session_id, service_id, severity, reason, click_count, duration_seconds, silent, created_at, configuration_version)
+        values (?, ?, ?, ?, ?, ?, 1, ?, ?)
         """,
-        (session_id, service_id, severity, reason, click_count, duration_seconds, now_iso()),
+        (session_id, service_id, severity, reason, click_count, duration_seconds, now_iso(),
+         get_service(conn, service_id)["configuration_version"]),
     )
 
 
@@ -332,7 +406,7 @@ def evaluate_duration_actions(
 ) -> list[dict]:
     service = get_service(conn, service_id)
     average = float(service["average_duration_seconds"])
-    if duration_seconds <= average * 1.5:
+    if duration_seconds <= average * float(service["duration_multiplier"]):
         return []
 
     create_alert_once(
@@ -367,10 +441,19 @@ class Handler(BaseHTTPRequestHandler):
     server_version = "AvaliadorServicosPublicos/0.1"
 
     def end_headers(self) -> None:
-        self.send_header("Access-Control-Allow-Origin", "*")
         self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization")
+        self.send_header("X-Content-Type-Options", "nosniff")
+        self.send_header("Referrer-Policy", "no-referrer")
+        self.send_header("Cache-Control", "no-store")
         super().end_headers()
+
+    def authorized(self) -> bool:
+        provided = self.headers.get("Authorization", "")
+        if not hmac.compare_digest(provided.encode("utf-8"), ("Bearer " + ADMIN_TOKEN).encode("utf-8")):
+            self.send_json({"error": "unauthorized"}, status=401)
+            return False
+        return True
 
     def do_OPTIONS(self) -> None:
         self.send_response(204)
@@ -379,6 +462,8 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:
         route = urlparse(self.path)
         try:
+            if route.path.startswith("/api/admin/") and not self.authorized():
+                return
             if route.path in ("/", "/index.html"):
                 self.handle_home_page()
             elif route.path == "/portal":
@@ -388,24 +473,70 @@ class Handler(BaseHTTPRequestHandler):
             elif route.path.startswith("/assets/"):
                 self.handle_asset(route.path)
             elif route.path == "/health":
-                self.send_json({"status": "ok", "database": str(DB_PATH)})
+                self.send_json({"status": "ok", "notice_version": NOTICE_VERSION})
             elif route.path == "/api/services":
                 self.handle_get_services()
             elif route.path == "/api/admin/alerts":
                 self.handle_get_alerts()
             elif route.path == "/api/admin/dashboard":
                 self.handle_get_dashboard()
+            elif route.path == "/api/admin/configurations":
+                with connect() as conn:
+                    rows = conn.execute("select * from service_config_versions order by id desc").fetchall()
+                self.send_json([dict(row) for row in rows])
+            elif route.path == "/api/admin/improvements":
+                with connect() as conn:
+                    result = governance.list_improvements(conn)
+                self.send_json(result)
+            elif route.path == "/api/admin/retention":
+                with connect() as conn:
+                    result = governance.purge_expired(conn, RETENTION_DAYS)
+                self.send_json(result)
+            elif route.path == "/privacy":
+                self.send_html(privacy_html())
             elif route.path == "/feedback":
                 self.handle_feedback_page(route.query)
             else:
                 self.send_json({"error": "not_found"}, status=404)
         except Exception as exc:
-            self.send_json({"error": "internal_error", "detail": str(exc)}, status=500)
+            self.send_json({"error": "internal_error"}, status=500)
 
     def do_POST(self) -> None:
         route = urlparse(self.path)
         try:
-            if route.path == "/api/events/click":
+            origin = self.headers.get("Origin")
+            if origin and origin != "http://" + self.headers.get("Host", ""):
+                self.send_json({"error": "origin_not_allowed"}, status=403)
+                return
+            if self.headers.get("Content-Type", "").split(";")[0].strip() != "application/json":
+                self.send_json({"error": "json_required"}, status=415)
+                return
+            if route.path.startswith("/api/admin/") and not self.authorized():
+                return
+            if route.path in ("/api/session/permission", "/api/session/withdraw"):
+                self.handle_permission(route.path.endswith("withdraw"))
+            elif route.path == "/api/admin/configurations":
+                payload = self.read_json()
+                with connect() as conn:
+                    result = governance.update_configuration(conn, payload)
+                self.send_json(result)
+            elif route.path == "/api/admin/improvements":
+                payload = self.read_json()
+                with connect() as conn:
+                    if "action_id" in payload:
+                        action_id = governance.update_improvement(conn, payload)
+                    else:
+                        action_id = governance.create_improvement(conn, payload)
+                self.send_json({"action_id": action_id}, status=201)
+            elif route.path == "/api/admin/retention":
+                payload = self.read_json()
+                if payload.get("confirm") is not True:
+                    raise ValueError("A execução exige confirm=true; consulte antes a prévia")
+                with connect() as conn:
+                    result = governance.purge_expired(conn, RETENTION_DAYS, confirm=True,
+                        cutoff=payload.get("cutoff"), expected_token=payload.get("preview_token"))
+                self.send_json(result)
+            elif route.path == "/api/events/click":
                 self.handle_click()
             elif route.path == "/api/events/page-time":
                 self.handle_page_time()
@@ -413,17 +544,50 @@ class Handler(BaseHTTPRequestHandler):
                 self.handle_feedback_submit()
             else:
                 self.send_json({"error": "not_found"}, status=404)
+        except governance.ConfigurationConflict as exc:
+            self.send_json({"error": "configuration_conflict", "detail": str(exc)}, status=409)
+        except PermissionError:
+            self.send_json({"error": "telemetry_not_permitted"}, status=403)
         except ValueError as exc:
             self.send_json({"error": "invalid_request", "detail": str(exc)}, status=400)
         except Exception as exc:
-            self.send_json({"error": "internal_error", "detail": str(exc)}, status=500)
+            self.send_json({"error": "internal_error"}, status=500)
 
     def read_json(self) -> dict:
         length = int(self.headers.get("Content-Length", "0"))
+        if length < 0 or length > 65536:
+            raise ValueError("Corpo da requisição deve ter até 64 KiB")
         if length == 0:
             return {}
         raw = self.rfile.read(length).decode("utf-8")
-        return json.loads(raw)
+        payload = json.loads(raw)
+        if not isinstance(payload, dict):
+            raise ValueError("Esperado objeto JSON")
+        return payload
+
+    def handle_permission(self, withdraw: bool) -> None:
+        payload = self.read_json()
+        session = governance.text(payload.get("session_id") or str(uuid.uuid4()), "session_id", maximum=80)
+        if not withdraw and (payload.get("notice_version") != NOTICE_VERSION or payload.get("allow") is not True):
+            raise ValueError("A coleta requer escolha afirmativa e versão do aviso")
+        with connect() as conn:
+            ensure_session(conn, session, None)
+            conn.execute("update sessions set telemetry_allowed=?, notice_version=? where id=?",
+                         (0 if withdraw else 1, NOTICE_VERSION, session))
+        self.send_json({"session_id": session, "telemetry_allowed": not withdraw,
+                        "notice_version": NOTICE_VERSION})
+
+    def validate_collection(self, conn, payload):
+        session = governance.text(payload.get("session_id"), "session_id", maximum=80)
+        row = conn.execute("select telemetry_allowed from sessions where id=?", (session,)).fetchone()
+        if row is None or not row["telemetry_allowed"]:
+            raise PermissionError()
+        if any(key in payload for key in ("user_id", "url", "x", "y")):
+            raise ValueError("A versão atual não coleta identificação, URL ou coordenadas")
+        governance.text(payload.get("page_id", "pagina"), "page_id", maximum=80)
+        if conn.execute("select id from services where id=?", (payload.get("service_id"),)).fetchone() is None:
+            raise ValueError("Serviço inexistente")
+        return session
 
     def send_json(self, payload: dict | list, status: int = 200) -> None:
         body = json.dumps(payload, ensure_ascii=False, indent=2).encode("utf-8")
@@ -453,11 +617,13 @@ class Handler(BaseHTTPRequestHandler):
 
     def handle_click(self) -> None:
         payload = self.read_json()
-        session_id = payload.get("session_id") or str(uuid.uuid4())
-        user_id = payload.get("user_id")
+        session_id = payload.get("session_id")
+        user_id = None
         service_id = payload.get("service_id")
 
         with connect() as conn:
+            conn.execute("begin immediate")
+            session_id = self.validate_collection(conn, payload)
             ensure_session(conn, session_id, user_id)
             conn.execute(
                 """
@@ -471,9 +637,9 @@ class Handler(BaseHTTPRequestHandler):
                     payload.get("page_id"),
                     payload.get("page_type"),
                     service_id,
-                    payload.get("url"),
-                    payload.get("x"),
-                    payload.get("y"),
+                    None,
+                    None,
+                    None,
                     now_iso(),
                 ),
             )
@@ -496,14 +662,19 @@ class Handler(BaseHTTPRequestHandler):
         if not session_id:
             raise ValueError("session_id é obrigatório para registrar tempo de página")
 
-        duration_seconds = float(payload.get("duration_seconds", 0))
-        if duration_seconds < 0:
-            raise ValueError("duration_seconds não pode ser negativo")
+        raw_duration = payload.get("duration_seconds")
+        if type(raw_duration) not in (int, float):
+            raise ValueError("duration_seconds deve ser numérico")
+        duration_seconds = float(raw_duration)
+        if not math.isfinite(duration_seconds) or not 0 <= duration_seconds <= 86400:
+            raise ValueError("duration_seconds deve estar entre 0 e 86400")
 
-        user_id = payload.get("user_id")
+        user_id = None
         service_id = payload.get("service_id")
 
         with connect() as conn:
+            conn.execute("begin immediate")
+            session_id = self.validate_collection(conn, payload)
             ensure_session(conn, session_id, user_id)
             conn.execute(
                 """
@@ -537,34 +708,51 @@ class Handler(BaseHTTPRequestHandler):
         session_id = payload.get("session_id")
         if not session_id:
             raise ValueError("session_id é obrigatório")
+        session_id = governance.text(session_id, "session_id", maximum=80)
+        if payload.get("user_id") is not None:
+            raise ValueError("A versão atual não coleta identificação de usuário")
 
-        stars = int(payload.get("stars", 0))
-        nps = int(payload.get("nps", -1))
+        stars = governance.integer(payload.get("stars"), "stars", 1, 5)
+        if "nps" in payload:
+            raise ValueError("Campo descontinuado; use ces de 1 a 7 ou omita a resposta")
+        ces = payload.get("ces")
         traits = payload.get("traits", [])
 
         if stars < 1 or stars > 5:
             raise ValueError("stars deve estar entre 1 e 5")
-        if nps < 0 or nps > 10:
-            raise ValueError("nps deve estar entre 0 e 10")
+        if ces is not None and (type(ces) is not int or not 1 <= ces <= 7):
+            raise ValueError("ces deve ser um inteiro de 1 a 7 ou null")
         if not isinstance(traits, list):
             raise ValueError("traits deve ser uma lista")
+        allowed_traits = {"clareza_informacoes", "tempo_obtencao", "esforco_alto", "usabilidade", "atendimento", "eficacia"}
+        if any(not isinstance(value, str) or value not in allowed_traits for value in traits):
+            raise ValueError("Atributo desconhecido")
+        traits = list(dict.fromkeys(traits))
+        comment = payload.get("comment") or None
+        if comment is not None:
+            comment = governance.text(comment, "comment", maximum=2000)
 
         with connect() as conn:
+            if conn.execute("select id from services where id=?", (payload.get("service_id"),)).fetchone() is None:
+                raise ValueError("Serviço inexistente")
             ensure_session(conn, session_id, payload.get("user_id"))
             conn.execute(
                 """
                 insert into feedbacks
-                    (session_id, user_id, service_id, stars, nps, traits_json, comment, created_at)
-                values (?, ?, ?, ?, ?, ?, ?, ?)
+                    (session_id, user_id, service_id, stars, stars_item_version, ces, ces_item_version,
+                     traits_json, comment, created_at)
+                values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     session_id,
                     payload.get("user_id"),
                     payload.get("service_id"),
                     stars,
-                    nps,
+                    SATISFACTION_ITEM_VERSION,
+                    ces,
+                    CES_ITEM_VERSION if ces is not None else None,
                     json.dumps(traits, ensure_ascii=False),
-                    payload.get("comment"),
+                    comment,
                     now_iso(),
                 ),
             )
@@ -581,7 +769,8 @@ class Handler(BaseHTTPRequestHandler):
             rows = conn.execute(
                 """
                 select
-                    a.*,
+                    a.id, a.session_id, a.service_id, a.severity, a.reason,
+                    a.click_count, a.duration_seconds, a.created_at, a.configuration_version,
                     s.name as service_name,
                     s.url as service_url
                 from admin_alerts a
@@ -613,21 +802,63 @@ class Handler(BaseHTTPRequestHandler):
                 select
                     coalesce(service_id, 'sem-servico') as service_id,
                     count(*) as total_feedbacks,
-                    round(avg(stars), 2) as average_stars,
-                    round(avg(nps), 2) as average_nps
+                    count(case when stars_item_version = ? then stars end) as stars_responses,
+                    count(*) - count(case when stars_item_version = ? then stars end) as stars_other_versions,
+                    round(avg(case when stars_item_version = ? then stars end), 2) as average_stars,
+                    count(case when ces_item_version = ? then ces end) as ces_responses,
+                    count(*) - count(ces) as ces_missing,
+                    count(case when ces is null and stars_item_version = ? then 1 end) as ces_missing_current_contract,
+                    count(case when ces is null and coalesce(stars_item_version, '') <> ? then 1 end) as ces_missing_legacy_or_unknown,
+                    count(ces) - count(case when ces_item_version = ? then ces end) as ces_other_versions,
+                    round(avg(case when ces_item_version = ? then ces end), 2) as average_ces
                 from feedbacks
                 group by coalesce(service_id, 'sem-servico')
                 order by total_feedbacks desc
-                """
+                """,
+                (SATISFACTION_ITEM_VERSION,) * 3 + (CES_ITEM_VERSION,)
+                + (SATISFACTION_ITEM_VERSION,) * 2 + (CES_ITEM_VERSION,) * 2,
+            ).fetchall()
+
+            distributions = conn.execute(
+                """select coalesce(service_id, 'sem-servico') as service_id,
+                          ces, count(*) as total
+                   from feedbacks where ces is not null and ces_item_version=?
+                   group by coalesce(service_id, 'sem-servico'), ces""", (CES_ITEM_VERSION,)
             ).fetchall()
 
             alert_count = conn.execute("select count(*) as total from admin_alerts").fetchone()
+            total_sessions = conn.execute("select count(distinct session_id) from click_events").fetchone()[0]
+            alerted_sessions = conn.execute("select count(distinct session_id) from admin_alerts").fetchone()[0]
+            attribute_metrics = {}
+            for row in conn.execute("select service_id, traits_json from feedbacks"):
+                for trait in set(json.loads(row["traits_json"])):
+                    key = (row["service_id"], trait)
+                    attribute_metrics[key] = attribute_metrics.get(key, 0) + 1
+
+        feedback_summary = [dict(row) for row in feedback_metrics]
+        for item in feedback_summary:
+            item["ces_distribution"] = {str(value): 0 for value in CES_LABELS}
+            for row in distributions:
+                if row["service_id"] == item["service_id"]:
+                    item["ces_distribution"][str(row["ces"])] = row["total"]
 
         self.send_json(
             {
                 "total_alerts": int(alert_count["total"]),
+                "sessions_with_clicks": total_sessions,
+                "sessions_with_alerts": alerted_sessions,
+                "attribute_metrics": [{"service_id": key[0], "trait": key[1], "responses": count}
+                                      for key, count in attribute_metrics.items()],
                 "service_metrics": [dict(row) for row in service_metrics],
-                "feedback_metrics": [dict(row) for row in feedback_metrics],
+                "feedback_metrics": feedback_summary,
+                "stars_item_version": SATISFACTION_ITEM_VERSION,
+                "ces_instrument": {
+                    "version": CES_ITEM_VERSION,
+                    "question": CES_QUESTION,
+                    "labels": CES_LABELS,
+                    "optional": True,
+                    "higher_is": "greater_perceived_ease",
+                },
             }
         )
 
@@ -636,14 +867,13 @@ class Handler(BaseHTTPRequestHandler):
         session_id = params.get("session_id", [""])[0]
         service_id = params.get("service_id", [""])[0]
         if not session_id:
-            self.send_html("<h1>session_id ausente</h1>", status=400)
-            return
+            session_id = str(uuid.uuid4())
 
         html = feedback_html(session_id=session_id, service_id=service_id)
         self.send_html(html)
 
     def handle_home_page(self) -> None:
-        self.send_html(home_html())
+        self.send_html((BASE_DIR / "admin.html").read_text(encoding="utf-8"))
 
     def handle_portal_page(self) -> None:
         self.send_html(portal_html())
@@ -672,329 +902,31 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def home_html() -> str:
-    return """<!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Avaliador de Serviços Públicos</title>
-  <style>
-    :root {
-      color-scheme: light;
-      --bg: #f4f7fb;
-      --panel: #ffffff;
-      --border: #d7dfeb;
-      --text: #172033;
-      --muted: #5f6d80;
-      --primary: #1f6feb;
-      --danger: #b42318;
-      --success: #087443;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-    }
-    header {
-      padding: 22px 28px;
-      background: #111827;
-      color: #fff;
-    }
-    header h1 {
-      margin: 0 0 6px;
-      font-size: 24px;
-    }
-    header p {
-      margin: 0;
-      color: #cbd5e1;
-    }
-    main {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 24px;
-      display: grid;
-      grid-template-columns: minmax(280px, 420px) 1fr;
-      gap: 18px;
-    }
-    section {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 18px;
-    }
-    h2 {
-      margin: 0 0 14px;
-      font-size: 18px;
-    }
-    label {
-      display: block;
-      margin: 12px 0 6px;
-      font-weight: 700;
-    }
-    select, input, textarea {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #b8c4d4;
-      border-radius: 6px;
-      font: inherit;
-    }
-    button, a.button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 38px;
-      margin: 8px 8px 0 0;
-      padding: 9px 13px;
-      border: 0;
-      border-radius: 6px;
-      background: var(--primary);
-      color: #fff;
-      font-weight: 700;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    button.secondary, a.secondary { background: #334155; }
-    button.ghost, a.ghost {
-      background: #fff;
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-    .status {
-      display: inline-block;
-      padding: 4px 8px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      background: #fee2e2;
-      color: var(--danger);
-    }
-    .status.ok {
-      background: #dcfce7;
-      color: var(--success);
-    }
-    .links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 12px;
-    }
-    .metric {
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px;
-      background: #f8fafc;
-    }
-    .metric strong {
-      display: block;
-      font-size: 24px;
-      margin-bottom: 4px;
-    }
-    pre {
-      margin: 12px 0 0;
-      padding: 12px;
-      overflow: auto;
-      max-height: 360px;
-      background: #0f172a;
-      color: #dbeafe;
-      border-radius: 8px;
-      font-size: 13px;
-      white-space: pre-wrap;
-    }
-    .muted { color: var(--muted); }
-    .full { grid-column: 1 / -1; }
-    @media (max-width: 860px) {
-      main { grid-template-columns: 1fr; padding: 14px; }
-      .grid { grid-template-columns: 1fr; }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Avaliador de Serviços Públicos</h1>
-    <p>Protótipo local para registrar cliques, detectar dificuldade e coletar feedback.</p>
-  </header>
+    return (BASE_DIR / "admin.html").read_text(encoding="utf-8")
 
-  <main>
-    <section>
-      <h2>Status do servidor</h2>
-      <p><span id="server-status" class="status">verificando</span></p>
-      <p class="muted" id="database-path"></p>
-      <div class="links">
-        <a class="button" href="/portal">Abrir protótipo visual</a>
-        <a class="button ghost" href="/health">/health</a>
-        <a class="button ghost" href="/api/services">/api/services</a>
-        <a class="button ghost" href="/api/admin/dashboard">/api/admin/dashboard</a>
-        <a class="button ghost" href="/api/admin/alerts">/api/admin/alerts</a>
-      </div>
-    </section>
 
-    <section>
-      <h2>Resumo administrativo</h2>
-      <div class="grid">
-        <div class="metric">
-          <strong id="total-alerts">0</strong>
-          <span>Alertas registrados</span>
-        </div>
-        <div class="metric">
-          <strong id="service-count">0</strong>
-          <span>Serviços monitorados</span>
-        </div>
-        <div class="metric">
-          <strong id="session-count">0</strong>
-          <span>Sessões afetadas</span>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2>Simular navegação</h2>
-      <label for="service">Serviço</label>
-      <select id="service"></select>
-      <label for="session">Sessão</label>
-      <input id="session" value="sessao-demo-local">
-      <button id="click-once">Registrar clique</button>
-      <button id="click-many" class="secondary">Gerar 14 cliques</button>
-      <button id="time-high" class="secondary">Registrar tempo alto</button>
-      <a id="feedback-link" class="button ghost" href="/feedback?session_id=sessao-demo-local&service_id=imposto-renda">Abrir feedback demo</a>
-      <pre id="last-response">{}</pre>
-    </section>
-
-    <section>
-      <h2>Alertas recentes</h2>
-      <button id="refresh" class="ghost">Atualizar painel</button>
-      <pre id="alerts">[]</pre>
-    </section>
-
-    <section class="full">
-      <h2>Dashboard bruto</h2>
-      <pre id="dashboard">{}</pre>
-    </section>
-  </main>
-
-  <script>
-    const statusEl = document.querySelector("#server-status");
-    const databasePath = document.querySelector("#database-path");
-    const serviceSelect = document.querySelector("#service");
-    const sessionInput = document.querySelector("#session");
-    const feedbackLink = document.querySelector("#feedback-link");
-    const lastResponse = document.querySelector("#last-response");
-    const alertsEl = document.querySelector("#alerts");
-    const dashboardEl = document.querySelector("#dashboard");
-
-    function showJson(element, data) {
-      element.textContent = JSON.stringify(data, null, 2);
-    }
-
-    async function getJson(url) {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error(`${url} retornou ${response.status}`);
-      return response.json();
-    }
-
-    async function loadStatus() {
-      try {
-        const health = await getJson("/health");
-        statusEl.textContent = "online";
-        statusEl.classList.add("ok");
-        databasePath.textContent = `Banco SQLite: ${health.database}`;
-      } catch (error) {
-        statusEl.textContent = "offline";
-        statusEl.classList.remove("ok");
-        databasePath.textContent = error.message;
-      }
-    }
-
-    async function loadServices() {
-      const services = await getJson("/api/services");
-      serviceSelect.innerHTML = services.map((service) => (
-        `<option value="${service.id}">${service.name}</option>`
-      )).join("");
-      updateFeedbackLink();
-      document.querySelector("#service-count").textContent = services.length;
-    }
-
-    async function refreshDashboard() {
-      const dashboard = await getJson("/api/admin/dashboard");
-      const alerts = await getJson("/api/admin/alerts");
-      showJson(dashboardEl, dashboard);
-      showJson(alertsEl, alerts);
-      document.querySelector("#total-alerts").textContent = dashboard.total_alerts ?? 0;
-      const sessions = (dashboard.service_metrics || []).reduce(
-        (total, item) => total + Number(item.affected_sessions || 0),
-        0
-      );
-      document.querySelector("#session-count").textContent = sessions;
-    }
-
-    function updateFeedbackLink() {
-      feedbackLink.href = `/feedback?session_id=${encodeURIComponent(sessionInput.value)}&service_id=${encodeURIComponent(serviceSelect.value)}`;
-    }
-
-    async function registerClick() {
-      updateFeedbackLink();
-      const response = await fetch("/api/events/click", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          session_id: sessionInput.value,
-          page_id: "home-gov-demo",
-          page_type: "home",
-          service_id: serviceSelect.value,
-          url: location.href,
-          x: Math.floor(Math.random() * 900),
-          y: Math.floor(Math.random() * 700)
-        })
-      });
-      const data = await response.json();
-      showJson(lastResponse, data);
-      await refreshDashboard();
-      return data;
-    }
-
-    async function registerManyClicks() {
-      let data = {};
-      for (let i = 0; i < 14; i += 1) data = await registerClick();
-      showJson(lastResponse, data);
-    }
-
-    async function registerHighTime() {
-      updateFeedbackLink();
-      const response = await fetch("/api/events/page-time", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          session_id: sessionInput.value,
-          service_id: serviceSelect.value,
-          page_id: "home-gov-demo",
-          duration_seconds: 120
-        })
-      });
-      const data = await response.json();
-      showJson(lastResponse, data);
-      await refreshDashboard();
-    }
-
-    document.querySelector("#click-once").addEventListener("click", registerClick);
-    document.querySelector("#click-many").addEventListener("click", registerManyClicks);
-    document.querySelector("#time-high").addEventListener("click", registerHighTime);
-    document.querySelector("#refresh").addEventListener("click", refreshDashboard);
-    serviceSelect.addEventListener("change", updateFeedbackLink);
-    sessionInput.addEventListener("input", updateFeedbackLink);
-
-    loadStatus()
-      .then(loadServices)
-      .then(refreshDashboard)
-      .catch((error) => showJson(lastResponse, { error: error.message }));
-  </script>
-</body>
-</html>"""
+def privacy_html() -> str:
+    return """<!doctype html><html lang="pt-BR"><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dados da demonstração</title><main style="max-width:48rem;margin:2rem auto;padding:1rem;font:1.1rem/1.6 Arial">
+    <h1>Como os dados são tratados nesta demonstração</h1>
+    <p>Finalidade: estudar a relação entre navegação e avaliação declarada em páginas simuladas.
+    Este ambiente não presta serviço público real. A coleta de cliques depende da escolha
+    afirmativa na página e pode ser interrompida a qualquer momento. É possível navegar sem coleta.</p>
+    <p>Os novos eventos armazenam identificador técnico, página, serviço, instante e contagem;
+    a duração só é recebida quando enviada, sendo simulada na demonstração. Não são coletados
+    nome, login, documentos, URL, coordenadas de clique, áudio ou vídeo pela aplicação Python.</p>
+    <p>O formulário voluntário registra satisfação, atributos, CES opcional e comentário opcional.
+    Não inclua dados pessoais no comentário. Identificadores técnicos são pseudônimos;
+    não garantem anonimização. O estudo histórico Figma/Useberry teve procedimento e base separados.</p>
+    <p>A política operacional proposta retém eventos e feedbacks por até 30 dias por padrão,
+    ajustáveis no ambiente local; a remoção exige execução da rotina administrativa. Cópias de
+    segurança e registros históricos exigem guarda e descarte separados pelos pesquisadores.
+    Este protótipo não deve receber dados reais antes da definição institucional de controlador,
+    base legal, canal de direitos, responsabilidades, retenção e condições de pesquisa/CEP.</p>
+    <p>O painel e as funções de configuração e manutenção exigem chave de administração.
+    A proteção local não substitui controles de uma implantação governamental.</p>
+    <p><a href="/portal">Voltar à demonstração</a></p></main></html>"""
 
 
 def prototype_styles() -> str:
@@ -1778,10 +1710,10 @@ def prototype_script(page_id: str, page_type: str, service_id: str) -> str:
     const PAGE_TYPE = "__PAGE_TYPE__";
     const SERVICE_ID = "__SERVICE_ID__";
     const SESSION_KEY = "avaliador_session_id";
-    const sessionId = localStorage.getItem(SESSION_KEY) || (
+    let sessionId = sessionStorage.getItem(SESSION_KEY) || (
       window.crypto && crypto.randomUUID ? crypto.randomUUID() : `sessao-${Date.now()}`
     );
-    localStorage.setItem(SESSION_KEY, sessionId);
+    sessionStorage.setItem(SESSION_KEY, sessionId);
 
     const requestEl = document.querySelector("#api-request");
     const responseEl = document.querySelector("#api-response");
@@ -1789,13 +1721,60 @@ def prototype_script(page_id: str, page_type: str, service_id: str) -> str:
     const sessionEl = document.querySelector("#api-session");
     const feedbackNotice = document.querySelector("#feedback-notice");
     const feedbackNoticeLink = document.querySelector("#feedback-notice-link");
+    let feedbackDismissed = false;
+    let feedbackPreviousFocus = null;
+    document.querySelector("#feedback-dismiss")?.addEventListener("click", () => {
+      feedbackDismissed = true;
+      feedbackNotice?.classList.remove("active");
+      feedbackPreviousFocus?.focus();
+    });
     const modal = document.querySelector("#redirect-modal");
     const modalMessage = document.querySelector("#redirect-message");
     const redirectButton = document.querySelector("#redirect-accept");
     const dismissButton = document.querySelector("#redirect-dismiss");
     let pendingRedirectService = "";
     let pendingRedirectKey = "";
+    let previousFocus = null;
+    function closeRedirect() {
+      modal?.classList.remove("active");
+      previousFocus?.focus();
+    }
+    modal?.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") { event.preventDefault(); closeRedirect(); }
+      if (event.key === "Tab") {
+        const first = dismissButton, last = redirectButton;
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      }
+    });
 
+    const permission = document.createElement("section");
+    permission.setAttribute("aria-label", "Escolha sobre coleta de interações");
+    permission.style.cssText = "background:#fff;color:#172033;padding:16px;border-bottom:2px solid #1f6feb;line-height:1.5";
+    permission.innerHTML = `<strong>Coleta opcional de interações nesta demonstração</strong>
+      <p>Podemos registrar cliques instrumentados e duração informada para estudar a navegação.
+      Não coletamos nome, URL ou coordenadas. <a href="/privacy">Leia o aviso</a>.</p>
+      <button id="allow-telemetry" type="button">Permitir coleta nesta aba</button>
+      <button id="stop-telemetry" type="button">Continuar sem coleta / interromper</button>
+      <a href="/feedback?service_id=${encodeURIComponent(SERVICE_ID)}">Avaliar sem telemetria</a>
+      <p id="privacy-choice" role="status" aria-live="polite"></p>`;
+    document.body.prepend(permission);
+    const choice = document.querySelector("#privacy-choice");
+    const updateChoice = () => choice.textContent = sessionStorage.getItem("telemetry_allowed") === "1"
+      ? "Coleta permitida nesta aba. Você pode interromper a qualquer momento." : "Coleta desativada. A navegação continua disponível.";
+    document.querySelector("#allow-telemetry").addEventListener("click", async () => {
+      const response = await fetch("/api/session/permission", {method:"POST", headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({session_id:sessionId, allow:true, notice_version:"transparencia-v1"})});
+      if (response.ok) sessionStorage.setItem("telemetry_allowed", "1");
+      updateChoice();
+    });
+    document.querySelector("#stop-telemetry").addEventListener("click", async () => {
+      sessionStorage.removeItem("telemetry_allowed");
+      await fetch("/api/session/withdraw", {method:"POST", headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({session_id:sessionId})});
+      updateChoice();
+    });
+    updateChoice();
     if (sessionEl) sessionEl.textContent = sessionId;
 
     function showJson(element, data) {
@@ -1811,7 +1790,8 @@ def prototype_script(page_id: str, page_type: str, service_id: str) -> str:
     }
 
     function showFeedback(url) {
-      if (!feedbackNotice || !feedbackNoticeLink) return;
+      if (!feedbackNotice || !feedbackNoticeLink || feedbackDismissed) return;
+      if (!feedbackNotice.classList.contains("active")) feedbackPreviousFocus = document.activeElement;
       feedbackNotice.classList.add("active");
       feedbackNoticeLink.href = url;
     }
@@ -1821,15 +1801,17 @@ def prototype_script(page_id: str, page_type: str, service_id: str) -> str:
       const targetService = action.target_service_id || SERVICE_ID;
       const reason = action.reason || "redirect";
       const redirectKey = `avaliador_redirect_popup_seen:${sessionId}:${targetService}:${reason}`;
-      if (localStorage.getItem(redirectKey) === "1") {
+      if (sessionStorage.getItem(redirectKey) === "1") {
         setAction("Sugestão de redirecionamento já exibida nesta sessão.");
         return;
       }
       pendingRedirectService = targetService;
       pendingRedirectKey = redirectKey;
-      localStorage.setItem(redirectKey, "1");
+      sessionStorage.setItem(redirectKey, "1");
       modalMessage.textContent = action.message || "Deseja ir direto para o serviço indicado?";
+      previousFocus = document.activeElement;
       modal.classList.add("active");
+      dismissButton?.focus();
     }
 
     async function handleActions(actions) {
@@ -1858,20 +1840,18 @@ def prototype_script(page_id: str, page_type: str, service_id: str) -> str:
     }
 
     async function registerClick(event, label) {
+      if (sessionStorage.getItem("telemetry_allowed") !== "1") return {};
       const payload = {
         session_id: sessionId,
         page_id: PAGE_ID,
         page_type: PAGE_TYPE,
         service_id: SERVICE_ID,
-        url: location.href,
-        x: event ? Math.round(event.clientX) : 0,
-        y: event ? Math.round(event.clientY) : 0,
-        label: label || "click"
       };
       return postJson("/api/events/click", payload);
     }
 
     async function registerPageTime(seconds) {
+      if (sessionStorage.getItem("telemetry_allowed") !== "1") return {};
       const payload = {
         session_id: sessionId,
         page_id: PAGE_ID,
@@ -1906,13 +1886,13 @@ def prototype_script(page_id: str, page_type: str, service_id: str) -> str:
     });
 
     redirectButton?.addEventListener("click", () => {
-      if (pendingRedirectKey) localStorage.setItem(pendingRedirectKey, "1");
+      if (pendingRedirectKey) sessionStorage.setItem(pendingRedirectKey, "1");
       window.location.href = localServiceUrl(pendingRedirectService);
     });
 
     dismissButton?.addEventListener("click", () => {
-      if (pendingRedirectKey) localStorage.setItem(pendingRedirectKey, "1");
-      modal.classList.remove("active");
+      if (pendingRedirectKey) sessionStorage.setItem(pendingRedirectKey, "1");
+      closeRedirect();
       setAction("Usuário recusou o redirecionamento sugerido.");
     });
 
@@ -1926,7 +1906,7 @@ def prototype_script(page_id: str, page_type: str, service_id: str) -> str:
     showJson(responseEl, {
       mensagem: "Clique em elementos do protótipo ou use as simulações para ver a API funcionando."
     });
-    setAction("Aguardando cliques ou tempo acima da média.");
+    setAction("Aguardando eventos autorizados.");
   </script>
     """.replace("__PAGE_ID__", page_id).replace("__PAGE_TYPE__", page_type).replace("__SERVICE_ID__", service_id)
 
@@ -1941,7 +1921,7 @@ def api_console_html() -> str:
       <div class="api-console-body">
         <span class="api-pill">Sessão: <strong id="api-session"></strong></span>
         <div class="api-flow">
-          <div class="api-step"><strong>1. Captura</strong>O clique ou tempo de navegação é registrado no frontend.</div>
+          <div class="api-step"><strong>1. Captura</strong>Cliques instrumentados são registrados; a duração é simulada.</div>
           <div class="api-step"><strong>2. Envio</strong>O evento é enviado para `/api/events/click` ou `/api/events/page-time`.</div>
           <div class="api-step"><strong>3. Decisão</strong>A API compara com limites e devolve ações: popup, feedback ou fluxo normal.</div>
         </div>
@@ -2023,7 +2003,7 @@ def portal_html() -> str:
         <a href="#fale" data-track="atalho-fale-secretaria">Fale com a Secretaria</a>
         <a href="#noticias" data-track="atalho-noticias">Notícias</a>
         <a href="#servicos" data-track="atalho-servicos">Carta de Serviços</a>
-        <a href="/" data-track="atalho-admin">Painel admin</a>
+        <a href="/" data-track="atalho-admin">Gestão (atalho da demonstração)</a>
       </nav>
     </div>
   </header>
@@ -2135,7 +2115,7 @@ def portal_html() -> str:
               </div>
             </div>
             <div class="confusion-note">
-              Esta página simula um cenário realista de excesso de caminhos. Use a simulação de cliques para demonstrar a detecção de dificuldade.
+              Esta página simula um cenário realista de excesso de caminhos. Use a simulação de cliques para demonstrar o acionamento de regras.
             </div>
           </aside>
         </div>
@@ -2264,7 +2244,7 @@ def portal_html() -> str:
               <p>Transparência, ouvidoria, diário oficial e serviços aparecem no mesmo fluxo visual.</p>
             </div>
             <div class="card">
-              <h3>Ruído suficiente para medir dificuldade</h3>
+              <h3>Contexto para investigar a navegação</h3>
               <p>A API consegue registrar tentativas repetidas antes de sugerir feedback ou redirecionamento.</p>
             </div>
           </div>
@@ -2276,8 +2256,9 @@ def portal_html() -> str:
   </main>
 
   <div id="feedback-notice" class="notice" style="position:fixed;left:24px;bottom:24px;z-index:40;max-width:420px;">
-    A API detectou dificuldade nesta sessão.
+    Uma regra de navegação foi acionada. Deseja avaliar esta etapa?
     <a id="feedback-notice-link" class="button" href="/feedback?session_id=&service_id=pagina-inicial-governo">Abrir feedback</a>
+    <button id="feedback-dismiss" type="button">Agora não</button>
   </div>
 
   __MODAL__
@@ -2319,7 +2300,7 @@ def service_html(service: dict) -> str:
       </a>
       <nav class="nav" aria-label="Navegação principal">
         <a href="/portal" data-track="menu-inicio">Início</a>
-        <a href="/" data-track="menu-admin">Painel admin</a>
+        <a href="/" data-track="menu-admin">Gestão (atalho da demonstração)</a>
       </nav>
     </div>
   </header>
@@ -2367,8 +2348,8 @@ def service_html(service: dict) -> str:
           <h2>Como a API atua nesta tela</h2>
           <div class="quick-grid">
             <div class="card">
-              <h3>Registro silencioso</h3>
-              <p>Cada clique envia sessão, página, serviço, URL e posição do cursor.</p>
+              <h3>Coleta com escolha e transparência</h3>
+              <p>Após autorização, cliques instrumentados enviam identificador técnico, página e serviço.</p>
             </div>
             <div class="card">
               <h3>Regra de decisão</h3>
@@ -2376,7 +2357,7 @@ def service_html(service: dict) -> str:
             </div>
             <div class="card">
               <h3>Ação contextual</h3>
-              <p>Serviços prioritários podem exibir popup; dificuldades persistentes abrem feedback.</p>
+              <p>Serviços prioritários podem exibir sugestão; outras condições operacionais disponibilizam convite opcional.</p>
             </div>
           </div>
         </div>
@@ -2387,8 +2368,9 @@ def service_html(service: dict) -> str:
   </main>
 
   <div id="feedback-notice" class="notice" style="position:fixed;left:24px;bottom:24px;z-index:40;max-width:420px;">
-    A API detectou dificuldade nesta sessão.
+    Uma regra de navegação foi acionada. Deseja avaliar esta etapa?
     <a id="feedback-notice-link" class="button" href="/feedback?session_id=&service_id=__SERVICE_ID__">Abrir feedback</a>
+    <button id="feedback-dismiss" type="button">Agora não</button>
   </div>
 
   __MODAL__
@@ -2409,6 +2391,8 @@ def service_html(service: dict) -> str:
 
 
 def feedback_html(session_id: str, service_id: str) -> str:
+    session_json = json.dumps(session_id).replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
+    service_json = json.dumps(service_id).replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
     traits = [
         ("clareza_informacoes", "Informações confusas"),
         ("tempo_obtencao", "Demorou demais"),
@@ -2430,11 +2414,11 @@ def feedback_html(session_id: str, service_id: str) -> str:
           </label>
         """
         for value, label in [
-            (1, "Péssima"),
-            (2, "Ruim"),
-            (3, "Ok"),
-            (4, "Boa"),
-            (5, "Excelente"),
+            (1, "Muito insatisfeito(a)"),
+            (2, "Insatisfeito(a)"),
+            (3, "Nem satisfeito(a) nem insatisfeito(a)"),
+            (4, "Satisfeito(a)"),
+            (5, "Muito satisfeito(a)"),
         ]
     )
 
@@ -2445,6 +2429,7 @@ def feedback_html(session_id: str, service_id: str) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Feedback do serviço público</title>
   <style>
+    * {{ box-sizing: border-box; }}
     body {{
       font-family: Arial, sans-serif;
       margin: 0;
@@ -2452,15 +2437,16 @@ def feedback_html(session_id: str, service_id: str) -> str:
       color: #18202f;
     }}
     main {{
-      max-width: 680px;
-      margin: 48px auto;
+      width: calc(100% - 32px);
+      max-width: 760px;
+      margin: 32px auto;
       padding: 28px;
       background: #fff;
       border: 1px solid #d9e0eb;
       border-radius: 8px;
     }}
     h1 {{ font-size: 24px; margin: 0 0 18px; }}
-    fieldset {{ border: 0; padding: 0; margin: 22px 0; }}
+    fieldset {{ border: 0; padding: 0; margin: 22px 0; min-width: 0; }}
     legend {{ font-weight: 700; margin-bottom: 10px; }}
     .rating-field {{
       margin-top: 18px;
@@ -2468,6 +2454,7 @@ def feedback_html(session_id: str, service_id: str) -> str:
     .rating-heading {{
       display: flex;
       align-items: baseline;
+      flex-wrap: wrap;
       justify-content: space-between;
       gap: 12px;
       margin-bottom: 8px;
@@ -2514,6 +2501,8 @@ def feedback_html(session_id: str, service_id: str) -> str:
       color: #64748b;
       font-size: 12px;
       font-weight: 700;
+      text-align: center;
+      overflow-wrap: anywhere;
     }}
     .rating-option.active,
     .rating-option.preview {{
@@ -2563,13 +2552,15 @@ def feedback_html(session_id: str, service_id: str) -> str:
     #status {{ margin-top: 16px; font-weight: 700; }}
     @media (max-width: 560px) {{
       main {{
+        width: 100%;
+        padding: 20px;
         margin: 0;
         min-height: 100vh;
         border: 0;
         border-radius: 0;
       }}
       .rating-options {{
-        grid-template-columns: repeat(5, minmax(48px, 1fr));
+        grid-template-columns: repeat(5, minmax(0, 1fr));
         gap: 6px;
       }}
       .rating-option {{
@@ -2583,15 +2574,24 @@ def feedback_html(session_id: str, service_id: str) -> str:
         font-size: 10px;
       }}
     }}
+    @media (max-width: 400px) {{
+      .rating-options {{ grid-template-columns: 1fr; }}
+      .rating-option {{ flex-direction: row; min-height: 48px; gap: 12px; }}
+      .rating-star {{ font-size: 28px; }}
+      .rating-text {{ font-size: 14px; overflow-wrap: normal; }}
+    }}
   </style>
 </head>
 <body>
   <main>
     <h1>Como foi sua experiência?</h1>
+    <p>Esta é uma demonstração acadêmica. A avaliação é voluntária. Não inclua nome,
+      documentos, contato ou outros dados pessoais no comentário.
+      <a href="/privacy">Como os dados são tratados</a>.</p>
     <form id="feedback-form">
       <fieldset class="rating-field">
+        <legend>Qual é a sua satisfação com esta etapa do serviço?</legend>
         <div class="rating-heading">
-          <legend>Avaliação geral</legend>
           <span id="rating-caption" class="rating-caption">Toque em uma nota</span>
         </div>
         <div class="rating-options" role="radiogroup" aria-label="Avaliação geral">
@@ -2606,21 +2606,24 @@ def feedback_html(session_id: str, service_id: str) -> str:
       </fieldset>
 
       <fieldset>
-        <legend>NPS</legend>
-        <label for="nps">Qual a chance de você recomendar este serviço? (0 a 10)</label>
-        <select id="nps" name="nps" required>
-          <option value="">Selecione</option>
-          {"".join(f'<option value="{i}">{i}</option>' for i in range(11))}
+        <legend>Facilidade percebida — CES (opcional)</legend>
+        <label for="ces">{CES_QUESTION}</label>
+        <select id="ces" name="ces" aria-describedby="ces-help">
+          <option value="">Prefiro não responder</option>
+          {"".join(f'<option value="{i}">{i} — {label}</option>' for i, label in CES_LABELS.items())}
         </select>
+        <p id="ces-help">De 1 (discordo totalmente) a 7 (concordo totalmente).
+          Notas maiores indicam maior facilidade percebida nesta etapa.</p>
       </fieldset>
 
       <fieldset>
         <legend>Comentário opcional</legend>
-        <textarea name="comment" rows="4" placeholder="Descreva brevemente o problema encontrado"></textarea>
+        <label for="feedback-comment">Descreva brevemente a experiência, sem dados pessoais</label>
+        <textarea id="feedback-comment" name="comment" rows="4" maxlength="2000" placeholder="Descreva brevemente o problema encontrado"></textarea>
       </fieldset>
 
       <button type="submit">Enviar feedback</button>
-      <p id="status"></p>
+      <p id="status" role="status" aria-live="polite"></p>
     </form>
   </main>
 
@@ -2631,11 +2634,11 @@ def feedback_html(session_id: str, service_id: str) -> str:
     const ratingCaption = document.querySelector("#rating-caption");
     const ratingError = document.querySelector("#rating-error");
     const ratingLabels = {{
-      1: "Péssima",
-      2: "Ruim",
-      3: "Ok",
-      4: "Boa",
-      5: "Excelente"
+      1: "Muito insatisfeito(a)",
+      2: "Insatisfeito(a)",
+      3: "Nem satisfeito(a) nem insatisfeito(a)",
+      4: "Satisfeito(a)",
+      5: "Muito satisfeito(a)"
     }};
 
     function paintRating(value, mode = "active") {{
@@ -2680,10 +2683,10 @@ def feedback_html(session_id: str, service_id: str) -> str:
         return;
       }}
       const payload = {{
-        session_id: "{session_id}",
-        service_id: "{service_id}",
+        session_id: {session_json},
+        service_id: {service_json},
         stars: Number(data.get("stars")),
-        nps: Number(data.get("nps")),
+        ces: data.get("ces") === "" ? null : Number(data.get("ces")),
         traits: data.getAll("traits"),
         comment: data.get("comment")
       }};
@@ -2704,10 +2707,12 @@ def feedback_html(session_id: str, service_id: str) -> str:
 
 
 def main() -> None:
+    if not os.environ.get("AVALIADOR_ADMIN_TOKEN", "").strip():
+        raise SystemExit("Defina AVALIADOR_ADMIN_TOKEN antes de iniciar o protótipo e acessar a gestão.")
     init_db()
     server = ThreadingHTTPServer((HOST, PORT), Handler)
     print(f"Avaliador de Serviços Públicos API em http://{HOST}:{PORT}")
-    print(f"Banco SQLite: {DB_PATH}")
+    print("Painel administrativo disponível na raiz. Configure AVALIADOR_ADMIN_TOKEN antes de iniciar.")
     server.serve_forever()
 
 

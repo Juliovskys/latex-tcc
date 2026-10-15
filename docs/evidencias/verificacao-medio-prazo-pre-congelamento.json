@@ -1,0 +1,33 @@
+{
+  "started_at_utc": "2026-10-15T06:24:57.377707+00:00",
+  "finished_at_utc": "2026-10-15T06:25:09.033361+00:00",
+  "execution": "Execução automatizada local assistida por agente; não é avaliação humana independente.",
+  "python": "3.12.14",
+  "sqlite": "3.53.1",
+  "os": "Windows",
+  "os_release": "11",
+  "branch": "docs/tcc-medio-prazo",
+  "base_commit": "dee5007275de3370a7652f5d8f5ac079e860ff50",
+  "working_tree_has_changes": true,
+  "command": [
+    "python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "prototype-api",
+    "-p",
+    "test_*.py",
+    "-v"
+  ],
+  "return_code": 0,
+  "tests_reported": 19,
+  "source_sha256": {
+    "prototype-api/server.py": "12ff819271ec31af6aea1a71f71fa0af2618797fe4e036e34636a869fb3ccfa8",
+    "prototype-api/governance.py": "d1f48d967368a5c122f8cf20ce9f4cf0e3339502bc91ad226cc417fefab49d8f",
+    "prototype-api/admin.html": "91dbb72d52569b7b3fc666bc8f41ad200f3fb6993766b6b2eebb39e5da645e53",
+    "prototype-api/test_feedback_ces.py": "0a59f329fe70346ddbdfab7aae61dee81b5371591908bc91246268f012782486",
+    "prototype-api/test_governance.py": "d259e636c4bf352e99ae1321e00d118589d88d7d8c2bef193fddd6b11a246f49"
+  },
+  "scope": "Contratos e cenários selecionados, com bases temporárias e dados sintéticos. Sem validação com pessoas, carga ou auditoria global."
+}

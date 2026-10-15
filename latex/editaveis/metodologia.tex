@@ -1,40 +1,54 @@
 % Gerado a partir de docs/tcc.md por scripts/sincronizar_tcc.py.
 \chapter{Metodologia}\label{metodologia}
 
-Este capítulo apresenta o caminho seguido para transformar a ideia do sistema de avaliação contextual em um protótipo demonstrável. A metodologia combinou pesquisa aplicada, revisão bibliográfica e normativa, Design Science Research, prototipação incremental e Lean Inception, de modo que a definição do produto e a implementação técnica avançassem de forma coerente.
+Este capítulo organiza o percurso pela DSR, distinguindo atividades executadas, documentação formalizada posteriormente e avaliações ainda planejadas. O artefato técnico atual e as interfaces históricas do Figma são componentes relacionados, com bases de evidência separadas.
 
-\section{Caracterização da Pesquisa}\label{caracterizauxe7uxe3o-da-pesquisa}
+\section{Estratégia de Pesquisa e Fontes}\label{estratuxe9gia-de-pesquisa-e-fontes}
 
 A pesquisa é aplicada e exploratória: propõe uma solução computacional para relacionar contexto de navegação e avaliação declarada em serviços públicos digitais. O artefato possui dois componentes: uma implementação funcional local em Python, com API, páginas, formulário e painel; e um protótipo de interface no Figma, com os fluxos A e B usados no estudo com participantes. A implementação recebeu inspeção interna funcional e heurística. As interfaces no Figma receberam avaliação exploratória de usabilidade, instrumentada pelo Useberry. Nenhum desses procedimentos constitui validação em contexto real de prestação de serviço público.
 
-O percurso dialoga com a Design Science Research, na qual a construção e a avaliação de artefatos apoiam a produção de conhecimento em sistemas de informação \cite{hevner2004designscience}. A demonstração técnica da implementação e as observações de interface oferecem evidências de naturezas diferentes. A avaliação com oito participantes se refere às interfaces no Figma; não verifica os endpoints, a persistência ou os gatilhos da implementação Python. A estruturação completa do percurso pelas etapas da DSR permanece parte da continuidade metodológica.
+A estratégia de pesquisa adotada é Design Science Research (DSR), com o artefato como meio de investigar o problema. A organização segue identificação do problema, objetivos da solução, design e desenvolvimento, demonstração, avaliação e comunicação \cite{hevner2004designscience,peffers2007dsrm}. A Lean Inception é uma técnica da etapa de concepção do MVP, e a prototipação incremental é uma prática de desenvolvimento. Não são apresentadas como metodologias científicas paralelas.
 
-As fontes foram diferenciadas por natureza e finalidade. Artigos e livros acadêmicos fundamentam conceitos e questões de pesquisa; normas oferecem definições e critérios; legislação caracteriza o enquadramento normativo; relatórios técnicos e materiais institucionais descrevem modelos e práticas de governo digital. Os módulos da Enap são material didático institucional. Caroli, Fowler e Caroli, Cooper e Kalbach são usados como literatura profissional de concepção e projeto; Reichheld caracteriza a proposta original de NPS, sem constituir validação desse indicador para serviços públicos. Hotjar, Microsoft Clarity e Useberry são documentação comercial, limitada à descrição de funcionalidades declaradas e instrumentos utilizados. A classificação das fontes é apresentada a seguir; a presença de uma fonte não comprova a eficácia do mecanismo proposto.
+A formalização de requisitos, rastreabilidade e plano de avaliação ocorreu após a construção inicial e o estudo exploratório de 28 de junho de 2026. A DSR organiza a consolidação e a continuidade iterativa; não se afirma que todos os seus produtos foram definidos prospectivamente antes daquela coleta. Demonstração técnica, testes automatizados locais, inspeção heurística interna e observação de interfaces têm alcances diferentes. A avaliação externa e a validação em serviço público real permanecem não executadas.
+
+As fontes foram diferenciadas por natureza e finalidade. Artigos e livros acadêmicos fundamentam conceitos e questões de pesquisa; normas oferecem definições e critérios; legislação caracteriza o enquadramento normativo; relatórios técnicos e materiais institucionais descrevem modelos e práticas de governo digital. Os módulos da Enap são material didático institucional. Caroli, Fowler e Caroli, Cooper e Kalbach são usados como literatura profissional de concepção e projeto; Dixon, Freeman e Toman contextualizam o esforço em serviços como literatura profissional, sem validar o instrumento adaptado para serviços públicos. Hotjar, Microsoft Clarity, Useberry e SurveyMonkey são documentação comercial, limitada à descrição de funcionalidades declaradas e instrumentos utilizados. A classificação das fontes é apresentada a seguir; a presença de uma fonte não comprova a eficácia do mecanismo proposto.
 
 \begin{itemize}
 \item
   \textbf{Legislação:} \citeonline{brasil2011lei12527}; \citeonline{brasil2017decreto9094}; \citeonline{brasil2017lei13460}; \citeonline{brasil2018lgpd}; \citeonline{brasil2021lei14129}; \citeonline{brasil2022decreto11260}; \citeonline{brasil2022portaria548}.
 \item
-  \textbf{Documentação ou pesquisa institucional:} \citeonline{govbrFerramentaAvaliacao}; \citeonline{brasilMgi2024ppaParticipativo}; \citeonline{cetic2025ticDomicilios2024}; \citeonline{govuk2021completionRate}; \citeonline{govuk2021usingData}.
+  \textbf{Documentação ou pesquisa institucional:} \citeonline{govbrFerramentaAvaliacao}; \citeonline{brasilMgi2024ppaParticipativo}; \citeonline{cetic2025ticDomicilios2024}; \citeonline{govuk2021completionRate}; \citeonline{govuk2021usingData}; \citeonline{govuk2026wholeProblem}; \citeonline{ipc2020privacy}; \citeonline{cavoukian2011pbd}.
 \item
-  \textbf{Literatura profissional:} \citeonline{caroli2018leanInception}; \citeonline{cooper1999inmates}; \citeonline{fowler2022leanInception}; \citeonline{kalbach2016mapping}; \citeonline{reichheld2003nps}.
+  \textbf{Literatura profissional:} \citeonline{caroli2018leanInception}; \citeonline{cooper1999inmates}; \citeonline{fowler2022leanInception}; \citeonline{kalbach2016mapping}; \citeonline{dixon2010effort}; \citeonline{dixon2013effortless}; \citeonline{dixon2016ces}.
 \item
-  \textbf{Literatura acadêmica/científica:} \citeonline{deloneMclean2003}; \citeonline{gronroos1984service}; \citeonline{hektner2007experienceSampling}; \citeonline{hevner2004designscience}; \citeonline{kahneman1993peakEnd}; \citeonline{larson1983experienceSampling}; \citeonline{manfreda2008webSurveys}; \citeonline{mark2008interruptedWork}; \citeonline{nielsen1994heuristic}; \citeonline{oliver2014satisfaction}; \citeonline{parasuraman1988servqual}; \citeonline{schwarz1999selfReports}; \citeonline{shihFan2008responseRates}; \citeonline{Sommerville2011}; \citeonline{sweller1988cognitiveLoad}.
+  \textbf{Literatura acadêmica/científica:} \citeonline{deloneMclean2003}; \citeonline{gronroos1984service}; \citeonline{hektner2007experienceSampling}; \citeonline{hevner2004designscience}; \citeonline{kahneman1993peakEnd}; \citeonline{larson1983experienceSampling}; \citeonline{manfreda2008webSurveys}; \citeonline{mark2008interruptedWork}; \citeonline{nielsen1994heuristic}; \citeonline{oliver2014satisfaction}; \citeonline{parasuraman1988servqual}; \citeonline{schwarz1999selfReports}; \citeonline{shihFan2008responseRates}; \citeonline{Sommerville2011}; \citeonline{sweller1988cognitiveLoad}; \citeonline{parasuraman2005esqual}; \citeonline{peffers2007dsrm}; \citeonline{papadomichelaki2012egovqual}.
 \item
-  \textbf{Documentação comercial:} \citeonline{hotjar2026}; \citeonline{microsoftClarity2026}; \citeonline{useberryFigma}.
+  \textbf{Documentação comercial:} \citeonline{hotjar2026}; \citeonline{microsoftClarity2026}; \citeonline{useberryFigma}; \citeonline{surveymonkey2026ces}.
 \item
-  \textbf{Norma técnica:} \citeonline{iso9241112018}; \citeonline{iso92412102019}.
+  \textbf{Normas técnicas:} \citeonline{iso9241112018}; \citeonline{iso92412102019}; \citeonline{iso250102023}; \citeonline{wcag22}.
 \item
   \textbf{Material didático institucional:} \citeonline{limaPereira2020modulo1}; \citeonline{limaPereira2020modulo2}; \citeonline{limaPereira2020modulo3}; \citeonline{limaPereira2020modulo4}.
 \item
   \textbf{Relatório técnico institucional:} \citeonline{pedrosa2019qualidadeGovbr}; \citeonline{silva2024atributosApi}; \citeonline{silva2019brasp}; \citeonline{silva2022modeloUnificado}.
 \end{itemize}
 
-\section{Lean Inception}\label{lean-inception}
+As fontes acrescentadas nesta consolidação incluem o artigo de E-S-QUAL/E-RecS-QUAL, o método DSRM e o artigo de Fawcett sobre matriz de confusão como literatura científica; ISO/IEC 25010:2023 e WCAG 2.2 como referências normativas de qualidade e acessibilidade; e o material sobre Privacy by Design como orientação institucional de projeto \cite{parasuraman2005esqual,peffers2007dsrm,fawcett2006roc,iso250102023,wcag22,ipc2020privacy}. O guia de serviço completo do GDS é documentação institucional. Essa classificação não transfere validade de um contexto de aplicação para outro.
 
-A Lean Inception foi utilizada como protocolo metodológico para alinhar visão de produto, escopo e MVP. A abordagem de \citeonline{caroli2018leanInception} auxilia equipes a definir o produto certo antes de ampliar o desenvolvimento; \citeonline{fowler2022leanInception} também a descreve como uma inception focada em compreender funcionalidades, clientes e Canvas MVP. Neste trabalho, a técnica organizou a definição do sistema de avaliação contextual e ajudou a transformar a ideia inicial em um conjunto priorizado de funcionalidades.
+\section{Identificação do Problema e Motivação}\label{identificauxe7uxe3o-do-problema-e-motivauxe7uxe3o}
 
-A atividade interna contou com quatro participantes. As perspectivas listadas a seguir representam suas contribuições à discussão, sem atribuir-lhes vínculo institucional ou condição de especialista independente:
+O problema é a dificuldade de relacionar julgamentos declarados ao contexto de navegação em que são solicitados. Derivam-se cinco necessidades de projeto: \textbf{N01}, avaliar a etapa com linguagem e esforço de resposta compatíveis com o cidadão; \textbf{N02}, registrar contexto sem equipará-lo à percepção; \textbf{N03}, transformar evidências em hipóteses de melhoria acompanháveis; \textbf{N04}, gerir regras e dados de forma controlada; e \textbf{N05}, verificar o software e planejar avaliação independente. São necessidades de projeto derivadas do problema e da discussão de concepção, não resultados de nova elicitação com gestores externos.
+
+\section{Objetivos e Requisitos da Solução}\label{objetivos-e-requisitos-da-soluuxe7uxe3o}
+
+Os objetivos da seção 1.4 são desdobrados em requisitos funcionais, não funcionais, regras de negócio, histórias de usuário e critérios de aceitação no Apêndice H. A matriz de Engenharia de Software liga N01--N05 a esses requisitos, componentes e evidências. Ela difere da rastreabilidade conceitual entre construtos e dados: a primeira organiza construção e verificação; a segunda delimita o significado das medidas.
+
+\subsection{Concepção e Delimitação com Lean Inception}\label{concepuxe7uxe3o-e-delimitauxe7uxe3o-com-lean-inception}
+
+A Lean Inception foi utilizada como técnica de concepção para alinhar visão de produto, escopo e MVP. A abordagem de \citeonline{caroli2018leanInception} auxilia equipes a definir o produto certo antes de ampliar o desenvolvimento; \citeonline{fowler2022leanInception} também a descreve como uma inception focada em compreender funcionalidades, clientes e Canvas MVP. Neste trabalho, a técnica organizou a definição do sistema de avaliação contextual e ajudou a transformar a ideia inicial em um conjunto priorizado de funcionalidades.
+
+O tema inicial foi organizado pelo orientador em dois recortes: este trabalho, desenvolvido pelos autores, e outro, desenvolvido por Wesley Pedrosa dos Santos. Parte das atividades de concepção foi compartilhada entre os trabalhos. Wesley participou de parte dessas atividades, sem participar de toda a Lean Inception. Os registros de visão do produto, funcionalidades e demais artefatos de concepção tiveram origem nesse contexto compartilhado; as figuras foram produzidas por Fernando Gabriel dos Santos Carrijo.
+
+A discussão das quatro perspectivas listadas a seguir não contou com Wesley. As perspectivas estão associadas às contribuições dos participantes, sem atribuir-lhes vínculo institucional ou condição de especialista independente:
 
 \begin{itemize}
 \item
@@ -47,9 +61,9 @@ A atividade interna contou com quatro participantes. As perspectivas listadas a 
   \textbf{Bruno}, estudante da UnB, representando experiência do usuário, jornada, clareza de interface e validação.
 \end{itemize}
 
-Lucas, participante da discussão, e Lucas Almeida, persona fictícia da seção 4.3, são referências distintas. A participação de Wesley Pedrosa dos Santos na Lean Inception esteve voltada ao tema de seu próprio trabalho; não é apresentada como avaliação independente do sistema aqui proposto. A dinâmica foi uma atividade interna de alinhamento e delimitação do produto, não uma validação externa. As decisões da Lean Inception não substituem especificação de requisitos, teste de usabilidade ou avaliação por especialistas independentes.
+Lucas, participante da discussão, e Lucas Almeida, persona fictícia da seção 4.3, são referências distintas. A colaboração parcial de Wesley nas atividades compartilhadas de concepção é distinta dessa discussão e não constitui avaliação independente do sistema. A dinâmica foi uma atividade interna de alinhamento e delimitação do produto, não uma validação externa. As decisões da Lean Inception não substituem especificação de requisitos, teste de usabilidade ou avaliação por especialistas independentes.
 
-\section{Etapas da Lean Inception}\label{etapas-da-lean-inception}
+\subsection{Atividades de Concepção}\label{atividades-de-concepuxe7uxe3o}
 
 A agenda da Lean Inception foi organizada para que as funcionalidades surgissem a partir da jornada do usuário, e não apenas de possibilidades técnicas. As etapas executadas foram:
 
@@ -77,7 +91,7 @@ A agenda da Lean Inception foi organizada para que as funcionalidades surgissem 
 
 A construção de personas foi baseada na tradição de design centrado no usuário. \citeonline{cooper1999inmates} apresenta personas como arquétipos usados para orientar decisões de produto. O mapeamento de jornada seguiu a lógica de visualização de experiências discutida por \citeonline{kalbach2016mapping}, com identificação de pontos de contato, fricções e oportunidades de intervenção. As personas também consideraram o cenário brasileiro de uso de tecnologias digitais, descrito pela TIC Domicílios 2024 \cite{cetic2025ticDomicilios2024}, e a existência de mecanismos oficiais de avaliação de serviços públicos digitais \cite{govbrFerramentaAvaliacao}.
 
-\section{Metodologia do Desenvolvimento da Solução}\label{metodologia-do-desenvolvimento-da-soluuxe7uxe3o}
+\section{Design e Desenvolvimento}\label{design-e-desenvolvimento}
 
 O desenvolvimento adotou prototipação incremental, com a finalidade de explorar decisões de solução e reduzir incertezas \cite{Sommerville2011}. A Lean Inception foi conduzida entre 18 e 27 de junho de 2026; a avaliação das interfaces no Figma ocorreu em 28 de junho de 2026. A existência de uma implementação funcional em Python antes das sessões não significa que ela tenha sido usada pelos participantes. Não se atribuem os resultados do Figma à API.
 
@@ -98,9 +112,21 @@ O sequenciador de concepção organizou cinco ondas:
   \textbf{Onda 5 --- Preparação de integração real:} organizações, autenticação, chave de API e cliente instalável.
 \end{enumerate}
 
-As ondas 1 a 3 constituíram o MVP planejado, mas foram implementadas apenas em parte. Na aplicação Python existem identificadores técnicos, captura de cliques em elementos instrumentados, envio de duração simulada, regras, formulário reutilizável e agregações básicas. Não foram implementados cronômetro automático de navegação, registro dos grupos A/B, exposição ao convite, ranking por alertas ou taxa de resposta por fluxo. A comparação de interfaces foi realizada no Figma. Parâmetros por serviço, originalmente previstos como incremento da onda 4, já estão no backend; filtros e comentários recentes continuam pendentes. O sequenciador expressa o planejamento, não uma lista de entregas integralmente executadas.
+As ondas 1 a 3 constituíram o MVP planejado, mas foram implementadas apenas em parte. Na aplicação Python existem identificadores técnicos, captura de cliques em elementos instrumentados, envio de duração simulada, regras, formulário reutilizável e agregações básicas. Não foram implementados cronômetro automático de navegação, registro dos grupos A/B, exposição ao convite, ranking por alertas ou taxa de resposta por fluxo. A comparação de interfaces foi realizada no Figma. Parâmetros por serviço, originalmente previstos como incremento da onda 4, agora possuem edição, persistência e histórico versionado; filtros temporais e comentários recentes continuam pendentes. Foram acrescentados controles locais de coleta, acesso e retenção, além de ações de melhoria com acompanhamento. O sequenciador expressa o planejamento, não uma lista de entregas integralmente executadas.
 
-\section{Hipótese e Critérios da Avaliação Preliminar}\label{hipuxf3tese-e-crituxe9rios-da-avaliauxe7uxe3o-preliminar}
+A implementação foi posteriormente atualizada para incorporar CES opcional de 1 a 7. Essa versão é posterior às sessões de 28 de junho de 2026. A atualização do formulário e dos indicadores não acrescenta medidas à coleta histórica nem permite atribuir CES aos participantes já avaliados.
+
+\section{Demonstração}\label{demonstrauxe7uxe3o}
+
+A demonstração técnica usa páginas simuladas, requisições HTTP, SQLite e um painel local. Dados sintéticos permitem observar uma condição operacional, o convite, a persistência de uma resposta, a edição de configurações e o registro de ações de melhoria. Executar esse encadeamento demonstra funções disponíveis no ambiente local, sem provar benefício ao cidadão ou capacidade de integração governamental. Os testes da implementação atual são descritos na seção 4.19.
+
+O estudo histórico utilizou Figma e Useberry. Sua demonstração de interfaces e seus oito registros não são demonstração de endpoints ou da persistência da API. A nova implementação de CES, configuração e gestão não foi retroativamente avaliada naquela amostra.
+
+\section{Avaliação}\label{avaliauxe7uxe3o}
+
+A avaliação distingue \textbf{verificação}, que confronta software e critérios de aceitação, de \textbf{validação}, que investiga se a solução atende ao problema e às necessidades dos interessados. Os testes automatizados locais oferecem evidências parciais de verificação; não validam os construtos, a utilidade do painel ou a hipótese comparativa. O Apêndice I seleciona características de qualidade e apresenta o plano de verificação e validação. O Apêndice K separa protocolos de cidadãos, gestores e especialistas.
+
+\subsection{Hipóteses e Critérios da Avaliação Exploratória}\label{hipuxf3teses-e-crituxe9rios-da-avaliauxe7uxe3o-exploratuxf3ria}
 
 As hipóteses direcionais propostas para um estudo futuro são: \textbf{H1}, em tarefas e condições equivalentes, o fluxo contextual terá maior proporção de participantes que enviam feedback do que o fluxo com formulário final; \textbf{H2}, os comentários enviados no fluxo contextual terão maior escore de especificidade do que os enviados no fluxo com formulário final, segundo rubrica definida antes da coleta. As hipóteses não foram testadas por esta avaliação exploratória. A regra de exposição ao convite e os denominadores deverão ser definidos previamente, com divulgação das respostas tanto por participante alocado quanto por participante exposto.
 
@@ -113,7 +139,7 @@ As variáveis previstas têm diferentes condições de observação nesta etapa:
 \item
   \textbf{Conclusão da tarefa:} há classificação Sim/Parcial/Não; o resumo considera somente Sim como conclusão completa. Isso explicita o cálculo descritivo e não representa critério prévio de sucesso documentado.
 \item
-  \textbf{Esforço percebido:} não foi medido por instrumento específico; a nota de facilidade do Apêndice F não corresponde ao CES.
+  \textbf{Esforço percebido:} não foi medido por instrumento específico no estudo histórico; a nota de facilidade do Apêndice F não corresponde ao CES. A versão posterior do protótipo dispõe do item CES especificado na seção 2.7, ainda sem nova coleta com participantes.
 \item
   \textbf{Qualidade/especificidade dos comentários do formulário:} não há corpus separado nem rubrica aplicada. Os comentários do Apêndice G são do questionário pós-sessão e não permitem testar H2.
 \item
@@ -126,7 +152,7 @@ H1 e H2 são as hipóteses comparativas principais. Conclusão da tarefa, esfor�
 
 Tempo e cliques são medidas auxiliares. A tarefa no Figma foi instrumentada pelo Useberry, enquanto as regras da API constituem outra fonte de evidência, relativa à implementação. O planejamento de instrumentos e critérios comparativos deve preceder nova coleta.
 
-Para a inspeção interna do artefato foram organizados sete critérios, retomados pelos mesmos identificadores na Tabela \ref{tab:criterios-avaliacao-preliminar}:
+Para a inspeção interna do artefato foram organizados sete critérios, retomados pelos mesmos identificadores no Quadro \ref{tab:criterios-avaliacao-preliminar}:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -140,7 +166,7 @@ Para a inspeção interna do artefato foram organizados sete critérios, retomad
 \item
   \textbf{C4 --- Apresentação para gestão:} existência de agregações e alertas; utilidade e acionabilidade dependem de avaliação com gestores.
 \item
-  \textbf{C5 --- Inspeção das regras:} regras localizáveis no código e parâmetros por serviço; histórico de configuração e versionamento permanecem ausentes.
+  \textbf{C5 --- Inspeção das regras:} configuração por serviço com versão, justificativa e histórico; o encadeamento é verificado localmente, sem auditoria independente ou calibração científica.
 \item
   \textbf{C6 --- Privacidade:} exame dos campos e das limitações de transparência, retenção e acesso, sem concluir conformidade jurídica.
 \item
@@ -149,14 +175,73 @@ Para a inspeção interna do artefato foram organizados sete critérios, retomad
 
 A apresentação dos resultados como exploratórios é uma regra de interpretação comum a todos os critérios, sem afirmação de superioridade ou generalização.
 
-\section{Procedimentos da Avaliação Exploratória}\label{procedimentos-da-avaliauxe7uxe3o-exploratuxf3ria}
+\subsection{Procedimentos do Estudo Histórico}\label{procedimentos-do-estudo-histuxf3rico}
 
-O relato do trabalho distingue três procedimentos. O primeiro é a inspeção funcional interna da implementação, com observação do registro de eventos, regras e indicadores descritos pelos autores, sem relatório de execução de testes anexado. O segundo é uma \textbf{avaliação heurística interna/preliminar}, também dos autores. O terceiro é a avaliação de fluxos de interface no Figma com oito participantes; os resultados desse procedimento não devem ser apresentados como verificação da API.
+O relato do trabalho distingue três procedimentos. O primeiro é a inspeção funcional interna da implementação, com observação do registro de eventos, regras e indicadores descritos pelos autores, sem relatório histórico de execução de testes anexado; esse registro não se confunde com a execução automatizada posterior documentada na seção 4.19. O segundo é uma \textbf{avaliação heurística interna/preliminar}, também dos autores. O terceiro é a avaliação de fluxos de interface no Figma com oito participantes; os resultados desse procedimento não devem ser apresentados como verificação da API.
 
 A avaliação exploratória de interface ocorreu em 28 de junho de 2026, com oito participantes externos ao grupo de desenvolvimento, quatro em cada fluxo. A alocação entre os grupos foi auxiliada por inteligência artificial e descrita como sorteio, sem registro auditável do mecanismo. Não se assume aleatorização verificável. O Figma foi instrumentado pelo Useberry para registro automático de cliques e tempos. O fluxo A previa formulário final e o B convite contextual; o popup de redirecionamento fez parte de ambos. A tarefa consistiu em localizar e iniciar a declaração do Imposto sobre a Renda da Pessoa Física (IRPF) de 2026, com limite de dez minutos. As sessões foram individuais e moderadas, sob coordenação de Julio Cesar Gomes de Souza Crispim e Fernando Gabriel dos Santos Carrijo, com TCLE que mencionava o Useberry e o registro de interações. A gravação se limitou à tela e aos eventos de interação, sem áudio ou vídeo de câmera dos participantes. Os comentários apresentados no Apêndice G provêm do questionário pós-sessão. O convite no fluxo B podia decorrer de tempo, entrada em tela ou clique no Figma. No fluxo A, resposta significa realizar a avaliação no formulário final; no B, aceitar o convite e realizar a avaliação sobre a experiência, não apenas abrir o convite. Os valores temporais, as telas e as interações específicas não estão discriminados neste protocolo. Esse procedimento permite observação formativa de interface, sem estabelecer funcionamento dos gatilhos do backend ou efeitos causais entre fluxos.
 
-\section{Tratamento dos Dados}\label{tratamento-dos-dados}
+\subsection{Tratamento e Significado dos Dados}\label{tratamento-e-significado-dos-dados}
 
-A implementação organiza dois grupos de dados: eventos de interação, com contexto de sessão, página, serviço, clique e duração informada; e respostas declaradas, com estrelas, atributos, pergunta auxiliar de recomendação e comentário opcional. Eventos indicam contexto e possível esforço, sem medir qualidade percebida. Estrelas e atributos expressam julgamentos declarados; a pergunta NPS não foi validada como medida de qualidade percebida neste cenário. A base do estudo de interface é distinta: cliques e tempos registrados no Useberry, classificações de tarefa e respostas ao questionário pós-sessão, transcritos no Apêndice G. Não foi apresentado um conjunto separado de respostas do formulário que permita comparar seus comentários, estrelas e atributos.
+A implementação organiza dois grupos de dados: eventos de interação, com contexto de sessão, página, serviço, clique e duração informada; e respostas declaradas, com satisfação por estrelas, atributos, CES opcional e comentário opcional. Eventos indicam contexto e possível esforço, sem medir qualidade percebida. Estrelas registram satisfação; atributos descrevem aspectos percebidos; CES registra facilidade percebida em uma etapa. A adequação dessa adaptação ao público-alvo ainda precisa ser avaliada. A base do estudo de interface é distinta: cliques e tempos registrados no Useberry, classificações de tarefa e respostas ao questionário pós-sessão, transcritos no Apêndice G. Não foi apresentado um conjunto separado de respostas do formulário que permita comparar seus comentários, estrelas e atributos.
 
-A implementação oferece consulta de alertas, cliques e identificadores de sessão por serviço, total de feedbacks e médias de respostas. Não oferece contagem de sessões únicas alertadas, recorrência de atributos ou análise A/B. O formulário não solicita nome, CPF, e-mail ou credencial de login. O backend aceita um \texttt{user\_id} opcional e registra URL e coordenadas do clique na tela, não geolocalização. Essas condições não comprovam anonimização. Aviso de coleta, retenção e controle de acesso exigem requisitos próprios \cite{brasil2018lgpd}.
+A implementação oferece sessões distintas com cliques ou alertas, frequências de atributos e agregações separadas por versão de item. A coleta de eventos requer autorização local; o formulário pode ser respondido sem telemetria. O contrato atual rejeita identificador de usuário, URL completa e coordenadas. Registros históricos e cópias não são automaticamente anonimizados. O identificador técnico permite associar eventos e relatos, exigindo controle de acesso e retenção. Os requisitos e limites estão no Apêndice J \cite{brasil2018lgpd}.
+
+\begingroup\footnotesize\SingleSpacing
+\setlength{\tabcolsep}{4pt}
+\setlength{\LTpre}{.6\baselineskip}
+\setlength{\LTpost}{.4\baselineskip}
+\setlength{\LTcapwidth}{\textwidth}
+
+\begin{TCCquadro}
+\begin{longtable}[]{@{}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1700}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2300}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3500}}@{}}
+\caption[]{\TCCquadroentry{Rastreabilidade entre construtos, indicadores e dados}Rastreabilidade entre construtos, indicadores e dados}\label{tab:construtos-indicadores-dados}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Construto ou dimensão
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Indicador e interpretação
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Dado e origem
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Situação e limite da evidência
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\caption[]{Rastreabilidade entre construtos, indicadores e dados (continuação)}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Construto ou dimensão
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Indicador e interpretação
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Dado e origem
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Situação e limite da evidência
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Satisfação com a etapa & Resposta por estrelas de 1 a 5, de muito insatisfeito(a) a muito satisfeito(a); média acompanhada de n. & \texttt{\seqsplit{feedbacks.stars}} e \texttt{\seqsplit{stars\_item\_version}} na API atual. & Coleta implementada; não há corpus apresentado do formulário no estudo Figma. O item atual explicita satisfação; notas históricas de avaliação geral permanecem preservadas com versão desconhecida e não entram nessa média. Não há validação psicométrica nem medida de qualidade global. \\
+Qualidade percebida do serviço & Seleção de atributos sobre clareza, tempo, passos, uso, atendimento e necessidade atendida. & \texttt{\seqsplit{feedbacks.traits\_json}}, categorias opcionais. & Coleta e frequência por atributo implementadas no painel. Ausência de seleção não demonstra ausência de problema; nenhum escore composto foi validado. \\
+Esforço percebido na etapa & CES adaptado: concordância de 1 a 7 com a afirmação de facilidade; maior nota indica maior facilidade percebida. & \texttt{\seqsplit{feedbacks.ces}} e \texttt{\seqsplit{ces\_item\_version}}; resposta opcional, nula quando ausente. & Implementado após as oito sessões. Sem CES empírico nessa amostra e sem validação da redação adaptada. Distribuição, n e média descritiva disponíveis na API; não mede esforço de preenchimento do formulário. \\
+Interação observada, como aproximação de esforço comportamental & Contagem de cliques instrumentados e duração; indícios para investigar possível atrito, sem diagnóstico. & API: \texttt{\seqsplit{click\_events}} e \texttt{\seqsplit{page\_time\_events}}; duração demonstrada por envio simulado. Estudo: cliques e tempos automáticos do Useberry. & Bases distintas. Apenas elementos marcados geram cliques na aplicação; não há cronômetro automático no cliente Python. Limiares sem calibração e risco de falsos positivos/negativos. Não mede percepção. \\
+Efetividade da tarefa observada & Classificação de conclusão completa, parcial ou não conclusão; proporção de conclusão completa. & Registro Sim/Parcial/Não do Apêndice G, no Figma/\allowbreak Useberry, conforme síntese do estudo. & Há oito casos; ``Parcial'' não foi contado como completo. Critério prévio de sucesso não está documentado. Conclusão simulada não demonstra entrega efetiva de um serviço público real; API não registra conclusão. \\
+Evidência qualitativa da experiência & Comentário sobre situação e motivo; análise temática ou rubrica de especificidade exigiria protocolo. & \texttt{\seqsplit{feedbacks.comment}} opcional na implementação; separadamente, comentários pós-sessão do Apêndice G. & Comentário é evidência qualitativa, não construto latente. Os relatos pós-sessão não são comentários do formulário e não sustentam comparação de especificidade entre os fluxos. \\
+\end{longtable}
+\end{TCCquadro}
+
+\endgroup
+
+Fonte: elaboração dos autores com base no modelo de dados, no instrumento atual e nos registros da avaliação exploratória (2026).
+
+A tabela explicita o significado pretendido, o dado observável e sua disponibilidade. Não demonstra validade de construto, equivalência entre fontes ou causalidade. O sistema relaciona as evidências por contexto técnico de sessão e serviço quando disponíveis, sem somá-las em uma pontuação única. O estudo Figma/\allowbreak Useberry continua separado da base da API.
+
+\section{Comunicação}\label{comunicauxe7uxe3o}
+
+A comunicação reúne o manuscrito, os artefatos de requisitos/rastreabilidade, os protocolos, o código e seus testes. As capturas da implementação atual identificam a versão e seu caráter demonstrativo. Os registros históricos do estudo permanecem separados da atualização técnica. A publicação de resultados de usuários, gestores ou especialistas exige executar e documentar os respectivos protocolos; o planejamento não é relatado como resultado.

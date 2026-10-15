@@ -14,6 +14,7 @@
 
 *.lof
 *.lot
+*.loq
 *.bbl
 *.blg
 *.brf

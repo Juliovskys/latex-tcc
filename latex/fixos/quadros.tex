@@ -1,0 +1,16 @@
+% Quadros multipágina com contador e lista independentes das tabelas.
+\makeatletter
+\newcounter{quadro}
+\newcommand{\listofquadros}{\chapter*{Lista de quadros}\@starttoc{loq}}
+\newcommand*{\l@quadro}{\@dottedtocline{1}{0em}{2.5em}}
+\newcommand{\TCCquadroentry}[1]{%
+  \addcontentsline{loq}{quadro}{\protect\numberline{\thequadro}#1}}
+\providecommand{\theHtable}{\arabic{table}}
+\newenvironment{TCCquadro}{%
+  \begingroup
+  \let\c@table\c@quadro
+  \renewcommand{\thetable}{\arabic{quadro}}%
+  \renewcommand{\theHtable}{quadro.\arabic{quadro}}%
+  \renewcommand{\tablename}{Quadro}%
+}{\endgroup}
+\makeatother

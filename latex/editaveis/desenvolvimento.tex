@@ -7,39 +7,13 @@ Este capítulo apresenta o desenvolvimento do sistema de avaliação contextual 
 
 O sistema de avaliação contextual foi definido como uma solução de feedback contextual para serviços públicos digitais. A solução registra eventos de navegação permitidos, identifica sinais de possível dificuldade, solicita feedback por meio de um formulário curto e apresenta indicadores agregados para apoio à decisão do gestor.
 
-A visão do produto foi usada como norte da solução: ela precisava deixar claro para quem o avaliador é construído, qual problema de navegação e avaliação ele enfrenta e de que forma o feedback contextual se diferencia de formulários estáticos exibidos apenas ao final da jornada.
+A visão do produto reúne cidadãos que precisam realizar uma tarefa e gestores que precisam interpretar sinais de uso. O sistema propõe relacionar o contexto da navegação a declarações curtas de satisfação, atributos e facilidade percebida, para orientar investigação e melhoria do serviço. Os benefícios de participação e utilidade permanecem hipóteses de avaliação.
 
-A Figura \ref{fig:visao-produto-lean-inception} registra a síntese visual dessa visão na Lean Inception, antes da delimitação negativa e operacional do escopo.
+As sínteses desta seção apresentam a concepção do produto e sua delimitação atual. Os registros visuais da Lean Inception, produzidos por Fernando Gabriel dos Santos Carrijo, permanecem no acervo do projeto. O escopo de coleta foi atualizado após o estudo de interface; não se atribui essa atualização à execução histórica da dinâmica. As capacidades implementadas são discriminadas nas seções 3.4 e 4.7 a 4.19; os registros históricos estão inventariados no Apêndice A.
 
-As Figuras 1 a 4 foram produzidas por Fernando Gabriel dos Santos Carrijo e registram a concepção do projeto. Sua terminologia e suas metas expressam o planejamento daquela etapa. As capacidades efetivamente implementadas são discriminadas nas seções 3.4 e 4.7 a 4.12.
+A dinâmica É / Não É / Faz / Não Faz delimitou o escopo inicial. O produto é uma implementação local demonstrativa, com integração a portais reais prevista como evolução. Também é um apoio à melhoria de serviços digitais e à decisão administrativa. Não é um substituto de ouvidoria, não é chatbot, não solicita nome ou CPF na interface e não representa uma implantação governamental completa. A delimitação distingue coleta de indícios, julgamento declarado e resolução efetiva da necessidade; o protótipo não executa a prestação do serviço público.
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\textwidth,height=.70\textheight,keepaspectratio]{figuras/apendices/lean-inception-visao-produto.png}
-\caption{Visão do produto construída na Lean Inception}\label{fig:visao-produto-lean-inception}
-
-\par\small\raggedright Fonte: elaboração de Fernando Gabriel dos Santos Carrijo (2026). A imagem registra decisões e metas de concepção, não resultados de avaliação.
-\end{figure}
-
-A dinâmica É / Não É / Faz / Não Faz delimitou o escopo inicial. O produto é uma implementação local demonstrativa, com integração a portais reais prevista como evolução. Também é um apoio à melhoria de serviços digitais e à decisão administrativa. Não é um substituto de ouvidoria, não é chatbot, não solicita nome ou CPF na interface e não representa uma implantação governamental completa. O registro visual dessa definição de escopo aparece nas Figuras \ref{fig:e-nao-e-faz-nao-faz-1} e \ref{fig:e-nao-e-faz-nao-faz-2}.
-
-Na implementação Python, o sistema registra cliques instrumentados, recebe duração informada à API, aplica regras e disponibiliza um formulário com estrelas, atributos, pergunta auxiliar de recomendação e comentário opcional. A duração é demonstrada por envio simulado, sem cronômetro automático no cliente. O formulário não solicita identificação civil ou credenciais de login, mas o backend admite identificador opcional de usuário e dados de evento. Não há garantia de anonimização, resolução automática do problema do serviço ou integração governamental real.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\textwidth,height=.70\textheight,keepaspectratio]{figuras/apendices/lean-inception-e-nao-e-faz-nao-faz-1.png}
-\caption{Dinâmica É / Não É / Faz / Não Faz da Lean Inception, parte inicial}\label{fig:e-nao-e-faz-nao-faz-1}
-
-\par\small\raggedright Fonte: elaboração de Fernando Gabriel dos Santos Carrijo (2026). A imagem registra decisões e metas de concepção, não resultados de avaliação.
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\textwidth,height=.70\textheight,keepaspectratio]{figuras/apendices/lean-inception-e-nao-e-faz-nao-faz-2.png}
-\caption{Dinâmica É / Não É / Faz / Não Faz da Lean Inception, continuação}\label{fig:e-nao-e-faz-nao-faz-2}
-
-\par\small\raggedright Fonte: elaboração de Fernando Gabriel dos Santos Carrijo (2026). A imagem registra decisões e metas de concepção, não resultados de avaliação.
-\end{figure}
+Na implementação Python, o sistema registra cliques instrumentados, recebe duração informada à API, aplica regras e disponibiliza um formulário com satisfação por estrelas, atributos, CES opcional e comentário opcional. A duração é demonstrada por envio simulado, sem cronômetro automático no cliente. O formulário não solicita identificação civil ou credenciais de login; o contrato atual de eventos rejeita identificador de usuário, URL completa e coordenadas e exige autorização local. Não há garantia de anonimização, resolução automática do problema do serviço ou integração governamental real.
 
 \section{Objetivos do Produto}\label{objetivos-do-produto}
 
@@ -63,21 +37,13 @@ A jornada principal descreve Carlos tentando usar um serviço público digital. 
 
 O ponto crítico ocorre entre a dificuldade observada e o abandono da jornada. É nesse intervalo que o feedback contextual se diferencia de uma avaliação estática. A proposta é perguntar quando a experiência ainda está recente, sem exigir um formulário longo e sem pressupor que um sinal comportamental comprove dificuldade.
 
-Foram definidos dois fluxos comparáveis. No fluxo A, o cidadão navega, enfrenta dúvidas e recebe um formulário apenas ao final da jornada. No fluxo B, o cidadão clica ou demora além do esperado, o sistema registra o sinal e solicita feedback contextual. A comparação futura seguirá H1 e H2 da seção 3.5. A apresentação de alertas no painel é uma capacidade de implementação distinta do teste dessas hipóteses.
+Foram definidos dois fluxos comparáveis. No fluxo A, o cidadão navega, enfrenta dúvidas e recebe um formulário apenas ao final da jornada. No fluxo B, o cidadão clica ou demora além do esperado, o sistema registra o sinal e solicita feedback contextual. A comparação futura seguirá H1 e H2 da seção 3.6.1. A apresentação de alertas no painel é uma capacidade de implementação distinta do teste dessas hipóteses.
 
 \section{Funcionalidades Priorizadas}\label{funcionalidades-priorizadas}
 
 O brainstorming de features agrupou as funcionalidades em cinco categorias: coleta de sinais, regras e detecção, feedback, painel e integração. A revisão técnica, de negócio e UX classificou cada funcionalidade por esforço, valor para gestão, impacto na experiência do usuário e confiança.
 
-A Figura \ref{fig:features-mvp-lean-inception} mostra como as features foram organizadas antes da seleção do MVP, separando capacidades essenciais de itens de evolução futura.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\textwidth,height=.70\textheight,keepaspectratio]{figuras/apendices/lean-inception-features-mvp.png}
-\caption{Features categorizadas e essenciais para o MVP}\label{fig:features-mvp-lean-inception}
-
-\par\small\raggedright Fonte: elaboração de Fernando Gabriel dos Santos Carrijo (2026). A imagem registra decisões e metas de concepção, não resultados de avaliação.
-\end{figure}
+A organização atual mantém cinco grupos: coleta de eventos instrumentados; regras operacionais por serviço; formulário com satisfação, atributos e CES; agregações administrativas; e integração prevista. Os requisitos, os critérios de aceitação e sua rastreabilidade estão especificados no Apêndice H; o Apêndice I relaciona qualidade e verificação/validação.
 
 As funcionalidades essenciais definidas para o MVP foram implementadas com os seguintes limites:
 
@@ -116,24 +82,27 @@ A Figura \ref{fig:prototipo-portal} mostra a página de portal público usada no
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth,height=.70\textheight,keepaspectratio]{figuras/apendices/prototipo-portal.png}
 \caption{Página de portal público usada no protótipo}\label{fig:prototipo-portal}
+\includegraphics[width=\textwidth,height=.70\textheight,keepaspectratio]{../docs/figuras/prototipo-portal-atual.png}
 
-\par\small\raggedright Fonte: captura produzida por Fernando Gabriel dos Santos Carrijo a partir da implementação Python (2026).
+\par\small\raggedright Fonte: captura da implementação Python atual, produzida na conferência local do protótipo (2026).
 \end{figure}
 
 \section{API e Endpoints}\label{api-e-endpoints}
 
-A API disponibiliza endpoints para saúde do serviço, listagem de serviços, registro de eventos, envio de feedback e consulta administrativa. A Tabela \ref{tab:endpoints-prototipo} resume os principais endpoints.
+A API disponibiliza endpoints para saúde do serviço, listagem de serviços, registro de eventos, envio de feedback e consulta administrativa. O Quadro \ref{tab:endpoints-prototipo} resume os principais endpoints.
 
 \begingroup\footnotesize\SingleSpacing
 \setlength{\tabcolsep}{4pt}
+\setlength{\LTpre}{.6\baselineskip}
+\setlength{\LTpost}{.4\baselineskip}
 \setlength{\LTcapwidth}{\textwidth}
 
+\begin{TCCquadro}
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.4200}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5800}}@{}}
-\caption{Endpoints principais do protótipo}\label{tab:endpoints-prototipo}\tabularnewline
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.4200}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5800}}@{}}
+\caption[]{\TCCquadroentry{Endpoints principais do protótipo}Endpoints principais do protótipo}\label{tab:endpoints-prototipo}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Endpoint}
@@ -142,6 +111,7 @@ A API disponibiliza endpoints para saúde do serviço, listagem de serviços, re
 \end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
+\caption[]{Endpoints principais do protótipo (continuação)}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Endpoint}
@@ -152,44 +122,54 @@ A API disponibiliza endpoints para saúde do serviço, listagem de serviços, re
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-\texttt{GET\ /health} & Verificar disponibilidade da API. \\
-\texttt{GET\ /api/services} & Listar serviços cadastrados e suas regras. \\
-\texttt{POST\ /api/events/click} & Registrar clique, página, serviço, origem e instante. \\
-\texttt{POST\ /api/events/page-time} & Receber e armazenar duração informada; demonstração com valor simulado, sem cronômetro automático no cliente. \\
-\texttt{GET\ /feedback} & Exibir página simples de feedback para uma sessão. \\
-\texttt{POST\ /api/feedback} & Salvar estrelas, atributos, NPS e comentário. \\
-\texttt{GET\ /api/admin/alerts} & Consultar alertas administrativos de possível dificuldade. \\
-\texttt{GET\ /api/admin/dashboard} & Consultar dados agregados para o painel. \\
+\texttt{\seqsplit{GET /health}} & Verificar disponibilidade da API. \\
+\texttt{\seqsplit{GET /api/services}} & Listar serviços cadastrados e suas regras. \\
+\texttt{\seqsplit{POST /api/events/click}} & Registrar contexto mínimo de clique após autorização local. \\
+\texttt{\seqsplit{POST /api/events/page-time}} & Receber e armazenar duração informada; demonstração com valor simulado, sem cronômetro automático no cliente. \\
+\texttt{\seqsplit{GET /feedback}} & Exibir página simples de feedback para uma sessão. \\
+\texttt{\seqsplit{POST /api/feedback}} & Salvar satisfação por estrelas, atributos, CES opcional e comentário. \\
+\texttt{\seqsplit{GET /api/admin/alerts}} & Consultar alertas administrativos de possível dificuldade. \\
+\texttt{\seqsplit{GET /api/admin/dashboard}} & Consultar indicadores com versões e denominadores; requer chave. \\
+\texttt{\seqsplit{POST /api/session/permission}} e \texttt{\seqsplit{/withdraw}} & Autorizar ou interromper telemetria da sessão. \\
+\texttt{\seqsplit{GET/POST /api/admin/configurations}} & Consultar/alterar parâmetros e histórico versionado. \\
+\texttt{\seqsplit{GET/POST /api/admin/improvements}} & Registrar ações e acompanhamentos. \\
+\texttt{\seqsplit{GET/POST /api/admin/retention}} & Consultar prévia e confirmar descarte de registros vencidos. \\
 \end{longtable}
+\end{TCCquadro}
 
 \endgroup
 
 Fonte: elaboração dos autores com base nos endpoints da implementação Python (2026).
 
+Nota: todas as rotas com prefixo \texttt{\seqsplit{/api/admin/}} exigem chave administrativa.
+
 \section{Regras de Detecção de Possível Dificuldade}\label{regras-de-detecuxe7uxe3o-de-possuxedvel-dificuldade}
 
-A detecção de possível dificuldade foi implementada com regras explícitas no backend. A API mantém, para cada serviço, um limite de cliques e um tempo médio esperado. Um alerta por clique é criado quando a contagem de cliques da mesma sessão, no mesmo serviço, fica \textbf{maior} que o limite configurado. Um alerta por duração informada é criado quando esse valor fica \textbf{maior} que 1,5 vez o tempo esperado do serviço.
+A detecção de possível dificuldade foi implementada com regras explícitas no backend. A API mantém, para cada serviço, um limite de cliques e um tempo médio esperado. Um alerta por clique é criado quando a contagem de cliques da mesma sessão, no mesmo serviço, fica \textbf{maior} que o limite configurado. Um alerta por duração informada é criado quando esse valor fica \textbf{maior} que o tempo de referência multiplicado pelo fator configurado; o fator inicial é 1,5.
 
-O identificador técnico é persistido no navegador; o backend também admite \texttt{user\_id}, URL e coordenadas do clique na tela (\texttt{x} e \texttt{y} em pixels), não coordenadas geográficas. Não solicitar nome ou CPF não torna os dados automaticamente anônimos. A implementação não demonstrou anonimização irreversível ou ausência de possibilidade de associação entre registros.
+O identificador técnico é mantido no armazenamento da aba. O contrato atual rejeita \texttt{\seqsplit{user\_id}}, URL completa e coordenadas; o registro de eventos depende da autorização local. Isso reduz dados novos, mas não torna os registros anônimos nem remove automaticamente campos históricos.
 
-O backend armazena a marcação administrativa com o campo \texttt{silent} ativo. Essa gravação interna não equivale à exibição de um aviso específico ao usuário; o convite de feedback é uma ação distinta. A ausência de aviso a cada marcação não supre a necessidade de transparência sobre a coleta. O protótipo não foi apresentado como solução com aviso de coleta, retenção e controle de acesso plenamente implementados.
+O alerta é um registro administrativo distinto do convite. Um campo legado de armazenamento não é exposto como indicador ao gestor. A transparência ocorre pelo aviso anterior à coleta, pelas opções de recusa/interrupção e pela página de privacidade. Os controles implementados são locais e parciais, conforme o Apêndice J.
 
-Essas regras operacionalizam o conceito de feedback contextual discutido na Seção~\ref{sec:feedback-contextual}: o sistema não pergunta aleatoriamente, mas usa sinais de uso para decidir quando solicitar uma manifestação do usuário. O acionamento não confirma que houve dificuldade nem mede qualidade percebida; ele apenas seleciona um contexto para coleta do feedback declarado.
+Essas regras operacionalizam o conceito de feedback contextual discutido na Seção \ref{sec:feedback-contextual}: o sistema não pergunta aleatoriamente, mas usa sinais de uso para decidir quando solicitar uma manifestação do usuário. O acionamento não confirma que houve dificuldade nem mede qualidade percebida; ele apenas seleciona um contexto para coleta do feedback declarado.
 
-A lógica aproxima-se da coleta contingente a eventos discutida na literatura de Experience Sampling Method (ESM), com uma adaptação ao contexto de software. A literatura de ESM descreve procedimentos de coleta de autorrelatos no cotidiano \cite{larson1983experienceSampling,hektner2007experienceSampling}. A Tabela~\ref{tab:formas-coleta-situada} organiza formas de acionamento para discutir o desenho do MVP; não representa uma classificação validada por este estudo. Neste protótipo, cliques acima do limite, tempo acima da faixa esperada e persistência após redirecionamento funcionam como sinais comportamentais de possível dificuldade. Eles não são equivalentes a uma confirmação de dificuldade e não expressam qualidade percebida; indicam apenas um momento plausível para solicitar feedback declarado. Por isso, o convite deve ser opcional, curto e não bloqueante.
+A lógica aproxima-se da coleta contingente a eventos discutida na literatura de Experience Sampling Method (ESM), com uma adaptação ao contexto de software. A literatura de ESM descreve procedimentos de coleta de autorrelatos no cotidiano \cite{larson1983experienceSampling,hektner2007experienceSampling}. O Quadro \ref{tab:formas-coleta-situada} organiza formas de acionamento para discutir o desenho do MVP; não representa uma classificação validada por este estudo. Neste protótipo, cliques acima do limite, tempo acima da faixa esperada e persistência após redirecionamento funcionam como sinais comportamentais de possível dificuldade. Eles não são equivalentes a uma confirmação de dificuldade e não expressam qualidade percebida; indicam apenas um momento plausível para solicitar feedback declarado. Por isso, o convite deve ser opcional, curto e não bloqueante.
 
-A Tabela~\ref{tab:formas-coleta-situada} explicita essa adaptação metodológica.
+O Quadro \ref{tab:formas-coleta-situada} explicita essa adaptação metodológica.
 
 \begingroup\footnotesize\SingleSpacing
 \setlength{\tabcolsep}{4pt}
+\setlength{\LTpre}{.6\baselineskip}
+\setlength{\LTpost}{.4\baselineskip}
 \setlength{\LTcapwidth}{\textwidth}
 
+\begin{TCCquadro}
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1900}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2800}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2900}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2400}}@{}}
-\caption{Formas de coleta situada e relação com o protótipo}\label{tab:formas-coleta-situada}\tabularnewline
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1900}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2800}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2900}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2400}}@{}}
+\caption[]{\TCCquadroentry{Formas de coleta situada e relação com o protótipo}Formas de coleta situada e relação com o protótipo}\label{tab:formas-coleta-situada}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Forma de coleta situada}
@@ -202,6 +182,7 @@ A Tabela~\ref{tab:formas-coleta-situada} explicita essa adaptação metodológic
 \end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
+\caption[]{Formas de coleta situada e relação com o protótipo (continuação)}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Forma de coleta situada}
@@ -221,6 +202,7 @@ Amostragem aleatória & O participante é solicitado em momentos sorteados duran
 Amostragem orientada a evento & A coleta ocorre quando um evento previamente definido acontece. & É a lógica mais próxima do MVP: cliques, tempo e persistência funcionam como eventos operacionais. & O evento técnico pode não corresponder a dificuldade real. \\
 Acionamento por proxy comportamental & O sistema usa indícios observáveis como substitutos de um evento subjetivo. & Foi adotado para tornar o feedback contextual demonstrável sem inferência complexa. & Exige calibração futura e análise de falsos positivos. \\
 \end{longtable}
+\end{TCCquadro}
 
 \endgroup
 
@@ -228,21 +210,24 @@ Fonte: elaborada pelos autores (2026).
 
 Os limiares usados no protótipo foram definidos como parâmetros operacionais de demonstração, e não por calibração estatística com dados de produção. A escolha permite que o MVP exiba três estados do fluxo: navegação sem alerta, alerta administrativo de possível dificuldade e convite de feedback contextual. Em uma implantação real, esses parâmetros deveriam ser calibrados por serviço, página, perfil de tarefa e histórico de uso.
 
-No backend Python, o parâmetro \texttt{click\_threshold} é 12 para a página inicial e o serviço genérico, e 10 para Imposto de Renda. A condição é estrita: a regra aciona quando a contagem é maior que esse parâmetro, portanto no 13º e no 11º clique, respectivamente. Nos contextos com redirecionamento, o convite de feedback por clique ocorre a partir de \texttt{click\_threshold\ +\ 2}: 14º clique na página inicial e 12º em Imposto de Renda. Esses valores se referem à contagem por sessão e serviço no backend, não ao total de cliques de uma tarefa no Figma. A duração informada é comparada com 1,5 vez o tempo esperado: acima de 90 segundos para os serviços com parâmetro 60 e acima de 67,5 segundos para Imposto de Renda, com parâmetro 45. O cliente Python demonstra essa regra com envio manual de duração simulada. Os tempos totais do Useberry não permitem deduzir se uma regra da API teria sido acionada.
+Nos dados iniciais do backend Python, o parâmetro \texttt{\seqsplit{click\_threshold}} é 12 para a página inicial e o serviço genérico, e 10 para Imposto de Renda. A condição é estrita: a regra aciona quando a contagem é maior que esse parâmetro, portanto no 13º e no 11º clique, respectivamente. Nos contextos com redirecionamento, o convite de feedback por clique ocorre a partir de \texttt{\seqsplit{click\_threshold + 2}}: 14º clique na página inicial e 12º em Imposto de Renda. Esses valores se referem à contagem por sessão e serviço no backend, não ao total de cliques de uma tarefa no Figma. A duração informada é comparada com 1,5 vez o tempo esperado: acima de 90 segundos para os serviços com parâmetro 60 e acima de 67,5 segundos para Imposto de Renda, com parâmetro 45. O cliente Python demonstra essa regra com envio manual de duração simulada. Os tempos totais do Useberry não permitem deduzir se uma regra da API teria sido acionada.
 
-Portanto, o primeiro acionamento no 13º clique corresponde ao parâmetro armazenado 12, não a um parâmetro 13. São valores operacionais de demonstração, sem calibração empírica. A Tabela \ref{tab:sensibilidade-limiares} apresenta uma análise qualitativa dos efeitos esperados de alterar os parâmetros.
+Portanto, o primeiro acionamento no 13º clique corresponde ao parâmetro armazenado 12, não a um parâmetro 13. São valores operacionais de demonstração, sem calibração empírica. O Quadro \ref{tab:sensibilidade-limiares} apresenta uma análise qualitativa dos efeitos esperados de alterar os parâmetros.
 
 \begingroup\footnotesize\SingleSpacing
 \setlength{\tabcolsep}{4pt}
+\setlength{\LTpre}{.6\baselineskip}
+\setlength{\LTpost}{.4\baselineskip}
 \setlength{\LTcapwidth}{\textwidth}
 
+\begin{TCCquadro}
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1600}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1700}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1700}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2500}}@{}}
-\caption{Análise qualitativa de sensibilidade dos limiares}\label{tab:sensibilidade-limiares}\tabularnewline
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1600}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1700}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2500}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1700}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2500}}@{}}
+\caption[]{\TCCquadroentry{Análise qualitativa de sensibilidade dos limiares}Análise qualitativa de sensibilidade dos limiares}\label{tab:sensibilidade-limiares}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Parâmetro}
@@ -257,6 +242,7 @@ Portanto, o primeiro acionamento no 13º clique corresponde ao parâmetro armaze
 \end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
+\caption[]{Análise qualitativa de sensibilidade dos limiares (continuação)}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Parâmetro}
@@ -277,29 +263,32 @@ Cliques & 10 cliques & Maior sensibilidade, mais alertas e maior risco de falso 
 Tempo & 1,2 vez o tempo esperado & Acionamento mais rápido, com possível interrupção de leitura normal. & 2,0 vezes o tempo esperado & Acionamento mais conservador, com possível atraso na coleta contextual. \\
 Persistência após redirecionamento & Acionamento imediato & Maior chance de interromper cedo demais. & Acionamento após nova evidência & Menor interrupção, mas maior demora para coletar o relato. \\
 \end{longtable}
+\end{TCCquadro}
 
 \endgroup
 
 Fonte: elaborada pelos autores (2026).
 
-A Tabela 5 é uma análise de projeto elaborada pelos autores, distinta das sessões empíricas com participantes. Ela organiza efeitos esperados e riscos dos parâmetros; não mede taxas reais de acionamento nem calibra limiares para produção.
+O Quadro \ref{tab:sensibilidade-limiares} é uma análise de projeto elaborada pelos autores, distinta das sessões empíricas com participantes. Ela organiza efeitos esperados e riscos dos parâmetros; não mede taxas reais de acionamento nem calibra limiares para produção.
 
 \subsection{Simulação Sintética dos Limiares}\label{simulauxe7uxe3o-sintuxe9tica-dos-limiares}
 
-Foi registrada uma análise sintética com 1.000 sessões de cliques e durações log-normais, medianas de 7 cliques e 60 segundos e cenários identificados por 10, 13 e 18 cliques. Os arquivos de execução e resultados intermediários não estão disponíveis. O valor da semente e os parâmetros de dispersão não foram preservados no relato. A Tabela 6 apresenta a síntese numérica dessa etapa, sem possibilidade de reprodução a partir dos materiais disponíveis.
+Foi registrada uma análise sintética com 1.000 sessões de cliques e durações log-normais, medianas de 7 cliques e 60 segundos e cenários identificados por 10, 13 e 18 cliques. Os arquivos de execução e resultados intermediários não estão disponíveis. O valor da semente e os parâmetros de dispersão não foram preservados no relato. A Tabela \ref{tab:simulacao-sintetica-limiares} apresenta a síntese numérica dessa etapa, sem possibilidade de reprodução a partir dos materiais disponíveis.
 
 O resultado sintético não valida um limiar de dificuldade e não corresponde à observação dos oito participantes. Sem o script, os dados gerados e todos os parâmetros, sua reprodutibilidade não pode ser afirmada. A confirmação ou substituição desse ensaio depende de execução futura documentada, apresentada como nova análise e sem atribuí-la à coleta anterior.
 
 \begingroup\footnotesize\SingleSpacing
 \setlength{\tabcolsep}{4pt}
+\setlength{\LTpre}{.6\baselineskip}
+\setlength{\LTpost}{.4\baselineskip}
 \setlength{\LTcapwidth}{\textwidth}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1700}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1400}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1700}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1700}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.3500}}@{}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1700}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1400}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1700}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1700}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.3500}}@{}}
 \caption{Simulação sintética de sensibilidade dos limiares de clique}\label{tab:simulacao-sintetica-limiares}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
@@ -315,6 +304,7 @@ O resultado sintético não valida um limiar de dificuldade e não corresponde �
 \end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
+\caption[]{Simulação sintética de sensibilidade dos limiares de clique (continuação)}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Limiar}
@@ -340,20 +330,23 @@ O resultado sintético não valida um limiar de dificuldade e não corresponde �
 
 Fonte: registros de síntese da análise sintética do projeto (2026). Os arquivos de execução não estão disponíveis para reprodução.
 
-Na síntese numérica, o cenário denominado 13 cliques tem taxa intermediária de acionamento. Não foi preservada a definição do comparador aplicado à contagem: não se sabe se os rótulos significavam \texttt{\textgreater{}\ 13}, \texttt{\ensuremath{\geq}\ 13} ou primeiro acionamento associado ao parâmetro 12. Portanto, essa linha não pode ser equiparada ao \texttt{click\_threshold} da implementação, nem fundamenta a escolha de um limite de dificuldade.
+Na síntese numérica, o cenário denominado 13 cliques tem taxa intermediária de acionamento. Não foi preservada a definição do comparador aplicado à contagem: não se sabe se os rótulos significavam \texttt{\seqsplit{> 13}}, \texttt{\ensuremath{\geq} 13} ou primeiro acionamento associado ao parâmetro 12. Portanto, essa linha não pode ser equiparada ao \texttt{\seqsplit{click\_threshold}} da implementação, nem fundamenta a escolha de um limite de dificuldade.
 
-No protótipo atual, as regras são as seguintes:
+Os valores iniciais de demonstração, antes de alterações administrativas, são os seguintes:
 
 \begingroup\footnotesize\SingleSpacing
 \setlength{\tabcolsep}{4pt}
+\setlength{\LTpre}{.6\baselineskip}
+\setlength{\LTpost}{.4\baselineskip}
 \setlength{\LTcapwidth}{\textwidth}
 
+\begin{TCCquadro}
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2200}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2800}}@{}}
-\caption{Regras operacionais de acionamento por possível dificuldade no protótipo}\label{tab:regras-dificuldade}\tabularnewline
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2000}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3000}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2200}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2800}}@{}}
+\caption[]{\TCCquadroentry{Regras operacionais de acionamento por possível dificuldade no protótipo}Regras operacionais de acionamento por possível dificuldade no protótipo}\label{tab:regras-dificuldade}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Serviço}
@@ -366,6 +359,7 @@ No protótipo atual, as regras são as seguintes:
 \end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
+\caption[]{Regras operacionais de acionamento por possível dificuldade no protótipo (continuação)}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Serviço}
@@ -384,33 +378,37 @@ Página inicial do governo & parâmetro 12; alerta e sugestão no 13º; convite 
 Imposto de Renda & parâmetro 10; alerta e sugestão no 11º; convite no 12º clique & duração informada maior que 67,5 segundos & retorna sugestão de redirecionamento e pode gerar convite \\
 Serviço público genérico & parâmetro 12; alerta e convite no 13º clique & duração informada maior que 90 segundos & gera convite sem sugestão prioritária \\
 \end{longtable}
+\end{TCCquadro}
 
 \endgroup
 
-Fonte: elaboração dos autores com base nas regras implementadas no backend Python (2026).
+Fonte: elaboração dos autores com base nos valores iniciais configurados no backend Python (2026).
 
 A página inicial do governo é tratada como contexto capaz de recomendar um serviço prioritário. O serviço de Imposto de Renda foi marcado como importante e de alto tráfego. O serviço genérico representa uma situação comum, na qual a API registra o acionamento da regra e pode gerar um convite sem sugerir redirecionamento. Em todos os casos, o alerta administrativo registra somente que uma regra operacional foi acionada. O gestor visualiza o evento como indício para investigação, e não como diagnóstico automático de dificuldade ou de baixa qualidade percebida.
 
 \section{Fluxos Implementados}\label{fluxos-implementados}
 
-O fluxo de clique começa quando o usuário acessa uma página simulada. O script cliente cria ou recupera uma sessão com identificador técnico, captura o evento e envia os dados para a API. A API registra o clique, atualiza a contagem por serviço, verifica o limite configurado e decide se deve retornar fluxo normal, popup de redirecionamento ou convite de feedback.
+O fluxo de clique começa pelo acesso a uma página simulada e pela escolha de autorizar ou recusar a telemetria. Após autorização, o script cliente associa eventos instrumentados a uma sessão técnica de aba e os envia à API. A interrupção bloqueia novos eventos dessa sessão. A API registra o clique, atualiza a contagem por serviço, verifica o limite configurado e decide se deve retornar fluxo normal, popup de redirecionamento ou convite de feedback.
 
-Quando o serviço é prioritário, a API pode retornar uma ação de popup sugerindo redirecionamento para o serviço correto. Esse popup é exibido apenas uma vez por sessão, serviço e motivo, evitando repetição excessiva. Quando o sinal persiste ou quando a duração informada ultrapassa a faixa esperada, a API pode retornar uma ação para disponibilizar o convite de feedback.
+Quando o serviço é prioritário, a API pode retornar uma ação de popup sugerindo redirecionamento para o serviço correto. O cliente controla sua exibição pelo armazenamento de aba (\texttt{\seqsplit{sessionStorage}}), uma vez por sessão, serviço e motivo nesse armazenamento. Limpar esse armazenamento pode permitir nova exibição. Quando o sinal persiste ou quando a duração informada ultrapassa a faixa esperada, a API pode retornar uma ação para disponibilizar o convite de feedback.
 
-O fluxo de feedback coleta avaliação por estrelas, características do problema, NPS e comentário opcional. As características previstas incluem clareza, tempo, esforço, usabilidade, atendimento e eficácia. O objetivo é transformar uma nota geral em dados explicativos para o gestor.
+O fluxo de feedback coleta satisfação por estrelas, características do problema, CES opcional e comentário opcional. As características previstas incluem clareza, tempo, esforço, usabilidade, atendimento e eficácia. O objetivo é transformar uma nota geral em dados explicativos para o gestor.
 
-A escolha desses atributos buscou decompor a avaliação geral em dimensões acionáveis. Clareza relaciona-se à compreensão da informação; tempo, à demora percebida; esforço, à quantidade de passos e decisões; usabilidade, à interação e navegação; atendimento, ao suporte complementar; e eficácia, à percepção de alcance do resultado pretendido. Essas categorias não constituem um modelo definitivo e devem ser confrontadas com a linguagem de cidadãos e com a taxonomia oficial. A Tabela~\ref{tab:atributos-feedback} explicita a relação.
+A escolha desses atributos buscou decompor a avaliação geral em dimensões acionáveis. Clareza relaciona-se à compreensão da informação; tempo, à demora percebida; esforço, à quantidade de passos e decisões; usabilidade, à interação e navegação; atendimento, ao suporte complementar; e eficácia, à percepção de alcance do resultado pretendido. Essas categorias não constituem um modelo definitivo e devem ser confrontadas com a linguagem de cidadãos e com a taxonomia oficial. O Quadro \ref{tab:atributos-feedback} explicita a relação.
 
 \begingroup\footnotesize\SingleSpacing
 \setlength{\tabcolsep}{4pt}
+\setlength{\LTpre}{.6\baselineskip}
+\setlength{\LTpost}{.4\baselineskip}
 \setlength{\LTcapwidth}{\textwidth}
 
+\begin{TCCquadro}
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2900}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2600}}@{}}
-\caption{Atributos do feedback e relação com dimensões de qualidade}\label{tab:atributos-feedback}\tabularnewline
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1500}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2900}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3000}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2600}}@{}}
+\caption[]{\TCCquadroentry{Atributos do feedback e relação com dimensões de qualidade}Atributos do feedback e relação com dimensões de qualidade}\label{tab:atributos-feedback}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Atributo no protótipo}
@@ -423,6 +421,7 @@ A escolha desses atributos buscou decompor a avaliação geral em dimensões aci
 \end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
+\caption[]{Atributos do feedback e relação com dimensões de qualidade (continuação)}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Atributo no protótipo}
@@ -439,31 +438,35 @@ A escolha desses atributos buscou decompor a avaliação geral em dimensões aci
 \endlastfoot
 Clareza & Clareza das informações e correspondência entre linguagem do sistema e do usuário. & Identifica problemas de compreensão, instrução ou linguagem institucional. & Não separa linguagem, orientação e organização visual. \\
 Tempo & Tempo para obtenção do serviço e percepção de demora. & Associa permanência excessiva ou espera percebida a uma avaliação declarada. & Não distingue lentidão técnica, leitura cuidadosa ou complexidade legítima. \\
-Esforço & Aproxima-se do CES e do custo/esforço para obtenção do serviço. & Indica se a jornada exigiu muitos passos ou decisões difíceis. & Pode se sobrepor a usabilidade e tempo. \\
+Esforço & Atributo categórico sobre passos ou decisões difíceis; complementa o CES. & Registra a seleção de um motivo percebido, sem produzir uma pontuação CES. & Não é intercambiável com o item graduado de facilidade; pode se sobrepor a usabilidade e tempo. \\
 Usabilidade & Facilidade de uso, prevenção de erros e navegação. & Captura problemas de interação, fluxo e compreensão operacional da interface. & É uma categoria ampla e exige comentário para diagnóstico mais preciso. \\
 Atendimento & Qualidade dos canais de comunicação e suporte. & Mantém espaço para experiências em que o canal digital depende de orientação complementar. & Pode ser pouco aplicável a serviços totalmente automatizados. \\
 Eficácia & Efetividade e resolução da necessidade do cidadão. & Indica se o serviço ajudou o usuário a atingir o resultado esperado. & Não comprova a conclusão real da tarefa sem integração com sistemas de produção. \\
 \end{longtable}
+\end{TCCquadro}
 
 \endgroup
 
 Fonte: elaborada pelos autores com base nos atributos do protótipo e em \citeonline{silva2024atributosApi}.
 
-A pergunta de recomendação identificada como NPS foi mantida como item auxiliar do formulário, sem validação de sua interpretação no serviço público e sem cálculo do escore no painel. Também foram considerados riscos de falso positivo: permanência longa pode representar leitura cuidadosa, tarefa complexa, conexão lenta, tecnologia assistiva ou interrupção externa, e não necessariamente dificuldade. Os alertas, portanto, são indícios comportamentais para investigação; a interpretação da qualidade percebida depende do feedback declarado.
+O CES opcional emprega sete categorias de concordância sobre a facilidade da etapa. O backend armazena a resposta e a versão do item; o painel apresenta quantidade de respostas, ausências, distribuição e média descritiva. Essa implementação não demonstra validade do instrumento adaptado nem menor esforço do cidadão. Também foram considerados riscos de falso positivo: permanência longa pode representar leitura cuidadosa, tarefa complexa, conexão lenta, tecnologia assistiva ou interrupção externa, e não necessariamente dificuldade. Os alertas, portanto, são indícios comportamentais para investigação; a interpretação da qualidade percebida depende do feedback declarado.
 
-O popup de redirecionamento segue a mesma cautela. Ele pode ajudar quando o usuário parece estar no serviço incorreto, mas também pode interromper a navegação e aumentar o abandono. No MVP, o risco foi mitigado por exibição limitada e pela possibilidade de continuar a tarefa. A Tabela \ref{tab:decisoes-design} registra benefícios, riscos e formas de mitigação das principais decisões.
+O popup de redirecionamento segue a mesma cautela. Ele pode ajudar quando o usuário parece estar no serviço incorreto, mas também pode interromper a navegação e aumentar o abandono. No MVP, o risco foi mitigado por exibição limitada e pela possibilidade de continuar a tarefa. O Quadro \ref{tab:decisoes-design} registra benefícios, riscos e formas de mitigação das principais decisões.
 
 \begingroup\footnotesize\SingleSpacing
 \setlength{\tabcolsep}{4pt}
+\setlength{\LTpre}{.6\baselineskip}
+\setlength{\LTpost}{.4\baselineskip}
 \setlength{\LTcapwidth}{\textwidth}
 
+\begin{TCCquadro}
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1600}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1900}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2100}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2400}}@{}}
-\caption{Decisões de design, benefícios, riscos e mitigações}\label{tab:decisoes-design}\tabularnewline
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1600}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1900}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2100}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2400}}@{}}
+\caption[]{\TCCquadroentry{Decisões de design, benefícios, riscos e mitigações}Decisões de design, benefícios, riscos e mitigações}\label{tab:decisoes-design}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Decisão de design}
@@ -478,6 +481,7 @@ O popup de redirecionamento segue a mesma cautela. Ele pode ajudar quando o usu�
 \end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
+\caption[]{Decisões de design, benefícios, riscos e mitigações (continuação)}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Decisão de design}
@@ -497,28 +501,43 @@ O popup de redirecionamento segue a mesma cautela. Ele pode ajudar quando o usu�
 Popup de redirecionamento & Ajudar o usuário a encontrar o serviço correto antes de registrar reclamação. & Interromper a navegação, irritar ou aumentar o abandono. & Exibição limitada, sem bloqueio definitivo da navegação. & Medir abandono, aceitação do redirecionamento e percepção de intrusão. \\
 Feedback contextual & Coletar relato próximo ao ponto de dificuldade. & Aumentar carga cognitiva durante uma tarefa já difícil. & Formulário curto, campos opcionais e poucos atributos. & Medir taxa de resposta, abandono e qualidade dos comentários. \\
 Atributos predefinidos & Transformar nota geral em categorias acionáveis. & Reduzir problemas complexos a opções simplificadas. & Comentário opcional para complementar a categoria. & Comparar com taxonomia oficial e ajustar nomes. \\
-Pergunta auxiliar de recomendação, identificada como NPS & Registrar uma resposta declarada de recomendação. & Atribuir qualidade percebida ou lealdade a uma resposta sem validação no contexto público. & Manter sua interpretação separada de estrelas e atributos; o painel calcula apenas média de 0 a 10. & Reavaliar o item em função do objetivo e do contexto de uso. \\
+CES opcional de 1 a 7 & Registrar facilidade percebida na etapa em que o convite aparece. & Confundir resposta favorável com esforço objetivo reduzido ou efetividade do serviço. & Informar pergunta, âncoras, orientação, versão, distribuição e denominador; não preencher ausências com zero. & Avaliar compreensão e adequação do item em estudo futuro. \\
 \end{longtable}
+\end{TCCquadro}
 
 \endgroup
 
 Fonte: elaborada pelos autores (2026).
 
-A Figura \ref{fig:prototipo-feedback} apresenta a tela de feedback contextual, com avaliação por estrelas, atributos do problema, NPS e comentário opcional.
+A Figura \ref{fig:prototipo-feedback} apresenta a tela de feedback contextual, com satisfação por estrelas, atributos do problema, CES opcional e comentário opcional.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth,height=.70\textheight,keepaspectratio]{figuras/apendices/prototipo-feedback.png}
 \caption{Formulário de feedback contextual do protótipo}\label{fig:prototipo-feedback}
+\includegraphics[width=\textwidth,height=.70\textheight,keepaspectratio]{../docs/figuras/prototipo-feedback-ces.png}
 
-\par\small\raggedright Fonte: captura produzida por Fernando Gabriel dos Santos Carrijo a partir da implementação Python (2026).
+\par\small\raggedright Fonte: captura da versão funcional com CES, produzida na atualização do protótipo (2026). Não corresponde às interfaces Figma utilizadas no estudo exploratório.
 \end{figure}
 
 \section{Painel Administrativo e Indicadores}\label{painel-administrativo-e-indicadores}
 
-A implementação do painel exibe JSON com total de alertas, cliques e identificadores de sessão distintos por serviço, total de feedbacks e médias de estrelas e da pergunta auxiliar de recomendação. O campo denominado \texttt{average\_nps} contém a média aritmética das respostas de 0 a 10, não o escore NPS. O contador visual de sessões soma os identificadores distintos de cada serviço; pode contar o mesmo identificador em mais de um serviço e não representa sessões únicas ou sessões com alertas. Não estão implementados frequência de atributos, comentários recentes, taxa de resposta por fluxo ou ranking de serviços por alerta. Essas agregações pertencem à evolução do painel. Os registros disponíveis apontam situações para investigação; excesso de cliques não comprova gargalo e utilidade gerencial não foi avaliada.
+O painel administrativo exige chave de acesso e reúne indicadores por serviço, configurações e ações de melhoria. Mostra sessões distintas com cliques e com alertas, além dos totais de eventos. Um identificador presente em serviços diferentes pode constar em mais de uma linha; a soma das linhas não representa usuários únicos. A frequência de atributos conta escolhas nos feedbacks; não representa prevalência na população nem dificuldade confirmada por um alerta.
 
-O painel organiza registros técnicos e médias de respostas, sem substituir instrumentos oficiais. Cliques e duração informada à API são dados comportamentais, não medidas de qualidade percebida. Estrelas, atributos e comentários são declarações sobre a experiência; a pergunta auxiliar de recomendação tem interpretação própria e não validada neste contexto. A implementação não calcula o escore NPS nem demonstra integração dos dados do estudo no Figma.
+As médias de satisfação e CES consideram somente a versão vigente de cada pergunta. O painel informa denominadores, ausências e distribuição CES; valores de outras versões são contados separadamente. Média sem resposta válida permanece nula. Ausência de CES é um feedback armazenado sem esse item, não um cidadão exposto que recusou todo o formulário. Não há taxa de resposta por fluxo, pois a exposição A/B ainda não está instrumentada.
+
+A cadeia administrativa é \textbf{dado \ensuremath{\rightarrow} interpretação \ensuremath{\rightarrow} ação \ensuremath{\rightarrow} acompanhamento}. O gestor seleciona uma fonte, registra uma hipótese de problema, propõe ação, papel responsável e prazo opcional. A aplicação guarda um retrato inicial dos indicadores e acrescenta situação, nota e novo retrato a cada acompanhamento. A comparação é descritiva: mudanças no conjunto de respondentes e na janela acumulada podem alterar médias sem efeito da ação. O retrato não substitui desenho causal nem avaliação de impacto. Sua utilidade será examinada por gestores segundo o Apêndice K.
+
+Exemplo sintético: respostas baixas de facilidade junto à seleção de clareza podem motivar investigação da orientação da etapa; o gestor registra revisão de linguagem e acompanha novos registros. Alertas isolados não autorizam concluir que existe um problema de linguagem. Quando há poucos dados, registrar insuficiência de evidência é uma decisão adequada.
+
+A Figura \ref{fig:painel-atual} apresenta dados e registro de ação no painel atual, em base sintética de demonstração.
+
+\begin{figure}[htbp]
+\centering
+\caption{Dados e registro de ação de melhoria no painel}\label{fig:painel-atual}
+\includegraphics[width=\textwidth,height=.70\textheight,keepaspectratio]{../docs/figuras/prototipo-painel-visao.png}
+
+\par\small\raggedright Fonte: captura da implementação local com dados sintéticos (2026); não representa resultados de cidadãos ou gestores.
+\end{figure}
 
 \section{Resultado do Desenvolvimento}\label{resultado-do-desenvolvimento}
 
@@ -528,20 +547,25 @@ A implementação funcional e a avaliação de interface representam frentes dis
 
 \section{Avaliação Preliminar do Artefato}\label{avaliauxe7uxe3o-preliminar-do-artefato}
 
-A análise interna do artefato distingue inspeção funcional e \textbf{avaliação heurística interna/preliminar} dos autores. A organização heurística tomou como referência \citeonline{nielsen1994heuristic}, sem equivaler a inspeção externa. O registro da inspeção não discrimina avaliadores, data ou severidade, e o trabalho não inclui relatório completo de execução dos testes. Os resultados abaixo devem ser lidos como apreciação interna da implementação e do desenho de interface.
+Na evolução posterior do formulário, foram executados seis testes automatizados específicos de satisfação e CES, com bases temporárias e dados sintéticos. Eles verificam as sete categorias, respostas ausentes, rejeição de valores inválidos, agregações por serviço, migração com cópia de segurança e separação de versões do item de satisfação. O código está em \texttt{\seqsplit{prototype-api/test\_feedback\_ces.py}}. Um envio sintético também foi conferido no navegador. Esses procedimentos verificam aspectos técnicos do contrato atual; não são novas sessões com cidadãos, validação do instrumento, teste das hipóteses ou execução de um plano completo de verificação e validação.
 
-A Tabela \ref{tab:criterios-avaliacao-preliminar} retoma os sete critérios C1--C7 da seção 3.5. Ela separa existência de implementação, julgamento interno e propriedades que não foram medidas.
+O quadro heurístico preserva a inspeção interna anterior às últimas alterações; suas recomendações não são um novo julgamento da versão atual. Os recursos posteriormente implementados precisam de reavaliação. A análise interna do artefato distingue inspeção funcional e \textbf{avaliação heurística interna/preliminar} dos autores. A organização heurística tomou como referência \citeonline{nielsen1994heuristic}, sem equivaler a inspeção externa. O registro daquela inspeção não discrimina avaliadores, data ou severidade e não contém relatório completo de execução. Os testes automatizados posteriores possuem saída e identificação dos arquivos na seção 4.19. Os resultados abaixo devem ser lidos como apreciação interna da implementação e do desenho de interface.
+
+O Quadro \ref{tab:criterios-avaliacao-preliminar} retoma os sete critérios C1--C7 da seção 3.6.1. Ele separa existência de implementação, julgamento interno e propriedades que não foram medidas.
 
 \begingroup\footnotesize\SingleSpacing
 \setlength{\tabcolsep}{4pt}
+\setlength{\LTpre}{.6\baselineskip}
+\setlength{\LTpost}{.4\baselineskip}
 \setlength{\LTcapwidth}{\textwidth}
 
+\begin{TCCquadro}
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1800}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2200}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2600}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3400}}@{}}
-\caption{Critérios da avaliação preliminar do protótipo}\label{tab:criterios-avaliacao-preliminar}\tabularnewline
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1800}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2200}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2600}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3400}}@{}}
+\caption[]{\TCCquadroentry{Critérios da avaliação preliminar do protótipo}Critérios da avaliação preliminar do protótipo}\label{tab:criterios-avaliacao-preliminar}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Critério}
@@ -554,6 +578,7 @@ A Tabela \ref{tab:criterios-avaliacao-preliminar} retoma os sete critérios C1--
 \end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
+\caption[]{Critérios da avaliação preliminar do protótipo (continuação)}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Critério}
@@ -568,31 +593,35 @@ A Tabela \ref{tab:criterios-avaliacao-preliminar} retoma os sete critérios C1--
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-C1 --- Registro mínimo de navegação & Implementado com limites de captura & Código de sessão, eventos e persistência & Cliques restritos a elementos marcados; duração demonstrada por envio simulado; sem relatório de testes anexado. \\
+C1 --- Registro mínimo de navegação & Implementado com limites de captura & Código de sessão, eventos e persistência & Cliques restritos a elementos marcados; duração demonstrada por envio simulado; verificação parcial documentada na seção 4.19. \\
 C2 --- Acionamento contextual & Regras explícitas no código & Parâmetros por serviço e condições de acionamento & A sessão no Figma não verifica sua execução; sem calibração empírica. \\
-C3 --- Esforço de resposta & Não medido & Formulário curto como decisão de projeto & Não há medida CES, tempo de preenchimento ou análise sistemática de abandono neste estudo. \\
-C4 --- Apresentação para gestão & Agregações básicas implementadas; utilidade não avaliada & Total de alertas, cliques/sessões por serviço e médias de respostas & Sem agregação de atributos, taxa de resposta ou avaliação com gestores; o contador não identifica sessões únicas alertadas. \\
-C5 --- Inspeção das regras & Parcialmente atendido & Condições localizáveis no backend e parâmetros por serviço & Sem histórico de configuração ou versionamento formal de regras. \\
-C6 --- Privacidade & Requisitos completos não verificados & Interface sem solicitação de nome, CPF, e-mail ou login & Isso não comprova anonimização; backend admite identificador de usuário, URL e coordenadas do clique na tela (\texttt{x} e \texttt{y} em pixels), não coordenadas geográficas. Transparência, retenção e acesso ainda exigem requisitos. \\
+C3 --- Esforço de resposta & Não medido & Formulário curto como decisão de projeto & O CES atual diz respeito à facilidade de uso da etapa do serviço, não ao tempo ou esforço para preencher o formulário. O estudo histórico não coletou CES nem mediu sistematicamente o esforço de resposta. \\
+C4 --- Apresentação para gestão & Indicadores e ações implementados; utilidade não avaliada & Sessões distintas, atributos, médias/denominadores e acompanhamento & Sem exposição A/B, taxa de resposta ou avaliação com gestores; mudanças descritivas não demonstram impacto. \\
+C5 --- Inspeção das regras & Implementado e verificado localmente & Configurações por serviço com versão, justificativa e histórico & Sem calibração empírica ou auditoria independente; histórico local não é inviolável. \\
+C6 --- Privacidade & Controles locais parcialmente verificados & Aviso, autorização/interrupção, minimização, chave e expurgo manual & O contrato atual rejeita identificação de usuário, URL e coordenadas; registros históricos podem contê-los. Minimização não comprova anonimização ou conformidade integral; guarda e implantação dependem de definição institucional. \\
 C7 --- Interrupção & Efeito não medido sistematicamente & Controles de recusa/fechamento e relatos pontuais & Sem taxa de intrusão ou efeito causal sobre abandono; popup presente nos dois fluxos. \\
 \end{longtable}
+\end{TCCquadro}
 
 \endgroup
 
 Fonte: elaborada pelos autores (2026).
 
-A inspeção permite localizar os componentes que materializam o fluxo proposto. Não comprova benefício ao cidadão, baixo esforço, utilidade gerencial ou superioridade sobre formulários finais. A calibração, a transparência da coleta, o risco de falsos positivos e a avaliação externa permanecem limites da proposta.
+A inspeção permite localizar os componentes que materializam o fluxo proposto. Não comprova benefício ao cidadão, baixo esforço, utilidade gerencial ou superioridade sobre formulários finais. A calibração, a compreensão dos avisos, o risco de falsos positivos e a avaliação externa permanecem limites da proposta.
 
 \begingroup\footnotesize\SingleSpacing
 \setlength{\tabcolsep}{4pt}
+\setlength{\LTpre}{.6\baselineskip}
+\setlength{\LTpost}{.4\baselineskip}
 \setlength{\LTcapwidth}{\textwidth}
 
+\begin{TCCquadro}
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1900}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2600}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3500}}@{}}
-\caption{Avaliação heurística interna/preliminar do protótipo}\label{tab:avaliacao-heuristica-preliminar}\tabularnewline
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1900}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2600}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2000}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3500}}@{}}
+\caption[]{\TCCquadroentry{Avaliação heurística interna/preliminar do protótipo}Avaliação heurística interna/preliminar do protótipo}\label{tab:avaliacao-heuristica-preliminar}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Heurística observada}
@@ -605,6 +634,7 @@ A inspeção permite localizar os componentes que materializam o fluxo proposto.
 \end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
+\caption[]{Avaliação heurística interna/preliminar do protótipo (continuação)}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Heurística observada}
@@ -628,6 +658,7 @@ Eficiência e baixo esforço & O formulário é curto e estruturado. & Parcialme
 Diagnóstico e recuperação & A lista de alertas indica serviço e tipo de sinal; recorrência não é agregada no painel. & Parcialmente atendida & Relacionar alertas a recomendações de melhoria ou prioridade de investigação. \\
 Ajuda e orientação & O protótipo demonstra o fluxo, mas não oferece ajuda contextual robusta. & Não atendida plenamente & Incluir microtextos explicativos e orientação sobre a finalidade da coleta. \\
 \end{longtable}
+\end{TCCquadro}
 
 \endgroup
 
@@ -641,7 +672,7 @@ Em 28 de junho de 2026 foi conduzida uma avaliação exploratória de interface 
 
 No fluxo A, a avaliação era apresentada ao final da jornada. No fluxo B, o convite podia ser acionado por tempo decorrido, entrada em uma tela ou interação de clique no Figma. Esses acionamentos pertencem ao protótipo de interface, sem execução das regras da API Python. A descrição do protocolo não discrimina os intervalos de tempo, as telas e os cliques configurados, nem identifica o gatilho específico de cada exposição registrada. Assim, os tipos de acionamento estão definidos, mas não se reconstrói a configuração exata de cada caso apenas com os dados apresentados.
 
-No fluxo A, a classificação ``respondeu ao feedback'' corresponde à realização da avaliação no formulário final. No B, corresponde ao aceite do convite seguido da realização da avaliação na interface. O aceite isolado do convite no B não foi suficiente. Essas classificações não comprovam digitação de comentário ou envio a um backend. Os comentários literais apresentados no Apêndice G foram obtidos no questionário pós-sessão. As Figuras 5 e 6 mostram a implementação Python; não reproduzem as telas A e B efetivamente avaliadas no Figma.
+No fluxo A, a classificação ``respondeu ao feedback'' corresponde à realização da avaliação no formulário final. No B, corresponde ao aceite do convite seguido da realização da avaliação na interface. O aceite isolado do convite no B não foi suficiente. Essas classificações não comprovam digitação de comentário ou envio a um backend. Os comentários literais apresentados no Apêndice G foram obtidos no questionário pós-sessão. As figuras da implementação mostram telas Python; não reproduzem as telas A e B efetivamente avaliadas no Figma.
 
 Os participantes foram recrutados voluntariamente entre estudantes da FCTE e cidadãos em geral, incluindo profissionais das áreas administrativa, educação, empreendedorismo e finanças, além de pessoa aposentada. Em P05, houve um pedido de confirmação sobre a segurança do protótipo e a orientação verbal do moderador para agir como em casa. Essa intervenção deve ser considerada como possível influência sobre a experiência. Quando necessário, foi feita uma demonstração inicial em tela neutra para reduzir a interferência da ferramenta de prototipação, registrada em P07. O tamanho da amostra foi definido para observação qualitativa formativa, e não para inferência estatística ou estimação de efeito entre os fluxos.
 
@@ -649,12 +680,14 @@ Os resultados são apresentados de forma descritiva. Com quatro participantes po
 
 \begingroup\footnotesize\SingleSpacing
 \setlength{\tabcolsep}{4pt}
+\setlength{\LTpre}{.6\baselineskip}
+\setlength{\LTpost}{.4\baselineskip}
 \setlength{\LTcapwidth}{\textwidth}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.5200}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2400}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2400}}@{}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.5200}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2400}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2400}}@{}}
 \caption{Resultados exploratórios por fluxo de avaliação}\label{tab:resultados-preliminares-fluxos}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
@@ -666,6 +699,7 @@ Os resultados são apresentados de forma descritiva. Com quatro participantes po
 \end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
+\caption[]{Resultados exploratórios por fluxo de avaliação (continuação)}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Métrica}
@@ -697,28 +731,31 @@ O fluxo B apresentou maior proporção descritiva de conclusão completa e maior
 
 Os comentários do Apêndice G são respostas ao questionário pós-sessão, inclusive de participantes que não realizaram a avaliação na interface. Não representam um corpus de comentários coletados pelo mecanismo contextual. Sem esse corpus e uma rubrica aplicada, não há base para concluir maior qualidade ou especificidade dos comentários do fluxo B. Os relatos permitem discutir impressões sobre a interface e o convite. A confusão entre consultar e declarar foi mencionada sobretudo por participantes do fluxo A, o que também impede atribuir a identificação desse problema ao mecanismo contextual. Os TCLEs foram arquivados separadamente; sua descrição consta no Apêndice E e o questionário no Apêndice F.
 
-Quatro temas descritivos merecem registro: ambiguidade entre consultar e declarar, nos relatos de P01, P03 e P05; percepção de oportunidade do convite em P02 e P08; decisão de ignorá-lo em P06; e baixa familiaridade de P07 com GOV.BR e Figma. São observações pós-sessão e do moderador, não medidas de eficácia do feedback. Os convites no Figma podiam decorrer de tempo, tela ou clique; as medidas agregadas da Tabela 12 não identificam a configuração ou a sequência específica de eventos de cada caso. Os limiares da API não explicam os casos P04 e P06, pois pertencem a outro componente do artefato.
+Quatro temas descritivos merecem registro: ambiguidade entre consultar e declarar, nos relatos de P01, P03 e P05; percepção de oportunidade do convite em P02 e P08; decisão de ignorá-lo em P06; e baixa familiaridade de P07 com GOV.BR e Figma. São observações pós-sessão e do moderador, não medidas de eficácia do feedback. Os convites no Figma podiam decorrer de tempo, tela ou clique; as medidas agregadas da Tabela \ref{tab:resultados-preliminares-fluxos} não identificam a configuração ou a sequência específica de eventos de cada caso. Os limiares da API não explicam os casos P04 e P06, pois pertencem a outro componente do artefato.
 
 \section{Síntese Crítica do Desenvolvimento}\label{suxedntese-cruxedtica-do-desenvolvimento}
 
-A contribuição investigativa desta etapa é formular hipóteses e organizar a distinção entre contexto comportamental e percepção declarada. A contribuição tecnológica é a implementação que permite associar essas fontes. A tabela de rastreabilidade dos construtos e os instrumentos comparativos ainda precisam ser concluídos; não se apresenta um modelo de mensuração validado. O estudo no Figma oferece observações formativas de interface e não verifica a execução do backend nem confirma H1 ou H2.
+A contribuição investigativa desta etapa é formular hipóteses e organizar a distinção entre contexto comportamental e percepção declarada. A contribuição tecnológica é a implementação que permite associar essas fontes. O Quadro \ref{tab:construtos-indicadores-dados} documenta a rastreabilidade conceitual; sua validação e a execução dos instrumentos comparativos propostos no Apêndice K permanecem pendentes. Não se apresenta um modelo de mensuração validado. O estudo no Figma oferece observações formativas de interface e não verifica a execução do backend nem confirma H1 ou H2.
 
 Permanecem como riscos centrais os falsos positivos dos gatilhos, a interrupção inoportuna, a simplificação de problemas complexos em atributos predefinidos e a ausência de avaliação externa por especialistas e gestores. Por isso, o sistema deve ser lido como artefato investigativo e protótipo tecnológico, não como produto pronto ou instrumento cientificamente calibrado.
 
 \section{Alternativas de Design Consideradas}\label{alternativas-de-design-consideradas}
 
-Durante a definição do MVP, alternativas de design foram consideradas, mas não priorizadas na primeira versão. A Tabela~\ref{tab:alternativas-design} torna explícitas essas decisões de escopo.
+Durante a definição do MVP, alternativas de design foram consideradas, mas não priorizadas na primeira versão. O Quadro \ref{tab:alternativas-design} torna explícitas essas decisões de escopo.
 
 \begingroup\footnotesize\SingleSpacing
 \setlength{\tabcolsep}{4pt}
+\setlength{\LTpre}{.6\baselineskip}
+\setlength{\LTpost}{.4\baselineskip}
 \setlength{\LTcapwidth}{\textwidth}
 
+\begin{TCCquadro}
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1900}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2800}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2700}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2600}}@{}}
-\caption{Alternativas de design consideradas no MVP}\label{tab:alternativas-design}\tabularnewline
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1900}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2800}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2700}}
+  >{\RaggedRight\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2600}}@{}}
+\caption[]{\TCCquadroentry{Alternativas de design consideradas no MVP}Alternativas de design consideradas no MVP}\label{tab:alternativas-design}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Decisão adotada no MVP}
@@ -731,6 +768,7 @@ Durante a definição do MVP, alternativas de design foram consideradas, mas nã
 \end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
+\caption[]{Alternativas de design consideradas no MVP (continuação)}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Decisão adotada no MVP}
@@ -749,13 +787,30 @@ Regras simples de clique e tempo & Modelo estatístico ou aprendizado de máquin
 Acionamento por limite de cliques e tempo & Análise de sequência de páginas, retorno a etapas ou padrões de navegação. & Aumentaria a complexidade de instrumentação e análise. & Facilita a demonstração, mas perde sinais mais ricos de desorientação. \\
 Popup de redirecionamento & Banner discreto, mensagem inline ou recomendação no painel lateral. & O popup torna a intervenção mais visível na demonstração. & Aumenta o risco de interrupção e precisa de teste de aceitação. \\
 Atributos predefinidos & Campo aberto obrigatório ou taxonomia oficial completa. & Campo obrigatório aumentaria o esforço; taxonomia extensa poderia reduzir a resposta. & Reduz esforço, mas simplifica problemas complexos. \\
-Pergunta auxiliar de recomendação, identificada como NPS & CSAT ou CES como métrica principal. & A pergunta foi mantida na concepção inicial pela familiaridade de uso, sem validação de sua interpretação. & Não representa medida validada de qualidade percebida nem escore NPS calculado no painel. \\
+CES opcional de concordância em sete pontos & Pergunta direta de esforço com escala invertida ou instrumento mais longo. & A facilidade da etapa é aderente ao problema de navegação e permite explicitar uma única orientação de resposta. & A tradução e o recorte contextual requerem avaliação de compreensão; não demonstram validade no setor público. \\
 Sessão com identificador técnico & Login, CPF ou integração com conta gov.br. & A identificação aumentaria o risco de privacidade e a dependência institucional. & Evita solicitação de identificação civil, mas não comprova anonimização. \\
 Painel administrativo básico & Ferramenta completa de analytics ou exportação avançada. & Escopo incompatível com o MVP e com a ausência de implantação real. & Entrega visão inicial, mas não substitui sistema de gestão de melhoria. \\
 \end{longtable}
+\end{TCCquadro}
 
 \endgroup
 
 Fonte: elaborada pelos autores (2026).
 
 Essas alternativas indicam caminhos de evolução do artefato. A análise de sequência de páginas e retorno a etapas anteriores pode melhorar a detecção sem depender apenas de cliques ou tempo. Uma intervenção menos intrusiva também pode reduzir abandono. Tais escolhas exigem avaliação externa e estudos com usuários para determinar se aumentam a utilidade do feedback contextual ou apenas acrescentam complexidade.
+
+\section{Gestão de Configurações}\label{gestuxe3o-de-configurauxe7uxf5es}
+
+O painel permite editar limite de cliques, duração de referência e multiplicador por serviço, exigindo justificativa e versão esperada. A alteração válida atualiza o serviço e acrescenta histórico na mesma transação; uma edição sobre versão obsoleta recebe conflito HTTP 409 e exige nova consulta. A inicialização preserva valores já existentes. Cada alerta conserva a versão de sua ocorrência, sem reclassificação retroativa. Os testes verificam esses comportamentos em base temporária. O histórico fica no mesmo SQLite e não é mecanismo inviolável de auditoria.
+
+\section{Controles de Privacidade e Inclusão}\label{controles-de-privacidade-e-inclusuxe3o}
+
+A coleta de eventos começa após escolha explícita na sessão da aba e pode ser interrompida. Feedback voluntário permanece disponível sem telemetria. Novas entradas rejeitam identificador de usuário, URL completa e coordenadas; avisos explicam finalidade e limites. Consultas e alterações administrativas exigem chave. A manutenção oferece prévia e expurgo confirmado de registros vencidos, sem agenda automática e sem alcançar cópias ou arquivos externos. Esses controles materializam parte dos requisitos do Apêndice J; não comprovam conformidade jurídica integral.
+
+Foram acrescentados rótulos associados, agrupamento das escalas, mensagens de estado, foco visível e controle inicial de foco dos modais. Tais alterações são recursos de implementação, não resultado de avaliação completa de acessibilidade. Os critérios e o plano abrangem páginas públicas e painel, incluindo teclado, leitor de tela, ampliação, contraste e pessoas com diferentes necessidades.
+
+\section{Verificação Técnica da Implementação Atual}\label{verificauxe7uxe3o-tuxe9cnica-da-implementauxe7uxe3o-atual}
+
+A suíte local contém 19 testes automatizados com dados sintéticos e bases temporárias: sete de satisfação/CES e doze de configuração, regras, acesso, privacidade, ações e retenção. Os testes foram executados em Windows, com Python 3.12.14 e SQLite 3.53.1, e passaram na execução automatizada local assistida por agente em 15 de outubro de 2026. A saída está em \href{https://github.com/Juliovskys/latex-tcc/blob/docs/tcc-medio-prazo/docs/evidencias/verificacao-medio-prazo.txt}{verificacao-medio-prazo.txt}; ambiente, comando, commit-base e hashes SHA-256 dos arquivos estão em \href{https://github.com/Juliovskys/latex-tcc/blob/docs/tcc-medio-prazo/docs/evidencias/verificacao-medio-prazo.json}{verificacao-medio-prazo.json}. Como havia alterações sem commit, os hashes identificam os arquivos efetivamente testados; o commit-base não é apresentado como versão final desta implementação. Verificam contratos e cenários selecionados, incluindo preservação após reinicialização, conflito de versão, rejeição de entradas, controle de coleta, médias estratificadas, histórico de ações e prévia/descarte. O procedimento reproduzível está em \texttt{\seqsplit{prototype-api/README.md}} e os casos em \texttt{\seqsplit{test\_feedback\_ces.py}} e \texttt{\seqsplit{test\_governance.py}}.
+
+Essa evidência não abrange carga, recuperação completa de falhas, auditoria de segurança, avaliação acessível abrangente ou novos participantes. A inspeção no navegador usa dados sintéticos e serve para conferir operação e apresentação local. O Apêndice I registra o plano de verificação e validação restante; o Apêndice K separa as três perspectivas humanas.

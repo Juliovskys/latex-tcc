@@ -1,5 +1,7 @@
 # Controle da revisão do TCC em Markdown
 
+**Fase atual:** médio prazo consolidado e transposto para LaTeX/PDF, com commit autorizado por Julio. Consulte [medio-prazo.md](medio-prazo.md) e [normalizacao-medio-prazo.md](normalizacao-medio-prazo.md) para entregas, evidências e limites. Markdown/BibTeX e LaTeX estão sincronizados; o PDF compilado aguarda novo CopySpider. As seções abaixo preservam o histórico da rodada anterior; suas pendências não descrevem a situação atual.
+
 ## Objetivo desta rodada
 
 Trabalhar no conteúdo de [tcc.md](tcc.md), começando exclusivamente pelo curto prazo, conforme a escolha dos autores nesta conversa. O arquivo reúne resumo, abstract, cinco capítulos, referências e sete apêndices. As imagens continuam vinculadas aos arquivos existentes do projeto. [referencias-tcc.bib](referencias-tcc.bib) preserva as chaves usadas no manuscrito e as entradas recuperadas, para a futura transposição ao LaTeX.
