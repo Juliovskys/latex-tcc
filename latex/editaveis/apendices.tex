@@ -1,273 +1,344 @@
+% Gerado a partir de docs/tcc.md por scripts/sincronizar_tcc.py.
 \begin{apendicesenv}
-
 \partapendices
+% Gerado a partir de docs/tcc.md por scripts/sincronizar_tcc.py.
+\chapter{Síntese da Lean Inception}\label{suxedntese-da-lean-inception}
 
-\chapter{Síntese da Lean Inception}
+A Lean Inception foi usada como protocolo metodológico para definir o MVP do sistema de avaliação contextual. A atividade reuniu internamente quatro perspectivas de discussão: Felipe, atendimento público; Lucas, gestão digital; Diassis, viabilidade técnica; e Bruno, experiência do usuário. Esses perfis orientaram o alinhamento do produto e não constituem validação externa do artefato.
 
-A Lean Inception foi usada como protocolo metodológico para definir o MVP do
-Avaliador de Serviços Públicos. A atividade reuniu internamente quatro
-perspectivas de discussão: Felipe, atendimento público; Lucas, gestão digital;
-Diassis, viabilidade técnica; e Bruno, experiência do usuário. Esses perfis
-orientaram o alinhamento do produto e não constituem validação externa do
-artefato.
-
-\section{Agenda}
+\section{Agenda}\label{agenda}
 
 \begin{itemize}
-    \item Kick-off e visão do produto;
-    \item dinâmica É / Não É / Faz / Não Faz;
-    \item objetivos e hipótese do MVP;
-    \item personas de cidadão e gestor;
-    \item jornada do cidadão no serviço digital;
-    \item brainstorming de features contextuais;
-    \item revisão técnica, de negócio e UX;
-    \item sequenciador;
-    \item Canvas MVP.
+\item
+  Kick-off e visão do produto;
+\item
+  dinâmica É / Não É / Faz / Não Faz;
+\item
+  objetivos e hipótese do MVP;
+\item
+  personas de cidadão e gestor;
+\item
+  jornada do cidadão no serviço digital;
+\item
+  brainstorming de features contextuais;
+\item
+  revisão técnica, de negócio e UX;
+\item
+  sequenciador;
+\item
+  Canvas MVP.
 \end{itemize}
 
-\section{Escopo Delimitado}
+\section{Escopo Delimitado}\label{escopo-delimitado}
 
-O produto é uma solução de feedback contextual, anônima e agregada, voltada à
-melhoria de serviços públicos digitais. Não é ouvidoria, chatbot, sistema de
-espionagem, ferramenta de identificação individual ou implantação governamental
-completa.
+O produto é uma solução de feedback contextual com identificadores técnicos e dados agregados, voltada à melhoria de serviços públicos digitais. Não é ouvidoria, chatbot, sistema de espionagem, ferramenta de identificação individual ou implantação governamental completa.
 
-\section{MVP}
+\section{MVP}\label{mvp}
 
-O MVP corresponde às ondas 1, 2 e 3 do sequenciador:
+O MVP planejado reuniu as ondas 1, 2 e 3, implementadas parcialmente:
 
 \begin{enumerate}
-    \item base técnica de coleta: sessão anônima, cliques, tempo e formulário
-    estático comparativo;
-    \item detecção e feedback contextual: regra simples, convite contextual,
-    estrelas, atributos, NPS e comentário;
-    \item painel básico: taxa de sessões com dificuldade, ranking de alertas e
-    taxa de resposta dos fluxos.
+\def\labelenumi{\arabic{enumi}.}
+\item
+  base técnica de coleta: sessão com identificador técnico, cliques instrumentados e duração simulada na API; formulário final comparativo apenas no desenho Figma;
+\item
+  detecção e feedback contextual: regra simples, convite contextual, estrelas, atributos, NPS e comentário;
+\item
+  painel básico: consulta de alertas e agregações de eventos e respostas; taxas e comparações entre fluxos foram previstas, mas não estão instrumentadas na API atual.
 \end{enumerate}
 
-\chapter[Fluxo Conceitual do Avaliador]{Fluxo Conceitual do Avaliador de Serviços Públicos}
+\chapter{Fluxo Conceitual do sistema de avaliação contextual}\label{fluxo-conceitual-do-sistema-de-avaliauxe7uxe3o-contextual}
 
-\section{Fluxo de navegação}
+\section{Fluxo de navegação}\label{fluxo-de-navegauxe7uxe3o}
 
-O fluxo conceitual parte do acesso do cidadão a uma página pública ou a uma
-página de serviço. O script cliente inicia uma sessão técnica anônima, registra
-cliques, página, serviço, origem e instante, e envia os dados para a API. A API
-atualiza métricas da sessão e compara cliques e tempo com as faixas esperadas.
+O desenho parte do acesso a uma página pública ou de serviço. Na implementação Python, o cliente agrupa cliques de elementos instrumentados por identificador técnico e envia os eventos à API. A duração é recebida por endpoint e demonstrada por envio simulado de 120 segundos, sem cronômetro automático. A API compara os valores recebidos com parâmetros por serviço. No estudo de interface, a medição automática de tempo e cliques foi realizada pelo Useberry, em tarefas no Figma, separadamente desse backend.
 
-\section{Detecção e redirecionamento}
+\section{Detecção e redirecionamento}\label{detecuxe7uxe3o-e-redirecionamento}
 
-Se os sinais estiverem dentro da faixa esperada, a navegação segue normalmente.
-Se houver excesso de cliques ou tempo, a API registra o acionamento de uma regra
-como evidência comportamental de possível dificuldade. Esse registro não equivale
-a qualidade percebida nem a diagnóstico automático. Em serviços comuns, a
-navegação pode continuar sem popup. Em
-serviços marcados como prioritários ou de alto tráfego, a API pode retornar uma
-ação para sugerir redirecionamento.
+Se os sinais estiverem dentro da faixa esperada, a navegação segue normalmente. Se houver excesso de cliques ou tempo, a API registra o acionamento de uma regra como evidência comportamental de possível dificuldade. Esse registro não equivale a qualidade percebida nem a diagnóstico automático. Em serviços comuns, a navegação pode continuar sem popup. Em serviços marcados como prioritários ou de alto tráfego, a API pode retornar uma ação para sugerir redirecionamento.
 
-\section{Feedback e painel}
+\section{Feedback e painel}\label{feedback-e-painel}
 
-Quando o usuário apresenta dificuldade persistente ou tempo acima da média, a API
-pode retornar ação para abrir uma página simples de feedback. O feedback contém:
+Quando a contagem de cliques ou a duração informada atende às condições operacionais, a API pode retornar uma ação para disponibilizar o convite de feedback. O feedback contém:
 
 \begin{itemize}
-    \item avaliação geral por estrelas;
-    \item seleção de características do problema, como clareza, tempo, esforço,
-    usabilidade, atendimento e eficácia;
-    \item pergunta de NPS;
-    \item comentário opcional.
+\item
+  avaliação geral por estrelas;
+\item
+  seleção de características do problema, como clareza, tempo, esforço, usabilidade, atendimento e eficácia;
+\item
+  pergunta de NPS;
+\item
+  comentário opcional.
 \end{itemize}
 
-Ao final, o administrador visualiza alertas, sessões críticas, notas, NPS,
-atributos recorrentes e pontos de melhoria.
+Na implementação atual, o administrador consulta alertas e agregações básicas de eventos e respostas. A comparação entre fluxos, a identificação de recorrências por atributo e o acompanhamento de melhorias são capacidades previstas, sem implementação demonstrada neste painel.
 
-\chapter[Endpoints e Indicadores]{Endpoints e Indicadores do Protótipo}
+\chapter{Endpoints e Indicadores do Protótipo}\label{endpoints-e-indicadores-do-protuxf3tipo}
 
-\section{Endpoints}
+\section{Endpoints}\label{endpoints}
 
 O protótipo local usa API HTTP e banco SQLite. Os endpoints principais são:
 
 \begin{itemize}
-    \item \texttt{GET /health}: verifica disponibilidade;
-    \item \texttt{GET /api/services}: lista serviços e regras;
-    \item \texttt{POST /api/events/click}: registra clique;
-    \item \texttt{POST /api/events/page-time}: registra tempo de permanência;
-    \item \texttt{GET /feedback}: exibe formulário de feedback;
-    \item \texttt{POST /api/feedback}: salva avaliação estruturada;
-    \item \texttt{GET /api/admin/alerts}: lista alertas silenciosos;
-    \item \texttt{GET /api/admin/dashboard}: retorna dados agregados.
+\item
+  \texttt{GET\ /health}: verifica disponibilidade;
+\item
+  \texttt{GET\ /api/services}: lista serviços e regras;
+\item
+  \texttt{POST\ /api/events/click}: registra clique;
+\item
+  \texttt{POST\ /api/events/page-time}: recebe duração informada, demonstrada por envio simulado;
+\item
+  \texttt{GET\ /feedback}: exibe formulário de feedback;
+\item
+  \texttt{POST\ /api/feedback}: salva avaliação estruturada;
+\item
+  \texttt{GET\ /api/admin/alerts}: lista alertas administrativos;
+\item
+  \texttt{GET\ /api/admin/dashboard}: retorna dados agregados.
 \end{itemize}
 
-\section{Indicadores}
+\section{Indicadores}\label{indicadores}
 
-Os indicadores previstos para o painel são:
+A implementação Python disponibiliza os seguintes dados administrativos:
 
 \begin{itemize}
-    \item total de alertas;
-    \item sessões com dificuldade;
-    \item serviços com maior recorrência de alertas;
-    \item média de estrelas por serviço;
-    \item NPS por serviço;
-    \item taxa de resposta dos fluxos;
-    \item atributos mais selecionados;
-    \item comentários recentes.
+\tightlist
+\item
+  total de alertas;
+\item
+  total de cliques por serviço;
+\item
+  identificadores de sessão distintos por serviço, sem equivalência a sessões com alertas;
+\item
+  total de feedbacks por serviço;
+\item
+  média de estrelas por serviço;
+\item
+  média da pergunta auxiliar de recomendação de 0 a 10, denominada \texttt{average\_nps} no código, sem cálculo do escore NPS.
 \end{itemize}
 
-\chapter[Protocolo de Walkthrough Externo]{Protocolo Proposto para Walkthrough Externo}
+Taxa de resposta dos fluxos, ranking de serviços por alertas, recorrência de atributos e comentários recentes são indicadores planejados. Não estão presentes na resposta atual do endpoint do painel.
 
-Este apêndice apresenta um protocolo para avaliação externa por especialistas,
-complementar à avaliação heurística interna/preliminar e à avaliação exploratória
-com participantes. Trata-se de etapa recomendada para fortalecer o ciclo de
-Design Science Research, não de atividade já executada.
+\chapter{Protocolo Proposto para Walkthrough Externo}\label{protocolo-proposto-para-walkthrough-externo}
 
-\section{Objetivo da avaliação}
+Este apêndice apresenta um protocolo para avaliação externa por especialistas, complementar à avaliação heurística interna/preliminar e à avaliação exploratória com participantes. Trata-se de etapa recomendada para fortalecer o ciclo de Design Science Research, não de atividade já executada.
 
-Avaliar, com pelo menos um especialista externo ao grupo de desenvolvimento, a
-clareza do fluxo, a pertinência dos gatilhos de feedback contextual, o risco de
-interrupção, a compreensão dos atributos e a utilidade inicial do painel
-administrativo.
+\section{Objetivo da avaliação}\label{objetivo-da-avaliauxe7uxe3o}
 
-\section{Perfil recomendado do avaliador}
+Avaliar, com pelo menos um especialista externo ao grupo de desenvolvimento, a clareza do fluxo, a pertinência dos gatilhos de feedback contextual, o risco de interrupção, a compreensão dos atributos e a utilidade inicial do painel administrativo.
+
+\section{Perfil recomendado do avaliador}\label{perfil-recomendado-do-avaliador}
 
 O avaliador pode ser:
 
 \begin{itemize}
-    \item professor ou pesquisador com experiência em interação
-    humano-computador, governo digital ou Engenharia de Software;
-    \item profissional de UX, produto digital ou pesquisa com usuários;
-    \item gestor público ou servidor envolvido com atendimento digital,
-    melhoria de serviços ou avaliação de satisfação.
+\item
+  professor ou pesquisador com experiência em interação humano-computador, governo digital ou Engenharia de Software;
+\item
+  profissional de UX, produto digital ou pesquisa com usuários;
+\item
+  gestor público ou servidor envolvido com atendimento digital, melhoria de serviços ou avaliação de satisfação.
 \end{itemize}
 
-\section{Roteiro de execução}
+\section{Roteiro de execução}\label{roteiro-de-execuuxe7uxe3o}
 
 \begin{enumerate}
-    \item apresentar o objetivo do protótipo e esclarecer que o artefato, não o
-    avaliador, está sendo avaliado;
-    \item solicitar uma tarefa de localização de serviço na página simulada;
-    \item acionar um cenário de excesso de cliques ou tempo;
-    \item observar a reação ao popup e ao convite de feedback contextual;
-    \item solicitar o preenchimento do formulário;
-    \item apresentar o painel e discutir a utilidade dos indicadores;
-    \item registrar comentários, dúvidas, fricções e recomendações.
+\def\labelenumi{\arabic{enumi}.}
+\item
+  apresentar o objetivo do protótipo e esclarecer que o artefato, não o avaliador, está sendo avaliado;
+\item
+  solicitar uma tarefa de localização de serviço na página simulada;
+\item
+  acionar um cenário de excesso de cliques ou tempo;
+\item
+  observar a reação ao popup e ao convite de feedback contextual;
+\item
+  solicitar o preenchimento do formulário;
+\item
+  apresentar o painel e discutir a utilidade dos indicadores;
+\item
+  registrar comentários, dúvidas, fricções e recomendações.
 \end{enumerate}
 
-\section{Checklist de observação}
+\section{Checklist de observação}\label{checklist-de-observauxe7uxe3o}
 
-\begin{center}
-\small
-\begin{tabular}{|p{3.7cm}|p{4.6cm}|p{4.3cm}|}
-\hline
-\textbf{Item observado} & \textbf{Pergunta de avaliação} &
-\textbf{Registro esperado} \\ \hline
-Momento do convite & O feedback apareceu em um momento compreensível da jornada?
-& Adequado, parcialmente adequado ou inadequado. \\ \hline
-Interrupção & O popup ou o feedback pareceu intrusivo? & Comentário do avaliador.
-\\ \hline
-Clareza dos atributos & Os atributos são compreensíveis e distinguíveis? &
-Atributos confusos ou sobrepostos. \\ \hline
-NPS adaptado & A pergunta de recomendação faz sentido no contexto público? &
-Aceita, rejeitada ou precisa de reformulação. \\ \hline
-Falso positivo & O avaliador identificou situações em que tempo ou cliques não
-significam dificuldade? & Exemplos levantados. \\ \hline
-Painel administrativo & Os indicadores ajudam a priorizar ações de melhoria? &
-Indicadores úteis e indicadores ausentes. \\ \hline
+\begingroup\footnotesize\SingleSpacing
+\setlength{\tabcolsep}{4pt}
+\setlength{\LTcapwidth}{\textwidth}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Item observado}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Pergunta de avaliação}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Registro esperado}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Momento do convite & O feedback apareceu em um momento compreensível da jornada? & Adequado, parcialmente adequado ou inadequado. \\
+Interrupção & O popup ou o feedback pareceu intrusivo? & Comentário do avaliador. \\
+Clareza dos atributos & Os atributos são compreensíveis e distinguíveis? & Atributos confusos ou sobrepostos. \\
+NPS adaptado & A pergunta de recomendação faz sentido no contexto público? & Aceita, rejeitada ou precisa de reformulação. \\
+Falso positivo & O avaliador identificou situações em que tempo ou cliques não significam dificuldade? & Exemplos levantados. \\
+Painel administrativo & Os indicadores ajudam a priorizar ações de melhoria? & Indicadores úteis e indicadores ausentes. \\
 Privacidade & A coleta parece proporcional e minimizada? & Riscos percebidos. \\
-\hline
-\end{tabular}
-\end{center}
+\end{longtable}
+}
 
-\section{Forma de análise}
+\endgroup
+
+\section{Forma de análise}\label{forma-de-anuxe1lise}
 
 Os achados podem ser organizados em três grupos:
 
 \begin{itemize}
-    \item ajustes críticos, quando o problema impede compreensão ou uso do
-    fluxo;
-    \item ajustes recomendados, quando a melhoria aumenta clareza, utilidade ou
-    confiança;
-    \item ajustes futuros, quando dependem de piloto real, integração
-    institucional ou coleta com mais participantes.
+\item
+  ajustes críticos, quando o problema impede compreensão ou uso do fluxo;
+\item
+  ajustes recomendados, quando a melhoria aumenta clareza, utilidade ou confiança;
+\item
+  ajustes futuros, quando dependem de piloto real, integração institucional ou coleta com mais participantes.
 \end{itemize}
 
-\section{Resultado esperado}
+\section{Resultado esperado}\label{resultado-esperado}
 
-O walkthrough não comprovaria a hipótese. Acrescentaria avaliação independente,
-confrontando as decisões dos autores com uma leitura externa.
+O walkthrough não comprovaria a hipótese. Acrescentaria avaliação independente, confrontando as decisões dos autores com uma leitura externa.
 
-\chapter{Modelo do TCLE Utilizado}
+\chapter{Descrição do TCLE Utilizado}\label{descriuxe7uxe3o-do-tcle-utilizado}
 
-\section{Descrição do TCLE}
+\section{Descrição do TCLE}\label{descriuxe7uxe3o-do-tcle}
 
-O estudo com participantes foi conduzido mediante Termo de Consentimento Livre e
-Esclarecido. O modelo identifica a Universidade de Brasília, a Faculdade de
-Ciências e Tecnologias em Engenharia, os pesquisadores, o orientador, o objetivo
-do estudo, os procedimentos, os riscos mínimos, os benefícios, as regras de
-sigilo e anonimização, o direito de desistência, a ausência de gravação, o prazo
-de armazenamento e as formas aceitas de assinatura.
+O estudo foi conduzido mediante Termo de Consentimento Livre e Esclarecido, com identificação institucional, dos pesquisadores e do orientador, objetivo, procedimentos, riscos, benefícios, sigilo, direito de desistência, armazenamento e assinatura. O Useberry registrou eventos de interação e gravação de tela, conforme previsto no TCLE. Não houve gravação de áudio ou vídeo de câmera dos participantes.
 
-O TCLE foi apresentado antes de cada sessão. Os termos assinados foram arquivados
-pelos pesquisadores e mantidos separados da base anonimizada. A versão integral
-do documento permanece em arquivo digital sob guarda dos autores.
+O TCLE foi apresentado antes de cada sessão. Os termos assinados foram arquivados pelos pesquisadores e mantidos separados da base anonimizada. A versão integral do documento permanece em arquivo digital sob guarda dos autores.
 
-\chapter{Questionário Pós-Sessão}
+\chapter{Questionário Pós-Sessão}\label{questionuxe1rio-puxf3s-sessuxe3o}
 
-\section{Perguntas}
+\section{Perguntas}\label{perguntas}
 
 Após a tarefa, os participantes responderam às seguintes perguntas:
 
 \begin{enumerate}
-    \item Em uma escala de 1 a 5, como você avalia a facilidade de uso do portal?
-    \item Você encontrou o que procurava? (Sim / Não / Parcialmente)
-    \item Para o fluxo B: quando a pergunta de avaliação apareceu, o que você
-    fez? (Respondi / Ignorei / Fechei sem ler / Não apareceu)
-    \item Para o fluxo B: o momento em que a pergunta apareceu foi adequado?
-    (Sim / Não / Mais ou menos)
-    \item Algum comentário sobre sua experiência?
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Em uma escala de 1 a 5, como você avalia a facilidade de uso do portal?
+\item
+  Você encontrou o que procurava? (Sim / Não / Parcialmente)
+\item
+  Para o fluxo B: quando a pergunta de avaliação apareceu, o que você fez? (Respondi / Ignorei / Fechei sem ler / Não apareceu)
+\item
+  Para o fluxo B: o momento em que a pergunta apareceu foi adequado? (Sim / Não / Mais ou menos)
+\item
+  Algum comentário sobre sua experiência?
 \end{enumerate}
 
-\chapter[Dados Anonimizados da Avaliação]{Dados Brutos Anonimizados da Avaliação com Participantes}
+\chapter{Registros Anonimizados da Avaliação com Participantes}\label{registros-anonimizados-da-avaliauxe7uxe3o-com-participantes}
 
-Os registros abaixo preservam os identificadores anônimos usados na análise.
+Os registros apresentam as classificações de tarefa, métricas do estudo Figma/\allowbreak Useberry, respostas ao questionário pós-sessão e observações do moderador. No campo ``Respondeu ao feedback'', Sim indica realização da avaliação no formulário final no fluxo A e aceite do convite seguido de realização da avaliação no fluxo B; Não indica que o critério do respectivo fluxo não foi atendido. Essa classificação não transforma os comentários pós-sessão em comentários do formulário. Para leitura, ``N.A.'' foi expandido para ``Não se aplica'' e a nota de facilidade explicita a escala de 1 a 5. Os comentários literais são respostas pós-sessão, não comentários do formulário de feedback. As observações são apresentadas separadamente e não constituem medida de especificidade. O conjunto apresentado não inclui a exportação primária do Useberry. As intervenções registradas em P05 e P07 devem ser consideradas na interpretação dos resultados.
 
-\begin{description}
-    \item[P01 -- Fluxo A] Estudante de Engenharia de Software; já havia usado
-    GOV.BR; concluiu em 06:42, com 15 cliques; respondeu ao feedback; facilidade
-    4/5; encontrou o serviço. Comentou que demorou para diferenciar consulta de
-    declaração.
+\section{P01 --- Fluxo A}\label{p01--fluxo-a}
 
-    \item[P02 -- Fluxo B] Assistente administrativo; já havia usado GOV.BR;
-    concluiu em 07:18, com 18 cliques; recebeu e respondeu ao convite;
-    facilidade 4/5; encontrou o serviço. Relatou que a pergunta apareceu quando
-    estava parado no formulário e permitiu explicar a dúvida naquele momento.
+Data: 28/06/2026. Perfil: Estudante FCTE --- Engenharia de Software. Já usou GOV.BR: Sim. Concluiu: Sim. Tempo: 06:42. Cliques: 15. Convite apareceu: Não se aplica. Respondeu ao feedback: Sim. Facilidade: 4/5. Encontrou: Sim.
 
-    \item[P03 -- Fluxo A] Profissional autônoma; já havia usado GOV.BR;
-    conclusão parcial em 09:21, com 24 cliques; não respondeu ao feedback;
-    facilidade 2/5; encontrou parcialmente. Relatou dúvida entre fazer a
-    declaração e consultar informação.
+Comentário literal:
 
-    \item[P04 -- Fluxo B] Estudante de Engenharia de Software; já havia usado
-    GOV.BR; concluiu em 05:56, com 13 cliques; não recebeu o convite por avançar
-    rapidamente; facilidade 5/5; encontrou o serviço.
+\begin{quote}
+Eu achei parecido com o gov.br e consegui entender o caminho, mas demorei um pouco para diferenciar consulta de declaração.
+\end{quote}
 
-    \item[P05 -- Fluxo A] Professora da educação básica; já havia usado GOV.BR;
-    concluiu em 08:04, com 20 cliques; respondeu ao feedback; facilidade 3/5;
-    encontrou o serviço. Comentou que alguns nomes eram parecidos e esperava
-    explicação maior antes de avançar.
+Observações do moderador: Leu a lista de serviços antes de clicar em Fazer minha declaração; concluiu sem pedir ajuda.
 
-    \item[P06 -- Fluxo B] Microempreendedor individual; já havia usado GOV.BR;
-    não concluiu no limite de 10:00, com 29 cliques; recebeu e ignorou o convite;
-    facilidade 2/5; não encontrou o serviço. Relatou que tentou resolver antes de
-    responder e depois se perdeu.
+\section{P02 --- Fluxo B}\label{p02--fluxo-b}
 
-    \item[P07 -- Fluxo A] Participante aposentado; não havia usado GOV.BR; não
-    concluiu no limite de 10:00, com 22 cliques; não respondeu ao feedback;
-    facilidade 1/5; não encontrou o serviço. Relatou excesso de informação e
-    dificuldade para identificar o início.
+Data: 28/06/2026. Perfil: Cidadão --- Assistente administrativo. Já usou GOV.BR: Sim. Concluiu: Sim. Tempo: 07:18. Cliques: 18. Convite apareceu: Sim. Respondeu ao feedback: Sim. Facilidade: 4/5. Encontrou: Sim.
 
-    \item[P08 -- Fluxo B] Analista financeiro; já havia usado GOV.BR; concluiu em
-    06:49, com 16 cliques; recebeu e respondeu ao convite; facilidade 4/5;
-    encontrou o serviço. Considerou adequado o momento do aviso e sugeriu texto
-    mais curto.
-\end{description}
+Comentário literal:
 
+\begin{quote}
+A pergunta apareceu quando eu estava parado no formulário. Achei bom porque deu para explicar minha dúvida na hora.
+\end{quote}
+
+Observações do moderador: Hesitou no campo de serviço; respondeu ao convite contextual com comentário específico.
+
+\section{P03 --- Fluxo A}\label{p03--fluxo-a}
+
+Data: 28/06/2026. Perfil: Cidadão --- Autônoma. Já usou GOV.BR: Sim. Concluiu: Parcial. Tempo: 09:21. Cliques: 24. Convite apareceu: Não se aplica. Respondeu ao feedback: Não. Facilidade: 2/5. Encontrou: Parcialmente.
+
+Comentário literal:
+
+\begin{quote}
+Eu fui clicando, mas não tive certeza se estava fazendo a declaração ou só consultando uma informação.
+\end{quote}
+
+Observações do moderador: Voltou duas vezes para a primeira tela; não respondeu ao formulário final.
+
+\section{P04 --- Fluxo B}\label{p04--fluxo-b}
+
+Data: 28/06/2026. Perfil: Estudante FCTE --- Engenharia de Software. Já usou GOV.BR: Sim. Concluiu: Sim. Tempo: 05:56. Cliques: 13. Convite apareceu: Não. Respondeu ao feedback: Não se aplica. Facilidade: 5/5. Encontrou: Sim.
+
+Comentário literal:
+
+\begin{quote}
+Foi tranquilo. Eu fui direto no botão principal e entendi que era um protótipo.
+\end{quote}
+
+Observações do moderador: Não recebeu convite contextual porque avançou rapidamente até a confirmação.
+
+\section{P05 --- Fluxo A}\label{p05--fluxo-a}
+
+Data: 28/06/2026. Perfil: Cidadão --- Professora da educação básica. Já usou GOV.BR: Sim. Concluiu: Sim. Tempo: 08:04. Cliques: 20. Convite apareceu: Não se aplica. Respondeu ao feedback: Sim. Facilidade: 3/5. Encontrou: Sim.
+
+Comentário literal:
+
+\begin{quote}
+Consegui terminar, mas alguns nomes são muito parecidos. Eu esperava uma explicação maior antes de avançar.
+\end{quote}
+
+Observações do moderador: Pediu confirmação verbal se o protótipo era seguro; moderador apenas reforçou que deveria agir como faria em casa.
+
+\section{P06 --- Fluxo B}\label{p06--fluxo-b}
+
+Data: 28/06/2026. Perfil: Cidadão --- Microempreendedor individual. Já usou GOV.BR: Sim. Concluiu: Não. Tempo: 10:00. Cliques: 29. Convite apareceu: Sim. Respondeu ao feedback: Não. Facilidade: 2/5. Encontrou: Não.
+
+Comentário literal:
+
+\begin{quote}
+Ignorei a pergunta porque queria tentar resolver primeiro, mas depois me perdi e não cheguei ao final.
+\end{quote}
+
+Observações do moderador: Recebeu convite contextual aos 4 minutos, ignorou e estourou o tempo máximo.
+
+\section{P07 --- Fluxo A}\label{p07--fluxo-a}
+
+Data: 28/06/2026. Perfil: Cidadão --- Aposentado. Já usou GOV.BR: Não. Concluiu: Não. Tempo: 10:00. Cliques: 22. Convite apareceu: Não se aplica. Respondeu ao feedback: Não. Facilidade: 1/5. Encontrou: Não.
+
+Comentário literal:
+
+\begin{quote}
+Eu não entendi onde começava. Para mim parecia ter muita informação na tela.
+\end{quote}
+
+Observações do moderador: Baixa familiaridade com Figma; recebeu demonstração inicial e teve dificuldade na primeira tela.
+
+\section{P08 --- Fluxo B}\label{p08--fluxo-b}
+
+Data: 28/06/2026. Perfil: Cidadão --- Analista financeiro. Já usou GOV.BR: Sim. Concluiu: Sim. Tempo: 06:49. Cliques: 16. Convite apareceu: Sim. Respondeu ao feedback: Sim. Facilidade: 4/5. Encontrou: Sim.
+
+Comentário literal:
+
+\begin{quote}
+O aviso no meio do caminho apareceu em um momento adequado. Eu só deixaria o texto mais curto.
+\end{quote}
+
+Observações do moderador: Respondeu ao convite contextual; concluiu após retornar ao fluxo principal.
 \end{apendicesenv}

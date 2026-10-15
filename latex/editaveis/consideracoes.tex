@@ -1,180 +1,56 @@
-\chapter{Considerações Finais}
+% Gerado a partir de docs/tcc.md por scripts/sincronizar_tcc.py.
+\chapter{Considerações Finais}\label{considerauxe7uxf5es-finais}
 
-Este trabalho teve como objetivo conceber e desenvolver um protótipo inicial de
-avaliação contextual de serviços públicos digitais, capaz de registrar sinais de
-possível dificuldade na navegação, solicitar feedback de baixo esforço e
-apresentar indicadores agregados para apoiar a melhoria dos serviços avaliados.
-A proposta partiu de um problema prático: avaliações exibidas apenas ao final da
-jornada nem sempre capturam o contexto em que o usuário se perde, demora ou
-abandona a busca por um serviço.
+Este trabalho teve como objetivo conceber e desenvolver um protótipo inicial de avaliação contextual de serviços públicos digitais, capaz de registrar sinais de possível dificuldade na navegação, solicitar feedback de baixo esforço e apresentar indicadores agregados para apoiar a melhoria dos serviços avaliados. A proposta partiu de um problema prático: avaliações exibidas apenas ao final da jornada nem sempre capturam o contexto em que o usuário se perde, demora ou abandona a busca por um serviço.
 
-A revisão teórica indicou que a avaliação de serviços públicos precisa combinar
-satisfação, qualidade percebida, efetividade, usabilidade e orientação para
-melhoria. Também reforçou que uma nota geral, isoladamente, explica pouco sobre o
-problema vivido pelo cidadão. Por isso, o protótipo relaciona dois tipos de
-evidência sem tratá-los como equivalentes: evidências comportamentais de contexto,
-como cliques e tempo de permanência, e evidências declaradas, como estrelas,
-atributos do problema, NPS e comentário opcional. As primeiras indicam possíveis
-pontos de investigação; somente as segundas expressam a percepção do usuário.
+A fundamentação distingue satisfação, qualidade percebida, efetividade e usabilidade. O desenho relaciona contexto comportamental e julgamento declarado, mas cada componente tem limites: a API recebe duração simulada, o estudo Figma/\allowbreak Useberry registra automaticamente tempo e cliques, e o questionário pós-sessão reúne impressões da interface. Estrelas e atributos não são substituídos por telemetria. A pergunta de recomendação mantida no formulário possui interpretação própria e não foi validada como qualidade percebida.
 
-A Lean Inception contribuiu para transformar a ideia inicial em um MVP mais
-delimitado. As dinâmicas de escopo, objetivos, personas, jornadas,
-brainstorming, revisão técnica, sequenciamento e Canvas MVP permitiram separar o
-que deveria entrar na primeira versão do que deveria permanecer como evolução.
-Com isso, o trabalho evitou ampliar o escopo para ouvidoria, chatbot,
-identificação individual, autenticação avançada ou integração real com portais
-governamentais.
+A Lean Inception contribuiu para transformar a ideia inicial em um MVP mais delimitado. As dinâmicas de escopo, objetivos, personas, jornadas, brainstorming, revisão técnica, sequenciamento e Canvas MVP permitiram separar o que deveria entrar na primeira versão do que deveria permanecer como evolução. Com isso, o trabalho evitou ampliar o escopo para ouvidoria, chatbot, identificação individual, autenticação avançada ou integração real com portais governamentais.
 
-O protótipo desenvolvido demonstrou a viabilidade técnica do fluxo proposto. A
-solução local registra eventos de navegação, aplica regras explícitas de
-acionamento, exibe popup de redirecionamento para serviços prioritários, abre uma
-página de feedback e apresenta dados administrativos agregados. A contribuição
-científica está na hipótese e no modelo de análise que distinguem comportamento
-observado de percepção declarada. A contribuição tecnológica está no artefato que
-associa essas fontes de evidência ao serviço e ao ponto da jornada em que o
-convite foi acionado.
+O protótipo funcional implementa registro de eventos, regras de acionamento, convite de feedback e agregações administrativas em ambiente local. Essa implementação constitui a contribuição tecnológica. A contribuição investigativa é a formulação de hipóteses sobre o momento da coleta e a distinção entre evidências comportamentais e declaradas. A avaliação no Figma examina o desenho da interface; não demonstra integração funcional nem valida um modelo de mensuração.
 
-\section{Resultados em Relação aos Objetivos}
+\section{Resultados em Relação aos Objetivos}\label{resultados-em-relauxe7uxe3o-aos-objetivos}
 
-O primeiro objetivo específico foi levantar fundamentos legais, técnicos e
-teóricos sobre avaliação de serviços públicos, qualidade percebida, usabilidade,
-governo digital e Lean Inception. Esse objetivo foi atendido no referencial
-teórico, que reuniu legislação brasileira, modelos de avaliação de serviços,
-BRASP, API de avaliação, modelo unificado, experiência do usuário, NPS, métricas
-de navegação, LGPD e fundamentos de Design Science Research.
+O primeiro objetivo específico foi levantar fundamentos legais, técnicos e teóricos sobre avaliação de serviços públicos, qualidade percebida, usabilidade, governo digital e Lean Inception. O referencial reúne parte dessa base, e a metodologia apresenta a aproximação à DSR. O referencial ainda requer ampliação com modelos de qualidade de serviços eletrônicos, além de aprofundamento das fontes e de sua aplicação ao artefato.
 
-O segundo objetivo específico foi definir, por meio de Lean Inception, o fluxo de
-detecção de dificuldade, sugestão de redirecionamento e coleta de feedback. Esse
-resultado aparece na definição do MVP, nas personas, nas jornadas, no
-sequenciamento de funcionalidades e no fluxo conceitual apresentado nos
-apêndices. A Lean Inception ajudou a justificar por que o produto deveria ser um
-mecanismo contextual de apoio à melhoria, e não uma ouvidoria, um chatbot ou um
-sistema completo de atendimento.
+O segundo objetivo específico foi definir, por meio de Lean Inception, o fluxo de detecção de possível dificuldade, sugestão de redirecionamento e coleta de feedback. Esse resultado aparece na definição do MVP, nas personas, nas jornadas, no sequenciamento de funcionalidades e no fluxo conceitual apresentado nos apêndices. A Lean Inception ajudou a justificar por que o produto deveria ser um mecanismo contextual de apoio à melhoria, e não uma ouvidoria, um chatbot ou um sistema completo de atendimento.
 
-O terceiro objetivo específico foi construir um protótipo funcional com API,
-páginas de serviço público, feedback contextual, formulário estático comparativo
-e visualização administrativa. Esse objetivo foi atendido pela implementação do
-servidor local, dos endpoints, das páginas navegáveis, do popup de
-redirecionamento, da tela de feedback com estrelas, atributos, NPS e comentário,
-e do painel administrativo com alertas e indicadores agregados.
+O terceiro objetivo específico foi construir API, páginas navegáveis, coleta de feedback e visualização administrativa, além de prever a comparação com formulário final. A implementação Python contém endpoints, páginas, popup, formulário reutilizável e agregações básicas. A comparação entre A e B foi desenhada e avaliada na interface Figma. O backend não registra grupo, modalidade do convite, conclusão da tarefa ou exposição efetiva ao formulário; portanto, a instrumentação comparativa funcional desse objetivo permanece parcial.
 
-O quarto objetivo específico foi estruturar os dados e indicadores necessários
-para apoiar a análise de cliques, tempo de navegação, taxa de resposta,
-avaliações, NPS e pontos recorrentes de melhoria. O protótipo já organiza esses
-dados em eventos de clique, eventos de tempo, alertas administrativos e
-feedbacks estruturados. Também disponibiliza endpoints de consulta para o painel.
-A comparação entre avaliação estática e feedback contextual, entretanto, ainda
-não possui resultado estatístico. A avaliação exploratória com oito participantes
-produziu indícios iniciais em cenário controlado e demonstrou que a estrutura
-técnica permite medir a comparação, mas não confirmou superioridade de um fluxo.
+O quarto objetivo específico foi estruturar dados e indicadores para analisar eventos, avaliações e possíveis pontos de investigação. A implementação contém estruturas de eventos, alertas e feedbacks, além de consultas para agregação. A avaliação de interface no Figma oferece outro conjunto de registros, sem comprovar sua integração a essa base. A tabela construto \ensuremath{\rightarrow} indicador \ensuremath{\rightarrow} dado e a operacionalização das variáveis permanecem pendentes; não foi demonstrado que a estrutura atual basta para testar todas as hipóteses.
 
-\section{Limitações}
+\section{Limitações}\label{limitauxe7uxf5es}
 
-A principal limitação é o tamanho e a seleção da amostra. A avaliação exploratória
-preliminar com oito participantes permitiu observar indícios sobre o uso do
-protótipo, mas não oferece base empírica suficiente para afirmar que o feedback
-contextual aumenta a taxa de resposta ou melhora a qualidade dos dados quando
-comparado a um formulário estático. Além disso, a avaliação heurística foi
-interna/preliminar, conduzida pelos autores, e não substitui inspeção independente
-por especialistas ou avaliação com gestores públicos.
+A principal limitação é o tamanho e a seleção da amostra. A avaliação exploratória preliminar com oito participantes permitiu observar indícios sobre o uso do protótipo, mas não oferece base empírica suficiente para afirmar que o feedback contextual aumenta a taxa de resposta ou melhora a qualidade dos dados quando comparado a um formulário estático. Além disso, a avaliação heurística foi interna/preliminar, conduzida pelos autores, e não substitui inspeção independente por especialistas ou avaliação com gestores públicos.
 
-O desenvolvimento também evidencia uma limitação organizacional. A tecnologia,
-isoladamente, não garante melhoria de serviços públicos. Para que o Avaliador
-gere impacto real, o órgão precisa tratar feedback negativo como insumo de
-aprendizado, definir responsáveis pela análise dos indicadores e transformar os
-alertas em decisões de melhoria. Sem essa rotina institucional, o painel poderia
-se tornar apenas um repositório de sinais de dificuldade e avaliações, sem
-efeito concreto na experiência do cidadão.
+O desenvolvimento também evidencia uma limitação organizacional. A tecnologia, isoladamente, não garante melhoria de serviços públicos. Para que o sistema gere impacto real, o órgão precisa tratar feedback negativo como insumo de aprendizado, definir responsáveis pela análise dos indicadores e transformar os alertas em decisões de melhoria. Sem essa rotina institucional, o painel poderia se tornar apenas um repositório de sinais de possível dificuldade e avaliações, sem efeito concreto na experiência do cidadão.
 
-Outra limitação está nos limiares de clique e tempo. Os valores usados no
-backend são operacionais e servem para demonstrar a lógica de detecção:
-dificuldade por clique acima do limite configurado e dificuldade por tempo acima
-de 1,5 vez o tempo médio definido para o serviço. Em uma implantação real, esses
-limiares deveriam ser calibrados com dados históricos, testes de usabilidade e
-análise por tipo de serviço.
+Os limiares de clique e duração são parâmetros operacionais, sem calibração com dados rotulados. A análise qualitativa é de projeto; a síntese da simulação não pode ser reproduzida, pois os arquivos de execução e parâmetros completos não estão disponíveis. Há risco de falsos positivos e negativos: leitura cuidadosa, tecnologia assistiva ou tarefa complexa podem acionar regras sem dificuldade declarada, enquanto problemas reais podem ocorrer abaixo dos limites.
 
-Há ainda um desafio ético e de privacidade. Mesmo sem coletar CPF, nome, e-mail
-ou login, padrões de navegação, tempo de permanência, sequência de ações e tipo
-de serviço acessado podem gerar inferências sobre comportamentos de grupos de
-usuários. Por isso, qualquer implantação real deve aplicar rigorosamente os
-princípios da LGPD, especialmente minimização, finalidade, transparência,
-controle de acesso, retenção limitada e anonimização efetiva \cite{brasil2018lgpd}.
+Há ainda um desafio ético e de privacidade. Mesmo sem solicitar CPF, nome, e-mail ou credenciais de login na interface, identificadores técnicos, URL, coordenadas de clique e padrões de interação podem permitir associações ou inferências sobre usuários. O tempo observado no estudo Figma/\allowbreak Useberry e a duração simulada na API pertencem a bases distintas. Por isso, qualquer implantação real deve aplicar rigorosamente os princípios da LGPD, especialmente minimização, finalidade, transparência, controle de acesso, retenção limitada e anonimização efetiva \cite{brasil2018lgpd}.
 
-Também não houve integração com portais governamentais reais. Essa decisão
-manteve o escopo compatível com o TCC e evitou dependências de autorização
-institucional, segurança, governança e privacidade. Assim, os resultados devem
-ser interpretados como demonstração de viabilidade conceitual e técnica, não como
-comprovação de impacto em produção.
+A avaliação com participantes ocorreu no Figma/\allowbreak Useberry, separadamente da aplicação Python. Não verifica endpoints, persistência, acionamento ou integração da API. O relato do sorteio auxiliado por IA não documenta seu mecanismo; o popup fez parte dos dois fluxos sem registro individual de exposição. O convite no Figma podia decorrer de tempo, tela ou clique, mas seus parâmetros e os acionamentos individuais não estão documentados nas sínteses disponíveis. Se preservadas, as gravações de tela poderão auxiliar a reconstituir os momentos dos convites; elas ainda não foram examinadas para esse fim. O esforço não foi medido por instrumento específico, e os comentários disponíveis são pós-sessão. O intervalo observado foi limitado a dez minutos. Essas características restringem a interpretação das diferenças entre os quatro casos de cada grupo.
 
-\section{Trabalhos Futuros}
+Não houve comparação empírica com ferramentas existentes; a Tabela 2 é um posicionamento documental. A inspeção heurística não registra severidade, data e avaliadores individualizados. As capturas da Lean Inception preservam termos e metas de concepção, não resultados alcançados.
 
-Os trabalhos futuros devem avançar em três frentes. A primeira é testar a
-hipótese comparativa com amostra maior, participantes mais diversos e protocolo
-previamente definido. No fluxo A, o usuário recebe um formulário estático ao
-final; no fluxo B, o sistema usa sinais comportamentais para solicitar feedback
-contextual. As variáveis dependentes devem incluir taxa de resposta, taxa de
-conclusão, esforço percebido, qualidade e especificidade dos comentários,
-abandono ou interrupção provocada e percepção de adequação do momento da
-pergunta. Só depois dessa coleta será possível avaliar, com evidência mais
-consistente, se um fluxo apresenta vantagens no cenário estudado.
+Também não houve integração com portais governamentais reais. Essa decisão manteve o escopo compatível com o TCC e evitou dependências de autorização institucional, segurança, governança e privacidade. Assim, os resultados devem ser interpretados como demonstração técnica local e parcial, não como comprovação de viabilidade integrada ou de impacto em produção.
 
-A segunda frente é a calibração técnica. Os limiares atuais de clique e tempo
-foram definidos para demonstrar o funcionamento do protótipo. Em uma evolução, o
-sistema deve permitir configuração por serviço, por página e por tipo de tarefa.
-Também deve registrar versão das regras, evitar alertas duplicados, separar
-eventos por organização, criar filtros por período e serviço, e apresentar
-métricas comparáveis no painel. Essa etapa aproxima o protótipo de uma solução
-mais robusta de engenharia de software, com regras auditáveis e manutenção mais
-segura.
+\section{Trabalhos Futuros}\label{trabalhos-futuros}
 
-A terceira frente é a preparação para piloto autorizado. Uma implantação real
-exigiria aviso de coleta, definição de base legal e finalidade, política de
-retenção, controle de acesso ao painel, chave de API, separação por órgão,
-monitoramento de disponibilidade e documentação de integração do script cliente.
-Também seria necessário validar se os indicadores gerados realmente apoiam a
-decisão administrativa, por exemplo, priorização de páginas confusas, revisão de
-linguagem, redução de etapas e reorganização de menus.
+Os trabalhos futuros devem avançar em quatro frentes. A primeira é testar a hipótese comparativa com amostra maior, participantes mais diversos e protocolo previamente definido. No fluxo A, o usuário recebe um formulário estático ao final; no fluxo B, o sistema usa sinais comportamentais para solicitar feedback contextual. As variáveis dependentes devem incluir taxa de resposta, taxa de conclusão, esforço percebido, qualidade e especificidade dos comentários, abandono ou interrupção provocada e percepção de adequação do momento da pergunta. Só depois dessa coleta será possível avaliar, com evidência mais consistente, se um fluxo apresenta vantagens no cenário estudado.
 
-Uma quarta frente é a avaliação externa do artefato. A avaliação heurística
-interna/preliminar deve ser complementada por inspeção independente de
-especialistas em usabilidade, Engenharia de Software ou governo digital e por
-walkthrough com gestores públicos. Essa etapa deve permanecer separada do teste
-de usabilidade com cidadãos, pois responde a perguntas técnicas e gerenciais
-distintas.
+A segunda frente é a calibração técnica. Os limiares atuais de clique e tempo foram definidos para demonstrar o funcionamento do protótipo. Em uma evolução, o sistema deve permitir configuração por serviço, por página e por tipo de tarefa. Também deve registrar versão das regras, evitar alertas duplicados, separar eventos por organização, criar filtros por período e serviço, e apresentar métricas comparáveis no painel. Essa etapa aproxima o protótipo de uma solução mais robusta de engenharia de software, com regras auditáveis e manutenção mais segura.
 
-\section{Conclusão}
+A terceira frente é a preparação para piloto autorizado. Uma implantação real exigiria aviso de coleta, definição de base legal e finalidade, política de retenção, controle de acesso ao painel, chave de API, separação por órgão, monitoramento de disponibilidade e documentação de integração do script cliente. Também seria necessário validar se os indicadores gerados realmente apoiam a decisão administrativa, por exemplo, priorização de páginas confusas, revisão de linguagem, redução de etapas e reorganização de menus.
 
-Conclui-se que o Avaliador de Serviços Públicos proposto é uma alternativa
-viável para explorar feedback contextual em serviços digitais. A solução não
-substitui instrumentos oficiais de avaliação, mas pode complementá-los ao
-capturar sinais de dificuldade durante a navegação e relacioná-los a avaliações
-simples feitas pelo usuário. Essa combinação responde ao problema inicial do
-trabalho: avaliações genéricas e tardias podem indicar insatisfação, mas nem
-sempre mostram onde a jornada falhou ou qual característica precisa ser
-melhorada.
+Uma quarta frente é a avaliação externa do artefato. A avaliação heurística interna/preliminar deve ser complementada por inspeção independente de especialistas em usabilidade, Engenharia de Software ou governo digital e por walkthrough com gestores públicos. Essa etapa deve permanecer separada do teste de usabilidade com cidadãos, pois responde a perguntas técnicas e gerenciais distintas.
 
-O artefato desenvolvido mostra que é tecnicamente possível registrar eventos de
-navegação em uma sessão anônima, aplicar regras de detecção, sugerir
-redirecionamento em serviços prioritários, solicitar feedback de baixo esforço e
-organizar os dados em indicadores administrativos. A avaliação exploratória
-preliminar com oito participantes produziu indícios favoráveis a aspectos do
-fluxo contextual, mas não permite generalização, atribuição causal ou afirmação de
-superioridade. Seu resultado principal foi demonstrar a exequibilidade do
-protocolo e deixar uma base mensurável para testar a hipótese posteriormente.
+\section{Conclusão}\label{conclusuxe3o}
 
-O percurso do trabalho também mostra que a solução não nasce apenas de uma
-decisão técnica de implementação. Ela foi delimitada por fundamentos de governo
-digital, qualidade percebida, usabilidade, privacidade e Lean Inception, e por
-artefatos de produto que explicitaram personas, jornadas, escopo, features,
-sequenciamento e critérios de verificação. Isso torna a proposta mais defensável
-como trabalho de Engenharia de Software, pois conecta problema, método, protótipo
-e indicadores.
+O trabalho apresenta uma implementação local parcial e observações exploratórias de interface, que permitem delimitar uma proposta de avaliação contextual de serviços públicos digitais. A viabilidade do fluxo integrado e sua utilidade para cidadãos e gestores ainda exigem avaliação. Os resultados não demonstram que a proposta resolva o problema de relacionar contexto e avaliação com maior eficácia do que instrumentos existentes.
 
-A principal contribuição científica do trabalho é organizar uma hipótese
-avaliável sobre o momento da coleta e distinguir explicitamente evidências
-comportamentais de evidências declaradas de qualidade percebida. A contribuição
-tecnológica é um protótipo auditável que integra telemetria de interação,
-acionamento contextual, feedback estruturado e visualização administrativa. A
-proposta torna concreta a combinação dessas fontes, desde que os dados sejam
-coletados com finalidade clara, baixo esforço para o cidadão, interpretação
-cautelosa e respeito à privacidade.
+A implementação explicita como eventos e respostas podem ser organizados em um fluxo contextual. A avaliação exploratória com oito participantes examinou a interface no Figma e registrou conclusão, facilidade e impressões pós-sessão. Não verificou o backend, não comparou a especificidade dos comentários do formulário e não confirmou benefício do fluxo contextual. Seu alcance é formativo e limitado ao desenho avaliado, com as restrições de protocolo e registro descritas no trabalho.
+
+O percurso do trabalho também mostra que a solução não nasce apenas de uma decisão técnica de implementação. Ela foi delimitada por fundamentos de governo digital, qualidade percebida, usabilidade, privacidade e Lean Inception, e por artefatos de produto que explicitaram personas, jornadas, escopo, features, sequenciamento e critérios de verificação. Isso torna a proposta mais defensável como trabalho de Engenharia de Software, pois conecta problema, método, protótipo e indicadores.
+
+A contribuição investigativa é a formulação de hipóteses sobre o momento da coleta, acompanhada da distinção entre evidências comportamentais e declaradas. A contribuição tecnológica é um protótipo com regras explícitas, feedback estruturado e agregações administrativas. Ainda são necessários a rastreabilidade dos construtos, instrumentos de coleta adequados e testes independentes. A proposta oferece uma base de desenvolvimento e investigação; seus benefícios, sua calibração e sua adequação a um serviço público real permanecem questões em aberto.

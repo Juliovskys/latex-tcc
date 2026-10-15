@@ -1,198 +1,162 @@
-\chapter{Metodologia}
+% Gerado a partir de docs/tcc.md por scripts/sincronizar_tcc.py.
+\chapter{Metodologia}\label{metodologia}
 
-Este capítulo apresenta o caminho seguido para transformar a ideia do Avaliador
-de Serviços Públicos em um protótipo demonstrável. A metodologia combinou
-pesquisa aplicada, revisão bibliográfica e normativa, Design Science Research,
-prototipação incremental e Lean Inception, de modo que a definição do produto e
-a implementação técnica avançassem de forma coerente.
+Este capítulo apresenta o caminho seguido para transformar a ideia do sistema de avaliação contextual em um protótipo demonstrável. A metodologia combinou pesquisa aplicada, revisão bibliográfica e normativa, Design Science Research, prototipação incremental e Lean Inception, de modo que a definição do produto e a implementação técnica avançassem de forma coerente.
 
-\section{Caracterização da Pesquisa}
+\section{Caracterização da Pesquisa}\label{caracterizauxe7uxe3o-da-pesquisa}
 
-A pesquisa é aplicada, pois busca propor uma solução computacional para um
-problema associado à avaliação e melhoria de serviços públicos digitais. Quanto
-aos objetivos, possui caráter exploratório, uma vez que organiza fundamentos
-existentes e os transforma em um artefato inicial. O artefato foi submetido a uma
-avaliação exploratória preliminar em ambiente controlado, ainda sem validação em
-contexto real de prestação de serviço público.
+A pesquisa é aplicada e exploratória: propõe uma solução computacional para relacionar contexto de navegação e avaliação declarada em serviços públicos digitais. O artefato possui dois componentes: uma implementação funcional local em Python, com API, páginas, formulário e painel; e um protótipo de interface no Figma, com os fluxos A e B usados no estudo com participantes. A implementação recebeu inspeção interna funcional e heurística. As interfaces no Figma receberam avaliação exploratória de usabilidade, instrumentada pelo Useberry. Nenhum desses procedimentos constitui validação em contexto real de prestação de serviço público.
 
-A estratégia metodológica se aproxima da Design Science Research. Para
-\citeonline{hevner2004designscience}, pesquisas em sistemas de informação podem
-produzir conhecimento por meio da construção e avaliação de artefatos, como
-modelos, métodos, arquiteturas e sistemas. O artefato deste TCC é um protótipo
-composto por API, páginas simuladas, formulário de feedback e painel
-administrativo.
+O percurso dialoga com a Design Science Research, na qual a construção e a avaliação de artefatos apoiam a produção de conhecimento em sistemas de informação \cite{hevner2004designscience}. A demonstração técnica da implementação e as observações de interface oferecem evidências de naturezas diferentes. A avaliação com oito participantes se refere às interfaces no Figma; não verifica os endpoints, a persistência ou os gatilhos da implementação Python. A estruturação completa do percurso pelas etapas da DSR permanece parte da continuidade metodológica.
 
-As referências foram usadas de acordo com sua natureza. A literatura científica
-sustenta os conceitos, relações teóricas e escolhas metodológicas; as normas
-técnicas fornecem definições e critérios; a legislação estabelece obrigações e
-princípios jurídicos; documentos institucionais caracterizam políticas, modelos
-e práticas governamentais; e a documentação de ferramentas comerciais descreve
-somente funcionalidades declaradas pelos fornecedores. Páginas de Hotjar e
-Microsoft Clarity, portanto, não são tratadas como evidência científica de
-eficácia, mas como fontes de caracterização tecnológica para o posicionamento do
-protótipo.
-
-\section{Lean Inception}
-
-A Lean Inception foi utilizada como protocolo metodológico para alinhar visão de
-produto, escopo e MVP. A abordagem de \citeonline{caroli2018leanInception}
-auxilia equipes a definir o produto certo antes de ampliar o desenvolvimento;
-\citeonline{fowler2022leanInception} também a descreve como uma inception focada
-em compreender funcionalidades, clientes e Canvas MVP. Neste trabalho, a técnica
-organizou a definição do Avaliador de Serviços Públicos e ajudou a transformar a
-ideia inicial em um conjunto priorizado de funcionalidades.
-
-Foram considerados internamente quatro perfis de discussão, cada um com uma
-perspectiva relevante para o problema:
+As fontes foram diferenciadas por natureza e finalidade. Artigos e livros acadêmicos fundamentam conceitos e questões de pesquisa; normas oferecem definições e critérios; legislação caracteriza o enquadramento normativo; relatórios técnicos e materiais institucionais descrevem modelos e práticas de governo digital. Os módulos da Enap são material didático institucional. Caroli, Fowler e Caroli, Cooper e Kalbach são usados como literatura profissional de concepção e projeto; Reichheld caracteriza a proposta original de NPS, sem constituir validação desse indicador para serviços públicos. Hotjar, Microsoft Clarity e Useberry são documentação comercial, limitada à descrição de funcionalidades declaradas e instrumentos utilizados. A classificação das fontes é apresentada a seguir; a presença de uma fonte não comprova a eficácia do mecanismo proposto.
 
 \begin{itemize}
-    \item \textbf{Felipe}, atendimento público, representando dúvidas
-    recorrentes e dificuldades relatadas por cidadãos;
-    \item \textbf{Lucas}, gestão digital, representando a necessidade de
-    indicadores acionáveis para priorização de melhorias;
-    \item \textbf{Diassis}, estudante da UnB, representando viabilidade técnica,
-    escopo acadêmico, segurança e LGPD;
-    \item \textbf{Bruno}, estudante da UnB, representando experiência do usuário,
-    jornada, clareza de interface e validação.
+\item
+  \textbf{Legislação:} \citeonline{brasil2011lei12527}; \citeonline{brasil2017decreto9094}; \citeonline{brasil2017lei13460}; \citeonline{brasil2018lgpd}; \citeonline{brasil2021lei14129}; \citeonline{brasil2022decreto11260}; \citeonline{brasil2022portaria548}.
+\item
+  \textbf{Documentação ou pesquisa institucional:} \citeonline{govbrFerramentaAvaliacao}; \citeonline{brasilMgi2024ppaParticipativo}; \citeonline{cetic2025ticDomicilios2024}; \citeonline{govuk2021completionRate}; \citeonline{govuk2021usingData}.
+\item
+  \textbf{Literatura profissional:} \citeonline{caroli2018leanInception}; \citeonline{cooper1999inmates}; \citeonline{fowler2022leanInception}; \citeonline{kalbach2016mapping}; \citeonline{reichheld2003nps}.
+\item
+  \textbf{Literatura acadêmica/científica:} \citeonline{deloneMclean2003}; \citeonline{gronroos1984service}; \citeonline{hektner2007experienceSampling}; \citeonline{hevner2004designscience}; \citeonline{kahneman1993peakEnd}; \citeonline{larson1983experienceSampling}; \citeonline{manfreda2008webSurveys}; \citeonline{mark2008interruptedWork}; \citeonline{nielsen1994heuristic}; \citeonline{oliver2014satisfaction}; \citeonline{parasuraman1988servqual}; \citeonline{schwarz1999selfReports}; \citeonline{shihFan2008responseRates}; \citeonline{Sommerville2011}; \citeonline{sweller1988cognitiveLoad}.
+\item
+  \textbf{Documentação comercial:} \citeonline{hotjar2026}; \citeonline{microsoftClarity2026}; \citeonline{useberryFigma}.
+\item
+  \textbf{Norma técnica:} \citeonline{iso9241112018}; \citeonline{iso92412102019}.
+\item
+  \textbf{Material didático institucional:} \citeonline{limaPereira2020modulo1}; \citeonline{limaPereira2020modulo2}; \citeonline{limaPereira2020modulo3}; \citeonline{limaPereira2020modulo4}.
+\item
+  \textbf{Relatório técnico institucional:} \citeonline{pedrosa2019qualidadeGovbr}; \citeonline{silva2024atributosApi}; \citeonline{silva2019brasp}; \citeonline{silva2022modeloUnificado}.
 \end{itemize}
 
-Essa dinâmica foi uma atividade interna de alinhamento e delimitação do produto,
-e não uma validação externa do artefato. As decisões da Lean Inception orientaram
-o escopo do MVP, mas não substituem teste de usabilidade, avaliação por
-especialistas independentes ou implantação em portal público real.
+\section{Lean Inception}\label{lean-inception}
 
-\section{Etapas da Lean Inception}
+A Lean Inception foi utilizada como protocolo metodológico para alinhar visão de produto, escopo e MVP. A abordagem de \citeonline{caroli2018leanInception} auxilia equipes a definir o produto certo antes de ampliar o desenvolvimento; \citeonline{fowler2022leanInception} também a descreve como uma inception focada em compreender funcionalidades, clientes e Canvas MVP. Neste trabalho, a técnica organizou a definição do sistema de avaliação contextual e ajudou a transformar a ideia inicial em um conjunto priorizado de funcionalidades.
 
-A agenda da Lean Inception foi organizada para que as funcionalidades surgissem a
-partir da jornada do usuário, e não apenas de possibilidades técnicas. As etapas
-executadas foram:
-
-\begin{enumerate}
-    \item \textbf{Kick-off}: alinhamento do problema, da hipótese e dos limites do
-    MVP;
-    \item \textbf{É / Não É / Faz / Não Faz}: delimitação do produto como solução
-    de feedback contextual, não como ouvidoria, chatbot, ferramenta de
-    identificação individual ou sistema governamental completo;
-    \item \textbf{Objetivos do Produto}: definição de objetivos como capturar
-    sinais de dificuldade, solicitar feedback no momento adequado, preservar
-    privacidade e gerar dados acionáveis;
-    \item \textbf{Personas}: definição de Carlos Pereira, cidadão usuário de
-    serviço público digital, e Lucas Almeida, gestor público de serviço digital;
-    \item \textbf{Jornadas}: comparação entre um fluxo com formulário estático ao
-    final e um fluxo com feedback contextual durante a dificuldade;
-    \item \textbf{Brainstorming de features}: levantamento de funcionalidades
-    relacionadas a coleta de sinais, regras, feedback, painel e integração;
-    \item \textbf{Revisão técnica, de negócio e UX}: avaliação relativa de
-    esforço, valor para gestão e impacto na experiência do usuário;
-    \item \textbf{Sequenciador}: organização das funcionalidades em ondas de
-    entrega;
-    \item \textbf{Canvas MVP}: consolidação da menor versão viável para validação
-    inicial.
-\end{enumerate}
-
-A construção de personas foi baseada na tradição de design centrado no usuário.
-\citeonline{cooper1999inmates} apresenta personas como arquétipos usados para
-orientar decisões de produto. O mapeamento de jornada seguiu a lógica de
-visualização de experiências discutida por \citeonline{kalbach2016mapping}, com
-identificação de pontos de contato, fricções e oportunidades de intervenção.
-As personas também consideraram o cenário brasileiro de uso de tecnologias
-digitais, descrito pela TIC Domicílios 2024 \cite{cetic2025ticDomicilios2024}, e
-a existência de mecanismos oficiais de avaliação de serviços públicos digitais
-\cite{govbrFerramentaAvaliacao}.
-
-\section{Metodologia do Desenvolvimento da Solução}
-
-O desenvolvimento adotou prototipação incremental. Segundo
-\citeonline{Sommerville2007}, protótipos ajudam a explorar requisitos e reduzir
-incertezas antes de uma solução definitiva. Uma versão funcional inicial já
-existia cerca de três semanas antes da avaliação. A Lean Inception foi conduzida
-entre 18 e 27 de junho de 2026 para revisar e delimitar o MVP, e os ajustes finais
-usados na avaliação exploratória foram realizados em 28 de junho de 2026. A
-implementação foi dividida em ondas, seguindo o sequenciador da Lean Inception.
-
-\begin{enumerate}
-    \item \textbf{Onda 1 -- Base técnica de coleta}: sessão técnica anônima,
-    registro de cliques e tempo, e formulário estático comparativo;
-    \item \textbf{Onda 2 -- Detecção e feedback contextual}: regra simples de
-    detecção, feedback contextual e formulário com estrelas, atributos, NPS e
-    comentário opcional;
-    \item \textbf{Onda 3 -- Painel básico}: visualização de sessões com
-    dificuldade, ranking de alertas e taxa de resposta dos fluxos;
-    \item \textbf{Onda 4 -- Incremento de qualidade}: regras por serviço, filtros
-    no painel e comentários recentes;
-    \item \textbf{Onda 5 -- Evolução para piloto controlado}: separação por
-    organização, autenticação, chave de API e script instalável em site real.
-\end{enumerate}
-
-O MVP obrigatório corresponde às três primeiras ondas. Essa decisão mantém a
-solução pequena o suficiente para o escopo acadêmico e, ao mesmo tempo, permite
-testar o fluxo ponta a ponta: o cidadão navega, o sistema detecta dificuldade, o
-feedback contextual é solicitado, os dados são armazenados e o gestor visualiza
-indicadores agregados.
-
-\section{Hipótese e Critérios da Avaliação Preliminar}
-
-A hipótese comparativa do trabalho é que o feedback solicitado de forma
-contextual, próximo a um sinal de possível dificuldade, pode produzir maior
-participação e evidências declaradas mais específicas do que um formulário
-apresentado somente ao final da jornada. Essa hipótese não foi considerada
-confirmada pela avaliação exploratória. Sua verificação robusta requer amostra
-maior, controle de cenário e análise previamente definida.
-
-As variáveis dependentes previstas para o estudo comparativo são: taxa de
-resposta; taxa de conclusão da tarefa; esforço percebido; qualidade e
-especificidade do comentário; abandono ou interrupção associado ao convite; e
-percepção de adequação do momento da pergunta. Tempo e quantidade de cliques são
-variáveis comportamentais auxiliares de contexto, não medidas de qualidade
-percebida.
-
-Foram definidos os seguintes critérios de verificação e avaliação preliminar:
+A atividade interna contou com quatro participantes. As perspectivas listadas a seguir representam suas contribuições à discussão, sem atribuir-lhes vínculo institucional ou condição de especialista independente:
 
 \begin{itemize}
-    \item o protótipo deve registrar cliques, tempo e eventos em uma sessão
-    técnica anônima;
-    \item o convite de feedback contextual deve aparecer apenas quando uma regra
-    de dificuldade for acionada;
-    \item o sistema deve permitir comparar o fluxo A, com formulário estático, e
-    o fluxo B, com feedback contextual;
-    \item o painel deve apresentar pelo menos um gargalo identificável no
-    protótipo;
-    \item os resultados dos dois fluxos devem ser descritos como indícios
-    exploratórios, sem afirmação de superioridade ou generalização estatística.
+\item
+  \textbf{Felipe}, atendimento público, representando dúvidas recorrentes e dificuldades relatadas por cidadãos;
+\item
+  \textbf{Lucas}, gestão digital, representando a necessidade de indicadores acionáveis para priorização de melhorias;
+\item
+  \textbf{Diassis}, estudante da UnB, representando viabilidade técnica, escopo acadêmico, segurança e LGPD;
+\item
+  \textbf{Bruno}, estudante da UnB, representando experiência do usuário, jornada, clareza de interface e validação.
 \end{itemize}
 
-\section{Procedimentos da Avaliação Exploratória}
+Lucas, participante da discussão, e Lucas Almeida, persona fictícia da seção 4.3, são referências distintas. A participação de Wesley Pedrosa dos Santos na Lean Inception esteve voltada ao tema de seu próprio trabalho; não é apresentada como avaliação independente do sistema aqui proposto. A dinâmica foi uma atividade interna de alinhamento e delimitação do produto, não uma validação externa. As decisões da Lean Inception não substituem especificação de requisitos, teste de usabilidade ou avaliação por especialistas independentes.
 
-A avaliação do artefato combinou três procedimentos. O primeiro foi a verificação
-funcional do fluxo, observando registro de eventos, acionamento das regras,
-abertura do feedback e apresentação de indicadores. O segundo foi uma
-\textbf{avaliação heurística interna/preliminar}, conduzida pelos próprios
-autores a partir das telas e decisões do protótipo. Essa inspeção não é
-apresentada como avaliação externa por especialistas.
+\section{Etapas da Lean Inception}\label{etapas-da-lean-inception}
 
-O terceiro procedimento foi uma avaliação exploratória preliminar de usabilidade
-com oito participantes externos ao grupo de desenvolvimento, realizada em 28 de
-junho de 2026. Quatro participantes executaram o fluxo A, com formulário ao final
-da jornada, e quatro executaram o fluxo B, com convite de feedback contextual.
-A tarefa consistiu em localizar e iniciar a declaração do IRPF 2026 no protótipo,
-com limite de dez minutos. As sessões foram individuais e moderadas; todos os
-participantes eram maiores de 18 anos e assinaram Termo de Consentimento Livre e
-Esclarecido. O tamanho e a seleção da amostra permitem apenas descrição e
-interpretação exploratória, sem inferência estatística.
+A agenda da Lean Inception foi organizada para que as funcionalidades surgissem a partir da jornada do usuário, e não apenas de possibilidades técnicas. As etapas executadas foram:
 
-\section{Tratamento dos Dados}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Kick-off}: alinhamento do problema, da hipótese e dos limites do MVP;
+\item
+  \textbf{É / Não É / Faz / Não Faz}: delimitação do produto como solução de feedback contextual, não como ouvidoria, chatbot, ferramenta de identificação individual ou sistema governamental completo;
+\item
+  \textbf{Objetivos do Produto}: definição de objetivos como capturar sinais de possível dificuldade, solicitar feedback no momento adequado, preservar privacidade e gerar dados acionáveis;
+\item
+  \textbf{Personas}: definição de Carlos Pereira, cidadão usuário de serviço público digital, e Lucas Almeida, gestor público de serviço digital;
+\item
+  \textbf{Jornadas}: comparação entre um fluxo com formulário estático ao final e um fluxo com feedback contextual durante a dificuldade;
+\item
+  \textbf{Brainstorming de features}: levantamento de funcionalidades relacionadas a coleta de sinais, regras, feedback, painel e integração;
+\item
+  \textbf{Revisão técnica, de negócio e UX}: avaliação relativa de esforço, valor para gestão e impacto na experiência do usuário;
+\item
+  \textbf{Sequenciador}: organização das funcionalidades em ondas de entrega;
+\item
+  \textbf{Canvas MVP}: consolidação da menor versão viável para validação inicial.
+\end{enumerate}
 
-Os dados do protótipo foram organizados em dois grupos. O primeiro contém
-evidências comportamentais produzidas pela telemetria de interação:
-identificador técnico de sessão, página, serviço, origem do evento, clique e
-tempo de permanência. Esses dados indicam contexto e possível esforço, mas não
-medem qualidade percebida. O segundo contém evidências declaradas pelo usuário:
-estrelas, atributos do problema, NPS e comentário opcional. É nesse segundo grupo
-que se situam satisfação e qualidade percebida.
+A construção de personas foi baseada na tradição de design centrado no usuário. \citeonline{cooper1999inmates} apresenta personas como arquétipos usados para orientar decisões de produto. O mapeamento de jornada seguiu a lógica de visualização de experiências discutida por \citeonline{kalbach2016mapping}, com identificação de pontos de contato, fricções e oportunidades de intervenção. As personas também consideraram o cenário brasileiro de uso de tecnologias digitais, descrito pela TIC Domicílios 2024 \cite{cetic2025ticDomicilios2024}, e a existência de mecanismos oficiais de avaliação de serviços públicos digitais \cite{govbrFerramentaAvaliacao}.
 
-A análise foi pensada para apoiar o gestor público com indicadores agregados,
-como sessões com dificuldade, alertas por serviço, média de estrelas, NPS e
-atributos recorrentes. A coleta evita nome, CPF, e-mail e login, respeitando a
-lógica de minimização de dados da LGPD \cite{brasil2018lgpd}. Em uma implantação
-real, ainda seriam necessários aviso de coleta, governança, controle de acesso,
-retenção definida e autorização institucional.
+\section{Metodologia do Desenvolvimento da Solução}\label{metodologia-do-desenvolvimento-da-soluuxe7uxe3o}
+
+O desenvolvimento adotou prototipação incremental, com a finalidade de explorar decisões de solução e reduzir incertezas \cite{Sommerville2011}. A Lean Inception foi conduzida entre 18 e 27 de junho de 2026; a avaliação das interfaces no Figma ocorreu em 28 de junho de 2026. A existência de uma implementação funcional em Python antes das sessões não significa que ela tenha sido usada pelos participantes. Não se atribuem os resultados do Figma à API.
+
+O sequenciador de concepção organizou cinco ondas:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Onda 1 --- Base técnica e desenho comparativo:} identificador de sessão, eventos e planejamento dos formulários contextual e final.
+\item
+  \textbf{Onda 2 --- Regras e feedback:} condições de acionamento, sugestão de redirecionamento e formulário.
+\item
+  \textbf{Onda 3 --- Painel básico:} agregações de eventos e respostas e planejamento de indicadores comparativos.
+\item
+  \textbf{Onda 4 --- Incrementos de gestão:} parâmetros por serviço, filtros e apresentação de comentários.
+\item
+  \textbf{Onda 5 --- Preparação de integração real:} organizações, autenticação, chave de API e cliente instalável.
+\end{enumerate}
+
+As ondas 1 a 3 constituíram o MVP planejado, mas foram implementadas apenas em parte. Na aplicação Python existem identificadores técnicos, captura de cliques em elementos instrumentados, envio de duração simulada, regras, formulário reutilizável e agregações básicas. Não foram implementados cronômetro automático de navegação, registro dos grupos A/B, exposição ao convite, ranking por alertas ou taxa de resposta por fluxo. A comparação de interfaces foi realizada no Figma. Parâmetros por serviço, originalmente previstos como incremento da onda 4, já estão no backend; filtros e comentários recentes continuam pendentes. O sequenciador expressa o planejamento, não uma lista de entregas integralmente executadas.
+
+\section{Hipótese e Critérios da Avaliação Preliminar}\label{hipuxf3tese-e-crituxe9rios-da-avaliauxe7uxe3o-preliminar}
+
+As hipóteses direcionais propostas para um estudo futuro são: \textbf{H1}, em tarefas e condições equivalentes, o fluxo contextual terá maior proporção de participantes que enviam feedback do que o fluxo com formulário final; \textbf{H2}, os comentários enviados no fluxo contextual terão maior escore de especificidade do que os enviados no fluxo com formulário final, segundo rubrica definida antes da coleta. As hipóteses não foram testadas por esta avaliação exploratória. A regra de exposição ao convite e os denominadores deverão ser definidos previamente, com divulgação das respostas tanto por participante alocado quanto por participante exposto.
+
+As variáveis previstas têm diferentes condições de observação nesta etapa:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Realização da avaliação:} considerou-se resposta, no fluxo A, quando o participante realizou a avaliação apresentada ao final da jornada e, no fluxo B, quando aceitou o convite e realizou a avaliação. Abrir o convite, sem realizar a avaliação, não corresponde a esse critério. Essa classificação não comprova envio de dados à API nem digitação de comentário. A exposição ao formulário final não foi discriminada para cada participante do A; as proporções por participante e por exposição devem permanecer distintas.
+\item
+  \textbf{Conclusão da tarefa:} há classificação Sim/Parcial/Não; o resumo considera somente Sim como conclusão completa. Isso explicita o cálculo descritivo e não representa critério prévio de sucesso documentado.
+\item
+  \textbf{Esforço percebido:} não foi medido por instrumento específico; a nota de facilidade do Apêndice F não corresponde ao CES.
+\item
+  \textbf{Qualidade/especificidade dos comentários do formulário:} não há corpus separado nem rubrica aplicada. Os comentários do Apêndice G são do questionário pós-sessão e não permitem testar H2.
+\item
+  \textbf{Interrupção e abandono associados ao convite:} há relatos pontuais de ignorar o convite; não há medida capaz de atribuir causalidade ao popup ou ao feedback.
+\item
+  \textbf{Adequação do momento:} existem relatos pontuais, mas o conjunto de dados apresentado não inclui a série completa de respostas à pergunta correspondente do questionário.
+\end{itemize}
+
+H1 e H2 são as hipóteses comparativas principais. Conclusão da tarefa, esforço, interrupção e adequação do momento são variáveis secundárias previstas para caracterizar benefícios e custos da intervenção; nesta etapa, sua observação foi incompleta. H2 compara somente comentários de quem respondeu ao formulário. Essa seleção pode diferir entre os grupos e produzir viés; um estudo futuro deverá relatar a ausência de respostas e a composição dos respondentes, sem generalizar os escores para todos os participantes.
+
+Tempo e cliques são medidas auxiliares. A tarefa no Figma foi instrumentada pelo Useberry, enquanto as regras da API constituem outra fonte de evidência, relativa à implementação. O planejamento de instrumentos e critérios comparativos deve preceder nova coleta.
+
+Para a inspeção interna do artefato foram organizados sete critérios, retomados pelos mesmos identificadores na Tabela \ref{tab:criterios-avaliacao-preliminar}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{C1 --- Registro mínimo de navegação:} existência de sessão técnica e estruturas para registrar eventos, com explicitação dos limites de captura do cliente de demonstração.
+\item
+  \textbf{C2 --- Acionamento contextual:} correspondência entre parâmetros por serviço e ações previstas no código, sem interpretar acionamento como dificuldade confirmada.
+\item
+  \textbf{C3 --- Esforço de resposta:} presença de formulário curto como decisão de projeto; esforço efetivamente percebido deve ser tratado como não medido nesta coleta.
+\item
+  \textbf{C4 --- Apresentação para gestão:} existência de agregações e alertas; utilidade e acionabilidade dependem de avaliação com gestores.
+\item
+  \textbf{C5 --- Inspeção das regras:} regras localizáveis no código e parâmetros por serviço; histórico de configuração e versionamento permanecem ausentes.
+\item
+  \textbf{C6 --- Privacidade:} exame dos campos e das limitações de transparência, retenção e acesso, sem concluir conformidade jurídica.
+\item
+  \textbf{C7 --- Interrupção:} possibilidade de ignorar o convite e limitar o popup; efeito sobre abandono ou irritação depende de mensuração posterior.
+\end{enumerate}
+
+A apresentação dos resultados como exploratórios é uma regra de interpretação comum a todos os critérios, sem afirmação de superioridade ou generalização.
+
+\section{Procedimentos da Avaliação Exploratória}\label{procedimentos-da-avaliauxe7uxe3o-exploratuxf3ria}
+
+O relato do trabalho distingue três procedimentos. O primeiro é a inspeção funcional interna da implementação, com observação do registro de eventos, regras e indicadores descritos pelos autores, sem relatório de execução de testes anexado. O segundo é uma \textbf{avaliação heurística interna/preliminar}, também dos autores. O terceiro é a avaliação de fluxos de interface no Figma com oito participantes; os resultados desse procedimento não devem ser apresentados como verificação da API.
+
+A avaliação exploratória de interface ocorreu em 28 de junho de 2026, com oito participantes externos ao grupo de desenvolvimento, quatro em cada fluxo. A alocação entre os grupos foi auxiliada por inteligência artificial e descrita como sorteio, sem registro auditável do mecanismo. Não se assume aleatorização verificável. O Figma foi instrumentado pelo Useberry para registro automático de cliques e tempos. O fluxo A previa formulário final e o B convite contextual; o popup de redirecionamento fez parte de ambos. A tarefa consistiu em localizar e iniciar a declaração do Imposto sobre a Renda da Pessoa Física (IRPF) de 2026, com limite de dez minutos. As sessões foram individuais e moderadas, sob coordenação de Julio Cesar Gomes de Souza Crispim e Fernando Gabriel dos Santos Carrijo, com TCLE que mencionava o Useberry e o registro de interações. A gravação se limitou à tela e aos eventos de interação, sem áudio ou vídeo de câmera dos participantes. Os comentários apresentados no Apêndice G provêm do questionário pós-sessão. O convite no fluxo B podia decorrer de tempo, entrada em tela ou clique no Figma. No fluxo A, resposta significa realizar a avaliação no formulário final; no B, aceitar o convite e realizar a avaliação sobre a experiência, não apenas abrir o convite. Os valores temporais, as telas e as interações específicas não estão discriminados neste protocolo. Esse procedimento permite observação formativa de interface, sem estabelecer funcionamento dos gatilhos do backend ou efeitos causais entre fluxos.
+
+\section{Tratamento dos Dados}\label{tratamento-dos-dados}
+
+A implementação organiza dois grupos de dados: eventos de interação, com contexto de sessão, página, serviço, clique e duração informada; e respostas declaradas, com estrelas, atributos, pergunta auxiliar de recomendação e comentário opcional. Eventos indicam contexto e possível esforço, sem medir qualidade percebida. Estrelas e atributos expressam julgamentos declarados; a pergunta NPS não foi validada como medida de qualidade percebida neste cenário. A base do estudo de interface é distinta: cliques e tempos registrados no Useberry, classificações de tarefa e respostas ao questionário pós-sessão, transcritos no Apêndice G. Não foi apresentado um conjunto separado de respostas do formulário que permita comparar seus comentários, estrelas e atributos.
+
+A implementação oferece consulta de alertas, cliques e identificadores de sessão por serviço, total de feedbacks e médias de respostas. Não oferece contagem de sessões únicas alertadas, recorrência de atributos ou análise A/B. O formulário não solicita nome, CPF, e-mail ou credencial de login. O backend aceita um \texttt{user\_id} opcional e registra URL e coordenadas do clique na tela, não geolocalização. Essas condições não comprovam anonimização. Aviso de coleta, retenção e controle de acesso exigem requisitos próprios \cite{brasil2018lgpd}.

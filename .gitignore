@@ -24,3 +24,6 @@
 prototype-api/*.db
 prototype-api/*.db-*
 prototype-api/__pycache__/
+
+# Arquivos temporários de compilação e conferência visual
+/tmp/
