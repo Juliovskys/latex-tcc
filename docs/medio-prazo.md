@@ -79,7 +79,7 @@ A [resposta ao parecer v5](resposta-parecer-v5-medio-prazo.md) registra a unifor
 
 - [ ] Obter e registrar a confirmação de Fernando e do orientador sobre a redação da divisão dos recortes e da concepção parcialmente compartilhada. Não há confirmação deles registrada nesta revisão.
 - [x] Destino dos registros visuais históricos: incluídos no Apêndice L, com contextualização, conforme a autorização de Julio para a transposição.
-- [ ] Após aprovação dos autores, congelar a versão em commit/tag autorizado e executar novamente as verificações com evidência vinculada à versão.
+- [x] Versão congelada em commit autorizado; nova execução local dos 19 testes passou, com commit e hashes registrados no JSON de evidência.
 - [x] Transpor o conteúdo aprovado para LaTeX e revisar visualmente o PDF completo.
 - [ ] Gerar novo CopySpider e interpretar os trechos sinalizados com o orientador, considerando a origem compartilhada dos artefatos com o trabalho de Wesley. Se houver uma versão identificável desse trabalho, conferir o conteúdo pertinente e os dados bibliográficos antes de inserir eventual citação na seção 3.3.1. Não foi criada referência sem esses dados, nem estimado percentual de similaridade.
 
@@ -90,3 +90,5 @@ Esta rodada modifica apenas documentos. Não equivale a confirmação de Fernand
 Julio autorizou a transposição e o commit na branch `docs/tcc-medio-prazo`. O conteúdo consolidado do arquivo local foi usado como fonte. Os quatro registros históricos de autoria de Fernando foram incluídos no Apêndice L, com nota de contextualização e imagens preservadas. O manuscrito passa a 12 apêndices e sete figuras; mantém 19 quadros, duas tabelas e 57 referências. As confirmações de Fernando/orientador não foram presumidas, e o novo CopySpider continua pendente.
 
 O sincronizador preserva as listas/counters de quadros e tabelas, legendas/fontes, referências e remissões, e harmoniza os sufixos de ano exibidos com a saída do BibTeX. A derivação local do estilo bibliográfico mantém os mesmos sufixos nas citações e na lista de referências, com origem e licença preservadas. Os registros históricos F/G e as imagens originais não foram alterados. A conferência da compilação está em `docs/evidencias/compilacao-medio-prazo.json`.
+
+A execução local após o congelamento passou os 19 testes em 15/10/2026, às 07:30 UTC, com árvore de trabalho limpa no início e código identificado pelo commit `935050f9ea7ffa443a1742ec956776762d756090`. Os ajustes documentais posteriores não alteram os cinco arquivos de implementação/testes identificados por hash. A evidência da compilação identifica separadamente o commit das fontes LaTeX/Markdown do PDF.
