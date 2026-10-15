@@ -4,7 +4,7 @@
 % na lista de referências os mesmos sufixos a/b/c/d gerados nas citações.
 % Demais funções e avisos de licença preservados abaixo.
 %% abntex2-alf.bst, v<VERSION> laurocesar
-%% Copyright 2012-<COPYRIGHT_YEAR> by abnTeX2 group at http://www.abntex.net.br/ 
+%% Copyright 2012-<COPYRIGHT_YEAR> by abnTeX2 group at http://www.abntex.net.br/
 %%
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3
@@ -15,9 +15,9 @@
 %% version 2005/12/01 or later.
 %%
 %% This work has the LPPL maintenance status `maintained'.
-%% 
+%%
 %% The Current Maintainer of this work is the abnTeX2 team, led
-%% by Lauro César Araujo. Further information are available on 
+%% by Lauro César Araujo. Further information are available on
 %% http://www.abntex.net.br/
 %%
 %% Creator and original mantainer: Gerald Weber <gweber@codigolivre.org.br>
@@ -351,7 +351,7 @@ FUNCTION {bibinfo.warn}
 FUNCTION {write.field.verbatim}
 {
 duplicate$ missing$
-  {pop$ pop$} 
+  {pop$ pop$}
   {
   s text.length$ #0 >
     {s "," * newline$ write$ "" 's :=}
@@ -609,7 +609,7 @@ FUNCTION {format.illustrated}
   if$
 }
 FUNCTION {format.isbn}
-{ isbn "isbn" bibinfo.check duplicate$ empty$ 
+{ isbn "isbn" bibinfo.check duplicate$ empty$
     'skip$
     {new.block "ISBN " swap$ *}
   if$
@@ -870,7 +870,7 @@ FUNCTION {extract.num}
     { pop$ s }
   if$
 }
- 
+
 FUNCTION {format.edition}
 { edition duplicate$ empty$ 'skip$
     {output.state mid.sentence = { "l" } { "t" } if$ change.case$
@@ -1263,8 +1263,8 @@ FUNCTION {format.names.for.label2} %abnt-alf only
      abnt.cite.style #0 = {"u" change.case$} 'skip$ if$ 't :=
       nameptr #1 >
         {namesleft #1 >
-            { numnames abnt.etal.cite > 
-	      {#0 'namesleft := abnt.etal.cite {bbl.etal *} 'skip$ if$} 
+            { numnames abnt.etal.cite >
+	      {#0 'namesleft := abnt.etal.cite {bbl.etal *} 'skip$ if$}
 	      {"; " * t * } if$ }
             { t "OTHERS" = t "others" = or
 	      {abnt.etal.cite {bbl.etal *} 'skip$ if$}
@@ -1518,7 +1518,7 @@ FUNCTION { abnt-options2 }
             'abnt.and.type :=
       "abnt-and-type" abnt-and-type abnt.display.options}
     if$
-    
+
     abnt-thesis-year empty$
     'skip$ {abnt-thesis-year "final" =
               {#0} {abnt-thesis-year "title" =
@@ -1589,7 +1589,7 @@ FUNCTION { abnt-options3 }
     abnt-verbatim-entry empty$
     'skip$ {abnt-verbatim-entry "yes" = 'abnt.verbatim.entry :=
     "abnt-verbatim-entry" abnt-verbatim-entry abnt.display.options} if$
-  
+
   abnt.show.options #2 = 'fin.entry  'skip$ if$
   }
 
@@ -1629,7 +1629,7 @@ FUNCTION { iso.year.label }
 FUNCTION { iso.date }
 {  iso.date.place
      { abnt.alf
-	 'skip$ 
+	 'skip$
           {year output new.sentence}
 	 if$}
     'skip$ if$}
@@ -2019,7 +2019,7 @@ if$
 }
 
 FUNCTION {presort}
-{ 
+{
  any.sort
   "    " * year field.or.null sortify * "    " * title field.or.null
   sort.format.title * #1 entry.max$ substring$
