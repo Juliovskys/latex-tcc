@@ -1,5 +1,5 @@
 <!--
-Reprodução visual fiel de TCC_Avaliacao_Contextual_Planejamento_TCC2.pdf.
+Reprodução visual fiel de TCC_Avaliacao_Contextual_Planejamento_TCC2_corrigido.pdf.
 Cada imagem corresponde, na mesma ordem, a uma página do PDF de origem.
 As imagens foram renderizadas diretamente do PDF em 144 dpi.
 -->
