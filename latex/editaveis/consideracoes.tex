@@ -1,5 +1,5 @@
 % Gerado a partir de docs/tcc.md por scripts/sincronizar_tcc.py.
-\chapter{Considerações Finais}\label{considerauxe7uxf5es-finais}
+\chapter{Considerações Finais}\label{sec:5}
 
 Este trabalho teve como objetivo conceber e desenvolver um protótipo inicial de avaliação contextual de serviços públicos digitais, capaz de registrar sinais de possível dificuldade na navegação, solicitar feedback por formulário curto e apresentar indicadores agregados para apoiar a melhoria dos serviços avaliados. A proposta partiu de um problema prático: avaliações exibidas apenas ao final da jornada nem sempre capturam o contexto em que o usuário se perde, demora ou abandona a busca por um serviço.
 
@@ -9,7 +9,7 @@ A Lean Inception contribuiu para transformar a ideia inicial em um MVP mais deli
 
 O protótipo funcional implementa registro de eventos, regras de acionamento, convite de feedback e agregações administrativas em ambiente local. Essa implementação constitui a contribuição tecnológica. A contribuição investigativa é a formulação de hipóteses sobre o momento da coleta e a distinção entre evidências comportamentais e declaradas. A avaliação no Figma examina o desenho da interface; não demonstra integração funcional nem valida um modelo de mensuração.
 
-\section{Resultados em Relação aos Objetivos}\label{resultados-em-relauxe7uxe3o-aos-objetivos}
+\section{Resultados em Relação aos Objetivos}\label{sec:5-1}
 
 O primeiro objetivo específico foi levantar fundamentos legais, técnicos e teóricos sobre avaliação de serviços públicos, qualidade percebida, usabilidade, governo digital e Lean Inception. O referencial articula modelos de serviços, qualidade eletrônica e instrumentos brasileiros, distinguindo os objetos avaliados. A metodologia organiza o percurso pelas atividades da DSR e situa a Lean Inception na concepção; a formalização posterior não transforma atividades planejadas em executadas.
 
@@ -17,11 +17,11 @@ O segundo objetivo específico foi definir, por meio de Lean Inception, o fluxo 
 
 O terceiro objetivo específico foi construir API, páginas navegáveis, coleta de feedback e visualização administrativa, além de prever a comparação com formulário final. A implementação Python contém endpoints, páginas, popup, formulário reutilizável e agregações básicas. A comparação entre A e B foi desenhada e avaliada na interface Figma. O backend não registra grupo, modalidade do convite, conclusão da tarefa ou exposição efetiva ao formulário; portanto, a instrumentação comparativa funcional desse objetivo permanece parcial.
 
-O quarto objetivo específico foi estruturar dados e indicadores para analisar eventos, avaliações e possíveis pontos de investigação. A implementação contém estruturas de eventos, alertas e feedbacks, além de consultas para agregação. A avaliação de interface no Figma oferece outro conjunto de registros, sem comprovar sua integração a essa base. O Quadro \ref{tab:construtos-indicadores-dados} explicita construtos, indicadores e dados. A execução da operacionalização comparativa proposta no Apêndice K e a validação desse mapeamento permanecem pendentes; não foi demonstrado que a estrutura atual basta para testar todas as hipóteses.
+O quarto objetivo específico foi estruturar dados e indicadores para analisar eventos, avaliações e possíveis pontos de investigação. A implementação contém estruturas de eventos, alertas e feedbacks, além de consultas para agregação. A avaliação de interface no Figma oferece outro conjunto de registros, sem comprovar sua integração a essa base. O Quadro \ref{tab:construtos-indicadores-dados} explicita construtos, indicadores e dados. A execução da operacionalização comparativa proposta no Apêndice \ref{sec:apendice-k} e a validação desse mapeamento permanecem pendentes; não foi demonstrado que a estrutura atual basta para testar todas as hipóteses.
 
-A consolidação de Engenharia de Software acrescenta requisitos e critérios de aceitação, rastreabilidade e modelo de qualidade do produto, além de planos de verificação/validação e protocolos separados para cidadãos, gestores e especialistas (Apêndices H--K). A gestão versionada de parâmetros, os controles locais de dados e as ações com acompanhamento materializam parte dessa especificação; a verificação técnica parcial não valida benefício em contexto real.
+A consolidação de Engenharia de Software acrescenta requisitos e critérios de aceitação, rastreabilidade e modelo de qualidade do produto, além de planos de verificação/validação e protocolos separados para cidadãos, gestores e especialistas (Apêndices \ref{sec:apendice-h}--\ref{sec:apendice-k}). A gestão versionada de parâmetros, os controles locais de dados e as ações com acompanhamento materializam parte dessa especificação; a verificação técnica parcial não valida benefício em contexto real.
 
-\section{Limitações}\label{limitauxe7uxf5es}
+\section{Limitações}\label{sec:5-2}
 
 A principal limitação é o tamanho e a seleção da amostra. A avaliação exploratória preliminar com oito participantes permitiu observar indícios sobre o uso do protótipo, mas não oferece base empírica suficiente para afirmar que o feedback contextual aumenta a taxa de resposta ou melhora a qualidade dos dados quando comparado a um formulário estático. Além disso, a avaliação heurística foi interna/preliminar, conduzida pelos autores, e não substitui inspeção independente por especialistas ou avaliação com gestores públicos.
 
@@ -33,11 +33,11 @@ Há ainda um desafio ético e de privacidade. Mesmo sem solicitar identificaçã
 
 A avaliação com participantes ocorreu no Figma/\allowbreak Useberry, separadamente da aplicação Python. Não verifica endpoints, persistência, acionamento ou integração da API. O relato do sorteio auxiliado por IA não documenta seu mecanismo; o popup fez parte dos dois fluxos sem registro individual de exposição. O convite no Figma podia decorrer de tempo, tela ou clique, mas seus parâmetros e os acionamentos individuais não estão documentados nas sínteses disponíveis. Se preservadas, as gravações de tela poderão auxiliar a reconstituir os momentos dos convites; elas ainda não foram examinadas para esse fim. O esforço não foi medido por instrumento específico nas oito sessões, e os comentários disponíveis são pós-sessão. O CES acrescentado posteriormente exige avaliação de compreensão e nova coleta; sua presença no software não produz resultados empíricos retroativos. O intervalo observado foi limitado a dez minutos. Essas características restringem a interpretação das diferenças entre os quatro casos de cada grupo.
 
-Não houve comparação empírica com ferramentas existentes; o Quadro 2 é um posicionamento documental. A inspeção heurística não registra severidade, data e avaliadores individualizados. As sínteses da Lean Inception descrevem concepção e metas; não demonstram resultados alcançados. Os registros visuais históricos permanecem no acervo, separados das telas da implementação atual.
+Não houve comparação empírica com ferramentas existentes; o Quadro \ref{tab:posicionamento-solucoes} é um posicionamento documental. A inspeção heurística não registra severidade, data e avaliadores individualizados. As sínteses da Lean Inception descrevem concepção e metas; não demonstram resultados alcançados. Os registros visuais históricos permanecem no acervo, separados das telas da implementação atual.
 
 Também não houve integração com portais governamentais reais. Essa decisão manteve o escopo compatível com o TCC e evitou dependências de autorização institucional, segurança, governança e privacidade. Assim, os resultados devem ser interpretados como demonstração técnica local e parcial, não como comprovação de viabilidade integrada ou de impacto em produção.
 
-\section{Trabalhos Futuros}\label{trabalhos-futuros}
+\section{Trabalhos Futuros}\label{sec:5-3}
 
 Os trabalhos futuros devem avançar em quatro frentes. A primeira é testar a hipótese comparativa com amostra maior, participantes mais diversos e protocolo previamente definido. No fluxo A, o usuário recebe um formulário estático ao final; no fluxo B, o sistema usa sinais comportamentais para solicitar feedback contextual. As variáveis dependentes devem incluir taxa de resposta, taxa de conclusão, esforço percebido, qualidade e especificidade dos comentários, abandono ou interrupção provocada e percepção de adequação do momento da pergunta. Só depois dessa coleta será possível avaliar, com evidência mais consistente, se um fluxo apresenta vantagens no cenário estudado.
 
@@ -47,7 +47,7 @@ A terceira frente é a preparação para piloto autorizado. Os controles locais 
 
 Uma quarta frente é a avaliação externa do artefato. A avaliação heurística interna/preliminar deve ser complementada por inspeção independente de especialistas em usabilidade, Engenharia de Software ou governo digital e por walkthrough com gestores públicos. Essa etapa deve permanecer separada do teste de usabilidade com cidadãos, pois responde a perguntas técnicas e gerenciais distintas.
 
-\section{Conclusão}\label{conclusuxe3o}
+\section{Conclusão}\label{sec:5-4}
 
 O trabalho apresenta uma implementação local parcial e observações exploratórias de interface, que permitem delimitar uma proposta de avaliação contextual de serviços públicos digitais. A viabilidade do fluxo integrado e sua utilidade para cidadãos e gestores ainda exigem avaliação. Os resultados não demonstram que a proposta resolva o problema de relacionar contexto e avaliação com maior eficácia do que instrumentos existentes.
 

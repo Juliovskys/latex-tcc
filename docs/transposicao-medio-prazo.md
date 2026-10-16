@@ -1,5 +1,7 @@
 # Transposição do médio prazo para LaTeX
 
+> Registro histórico da compilação anterior. A transposição da fonte editorial final está documentada em `docs/transposicao-final.md`; a confirmação da seção 3.3.1 e do Apêndice L foi posteriormente informada por Julio.
+
 Julio autorizou a transposição e o commit na branch `docs/tcc-medio-prazo`. Foi utilizado o arquivo local consolidado de `docs/tcc.md`, com a redação corrigida da seção 3.3.1 e a exclusão do abandono da escolha do gatilho em K.1.1. Mensagens coladas de versões anteriores não foram usadas como fonte.
 
 ## Resultado

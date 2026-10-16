@@ -1,0 +1,18 @@
+{
+  "pages": 107,
+  "previous_pdf_sha256": "b0ddfb1f74f1b8e62948dea50315ddd854428887d517ff8a29e000005816dd6e",
+  "pdf_sha256": "71eb2171057f8f54c9ebc85e0a5ca3a86de9cd8f3f4cc1260408336990aa2b30",
+  "changed_text_pages": [
+    3,
+    4
+  ],
+  "changed_rendered_pages_at_72dpi": [
+    3,
+    4
+  ],
+  "all_other_pages_text_and_pixels_identical": true,
+  "ficha_received_sha256": "bccb6f7a800b2dc65c391f7cb8f081488dcc2698b6c7ccc3a2da5d4d951392c9",
+  "ficha_embedded_source_sha256": "90644b24f6bee15113e7d21f774c07a61f88cbd7627315f3e2be3ddb5c1be5d6",
+  "ficha_received_and_normalized_render_identical_at_108dpi": true,
+  "changes": "Página3: ficha fornecida; página4: nomes dos membros convidados e data em branco. Orientador conhecido mantido."
+}

@@ -1,27 +1,27 @@
 % Gerado a partir de docs/tcc.md por scripts/sincronizar_tcc.py.
-\chapter{Desenvolvimento da Solução}\label{desenvolvimento-da-soluuxe7uxe3o}
+\chapter{Desenvolvimento da Solução}\label{sec:4}
 
 Este capítulo apresenta o desenvolvimento do sistema de avaliação contextual a partir dos artefatos da Lean Inception e da implementação do protótipo. O desenvolvimento foi orientado pela hipótese de que o feedback contextual, acionado próximo a um sinal de possível dificuldade, pode ampliar a participação e produzir evidências declaradas mais específicas do que uma avaliação estática exibida apenas ao final da jornada. A avaliação exploratória desta etapa não é suficiente para confirmar essa hipótese.
 
-\section{Visão Geral do Produto}\label{visuxe3o-geral-do-produto}
+\section{Visão Geral do Produto}\label{sec:4-1}
 
 O sistema de avaliação contextual foi definido como uma solução de feedback contextual para serviços públicos digitais. A solução registra eventos de navegação permitidos, identifica sinais de possível dificuldade, solicita feedback por meio de um formulário curto e apresenta indicadores agregados para apoio à decisão do gestor.
 
 A visão do produto reúne cidadãos que precisam realizar uma tarefa e gestores que precisam interpretar sinais de uso. O sistema propõe relacionar o contexto da navegação a declarações curtas de satisfação, atributos e facilidade percebida, para orientar investigação e melhoria do serviço. Os benefícios de participação e utilidade permanecem hipóteses de avaliação.
 
-As sínteses desta seção apresentam a concepção do produto e sua delimitação atual. Os registros visuais da Lean Inception, produzidos por Fernando Gabriel dos Santos Carrijo, permanecem no acervo do projeto. O escopo de coleta foi atualizado após o estudo de interface; não se atribui essa atualização à execução histórica da dinâmica. As capacidades implementadas são discriminadas nas seções 3.4 e 4.7 a 4.19; os registros históricos estão inventariados no Apêndice A.
+As sínteses desta seção apresentam a concepção do produto e sua delimitação atual. Os registros visuais históricos tiveram elaboração visual de Fernando Gabriel dos Santos Carrijo e conteúdo resultante das atividades parcialmente compartilhadas descritas na seção \ref{sec:3-3-1}. Os originais permanecem no acervo digital de concepção, separado deste manuscrito. O escopo de coleta foi atualizado após o estudo de interface; não se atribui essa atualização à execução histórica da dinâmica. As capacidades implementadas são discriminadas nas seções \ref{sec:3-4} e \ref{sec:4-7} a \ref{sec:4-19}; os registros históricos estão inventariados no Apêndice \ref{sec:apendice-a} e sua proveniência está descrita no Apêndice \ref{sec:apendice-l}.
 
 A dinâmica É / Não É / Faz / Não Faz delimitou o escopo inicial. O produto é uma implementação local demonstrativa, com integração a portais reais prevista como evolução. Também é um apoio à melhoria de serviços digitais e à decisão administrativa. Não é um substituto de ouvidoria, não é chatbot, não solicita nome ou CPF na interface e não representa uma implantação governamental completa. A delimitação distingue coleta de indícios, julgamento declarado e resolução efetiva da necessidade; o protótipo não executa a prestação do serviço público.
 
 Na implementação Python, o sistema registra cliques instrumentados, recebe duração informada à API, aplica regras e disponibiliza um formulário com satisfação por estrelas, atributos, CES opcional e comentário opcional. A duração é demonstrada por envio simulado, sem cronômetro automático no cliente. O formulário não solicita identificação civil ou credenciais de login; o contrato atual de eventos rejeita identificador de usuário, URL completa e coordenadas e exige autorização local. Não há garantia de anonimização, resolução automática do problema do serviço ou integração governamental real.
 
-\section{Objetivos do Produto}\label{objetivos-do-produto}
+\section{Objetivos do Produto}\label{sec:4-2}
 
 A dinâmica de objetivos do produto separou o que o MVP precisava provar daquilo que seria apenas evolução futura. Os objetivos levantados foram: capturar sinais de possível dificuldade durante a navegação, solicitar feedback no momento adequado, reduzir o esforço de resposta, gerar dados agregados e acionáveis, coletar dados comparáveis entre fluxo contextual e fluxo estático, preservar privacidade e validar o MVP em protótipo controlado.
 
 Foram priorizados três objetivos essenciais. O primeiro é capturar sinais de possível dificuldade, pois sem eventos de navegação não há como identificar o momento adequado para solicitar feedback. O segundo é solicitar feedback contextual, pois essa é a diferença principal em relação a formulários tradicionais. O terceiro é coletar dados comparáveis, porque a hipótese do MVP depende da comparação entre um fluxo estático e um fluxo contextual.
 
-\section{Personas}\label{personas}
+\section{Personas}\label{sec:4-3}
 
 As personas representam os usuários e beneficiários da solução. Elas não são os participantes da Lean Inception; são arquétipos usados para orientar decisões de produto.
 
@@ -31,19 +31,19 @@ A segunda persona é Lucas Almeida, gestor público de serviço digital. Lucas p
 
 A equipe técnica e de UX foi reconhecida como persona secundária de evolução. Ela seria importante em um piloto real, especialmente para configurar regras, acompanhar integrações e interpretar dados técnicos, mas não é essencial para validar o MVP em ambiente de protótipo.
 
-\section{Jornadas}\label{jornadas}
+\section{Jornadas}\label{sec:4-4}
 
 A jornada principal descreve Carlos tentando usar um serviço público digital. Ele acessa um portal público, procura um serviço, encontra termos confusos, clica repetidamente, permanece tempo acima do esperado, tem os sinais registrados pelo avaliador, recebe feedback contextual e pode responder ou ignorar a avaliação. Em seguida, os dados são enviados ao painel para que a persona gestora investigue um possível ponto de atrito.
 
 O ponto crítico ocorre entre a dificuldade observada e o abandono da jornada. É nesse intervalo que o feedback contextual se diferencia de uma avaliação estática. A proposta é perguntar quando a experiência ainda está recente, sem exigir um formulário longo e sem pressupor que um sinal comportamental comprove dificuldade.
 
-Foram definidos dois fluxos comparáveis. No fluxo A, o cidadão navega, enfrenta dúvidas e recebe um formulário apenas ao final da jornada. No fluxo B, o cidadão clica ou demora além do esperado, o sistema registra o sinal e solicita feedback contextual. A comparação futura seguirá H1 e H2 da seção 3.6.1. A apresentação de alertas no painel é uma capacidade de implementação distinta do teste dessas hipóteses.
+Foram definidos dois fluxos comparáveis. No fluxo A, o cidadão navega, enfrenta dúvidas e recebe um formulário apenas ao final da jornada. No fluxo B, o cidadão clica ou demora além do esperado, o sistema registra o sinal e solicita feedback contextual. A comparação futura seguirá H1 e H2 da seção \ref{sec:3-6-1}. A apresentação de alertas no painel é uma capacidade de implementação distinta do teste dessas hipóteses.
 
-\section{Funcionalidades Priorizadas}\label{funcionalidades-priorizadas}
+\section{Funcionalidades Priorizadas}\label{sec:4-5}
 
 O brainstorming de features agrupou as funcionalidades em cinco categorias: coleta de sinais, regras e detecção, feedback, painel e integração. A revisão técnica, de negócio e UX classificou cada funcionalidade por esforço, valor para gestão, impacto na experiência do usuário e confiança.
 
-A organização atual mantém cinco grupos: coleta de eventos instrumentados; regras operacionais por serviço; formulário com satisfação, atributos e CES; agregações administrativas; e integração prevista. Os requisitos, os critérios de aceitação e sua rastreabilidade estão especificados no Apêndice H; o Apêndice I relaciona qualidade e verificação/validação.
+A organização atual mantém cinco grupos: coleta de eventos instrumentados; regras operacionais por serviço; formulário com satisfação, atributos e CES; agregações administrativas; e integração prevista. Os requisitos, os critérios de aceitação e sua rastreabilidade estão especificados no Apêndice \ref{sec:apendice-h}; o Apêndice \ref{sec:apendice-i} relaciona qualidade e verificação/validação.
 
 As funcionalidades essenciais definidas para o MVP foram implementadas com os seguintes limites:
 
@@ -66,13 +66,13 @@ As funcionalidades essenciais definidas para o MVP foram implementadas com os se
 
 Funcionalidades como inteligência artificial para resumir comentários, integração com portal real, autenticação avançada, separação multi-organização completa e calibração estatística refinada foram deixadas fora do MVP inicial. Essas funcionalidades ampliam o escopo técnico e dependem de dados reais, autorização institucional ou governança de produção.
 
-\section{Sequenciamento e Canvas MVP}\label{sequenciamento-e-canvas-mvp}
+\section{Sequenciamento e Canvas MVP}\label{sec:4-6}
 
-O sequenciador definiu as ondas 1 a 3 como escopo do MVP. A implementação foi parcial, conforme a seção 3.4: API e interfaces no Figma materializam partes distintas do desenho. As regras por serviço já estão implementadas, embora tenham sido inicialmente associadas à onda 4; ranking, indicadores A/B, filtros e comentários recentes não estão disponíveis no painel. A preparação para piloto real permanece futura.
+O sequenciador definiu as ondas 1 a 3 como escopo do MVP. A implementação foi parcial, conforme a seção \ref{sec:3-4}: API e interfaces no Figma materializam partes distintas do desenho. As regras por serviço já estão implementadas, embora tenham sido inicialmente associadas à onda 4; ranking, indicadores A/B, filtros e comentários recentes não estão disponíveis no painel. A preparação para piloto real permanece futura.
 
 O Canvas MVP consolidou o planejamento de uma solução contextual com identificadores técnicos, formulário curto e indicadores administrativos. O resultado alcançado foi uma implementação local parcial e um estudo exploratório das interfaces no Figma. A execução integrada do MVP planejado e seus benefícios comparativos continuam sujeitos a desenvolvimento e avaliação.
 
-\section{Arquitetura do Protótipo}\label{arquitetura-do-protuxf3tipo}
+\section{Arquitetura do Protótipo}\label{sec:4-7}
 
 O protótipo foi implementado como uma aplicação local em Python, com servidor HTTP, banco SQLite e páginas HTML geradas pelo próprio backend. A escolha por uma estrutura simples reduz dependências externas e facilita a demonstração do fluxo completo durante o TCC.
 
@@ -83,12 +83,12 @@ A Figura \ref{fig:prototipo-portal} mostra a página de portal público usada no
 \begin{figure}[htbp]
 \centering
 \caption{Página de portal público usada no protótipo}\label{fig:prototipo-portal}
-\includegraphics[width=\textwidth,height=.70\textheight,keepaspectratio]{../docs/figuras/prototipo-portal-atual.png}
+\includegraphics[width=\textwidth,height=.70\textheight,keepaspectratio]{../docs/figuras/prototipo-portal-final.jpg}
 
-\par\small\raggedright Fonte: captura da implementação Python atual, produzida na conferência local do protótipo (2026).
+\fonte{captura da implementação Python atual, produzida na conferência local do protótipo (2026).}
 \end{figure}
 
-\section{API e Endpoints}\label{api-e-endpoints}
+\section{API e Endpoints}\label{sec:4-8}
 
 A API disponibiliza endpoints para saúde do serviço, listagem de serviços, registro de eventos, envio de feedback e consulta administrativa. O Quadro \ref{tab:endpoints-prototipo} resume os principais endpoints.
 
@@ -121,6 +121,7 @@ A API disponibiliza endpoints para saúde do serviço, listagem de serviços, re
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\multicolumn{2}{@{}p{\textwidth}@{}}{\fonte{elaboração dos autores com base nos endpoints da implementação Python (2026).}}\tabularnewline
 \endlastfoot
 \texttt{\seqsplit{GET /health}} & Verificar disponibilidade da API. \\
 \texttt{\seqsplit{GET /api/services}} & Listar serviços cadastrados e suas regras. \\
@@ -139,17 +140,15 @@ A API disponibiliza endpoints para saúde do serviço, listagem de serviços, re
 
 \endgroup
 
-Fonte: elaboração dos autores com base nos endpoints da implementação Python (2026).
-
 Nota: todas as rotas com prefixo \texttt{\seqsplit{/api/admin/}} exigem chave administrativa.
 
-\section{Regras de Detecção de Possível Dificuldade}\label{regras-de-detecuxe7uxe3o-de-possuxedvel-dificuldade}
+\section{Regras de Detecção de Possível Dificuldade}\label{sec:4-9}
 
 A detecção de possível dificuldade foi implementada com regras explícitas no backend. A API mantém, para cada serviço, um limite de cliques e um tempo médio esperado. Um alerta por clique é criado quando a contagem de cliques da mesma sessão, no mesmo serviço, fica \textbf{maior} que o limite configurado. Um alerta por duração informada é criado quando esse valor fica \textbf{maior} que o tempo de referência multiplicado pelo fator configurado; o fator inicial é 1,5.
 
 O identificador técnico é mantido no armazenamento da aba. O contrato atual rejeita \texttt{\seqsplit{user\_id}}, URL completa e coordenadas; o registro de eventos depende da autorização local. Isso reduz dados novos, mas não torna os registros anônimos nem remove automaticamente campos históricos.
 
-O alerta é um registro administrativo distinto do convite. Um campo legado de armazenamento não é exposto como indicador ao gestor. A transparência ocorre pelo aviso anterior à coleta, pelas opções de recusa/interrupção e pela página de privacidade. Os controles implementados são locais e parciais, conforme o Apêndice J.
+O alerta é um registro administrativo distinto do convite. Um campo legado de armazenamento não é exposto como indicador ao gestor. A transparência ocorre pelo aviso anterior à coleta, pelas opções de recusa/interrupção e pela página de privacidade. Os controles implementados são locais e parciais, conforme o Apêndice \ref{sec:apendice-j}.
 
 Essas regras operacionalizam o conceito de feedback contextual discutido na Seção \ref{sec:feedback-contextual}: o sistema não pergunta aleatoriamente, mas usa sinais de uso para decidir quando solicitar uma manifestação do usuário. O acionamento não confirma que houve dificuldade nem mede qualidade percebida; ele apenas seleciona um contexto para coleta do feedback declarado.
 
@@ -196,6 +195,7 @@ O Quadro \ref{tab:formas-coleta-situada} explicita essa adaptação metodológic
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\multicolumn{4}{@{}p{\textwidth}@{}}{\fonte{elaborada pelos autores (2026).}}\tabularnewline
 \endlastfoot
 Amostragem temporal & O participante responde em horários ou intervalos definidos. & Não foi adotada, pois a jornada do serviço não depende de horários fixos. & Poderia acionar perguntas fora do momento de dificuldade. \\
 Amostragem aleatória & O participante é solicitado em momentos sorteados durante a observação. & Não foi adotada no MVP, pois poderia interromper usuários sem sinal de atrito. & Reduz viés de seleção, mas aumenta o risco de interrupção sem contexto. \\
@@ -205,8 +205,6 @@ Acionamento por proxy comportamental & O sistema usa indícios observáveis como
 \end{TCCquadro}
 
 \endgroup
-
-Fonte: elaborada pelos autores (2026).
 
 Os limiares usados no protótipo foram definidos como parâmetros operacionais de demonstração, e não por calibração estatística com dados de produção. A escolha permite que o MVP exiba três estados do fluxo: navegação sem alerta, alerta administrativo de possível dificuldade e convite de feedback contextual. Em uma implantação real, esses parâmetros deveriam ser calibrados por serviço, página, perfil de tarefa e histórico de uso.
 
@@ -258,6 +256,7 @@ Portanto, o primeiro acionamento no 13º clique corresponde ao parâmetro armaze
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\multicolumn{5}{@{}p{\textwidth}@{}}{\fonte{elaborada pelos autores (2026).}}\tabularnewline
 \endlastfoot
 Cliques & 10 cliques & Maior sensibilidade, mais alertas e maior risco de falso positivo. & 15 a 20 cliques & Menos alertas e maior risco de perder dificuldades reais. \\
 Tempo & 1,2 vez o tempo esperado & Acionamento mais rápido, com possível interrupção de leitura normal. & 2,0 vezes o tempo esperado & Acionamento mais conservador, com possível atraso na coleta contextual. \\
@@ -267,11 +266,9 @@ Persistência após redirecionamento & Acionamento imediato & Maior chance de in
 
 \endgroup
 
-Fonte: elaborada pelos autores (2026).
-
 O Quadro \ref{tab:sensibilidade-limiares} é uma análise de projeto elaborada pelos autores, distinta das sessões empíricas com participantes. Ela organiza efeitos esperados e riscos dos parâmetros; não mede taxas reais de acionamento nem calibra limiares para produção.
 
-\subsection{Simulação Sintética dos Limiares}\label{simulauxe7uxe3o-sintuxe9tica-dos-limiares}
+\subsection{Simulação Sintética dos Limiares}\label{sec:4-9-1}
 
 Foi registrada uma análise sintética com 1.000 sessões de cliques e durações log-normais, medianas de 7 cliques e 60 segundos e cenários identificados por 10, 13 e 18 cliques. Os arquivos de execução e resultados intermediários não estão disponíveis. O valor da semente e os parâmetros de dispersão não foram preservados no relato. A Tabela \ref{tab:simulacao-sintetica-limiares} apresenta a síntese numérica dessa etapa, sem possibilidade de reprodução a partir dos materiais disponíveis.
 
@@ -320,6 +317,7 @@ O resultado sintético não valida um limiar de dificuldade e não corresponde �
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\multicolumn{5}{@{}p{\textwidth}@{}}{\fonte{registros de síntese da análise sintética do projeto (2026). Os arquivos de execução não estão disponíveis para reprodução.}}\tabularnewline
 \endlastfoot
 10 cliques & \textgreater{} 90 s & 28,3\% & 25,9\% & 42,9\% (429/1000) \\
 13 cliques & \textgreater{} 90 s & 13,7\% & 25,9\% & 32,8\% (328/1000) \\
@@ -328,11 +326,11 @@ O resultado sintético não valida um limiar de dificuldade e não corresponde �
 
 \endgroup
 
-Fonte: registros de síntese da análise sintética do projeto (2026). Os arquivos de execução não estão disponíveis para reprodução.
-
 Na síntese numérica, o cenário denominado 13 cliques tem taxa intermediária de acionamento. Não foi preservada a definição do comparador aplicado à contagem: não se sabe se os rótulos significavam \texttt{\seqsplit{> 13}}, \texttt{\ensuremath{\geq} 13} ou primeiro acionamento associado ao parâmetro 12. Portanto, essa linha não pode ser equiparada ao \texttt{\seqsplit{click\_threshold}} da implementação, nem fundamenta a escolha de um limite de dificuldade.
 
 Os valores iniciais de demonstração, antes de alterações administrativas, são os seguintes:
+
+\clearpage
 
 \begingroup\footnotesize\SingleSpacing
 \setlength{\tabcolsep}{4pt}
@@ -373,6 +371,7 @@ Os valores iniciais de demonstração, antes de alterações administrativas, s�
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\multicolumn{4}{@{}p{\textwidth}@{}}{\fonte{elaboração dos autores com base nos valores iniciais configurados no backend Python (2026).}}\tabularnewline
 \endlastfoot
 Página inicial do governo & parâmetro 12; alerta e sugestão no 13º; convite no 14º clique & duração informada maior que 90 segundos & sugere Imposto de Renda; persistência do sinal pode gerar convite \\
 Imposto de Renda & parâmetro 10; alerta e sugestão no 11º; convite no 12º clique & duração informada maior que 67,5 segundos & retorna sugestão de redirecionamento e pode gerar convite \\
@@ -382,11 +381,9 @@ Serviço público genérico & parâmetro 12; alerta e convite no 13º clique & d
 
 \endgroup
 
-Fonte: elaboração dos autores com base nos valores iniciais configurados no backend Python (2026).
-
 A página inicial do governo é tratada como contexto capaz de recomendar um serviço prioritário. O serviço de Imposto de Renda foi marcado como importante e de alto tráfego. O serviço genérico representa uma situação comum, na qual a API registra o acionamento da regra e pode gerar um convite sem sugerir redirecionamento. Em todos os casos, o alerta administrativo registra somente que uma regra operacional foi acionada. O gestor visualiza o evento como indício para investigação, e não como diagnóstico automático de dificuldade ou de baixa qualidade percebida.
 
-\section{Fluxos Implementados}\label{fluxos-implementados}
+\section{Fluxos Implementados}\label{sec:4-10}
 
 O fluxo de clique começa pelo acesso a uma página simulada e pela escolha de autorizar ou recusar a telemetria. Após autorização, o script cliente associa eventos instrumentados a uma sessão técnica de aba e os envia à API. A interrupção bloqueia novos eventos dessa sessão. A API registra o clique, atualiza a contagem por serviço, verifica o limite configurado e decide se deve retornar fluxo normal, popup de redirecionamento ou convite de feedback.
 
@@ -435,6 +432,7 @@ A escolha desses atributos buscou decompor a avaliação geral em dimensões aci
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\multicolumn{4}{@{}p{\textwidth}@{}}{\fonte{elaborada pelos autores com base nos atributos do protótipo e em \citeonline{silva2024atributosApi}.}}\tabularnewline
 \endlastfoot
 Clareza & Clareza das informações e correspondência entre linguagem do sistema e do usuário. & Identifica problemas de compreensão, instrução ou linguagem institucional. & Não separa linguagem, orientação e organização visual. \\
 Tempo & Tempo para obtenção do serviço e percepção de demora. & Associa permanência excessiva ou espera percebida a uma avaliação declarada. & Não distingue lentidão técnica, leitura cuidadosa ou complexidade legítima. \\
@@ -446,8 +444,6 @@ Eficácia & Efetividade e resolução da necessidade do cidadão. & Indica se o 
 \end{TCCquadro}
 
 \endgroup
-
-Fonte: elaborada pelos autores com base nos atributos do protótipo e em \citeonline{silva2024atributosApi}.
 
 O CES opcional emprega sete categorias de concordância sobre a facilidade da etapa. O backend armazena a resposta e a versão do item; o painel apresenta quantidade de respostas, ausências, distribuição e média descritiva. Essa implementação não demonstra validade do instrumento adaptado nem menor esforço do cidadão. Também foram considerados riscos de falso positivo: permanência longa pode representar leitura cuidadosa, tarefa complexa, conexão lenta, tecnologia assistiva ou interrupção externa, e não necessariamente dificuldade. Os alertas, portanto, são indícios comportamentais para investigação; a interpretação da qualidade percebida depende do feedback declarado.
 
@@ -497,6 +493,7 @@ O popup de redirecionamento segue a mesma cautela. Ele pode ajudar quando o usu�
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\multicolumn{5}{@{}p{\textwidth}@{}}{\fonte{elaborada pelos autores (2026).}}\tabularnewline
 \endlastfoot
 Popup de redirecionamento & Ajudar o usuário a encontrar o serviço correto antes de registrar reclamação. & Interromper a navegação, irritar ou aumentar o abandono. & Exibição limitada, sem bloqueio definitivo da navegação. & Medir abandono, aceitação do redirecionamento e percepção de intrusão. \\
 Feedback contextual & Coletar relato próximo ao ponto de dificuldade. & Aumentar carga cognitiva durante uma tarefa já difícil. & Formulário curto, campos opcionais e poucos atributos. & Medir taxa de resposta, abandono e qualidade dos comentários. \\
@@ -507,25 +504,23 @@ CES opcional de 1 a 7 & Registrar facilidade percebida na etapa em que o convite
 
 \endgroup
 
-Fonte: elaborada pelos autores (2026).
-
 A Figura \ref{fig:prototipo-feedback} apresenta a tela de feedback contextual, com satisfação por estrelas, atributos do problema, CES opcional e comentário opcional.
 
 \begin{figure}[htbp]
 \centering
 \caption{Formulário de feedback contextual do protótipo}\label{fig:prototipo-feedback}
-\includegraphics[width=\textwidth,height=.70\textheight,keepaspectratio]{../docs/figuras/prototipo-feedback-ces.png}
+\includegraphics[width=\textwidth,height=.70\textheight,keepaspectratio]{../docs/figuras/prototipo-feedback-final.jpg}
 
-\par\small\raggedright Fonte: captura da versão funcional com CES, produzida na atualização do protótipo (2026). Não corresponde às interfaces Figma utilizadas no estudo exploratório.
+\fonte{captura da versão funcional com CES, produzida na atualização do protótipo (2026). Não corresponde às interfaces Figma utilizadas no estudo exploratório.}
 \end{figure}
 
-\section{Painel Administrativo e Indicadores}\label{painel-administrativo-e-indicadores}
+\section{Painel Administrativo e Indicadores}\label{sec:4-11}
 
 O painel administrativo exige chave de acesso e reúne indicadores por serviço, configurações e ações de melhoria. Mostra sessões distintas com cliques e com alertas, além dos totais de eventos. Um identificador presente em serviços diferentes pode constar em mais de uma linha; a soma das linhas não representa usuários únicos. A frequência de atributos conta escolhas nos feedbacks; não representa prevalência na população nem dificuldade confirmada por um alerta.
 
 As médias de satisfação e CES consideram somente a versão vigente de cada pergunta. O painel informa denominadores, ausências e distribuição CES; valores de outras versões são contados separadamente. Média sem resposta válida permanece nula. Ausência de CES é um feedback armazenado sem esse item, não um cidadão exposto que recusou todo o formulário. Não há taxa de resposta por fluxo, pois a exposição A/B ainda não está instrumentada.
 
-A cadeia administrativa é \textbf{dado \ensuremath{\rightarrow} interpretação \ensuremath{\rightarrow} ação \ensuremath{\rightarrow} acompanhamento}. O gestor seleciona uma fonte, registra uma hipótese de problema, propõe ação, papel responsável e prazo opcional. A aplicação guarda um retrato inicial dos indicadores e acrescenta situação, nota e novo retrato a cada acompanhamento. A comparação é descritiva: mudanças no conjunto de respondentes e na janela acumulada podem alterar médias sem efeito da ação. O retrato não substitui desenho causal nem avaliação de impacto. Sua utilidade será examinada por gestores segundo o Apêndice K.
+A cadeia administrativa é \textbf{dado \ensuremath{\rightarrow} interpretação \ensuremath{\rightarrow} ação \ensuremath{\rightarrow} acompanhamento}. O gestor seleciona uma fonte, registra uma hipótese de problema, propõe ação, papel responsável e prazo opcional. A aplicação guarda um retrato inicial dos indicadores e acrescenta situação, nota e novo retrato a cada acompanhamento. A comparação é descritiva: mudanças no conjunto de respondentes e na janela acumulada podem alterar médias sem efeito da ação. O retrato não substitui desenho causal nem avaliação de impacto. Sua utilidade será examinada por gestores segundo o Apêndice \ref{sec:apendice-k}.
 
 Exemplo sintético: respostas baixas de facilidade junto à seleção de clareza podem motivar investigação da orientação da etapa; o gestor registra revisão de linguagem e acompanha novos registros. Alertas isolados não autorizam concluir que existe um problema de linguagem. Quando há poucos dados, registrar insuficiência de evidência é uma decisão adequada.
 
@@ -534,24 +529,24 @@ A Figura \ref{fig:painel-atual} apresenta dados e registro de ação no painel a
 \begin{figure}[htbp]
 \centering
 \caption{Dados e registro de ação de melhoria no painel}\label{fig:painel-atual}
-\includegraphics[width=\textwidth,height=.70\textheight,keepaspectratio]{../docs/figuras/prototipo-painel-visao.png}
+\includegraphics[width=\textwidth,height=.70\textheight,keepaspectratio]{../docs/figuras/prototipo-painel-final.jpg}
 
-\par\small\raggedright Fonte: captura da implementação local com dados sintéticos (2026); não representa resultados de cidadãos ou gestores.
+\fonte{captura da implementação local com dados sintéticos (2026); não representa resultados de cidadãos ou gestores.}
 \end{figure}
 
-\section{Resultado do Desenvolvimento}\label{resultado-do-desenvolvimento}
+\section{Resultado do Desenvolvimento}\label{sec:4-12}
 
 O desenvolvimento resultou em uma implementação local parcial das ondas 1 a 3. Na aplicação Python há captura de cliques instrumentados, recepção de duração simulada, regras, formulário e agregações básicas. A construção não entrega integralmente o fluxo de avaliação planejado: faltam, entre outros elementos, instrumentação A/B, registro de exposição ao convite e coleta automática de duração no cliente. O estudo com participantes examinou o componente de interface no Figma.
 
 A implementação funcional e a avaliação de interface representam frentes distintas do trabalho. O desenho prevê formulário final no fluxo A e convite contextual no B. As sessões com oito participantes, descritas na seção \ref{sec:avaliacao-participantes}, ocorreram no Figma/\allowbreak Useberry. Seus resultados não verificam integração com SQLite, funcionamento dos endpoints ou aderência dos convites às regras do código Python.
 
-\section{Avaliação Preliminar do Artefato}\label{avaliauxe7uxe3o-preliminar-do-artefato}
+\section{Avaliação Preliminar do Artefato}\label{sec:4-13}
 
-Na evolução posterior do formulário, foram executados seis testes automatizados específicos de satisfação e CES, com bases temporárias e dados sintéticos. Eles verificam as sete categorias, respostas ausentes, rejeição de valores inválidos, agregações por serviço, migração com cópia de segurança e separação de versões do item de satisfação. O código está em \texttt{\seqsplit{prototype-api/test\_feedback\_ces.py}}. Um envio sintético também foi conferido no navegador. Esses procedimentos verificam aspectos técnicos do contrato atual; não são novas sessões com cidadãos, validação do instrumento, teste das hipóteses ou execução de um plano completo de verificação e validação.
+A execução automatizada local de 15 de outubro de 2026, documentada na seção \ref{sec:4-19}, compreende sete testes específicos de satisfação e CES, com bases temporárias e dados sintéticos, e doze testes de governança, totalizando 19. Os sete casos do formulário verificam as sete categorias, respostas ausentes, rejeição de valores inválidos, agregações por serviço, migração com cópia de segurança, separação de versões dos itens e presença do CES opcional. O código está em \texttt{\seqsplit{prototype-api/test\_feedback\_ces.py}}, e os casos são identificados em H.6. Um envio sintético também foi conferido no navegador. Esses procedimentos verificam aspectos técnicos do contrato atual; não são novas sessões com cidadãos, validação do instrumento, teste das hipóteses ou execução de um plano completo de verificação e validação.
 
-O quadro heurístico preserva a inspeção interna anterior às últimas alterações; suas recomendações não são um novo julgamento da versão atual. Os recursos posteriormente implementados precisam de reavaliação. A análise interna do artefato distingue inspeção funcional e \textbf{avaliação heurística interna/preliminar} dos autores. A organização heurística tomou como referência \citeonline{nielsen1994heuristic}, sem equivaler a inspeção externa. O registro daquela inspeção não discrimina avaliadores, data ou severidade e não contém relatório completo de execução. Os testes automatizados posteriores possuem saída e identificação dos arquivos na seção 4.19. Os resultados abaixo devem ser lidos como apreciação interna da implementação e do desenho de interface.
+O quadro heurístico preserva a inspeção interna anterior às últimas alterações; suas recomendações não são um novo julgamento da versão atual. Os recursos posteriormente implementados precisam de reavaliação. A análise interna do artefato distingue inspeção funcional e \textbf{avaliação heurística interna/preliminar} dos autores. A organização heurística tomou como referência \citeonline{nielsen1994heuristic}, sem equivaler a inspeção externa. O registro daquela inspeção não discrimina avaliadores, data ou severidade e não contém relatório completo de execução. Os testes automatizados posteriores possuem saída e identificação dos arquivos na seção \ref{sec:4-19}. Os resultados abaixo devem ser lidos como apreciação interna da implementação e do desenho de interface.
 
-O Quadro \ref{tab:criterios-avaliacao-preliminar} retoma os sete critérios C1--C7 da seção 3.6.1. Ele separa existência de implementação, julgamento interno e propriedades que não foram medidas.
+O Quadro \ref{tab:criterios-avaliacao-preliminar} retoma os sete critérios C1--C7 da seção \ref{sec:3-6-1}. Ele separa existência de implementação, julgamento interno e propriedades que não foram medidas.
 
 \begingroup\footnotesize\SingleSpacing
 \setlength{\tabcolsep}{4pt}
@@ -592,8 +587,9 @@ O Quadro \ref{tab:criterios-avaliacao-preliminar} retoma os sete critérios C1--
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\multicolumn{4}{@{}p{\textwidth}@{}}{\fonte{elaborada pelos autores (2026).}}\tabularnewline
 \endlastfoot
-C1 --- Registro mínimo de navegação & Implementado com limites de captura & Código de sessão, eventos e persistência & Cliques restritos a elementos marcados; duração demonstrada por envio simulado; verificação parcial documentada na seção 4.19. \\
+C1 --- Registro mínimo de navegação & Implementado com limites de captura & Código de sessão, eventos e persistência & Cliques restritos a elementos marcados; duração demonstrada por envio simulado; verificação parcial documentada na seção \ref{sec:4-19}. \\
 C2 --- Acionamento contextual & Regras explícitas no código & Parâmetros por serviço e condições de acionamento & A sessão no Figma não verifica sua execução; sem calibração empírica. \\
 C3 --- Esforço de resposta & Não medido & Formulário curto como decisão de projeto & O CES atual diz respeito à facilidade de uso da etapa do serviço, não ao tempo ou esforço para preencher o formulário. O estudo histórico não coletou CES nem mediu sistematicamente o esforço de resposta. \\
 C4 --- Apresentação para gestão & Indicadores e ações implementados; utilidade não avaliada & Sessões distintas, atributos, médias/denominadores e acompanhamento & Sem exposição A/B, taxa de resposta ou avaliação com gestores; mudanças descritivas não demonstram impacto. \\
@@ -604,8 +600,6 @@ C7 --- Interrupção & Efeito não medido sistematicamente & Controles de recusa
 \end{TCCquadro}
 
 \endgroup
-
-Fonte: elaborada pelos autores (2026).
 
 A inspeção permite localizar os componentes que materializam o fluxo proposto. Não comprova benefício ao cidadão, baixo esforço, utilidade gerencial ou superioridade sobre formulários finais. A calibração, a compreensão dos avisos, o risco de falsos positivos e a avaliação externa permanecem limites da proposta.
 
@@ -648,6 +642,7 @@ A inspeção permite localizar os componentes que materializam o fluxo proposto.
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\multicolumn{4}{@{}p{\textwidth}@{}}{\fonte{elaborada pelos autores (2026).}}\tabularnewline
 \endlastfoot
 Visibilidade do status do sistema & O painel lateral e o administrativo indicam eventos, alertas e respostas da API. & Parcialmente atendida & Exibir estados mais claros de carregamento, erro e feedback enviado. \\
 Correspondência com a linguagem do usuário & O formulário usa termos simples para informações confusas, demora e excesso de passos. & Parcialmente atendida & Testar os rótulos com cidadãos para evitar termos ambíguos. \\
@@ -662,17 +657,17 @@ Ajuda e orientação & O protótipo demonstra o fluxo, mas não oferece ajuda co
 
 \endgroup
 
-Fonte: elaborada pelos autores (2026).
-
 A leitura heurística interna/preliminar indicou que a interface apresenta o estado básico das ações, usa linguagem relativamente direta, mantém o feedback opcional e procura limitar a extensão do formulário por meio de atributos predefinidos. Como limitações, foram registrados a necessidade de estados mais claros de carregamento e erro, microtextos explicativos, maior evidência para ignorar ou fechar o convite e uma ligação mais explícita entre alertas e ações de melhoria. Esses achados são hipóteses de aprimoramento produzidas pelos autores, não parecer independente de especialistas.
 
-\section{Avaliação Exploratória com Participantes}\label{sec:avaliacao-participantes}
+\section{Avaliação Exploratória com Participantes}\label{sec:4-14}
+
+\label{sec:avaliacao-participantes}
 
 Em 28 de junho de 2026 foi conduzida uma avaliação exploratória de interface com oito participantes externos ao grupo de desenvolvimento. As tarefas foram realizadas no Figma, com registro automático de cliques e tempos pelo Useberry. A documentação do fornecedor caracteriza a integração para testes de protótipos; não constitui evidência independente dos dados desta coleta \cite{useberryFigma}. Quatro participantes realizaram o fluxo A, com formulário final, e quatro o B, com convite contextual. A alocação foi auxiliada por inteligência artificial e descrita como sorteio, sem registro auditável de seu mecanismo. O popup de redirecionamento fez parte de ambos os fluxos; não há registro individual de sua exibição ou aceitação. A tarefa consistia em localizar e iniciar a declaração do IRPF 2026, com limite de dez minutos. As sessões foram individuais e moderadas, sob coordenação de Julio Cesar Gomes de Souza Crispim e Fernando Gabriel dos Santos Carrijo, com TCLE que mencionava o Useberry e o registro de interações. A gravação se limitou à tela e aos eventos de interação, sem áudio ou vídeo de câmera dos participantes.
 
 No fluxo A, a avaliação era apresentada ao final da jornada. No fluxo B, o convite podia ser acionado por tempo decorrido, entrada em uma tela ou interação de clique no Figma. Esses acionamentos pertencem ao protótipo de interface, sem execução das regras da API Python. A descrição do protocolo não discrimina os intervalos de tempo, as telas e os cliques configurados, nem identifica o gatilho específico de cada exposição registrada. Assim, os tipos de acionamento estão definidos, mas não se reconstrói a configuração exata de cada caso apenas com os dados apresentados.
 
-No fluxo A, a classificação ``respondeu ao feedback'' corresponde à realização da avaliação no formulário final. No B, corresponde ao aceite do convite seguido da realização da avaliação na interface. O aceite isolado do convite no B não foi suficiente. Essas classificações não comprovam digitação de comentário ou envio a um backend. Os comentários literais apresentados no Apêndice G foram obtidos no questionário pós-sessão. As figuras da implementação mostram telas Python; não reproduzem as telas A e B efetivamente avaliadas no Figma.
+No fluxo A, a classificação ``respondeu ao feedback'' corresponde à realização da avaliação no formulário final. No B, corresponde ao aceite do convite seguido da realização da avaliação na interface. O aceite isolado do convite no B não foi suficiente. Essas classificações não comprovam digitação de comentário ou envio a um backend. Os comentários literais apresentados no Apêndice \ref{sec:apendice-g} foram obtidos no questionário pós-sessão. As figuras da implementação mostram telas Python; não reproduzem as telas A e B efetivamente avaliadas no Figma.
 
 Os participantes foram recrutados voluntariamente entre estudantes da FCTE e cidadãos em geral, incluindo profissionais das áreas administrativa, educação, empreendedorismo e finanças, além de pessoa aposentada. Em P05, houve um pedido de confirmação sobre a segurança do protótipo e a orientação verbal do moderador para agir como em casa. Essa intervenção deve ser considerada como possível influência sobre a experiência. Quando necessário, foi feita uma demonstração inicial em tela neutra para reduzir a interferência da ferramenta de prototipação, registrada em P07. O tamanho da amostra foi definido para observação qualitativa formativa, e não para inferência estatística ou estimação de efeito entre os fluxos.
 
@@ -711,6 +706,7 @@ Os resultados são apresentados de forma descritiva. Com quatro participantes po
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\multicolumn{3}{@{}p{\textwidth}@{}}{\fonte{elaborada pelos autores com base na avaliação exploratória preliminar (2026).}}\tabularnewline
 \endlastfoot
 Participantes & 4 & 4 \\
 Taxa de conclusão & 2/4 (50\%) & 3/4 (75\%) \\
@@ -725,21 +721,19 @@ Encontrou o que procurava & 2/4 (50\%) & 3/4 (75\%) \\
 
 \endgroup
 
-Fonte: elaborada pelos autores com base na avaliação exploratória preliminar (2026).
-
 O fluxo B apresentou maior proporção descritiva de conclusão completa e maior nota de facilidade, além de menor tempo médio observado. A exposição ao formulário final não está registrada por participante no fluxo A; por isso, 2/4 em cada grupo é a proporção de participantes que realizaram a avaliação segundo o critério de cada fluxo, não uma comparação condicionada à exposição. Entre os três participantes com convite registrado no B, dois responderam. As médias temporais incluem P06 e P07, encerrados no limite de dez minutos; não são médias de tempo de conclusão apenas entre tarefas completas. O caso Parcial de P03 foi contabilizado como não conclusão completa no resumo, sem que isso indique um critério prévio de sucesso documentado. A seleção, a alocação sem mecanismo auditável, o popup e as diferenças de familiaridade limitam qualquer interpretação comparativa ou causal.
 
-Os comentários do Apêndice G são respostas ao questionário pós-sessão, inclusive de participantes que não realizaram a avaliação na interface. Não representam um corpus de comentários coletados pelo mecanismo contextual. Sem esse corpus e uma rubrica aplicada, não há base para concluir maior qualidade ou especificidade dos comentários do fluxo B. Os relatos permitem discutir impressões sobre a interface e o convite. A confusão entre consultar e declarar foi mencionada sobretudo por participantes do fluxo A, o que também impede atribuir a identificação desse problema ao mecanismo contextual. Os TCLEs foram arquivados separadamente; sua descrição consta no Apêndice E e o questionário no Apêndice F.
+Os comentários do Apêndice \ref{sec:apendice-g} são respostas ao questionário pós-sessão, inclusive de participantes que não realizaram a avaliação na interface. Não representam um corpus de comentários coletados pelo mecanismo contextual. Sem esse corpus e uma rubrica aplicada, não há base para concluir maior qualidade ou especificidade dos comentários do fluxo B. Os relatos permitem discutir impressões sobre a interface e o convite. A confusão entre consultar e declarar foi mencionada sobretudo por participantes do fluxo A, o que também impede atribuir a identificação desse problema ao mecanismo contextual. Os TCLEs foram arquivados separadamente; sua descrição consta no Apêndice \ref{sec:apendice-e} e o questionário no Apêndice \ref{sec:apendice-f}.
 
 Quatro temas descritivos merecem registro: ambiguidade entre consultar e declarar, nos relatos de P01, P03 e P05; percepção de oportunidade do convite em P02 e P08; decisão de ignorá-lo em P06; e baixa familiaridade de P07 com GOV.BR e Figma. São observações pós-sessão e do moderador, não medidas de eficácia do feedback. Os convites no Figma podiam decorrer de tempo, tela ou clique; as medidas agregadas da Tabela \ref{tab:resultados-preliminares-fluxos} não identificam a configuração ou a sequência específica de eventos de cada caso. Os limiares da API não explicam os casos P04 e P06, pois pertencem a outro componente do artefato.
 
-\section{Síntese Crítica do Desenvolvimento}\label{suxedntese-cruxedtica-do-desenvolvimento}
+\section{Síntese Crítica do Desenvolvimento}\label{sec:4-15}
 
-A contribuição investigativa desta etapa é formular hipóteses e organizar a distinção entre contexto comportamental e percepção declarada. A contribuição tecnológica é a implementação que permite associar essas fontes. O Quadro \ref{tab:construtos-indicadores-dados} documenta a rastreabilidade conceitual; sua validação e a execução dos instrumentos comparativos propostos no Apêndice K permanecem pendentes. Não se apresenta um modelo de mensuração validado. O estudo no Figma oferece observações formativas de interface e não verifica a execução do backend nem confirma H1 ou H2.
+A contribuição investigativa desta etapa é formular hipóteses e organizar a distinção entre contexto comportamental e percepção declarada. A contribuição tecnológica é a implementação que permite associar essas fontes. O Quadro \ref{tab:construtos-indicadores-dados} documenta a rastreabilidade conceitual; sua validação e a execução dos instrumentos comparativos propostos no Apêndice \ref{sec:apendice-k} permanecem pendentes. Não se apresenta um modelo de mensuração validado. O estudo no Figma oferece observações formativas de interface e não verifica a execução do backend nem confirma H1 ou H2.
 
 Permanecem como riscos centrais os falsos positivos dos gatilhos, a interrupção inoportuna, a simplificação de problemas complexos em atributos predefinidos e a ausência de avaliação externa por especialistas e gestores. Por isso, o sistema deve ser lido como artefato investigativo e protótipo tecnológico, não como produto pronto ou instrumento cientificamente calibrado.
 
-\section{Alternativas de Design Consideradas}\label{alternativas-de-design-consideradas}
+\section{Alternativas de Design Consideradas}\label{sec:4-16}
 
 Durante a definição do MVP, alternativas de design foram consideradas, mas não priorizadas na primeira versão. O Quadro \ref{tab:alternativas-design} torna explícitas essas decisões de escopo.
 
@@ -782,11 +776,12 @@ Durante a definição do MVP, alternativas de design foram consideradas, mas nã
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\multicolumn{4}{@{}p{\textwidth}@{}}{\fonte{elaborada pelos autores (2026).}}\tabularnewline
 \endlastfoot
-Regras simples de clique e tempo & Modelo estatístico ou aprendizado de máquina para detectar dificuldade. & Exigiria base histórica, volume de dados e validação inexistentes nesta etapa. & Mantém rastreabilidade, mas reduz precisão. \\
+Regras simples de clique e tempo & Modelo estatístico ou aprendizado de máquina para detectar dificuldade. & Exigiria base histórica, volume de dados e validação inexistentes nesta etapa. & Facilita a inspeção das regras; a precisão dos acionamentos permanece desconhecida sem calibração empírica. \\
 Acionamento por limite de cliques e tempo & Análise de sequência de páginas, retorno a etapas ou padrões de navegação. & Aumentaria a complexidade de instrumentação e análise. & Facilita a demonstração, mas perde sinais mais ricos de desorientação. \\
 Popup de redirecionamento & Banner discreto, mensagem inline ou recomendação no painel lateral. & O popup torna a intervenção mais visível na demonstração. & Aumenta o risco de interrupção e precisa de teste de aceitação. \\
-Atributos predefinidos & Campo aberto obrigatório ou taxonomia oficial completa. & Campo obrigatório aumentaria o esforço; taxonomia extensa poderia reduzir a resposta. & Reduz esforço, mas simplifica problemas complexos. \\
+Atributos predefinidos & Campo aberto obrigatório ou taxonomia oficial completa. & Campo obrigatório poderia aumentar o esforço; taxonomia extensa poderia reduzir a resposta. & Busca reduzir o esforço de resposta, ainda não medido, e pode simplificar problemas complexos. \\
 CES opcional de concordância em sete pontos & Pergunta direta de esforço com escala invertida ou instrumento mais longo. & A facilidade da etapa é aderente ao problema de navegação e permite explicitar uma única orientação de resposta. & A tradução e o recorte contextual requerem avaliação de compreensão; não demonstram validade no setor público. \\
 Sessão com identificador técnico & Login, CPF ou integração com conta gov.br. & A identificação aumentaria o risco de privacidade e a dependência institucional. & Evita solicitação de identificação civil, mas não comprova anonimização. \\
 Painel administrativo básico & Ferramenta completa de analytics ou exportação avançada. & Escopo incompatível com o MVP e com a ausência de implantação real. & Entrega visão inicial, mas não substitui sistema de gestão de melhoria. \\
@@ -795,22 +790,20 @@ Painel administrativo básico & Ferramenta completa de analytics ou exportação
 
 \endgroup
 
-Fonte: elaborada pelos autores (2026).
-
 Essas alternativas indicam caminhos de evolução do artefato. A análise de sequência de páginas e retorno a etapas anteriores pode melhorar a detecção sem depender apenas de cliques ou tempo. Uma intervenção menos intrusiva também pode reduzir abandono. Tais escolhas exigem avaliação externa e estudos com usuários para determinar se aumentam a utilidade do feedback contextual ou apenas acrescentam complexidade.
 
-\section{Gestão de Configurações}\label{gestuxe3o-de-configurauxe7uxf5es}
+\section{Gestão de Configurações}\label{sec:4-17}
 
 O painel permite editar limite de cliques, duração de referência e multiplicador por serviço, exigindo justificativa e versão esperada. A alteração válida atualiza o serviço e acrescenta histórico na mesma transação; uma edição sobre versão obsoleta recebe conflito HTTP 409 e exige nova consulta. A inicialização preserva valores já existentes. Cada alerta conserva a versão de sua ocorrência, sem reclassificação retroativa. Os testes verificam esses comportamentos em base temporária. O histórico fica no mesmo SQLite e não é mecanismo inviolável de auditoria.
 
-\section{Controles de Privacidade e Inclusão}\label{controles-de-privacidade-e-inclusuxe3o}
+\section{Controles de Privacidade e Inclusão}\label{sec:4-18}
 
-A coleta de eventos começa após escolha explícita na sessão da aba e pode ser interrompida. Feedback voluntário permanece disponível sem telemetria. Novas entradas rejeitam identificador de usuário, URL completa e coordenadas; avisos explicam finalidade e limites. Consultas e alterações administrativas exigem chave. A manutenção oferece prévia e expurgo confirmado de registros vencidos, sem agenda automática e sem alcançar cópias ou arquivos externos. Esses controles materializam parte dos requisitos do Apêndice J; não comprovam conformidade jurídica integral.
+A coleta de eventos começa após escolha explícita na sessão da aba e pode ser interrompida. Feedback voluntário permanece disponível sem telemetria. Novas entradas rejeitam identificador de usuário, URL completa e coordenadas; avisos explicam finalidade e limites. Consultas e alterações administrativas exigem chave. A manutenção oferece prévia e expurgo confirmado de registros vencidos, sem agenda automática e sem alcançar cópias ou arquivos externos. Esses controles materializam parte dos requisitos do Apêndice \ref{sec:apendice-j}; não comprovam conformidade jurídica integral.
 
 Foram acrescentados rótulos associados, agrupamento das escalas, mensagens de estado, foco visível e controle inicial de foco dos modais. Tais alterações são recursos de implementação, não resultado de avaliação completa de acessibilidade. Os critérios e o plano abrangem páginas públicas e painel, incluindo teclado, leitor de tela, ampliação, contraste e pessoas com diferentes necessidades.
 
-\section{Verificação Técnica da Implementação Atual}\label{verificauxe7uxe3o-tuxe9cnica-da-implementauxe7uxe3o-atual}
+\section{Verificação Técnica da Implementação Atual}\label{sec:4-19}
 
-A suíte local contém 19 testes automatizados com dados sintéticos e bases temporárias: sete de satisfação/CES e doze de configuração, regras, acesso, privacidade, ações e retenção. Os testes foram executados em Windows, com Python 3.12.14 e SQLite 3.53.1, e passaram na execução automatizada local assistida por agente em 15 de outubro de 2026. A saída está em \href{https://github.com/Juliovskys/latex-tcc/blob/docs/tcc-medio-prazo/docs/evidencias/verificacao-medio-prazo.txt}{verificacao-medio-prazo.txt}; ambiente, comando, commit-base e hashes SHA-256 dos arquivos estão em \href{https://github.com/Juliovskys/latex-tcc/blob/docs/tcc-medio-prazo/docs/evidencias/verificacao-medio-prazo.json}{verificacao-medio-prazo.json}. Os metadados identificam o commit de referência e se havia alterações locais; os hashes registram os bytes dos arquivos efetivamente testados. Verificam contratos e cenários selecionados, incluindo preservação após reinicialização, conflito de versão, rejeição de entradas, controle de coleta, médias estratificadas, histórico de ações e prévia/descarte. O procedimento reproduzível está em \texttt{\seqsplit{prototype-api/README.md}} e os casos em \texttt{\seqsplit{test\_feedback\_ces.py}} e \texttt{\seqsplit{test\_governance.py}}.
+A suíte local contém 19 testes automatizados com dados sintéticos e bases temporárias: sete de satisfação/CES e doze de configuração, regras, acesso, privacidade, ações e retenção. Os testes foram executados em Windows, com Python 3.12.14 e SQLite 3.53.1, e passaram na execução automatizada local assistida por agente em 15 de outubro de 2026. A saída está em \href{https://github.com/Juliovskys/latex-tcc/blob/d24af5d8ccfa088c7857983fe4d24b08af5337b0/docs/evidencias/verificacao-medio-prazo.txt}{docs/evidencias/verificacao-medio-prazo.txt}; ambiente, comando, commit-base e hashes SHA-256 dos arquivos estão em \href{https://github.com/Juliovskys/latex-tcc/blob/d24af5d8ccfa088c7857983fe4d24b08af5337b0/docs/evidencias/verificacao-medio-prazo.json}{docs/evidencias/verificacao-medio-prazo.json}. Os metadados identificam o commit de referência e se havia alterações locais; os hashes registram os bytes dos arquivos efetivamente testados. Verificam contratos e cenários selecionados, incluindo preservação após reinicialização, conflito de versão, rejeição de entradas, controle de coleta, médias estratificadas, histórico de ações e prévia/descarte. O procedimento reproduzível está em \texttt{\seqsplit{prototype-api/README.md}} e os casos em \texttt{\seqsplit{test\_feedback\_ces.py}} e \texttt{\seqsplit{test\_governance.py}}.
 
-Essa evidência não abrange carga, recuperação completa de falhas, auditoria de segurança, avaliação acessível abrangente ou novos participantes. A inspeção no navegador usa dados sintéticos e serve para conferir operação e apresentação local. O Apêndice I registra o plano de verificação e validação restante; o Apêndice K separa as três perspectivas humanas.
+Essa evidência não abrange carga, recuperação completa de falhas, auditoria de segurança, avaliação acessível abrangente ou novos participantes. A inspeção no navegador usa dados sintéticos e serve para conferir operação e apresentação local. O Apêndice \ref{sec:apendice-i} registra o plano de verificação e validação restante; o Apêndice \ref{sec:apendice-k} separa as três perspectivas humanas.

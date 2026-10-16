@@ -28,3 +28,16 @@ prototype-api/__pycache__/
 
 # Arquivos temporários de compilação e conferência visual
 /tmp/
+
+# Entregáveis finais; conversões intermediárias permanecem locais.
+/output/*
+!/output/pdf/
+!/output/latex/
+/output/pdf/*
+!/output/pdf/TCC_Avaliacao_Contextual_Final.pdf
+!/output/pdf/historico/
+/output/pdf/historico/*
+!/output/pdf/historico/TCC_Avaliacao_Contextual_Final_CopySpider_2026-10-16.pdf
+/output/latex/*
+!/output/latex/TCC_Avaliacao_Contextual_Fontes_LaTeX_Final.zip
+!/latex/pretextuais/ficha-catalografica.pdf

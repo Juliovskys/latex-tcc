@@ -2,6 +2,9 @@
 % Fonte: https://github.com/abntex/abntex2/blob/master/bibtex/bst/abntex2/abntex2-alf.bst
 % Alteração: format.date e format.year imprimem year.label, preservando
 % na lista de referências os mesmos sufixos a/b/c/d gerados nas citações.
+% Ordenação por título e subtítulo; chamadas em caixa mista, incluindo entidades.
+% Lista bibliográfica com todos os autores; até três autores nas chamadas.
+% A função manual preserva a editora quando o campo publisher está disponível.
 % Demais funções e avisos de licença preservados abaixo.
 %% abntex2-alf.bst, v<VERSION> laurocesar
 %% Copyright 2012-<COPYRIGHT_YEAR> by abnTeX2 group at http://www.abntex.net.br/
@@ -571,6 +574,11 @@ FUNCTION {format.names.ed} {format.names}
 FUNCTION {format.authors}
 {
 author "author" format.names
+% Entidades protegidas por chaves mantêm a identidade nas chamadas, mas
+% aparecem em maiúsculas na lista, como os demais autores institucionais.
+author #1 #1 substring$ "{" =
+  { "\MakeUppercase{" swap$ * "}" * }
+  'skip$ if$
 }
 
 FUNCTION {format.authors.plain}
@@ -1335,7 +1343,8 @@ FUNCTION {calc.extended.label}
      {org-short empty$ not
       {org-short * "}{" * org-short "u" change.case$ *}
       {organization empty$ not
-       {organization * "}{" * organization "u" change.case$ *}
+       {organization * "}{" * organization
+        abnt.cite.style #0 = {"u" change.case$} 'skip$ if$ *}
         {title empty$ not
          {title format.title.for.label *}
          {"nada}{NADA" *}
@@ -1796,7 +1805,7 @@ FUNCTION {manual}
   format.btitle "title" output.check new.block
   format.furtherresp new.sentence
   format.edition output new.sentence
-  format.address output
+  publisher empty$ {format.address} {format.publisher.address} if$ output
   %format.date output new.sentence
   iso.date.place {abnt.alf 'skip$ {format.year output new.sentence} if$}
                  {format.year output new.sentence} if$
@@ -2022,6 +2031,7 @@ FUNCTION {presort}
 {
  any.sort
   "    " * year field.or.null sortify * "    " * title field.or.null
+  " " * subtitle field.or.null *
   sort.format.title * #1 entry.max$ substring$
   %for non-alpha style we drop a void sort.key such that SORT has no effect
   abnt.alf 'skip$ {pop$ ""} if$ 'sort.key$ :=
@@ -2039,13 +2049,13 @@ FUNCTION {set.default.abnt.variables}
   "$Revision: v<VERSION> $" extract.cvs.key 'abnt.bst.revision :=
   #0 'abnt.and.type     :=     % #0 "e"; #1 "&"
   "\emph" 'abnt.emphasize :=
-  #0 'abnt.cite.style :=       %default norm version for NBR10520
+  #1 'abnt.cite.style :=       % chamadas em caixa mista, NBR10520:2023
                                %#0 \cite=(AUTHOR, YEAR)
 			       %#1 \cite=(Author, YEAR)
   #0 'abnt.experimental :=
   abnt.doi.expand.to.url 'abnt.doi :=
   #3 'abnt.etal.cite :=
-  #3 'abnt.etal.list :=
+  #0 'abnt.etal.list :=
   "et al." 'abnt.etal.text :=
   #0 'abnt.full.initials :=
   #0 'abnt.last.names :=      %#0 abnt-style, #1 bibtex-style

@@ -10,7 +10,7 @@ from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[1]
 BUILD = ROOT / 'tmp/pdfs/build'
-PDF = ROOT / 'output/pdf/TCC_Avaliacao_Contextual_Medio_Prazo.pdf'
+PDF = ROOT / 'output/pdf/TCC_Avaliacao_Contextual_Final.pdf'
 CONTENT = ['introducao', 'referencialteorico', 'metodologia', 'desenvolvimento',
            'consideracoes', 'apendices', 'resumo', 'abstract', 'abreviaturas', 'listaapendices']
 
@@ -39,7 +39,7 @@ def main():
               'tables': (BUILD / 'tcc.lot').read_text(encoding='utf-8').count('\\contentsline'),
               'figures': (BUILD / 'tcc.lof').read_text(encoding='utf-8').count('\\contentsline'),
               'appendices': len(re.findall(r'^# Apêndice', md, re.M))}
-    assert counts == {'references': 57, 'quadros': 19, 'tables': 2, 'figures': 7, 'appendices': 12}, counts
+    assert counts == {'references': 57, 'quadros': 19, 'tables': 2, 'figures': 3, 'appendices': 12}, counts
     for letter in 'abcdefghijkl':
         assert f'\\newlabel{{sec:apendice-{letter}}}' in aux
     assert (ROOT / 'docs/referencias-tcc.bib').read_bytes() == (ROOT / 'latex/bibliografia.bib').read_bytes()
@@ -49,6 +49,37 @@ def main():
             assert entry.count(year[1]) >= 2, 'Sufixo ausente no corpo da referência.'
     assert PDF.read_bytes() == (BUILD / 'tcc.pdf').read_bytes(), 'PDF publicado difere da compilação.'
     reader = PdfReader(PDF)
+    assert reader.metadata.get('/Keywords') == (
+        'serviços públicos digitais; feedback contextual; avaliação de serviços; '
+        'experiência do usuário; Design Science Research'), 'Palavras-chave divergentes do Resumo.'
+    useberry = re.search(r'\\bibitem\[[^\]]+\]\{useberryFigma\}.*?(?=\\bibitem|\\end\{thebibliography\})', bbl, re.S)
+    assert useberry and '{c2026}' in useberry[0], 'Copyright de Useberry perdido na transposição.'
+    extracted = '\n'.join(page.extract_text() or '' for page in reader.pages)
+    assert 'CIP' in (reader.pages[2].extract_text() or '') and 'C932a' in (reader.pages[2].extract_text() or ''), 'Ficha fornecida ausente.'
+    assert 'Ficha catalográfica a ser emitida' not in extracted, 'Reserva da ficha ainda presente.'
+    assert 'Membro da banca a definir' not in extracted, 'Campos da banca não foram deixados em branco.'
+    assert not re.search(r'\bNPS\b|Net\s+Promoter', extracted, re.I), 'Indicador excluído presente no PDF.'
+    assert '<sup>' not in tex and '<a id=' not in tex, 'HTML não convertido.'
+    assert '\\fonte{' in tex, 'Fontes não normalizadas.'
+    expected_years = {'limaPereira2020modulo1': '2020a', 'limaPereira2020modulo2': '2020b',
+                      'limaPereira2020modulo3': '2020c', 'limaPereira2020modulo4': '2020d',
+                      'brasil2017decreto9094': '2017a', 'brasil2017lei13460': '2017b',
+                      'govuk2021completionRate': '2021a', 'govuk2021usingData': '2021b'}
+    for key, year in expected_years.items():
+        entry = re.search(r'\\bibitem\[[^\]]+\]\{' + key + r'\}.*?(?=\\bibitem|\\end\{thebibliography\})', bbl, re.S)
+        assert entry and re.search(r'\\abntrefinfo\{.*?\}\{.*?\}\{' + year + r'\}', entry[0], re.S), key
+    for page in reader.pages:
+        for ref in page.get('/Annots', []):
+            annotation = ref.get_object()
+            destination = annotation.get('/Dest')
+            if isinstance(destination, str):
+                assert destination in reader.named_destinations, destination
+            action = annotation.get('/A', {})
+            if action.get('/S') == '/GoTo' and isinstance(action.get('/D'), str):
+                assert action['/D'] in reader.named_destinations, action
+            assert action.get('/S') not in ('/GoToR', '/Launch'), 'Vínculo para arquivo local no PDF.'
+            if action.get('/S') == '/URI':
+                assert str(action.get('/URI', '')).startswith(('https://', 'http://')), action
     assert all(len(page.extract_text() or '') > 15 or (page.extract_text() or '').strip() == 'Apêndices'
                for page in reader.pages), 'Página sem conteúdo textual.'
     frozen = subprocess.run(['git', 'rev-parse', 'HEAD'], cwd=ROOT, capture_output=True,
@@ -58,10 +89,9 @@ def main():
                ROOT / 'scripts/verificar_latex.py',
                ROOT / 'latex/tcc.tex', ROOT / 'latex/abntex2-alf-tcc.bst',
                ROOT / 'latex/bibliografia.bib', ROOT / 'latex/editaveis/informacoes.tex',
-               ROOT / 'latex/figuras/capa.png', *tex_files,
+               ROOT / 'latex/figuras/capa.png', ROOT / 'latex/pretextuais/ficha-catalografica.pdf', *tex_files,
                *sorted((ROOT / 'latex/fixos').glob('*')),
-               *sorted((ROOT / 'docs/figuras').glob('*.png')),
-               *sorted((ROOT / 'latex/figuras/apendices').glob('lean*.png'))]
+               *sorted((ROOT / 'docs/figuras').glob('*-final.jpg'))]
     hashes = {str(p.relative_to(ROOT)).replace('\\', '/'): hashlib.sha256(p.read_bytes()).hexdigest()
               for p in sources if p.is_file()}
     matches_commit = True
@@ -83,7 +113,7 @@ def main():
               'source_sha256': hashes,
               'checks': 'Compilação; vínculos; numeração; correspondência bibliográfica; sufixos; listas; identidade do PDF. Revisão visual registrada no relatório de transposição.',
               'limitations': 'Não executa CopySpider, revisão institucional ou avaliação com participantes.'}
-    destination = ROOT / 'docs/evidencias/compilacao-medio-prazo.json'
+    destination = ROOT / 'docs/evidencias/compilacao-final.json'
     destination.write_text(json.dumps(record, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print(f'OK LaTeX/PDF: {len(reader.pages)} páginas; {counts}; log sem avisos críticos.')
 

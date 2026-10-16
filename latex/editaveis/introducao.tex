@@ -1,7 +1,7 @@
 % Gerado a partir de docs/tcc.md por scripts/sincronizar_tcc.py.
-\chapter{Introdução}\label{introduuxe7uxe3o}
+\chapter{Introdução}\label{sec:1}
 
-\section{Contextualização}\label{contextualizauxe7uxe3o}
+\section{Contextualização}\label{sec:1-1}
 
 Nas últimas décadas, a relação entre Estado e cidadão passou por uma mudança estrutural: atividades que antes dependiam de balcões presenciais, deslocamentos e atendimento físico foram progressivamente incorporadas a portais, aplicações e fluxos digitais. A plataforma GOV.BR simboliza esse movimento ao concentrar a oferta digital de serviços federais e ao reforçar a ideia de que governo digital não é apenas troca de canal, mas reorganização da forma como o cidadão encontra, solicita, acompanha e avalia serviços públicos.
 
@@ -17,7 +17,7 @@ A proposta é relacionar evidências comportamentais e declaradas sem tratá-las
 
 A proposta adota uma interface curta de avaliação e mantém uma implementação local de registro de eventos e feedback. A visualização administrativa disponível apresenta alertas, contagens por serviço e médias de respostas. O painel apresenta frequência de atributos, sessões distintas alertadas e ações com acompanhamento. Taxa de resposta por fluxo ainda depende de instrumentação A/B e de exposição. A Lean Inception orientou a delimitação do produto e do MVP, cujas funcionalidades foram implementadas parcialmente \cite{caroli2018leanInception,fowler2022leanInception}.
 
-\section{Problema de Pesquisa}\label{problema-de-pesquisa}
+\section{Problema de Pesquisa}\label{sec:1-2}
 
 A questão investigada é como relacionar a avaliação declarada pelo cidadão ao contexto de navegação em que ela é solicitada. Quando a coleta fica restrita ao final da jornada, pode deixar de registrar detalhes de uma etapa anterior ou de um fluxo interrompido. Essa possibilidade motiva o estudo do momento do convite, sem pressupor que a coleta contextual produza resultados superiores. Indicadores só se tornam úteis à gestão quando seu contexto e suas limitações são considerados \cite{govuk2021usingData,deloneMclean2003}.
 
@@ -25,13 +25,13 @@ Modelos oficiais e instrumentos consolidados de avaliação de serviços públic
 
 Este trabalho parte da seguinte questão de pesquisa: como propor e prototipar um avaliador de serviços públicos digitais que identifique sinais de possível dificuldade na navegação, colete feedback contextual de baixo esforço e organize informações úteis para a melhoria dos serviços avaliados?
 
-A comparação entre convite contextual e formulário final foi organizada nas hipóteses H1 e H2, formuladas na seção 3.6.1. Elas tratam, respectivamente, de participação e especificidade dos comentários do formulário. Os resultados disponíveis são observações exploratórias de interface e não testam essas hipóteses.
+A comparação entre convite contextual e formulário final foi organizada nas hipóteses H1 e H2, formuladas na seção \ref{sec:3-6-1}. Elas tratam, respectivamente, de participação e especificidade dos comentários do formulário. Os resultados disponíveis são observações exploratórias de interface e não testam essas hipóteses.
 
-\section{Objetivo Geral}\label{objetivo-geral}
+\section{Objetivo Geral}\label{sec:1-3}
 
 Propor e desenvolver um protótipo inicial de avaliador de serviços públicos digitais capaz de registrar sinais de possível dificuldade na navegação, coletar feedback contextual estruturado, comparar esse fluxo com uma avaliação estática e apresentar indicadores administrativos que apoiem a melhoria contínua dos serviços.
 
-\section{Objetivos Específicos}\label{objetivos-especuxedficos}
+\section{Objetivos Específicos}\label{sec:1-4}
 
 Para alcançar o objetivo geral, foram definidos os seguintes objetivos específicos:
 
@@ -48,7 +48,7 @@ Para alcançar o objetivo geral, foram definidos os seguintes objetivos específ
 
 A estrutura dos objetivos combina a fundamentação legal e técnica da avaliação de serviços públicos com práticas de definição de MVP e prototipação de software \cite{brasil2017lei13460,brasil2021lei14129,caroli2018leanInception,Sommerville2011}.
 
-\section{Justificativa}\label{justificativa}
+\section{Justificativa}\label{sec:1-5}
 
 Mecanismos digitais de avaliação podem fortalecer a participação do usuário na melhoria dos serviços públicos. Os materiais da Enap destacam que a avaliação centrada no cidadão desloca o foco das ferramentas tecnológicas para as necessidades, demandas e satisfação dos usuários \cite{limaPereira2020modulo1}. Também indicam que avaliações devem alimentar ciclos de melhoria, permitindo identificar problemas recorrentes, atributos críticos e prioridades de intervenção \cite{limaPereira2020modulo4}.
 
@@ -56,7 +56,7 @@ A proposta é relevante porque muitos usuários já conhecem avaliações simple
 
 Do ponto de vista investigativo, o trabalho formula hipóteses sobre o momento da coleta e distingue indícios comportamentais de percepção declarada. A organização conceitual é explicitada no Quadro \ref{tab:construtos-indicadores-dados}, com dados, origem e limites de interpretação; sua validade ainda depende de avaliação empírica. Do ponto de vista tecnológico, a contribuição é a implementação de API, telas, regras explícitas e painel que permitem associar contexto de navegação e relato do cidadão. As configurações possuem versões e histórico local, o que permite inspecionar alterações, sem equivaler a auditoria independente \cite{deloneMclean2003,hevner2004designscience,Sommerville2011}.
 
-\section{Escopo Inicial}\label{escopo-inicial}
+\section{Escopo Inicial}\label{sec:1-6}
 
 O escopo inicial concentra-se na proposta e prototipação de uma solução. O trabalho não pretende implantar um sistema em ambiente governamental real, nem substituir instrumentos oficiais de avaliação já existentes. A solução é complementar e exploratória: simula páginas de serviço público, registra eventos de navegação, aplica regras configuráveis de acionamento por sinais de possível dificuldade, abre uma coleta simples de feedback, inclui um formulário reutilizável e apresenta dados administrativos agregados. A comparação entre formulário final e convite contextual pertence ao desenho de interface no Figma; a aplicação Python ainda não distingue os grupos nem registra a exposição. Essa delimitação segue a lógica de prototipação como forma de reduzir incertezas antes de uma solução definitiva e mantém cuidado com minimização de dados pessoais \cite{Sommerville2011,brasil2018lgpd}.
 

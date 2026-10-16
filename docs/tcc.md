@@ -12,6 +12,28 @@
 
 Monografia submetida ao curso de graduação em Engenharia de Software da Universidade de Brasília como requisito parcial para obtenção do título de Bacharel em Engenharia de Software.
 
+# Ficha catalográfica
+
+[Ficha catalográfica oficial fornecida pelos autores](../latex/pretextuais/ficha-catalografica.pdf).
+
+# Folha de aprovação
+
+Julio Cesar Gomes de Souza Crispim
+
+Fernando Gabriel dos Santos Carrijo
+
+**Avaliação Contextual de Serviços Públicos Digitais: concepção e desenvolvimento de um sistema baseado em indicadores de navegação e qualidade percebida**
+
+Monografia submetida ao curso de graduação em Engenharia de Software da Universidade de Brasília, como requisito parcial para obtenção do Título de Bacharel em Engenharia de Software.
+
+Trabalho submetido à avaliação. Data de aprovação: ____________________.
+
+- Wander Cleber Maria Pereira da Silva — Orientador.
+- ____________________ — Convidado 1.
+- ____________________ — Convidado 2.
+
+Brasília, DF, 2026.
+
 # Resumo
 
 Este trabalho apresenta a concepção e o desenvolvimento inicial de um sistema de avaliação contextual de serviços públicos digitais. O problema investigado é a dificuldade de relacionar avaliações declaradas pelo cidadão ao contexto de navegação em que são solicitadas. O percurso combinou revisão bibliográfica e normativa, Lean Inception e prototipação incremental, organizados pelas atividades da Design Science Research. Foi implementado um protótipo local em Python, com API, páginas simuladas, regras operacionais sobre cliques e duração informada, formulário de feedback e painel administrativo. A telemetria fornece indícios comportamentais, sem medir qualidade percebida. A versão funcional atual registra satisfação por estrelas, atributos declarados e facilidade percebida por um item CES opcional de 1 a 7. Os itens atuais de satisfação e CES foram definidos após o estudo de interface e ainda não foram avaliados com participantes. Separadamente da implementação funcional, oito participantes avaliaram fluxos de interface no Figma, com registro automático de cliques e tempos pelo Useberry e questionário pós-sessão. Quatro participantes realizaram cada fluxo, com alocação auxiliada por inteligência artificial (IA), descrita como sorteio sem registro auditável, e com popup de redirecionamento presente em ambos. Os resultados descrevem conclusão de tarefa, facilidade percebida e relatos pós-sessão. Não comprovam maior participação, maior especificidade dos comentários do formulário, funcionamento dos gatilhos da API ou superioridade do fluxo contextual. A contribuição investigativa está na formulação de uma hipótese comparativa e na distinção entre evidências comportamentais e declaradas; a contribuição tecnológica está na implementação que permite relacioná-las. Foram especificados requisitos, rastreabilidade, critérios de qualidade e protocolos prospectivos para cidadãos, gestores e especialistas. A continuidade exige executar esses protocolos e calibrar as regras antes de uso real.
@@ -23,6 +45,54 @@ Este trabalho apresenta a concepção e o desenvolvimento inicial de um sistema 
 This work presents the design and initial development of a contextual evaluation system for digital public services. The research problem concerns linking citizens' declared evaluations to the navigation context in which feedback is requested. The work combined bibliographic and regulatory review, Lean Inception, and incremental prototyping, organized around the activities of Design Science Research. A local Python prototype was implemented with an API, simulated pages, operational rules based on clicks and reported duration, a feedback form, and an administrative dashboard. Telemetry provides behavioral indications and does not measure perceived quality. The current functional version records star-based satisfaction, declared attributes, and perceived ease through an optional seven-point CES item. The current satisfaction and CES items were specified after the interface study and have not yet been evaluated with participants. Separately from the functional implementation, eight participants evaluated interface flows in Figma, with automatic click and time records collected through Useberry and a post-session questionnaire. Four participants performed each flow, with artificial-intelligence-assisted allocation described as a draw without an auditable record, and with a redirect popup present in both flows. The results describe task completion, perceived ease, and post-session reports. They do not establish greater participation, more specific feedback-form comments, correct API-trigger behavior, or superiority of contextual feedback. The investigative contribution is the comparative hypothesis and the distinction between behavioral and declared evidence; the technological contribution is the implementation that can connect them. Requirements, traceability, quality criteria, and prospective protocols for citizens, managers, and specialists were specified. Further work requires executing these protocols and calibrating the rules before deployment.
 
 **Keywords**: digital public services; contextual feedback; service evaluation; user experience; Design Science Research.
+
+# Lista de ilustrações
+
+- Figura 1 — Página de portal público usada no protótipo
+- Figura 2 — Formulário de feedback contextual do protótipo
+- Figura 3 — Dados e registro de ação de melhoria no painel
+
+# Lista de quadros
+
+- Quadro 1 — Marcos legais nacionais sobre avaliação de serviços públicos digitais
+- Quadro 2 — Posicionamento da proposta em relação a soluções existentes
+- Quadro 3 — Rastreabilidade entre construtos, indicadores e dados
+- Quadro 4 — Endpoints principais do protótipo
+- Quadro 5 — Formas de coleta situada e relação com o protótipo
+- Quadro 6 — Análise qualitativa de sensibilidade dos limiares
+- Quadro 7 — Regras operacionais de acionamento por possível dificuldade no protótipo
+- Quadro 8 — Atributos do feedback e relação com dimensões de qualidade
+- Quadro 9 — Decisões de design, benefícios, riscos e mitigações
+- Quadro 10 — Critérios da avaliação preliminar do protótipo
+- Quadro 11 — Avaliação heurística interna/preliminar do protótipo
+- Quadro 12 — Alternativas de design consideradas no MVP
+- Quadro 13 — Requisitos funcionais
+- Quadro 14 — Requisitos não funcionais
+- Quadro 15 — Necessidades, requisitos, componentes e evidências
+- Quadro 16 — Casos automatizados identificáveis
+- Quadro 17 — Características selecionadas e evidências
+- Quadro 18 — Plano de verificação e validação
+- Quadro 19 — Critérios de acessibilidade e verificações previstas
+
+# Lista de tabelas
+
+- Tabela 1 — Simulação sintética de sensibilidade dos limiares de clique
+- Tabela 2 — Resultados exploratórios por fluxo de avaliação
+
+# Lista de apêndices
+
+- Apêndice A — Síntese da Lean Inception
+- Apêndice B — Fluxo Conceitual do sistema de avaliação contextual
+- Apêndice C — Endpoints e Indicadores do Protótipo
+- Apêndice D — Roteiro de Demonstração Técnica
+- Apêndice E — Descrição do TCLE Utilizado
+- Apêndice F — Questionário Pós-Sessão
+- Apêndice G — Registros Anonimizados da Avaliação com Participantes
+- Apêndice H — Especificação e Rastreabilidade do Software
+- Apêndice I — Qualidade do Produto e Plano de Verificação e Validação
+- Apêndice J — Privacidade e Acessibilidade por Requisitos
+- Apêndice K — Protocolos das Três Perspectivas de Avaliação
+- Apêndice L — Proveniência e guarda dos registros de concepção
 
 # Abreviaturas e siglas
 
@@ -64,7 +134,120 @@ This work presents the design and initial development of a contextual evaluation
 | W3C | World Wide Web Consortium |
 | WCAG | Web Content Accessibility Guidelines |
 
+# Sumário
+
+- [1 Introdução](#secao-1-introducao)
+  - [1.1 Contextualização](#secao-1-1-contextualizacao)
+  - [1.2 Problema de Pesquisa](#secao-1-2-problema-de-pesquisa)
+  - [1.3 Objetivo Geral](#secao-1-3-objetivo-geral)
+  - [1.4 Objetivos Específicos](#secao-1-4-objetivos-especificos)
+  - [1.5 Justificativa](#secao-1-5-justificativa)
+  - [1.6 Escopo Inicial](#secao-1-6-escopo-inicial)
+- [2 Referencial Teórico](#secao-2-referencial-teorico)
+  - [2.1 Serviços e Serviços Públicos](#secao-2-1-servicos-e-servicos-publicos)
+    - [2.1.1 Serviço digital, interação e resultado pretendido](#secao-2-1-1-servico-digital-interacao-e-resultado-pretendido)
+  - [2.2 Avaliação de Serviços](#secao-2-2-avaliacao-de-servicos)
+  - [2.3 Satisfação e Qualidade Percebida](#secao-2-3-satisfacao-e-qualidade-percebida)
+  - [2.4 Qualidade de Serviços Eletrônicos e Governo Eletrônico: E-S-QUAL, E-RecS-QUAL e e-GovQual](#secao-2-4-qualidade-de-servicos-eletronicos-e-governo-eletronico-e-s-qual-e-recs-qual-e-e-govqual)
+  - [2.5 Avaliação de Serviços Públicos no Brasil](#secao-2-5-avaliacao-de-servicos-publicos-no-brasil)
+  - [2.6 BRASP, API de Avaliação e Modelo Unificado](#secao-2-6-brasp-api-de-avaliacao-e-modelo-unificado)
+  - [2.7 Usabilidade, Inclusão Digital e Métricas de Experiência](#secao-2-7-usabilidade-inclusao-digital-e-metricas-de-experiencia)
+  - [2.8 Experiência do Usuário e Avaliações Inspiradas em Plataformas Digitais](#secao-2-8-experiencia-do-usuario-e-avaliacoes-inspiradas-em-plataformas-digitais)
+    - [2.8.1 Posicionamento em relação a soluções existentes](#secao-2-8-1-posicionamento-em-relacao-a-solucoes-existentes)
+  - [2.9 Métricas de Navegação e Sinais de Dificuldade](#secao-2-9-metricas-de-navegacao-e-sinais-de-dificuldade)
+  - [2.10 Feedback Contextual e Acionamento por Sinais de Uso](#secao-2-10-feedback-contextual-e-acionamento-por-sinais-de-uso)
+  - [2.11 Síntese do Referencial](#secao-2-11-sintese-do-referencial)
+- [3 Metodologia](#secao-3-metodologia)
+  - [3.1 Estratégia de Pesquisa e Fontes](#secao-3-1-estrategia-de-pesquisa-e-fontes)
+  - [3.2 Identificação do Problema e Motivação](#secao-3-2-identificacao-do-problema-e-motivacao)
+  - [3.3 Objetivos e Requisitos da Solução](#secao-3-3-objetivos-e-requisitos-da-solucao)
+    - [3.3.1 Concepção e Delimitação com Lean Inception](#secao-3-3-1-concepcao-e-delimitacao-com-lean-inception)
+    - [3.3.2 Atividades de Concepção](#secao-3-3-2-atividades-de-concepcao)
+  - [3.4 Design e Desenvolvimento](#secao-3-4-design-e-desenvolvimento)
+  - [3.5 Demonstração](#secao-3-5-demonstracao)
+  - [3.6 Avaliação](#secao-3-6-avaliacao)
+    - [3.6.1 Hipóteses e Critérios da Avaliação Exploratória](#secao-3-6-1-hipoteses-e-criterios-da-avaliacao-exploratoria)
+    - [3.6.2 Procedimentos do Estudo Histórico](#secao-3-6-2-procedimentos-do-estudo-historico)
+    - [3.6.3 Tratamento e Significado dos Dados](#secao-3-6-3-tratamento-e-significado-dos-dados)
+  - [3.7 Comunicação](#secao-3-7-comunicacao)
+- [4 Desenvolvimento da Solução](#secao-4-desenvolvimento-da-solucao)
+  - [4.1 Visão Geral do Produto](#secao-4-1-visao-geral-do-produto)
+  - [4.2 Objetivos do Produto](#secao-4-2-objetivos-do-produto)
+  - [4.3 Personas](#secao-4-3-personas)
+  - [4.4 Jornadas](#secao-4-4-jornadas)
+  - [4.5 Funcionalidades Priorizadas](#secao-4-5-funcionalidades-priorizadas)
+  - [4.6 Sequenciamento e Canvas MVP](#secao-4-6-sequenciamento-e-canvas-mvp)
+  - [4.7 Arquitetura do Protótipo](#secao-4-7-arquitetura-do-prototipo)
+  - [4.8 API e Endpoints](#secao-4-8-api-e-endpoints)
+  - [4.9 Regras de Detecção de Possível Dificuldade](#secao-4-9-regras-de-deteccao-de-possivel-dificuldade)
+    - [4.9.1 Simulação Sintética dos Limiares](#secao-4-9-1-simulacao-sintetica-dos-limiares)
+  - [4.10 Fluxos Implementados](#secao-4-10-fluxos-implementados)
+  - [4.11 Painel Administrativo e Indicadores](#secao-4-11-painel-administrativo-e-indicadores)
+  - [4.12 Resultado do Desenvolvimento](#secao-4-12-resultado-do-desenvolvimento)
+  - [4.13 Avaliação Preliminar do Artefato](#secao-4-13-avaliacao-preliminar-do-artefato)
+  - [4.14 Avaliação Exploratória com Participantes](#secao-4-14-avaliacao-exploratoria-com-participantes)
+  - [4.15 Síntese Crítica do Desenvolvimento](#secao-4-15-sintese-critica-do-desenvolvimento)
+  - [4.16 Alternativas de Design Consideradas](#secao-4-16-alternativas-de-design-consideradas)
+  - [4.17 Gestão de Configurações](#secao-4-17-gestao-de-configuracoes)
+  - [4.18 Controles de Privacidade e Inclusão](#secao-4-18-controles-de-privacidade-e-inclusao)
+  - [4.19 Verificação Técnica da Implementação Atual](#secao-4-19-verificacao-tecnica-da-implementacao-atual)
+- [5 Considerações Finais](#secao-5-consideracoes-finais)
+  - [5.1 Resultados em Relação aos Objetivos](#secao-5-1-resultados-em-relacao-aos-objetivos)
+  - [5.2 Limitações](#secao-5-2-limitacoes)
+  - [5.3 Trabalhos Futuros](#secao-5-3-trabalhos-futuros)
+  - [5.4 Conclusão](#secao-5-4-conclusao)
+- [Referências](#secao-referencias)
+- [Apêndice A — Síntese da Lean Inception](#secao-apendice-a-sintese-da-lean-inception)
+  - [A.1 Agenda](#secao-a-1-agenda)
+  - [A.2 Escopo Delimitado](#secao-a-2-escopo-delimitado)
+  - [A.3 MVP](#secao-a-3-mvp)
+  - [A.4 Inventário dos registros visuais históricos](#secao-a-4-inventario-dos-registros-visuais-historicos)
+- [Apêndice B — Fluxo Conceitual do sistema de avaliação contextual](#secao-apendice-b-fluxo-conceitual-do-sistema-de-avaliacao-contextual)
+  - [B.1 Fluxo de navegação](#secao-b-1-fluxo-de-navegacao)
+  - [B.2 Detecção e redirecionamento](#secao-b-2-deteccao-e-redirecionamento)
+  - [B.3 Feedback e painel](#secao-b-3-feedback-e-painel)
+- [Apêndice C — Endpoints e Indicadores do Protótipo](#secao-apendice-c-endpoints-e-indicadores-do-prototipo)
+  - [C.1 Endpoints](#secao-c-1-endpoints)
+  - [C.2 Indicadores](#secao-c-2-indicadores)
+- [Apêndice D — Roteiro de Demonstração Técnica](#secao-apendice-d-roteiro-de-demonstracao-tecnica)
+- [Apêndice E — Descrição do TCLE Utilizado](#secao-apendice-e-descricao-do-tcle-utilizado)
+  - [E.1 Descrição do TCLE](#secao-e-1-descricao-do-tcle)
+- [Apêndice F — Questionário Pós-Sessão](#secao-apendice-f-questionario-pos-sessao)
+  - [F.1 Perguntas](#secao-f-1-perguntas)
+- [Apêndice G — Registros Anonimizados da Avaliação com Participantes](#secao-apendice-g-registros-anonimizados-da-avaliacao-com-participantes)
+  - [G.1 P01 — Fluxo A](#secao-g-1-p01-fluxo-a)
+  - [G.2 P02 — Fluxo B](#secao-g-2-p02-fluxo-b)
+  - [G.3 P03 — Fluxo A](#secao-g-3-p03-fluxo-a)
+  - [G.4 P04 — Fluxo B](#secao-g-4-p04-fluxo-b)
+  - [G.5 P05 — Fluxo A](#secao-g-5-p05-fluxo-a)
+  - [G.6 P06 — Fluxo B](#secao-g-6-p06-fluxo-b)
+  - [G.7 P07 — Fluxo A](#secao-g-7-p07-fluxo-a)
+  - [G.8 P08 — Fluxo B](#secao-g-8-p08-fluxo-b)
+- [Apêndice H — Especificação e Rastreabilidade do Software](#secao-apendice-h-especificacao-e-rastreabilidade-do-software)
+  - [H.1 Requisitos funcionais e critérios de aceitação](#secao-h-1-requisitos-funcionais-e-criterios-de-aceitacao)
+  - [H.2 Requisitos não funcionais](#secao-h-2-requisitos-nao-funcionais)
+  - [H.3 Regras de negócio](#secao-h-3-regras-de-negocio)
+  - [H.4 Histórias de uso](#secao-h-4-historias-de-uso)
+  - [H.5 Matriz de rastreabilidade do software](#secao-h-5-matriz-de-rastreabilidade-do-software)
+  - [H.6 Catálogo dos testes e evidências](#secao-h-6-catalogo-dos-testes-e-evidencias)
+- [Apêndice I — Qualidade do Produto e Plano de Verificação e Validação](#secao-apendice-i-qualidade-do-produto-e-plano-de-verificacao-e-validacao)
+  - [I.1 Seleção de características de qualidade](#secao-i-1-selecao-de-caracteristicas-de-qualidade)
+  - [I.2 Plano de verificação e validação](#secao-i-2-plano-de-verificacao-e-validacao)
+- [Apêndice J — Privacidade e Acessibilidade por Requisitos](#secao-apendice-j-privacidade-e-acessibilidade-por-requisitos)
+  - [J.1 Privacidade desde a concepção](#secao-j-1-privacidade-desde-a-concepcao)
+  - [J.2 Requisitos e plano de acessibilidade](#secao-j-2-requisitos-e-plano-de-acessibilidade)
+- [Apêndice K — Protocolos das Três Perspectivas de Avaliação](#secao-apendice-k-protocolos-das-tres-perspectivas-de-avaliacao)
+  - [K.1 Cidadãos: uso, compreensão e comparação](#secao-k-1-cidadaos-uso-compreensao-e-comparacao)
+    - [K.1.1 Calibração dos sinais comportamentais — TV10](#secao-k-1-1-calibracao-dos-sinais-comportamentais-tv10)
+  - [K.2 Gestores: interpretação, decisão e acompanhamento](#secao-k-2-gestores-interpretacao-decisao-e-acompanhamento)
+  - [K.3 Especialistas: inspeção independente](#secao-k-3-especialistas-inspecao-independente)
+- [Apêndice L — Proveniência e guarda dos registros de concepção](#secao-apendice-l-proveniencia-e-guarda-dos-registros-de-concepcao)
+
+<a id="secao-1-introducao"></a>
+
 # 1 Introdução
+
+<a id="secao-1-1-contextualizacao"></a>
 
 ## 1.1 Contextualização
 
@@ -82,6 +265,8 @@ A proposta é relacionar evidências comportamentais e declaradas sem tratá-las
 
 A proposta adota uma interface curta de avaliação e mantém uma implementação local de registro de eventos e feedback. A visualização administrativa disponível apresenta alertas, contagens por serviço e médias de respostas. O painel apresenta frequência de atributos, sessões distintas alertadas e ações com acompanhamento. Taxa de resposta por fluxo ainda depende de instrumentação A/B e de exposição. A Lean Inception orientou a delimitação do produto e do MVP, cujas funcionalidades foram implementadas parcialmente ([Caroli, 2018](#ref-caroli2018leanInception); [Fowler; Caroli, 2022](#ref-fowler2022leanInception)).
 
+<a id="secao-1-2-problema-de-pesquisa"></a>
+
 ## 1.2 Problema de Pesquisa
 
 A questão investigada é como relacionar a avaliação declarada pelo cidadão ao contexto de navegação em que ela é solicitada. Quando a coleta fica restrita ao final da jornada, pode deixar de registrar detalhes de uma etapa anterior ou de um fluxo interrompido. Essa possibilidade motiva o estudo do momento do convite, sem pressupor que a coleta contextual produza resultados superiores. Indicadores só se tornam úteis à gestão quando seu contexto e suas limitações são considerados ([Government Digital Service, 2021b](#ref-govuk2021usingData); [DeLone; McLean, 2003](#ref-deloneMclean2003)).
@@ -92,9 +277,13 @@ Este trabalho parte da seguinte questão de pesquisa: como propor e prototipar u
 
 A comparação entre convite contextual e formulário final foi organizada nas hipóteses H1 e H2, formuladas na seção 3.6.1. Elas tratam, respectivamente, de participação e especificidade dos comentários do formulário. Os resultados disponíveis são observações exploratórias de interface e não testam essas hipóteses.
 
+<a id="secao-1-3-objetivo-geral"></a>
+
 ## 1.3 Objetivo Geral
 
 Propor e desenvolver um protótipo inicial de avaliador de serviços públicos digitais capaz de registrar sinais de possível dificuldade na navegação, coletar feedback contextual estruturado, comparar esse fluxo com uma avaliação estática e apresentar indicadores administrativos que apoiem a melhoria contínua dos serviços.
+
+<a id="secao-1-4-objetivos-especificos"></a>
 
 ## 1.4 Objetivos Específicos
 
@@ -110,13 +299,17 @@ Para alcançar o objetivo geral, foram definidos os seguintes objetivos específ
 
 A estrutura dos objetivos combina a fundamentação legal e técnica da avaliação de serviços públicos com práticas de definição de MVP e prototipação de software ([Brasil, 2017b](#ref-brasil2017lei13460); [Brasil, 2021](#ref-brasil2021lei14129); [Caroli, 2018](#ref-caroli2018leanInception); [Sommerville, 2011](#ref-Sommerville2011)).
 
+<a id="secao-1-5-justificativa"></a>
+
 ## 1.5 Justificativa
 
-Mecanismos digitais de avaliação podem fortalecer a participação do usuário na melhoria dos serviços públicos. Os materiais da Enap destacam que a avaliação centrada no cidadão desloca o foco das ferramentas tecnológicas para as necessidades, demandas e satisfação dos usuários ([Lima; Pereira, 2020a](#ref-limaPereira2020modulo1)). Também indicam que avaliações devem alimentar ciclos de melhoria, permitindo identificar problemas recorrentes, atributos críticos e prioridades de intervenção ([Lima; Pereira, 2020b](#ref-limaPereira2020modulo4)).
+Mecanismos digitais de avaliação podem fortalecer a participação do usuário na melhoria dos serviços públicos. Os materiais da Enap destacam que a avaliação centrada no cidadão desloca o foco das ferramentas tecnológicas para as necessidades, demandas e satisfação dos usuários ([Lima; Pereira, 2020a](#ref-limaPereira2020modulo1)). Também indicam que avaliações devem alimentar ciclos de melhoria, permitindo identificar problemas recorrentes, atributos críticos e prioridades de intervenção ([Lima; Pereira, 2020d](#ref-limaPereira2020modulo4)).
 
 A proposta é relevante porque muitos usuários já conhecem avaliações simples por estrelas, motivos e comentários. Uma solução pública pode aproveitar essa familiaridade para reduzir o esforço de resposta, desde que use os dados para finalidades compatíveis com o interesse público. Além disso, a combinação entre eventos de navegação e feedback declarado permite que o gestor observe tanto o que o usuário informou quanto o que ocorreu durante a jornada digital.
 
 Do ponto de vista investigativo, o trabalho formula hipóteses sobre o momento da coleta e distingue indícios comportamentais de percepção declarada. A organização conceitual é explicitada no Quadro [3](#tab:construtos-indicadores-dados), com dados, origem e limites de interpretação; sua validade ainda depende de avaliação empírica. Do ponto de vista tecnológico, a contribuição é a implementação de API, telas, regras explícitas e painel que permitem associar contexto de navegação e relato do cidadão. As configurações possuem versões e histórico local, o que permite inspecionar alterações, sem equivaler a auditoria independente ([DeLone; McLean, 2003](#ref-deloneMclean2003); [Hevner et al., 2004](#ref-hevner2004designscience); [Sommerville, 2011](#ref-Sommerville2011)).
+
+<a id="secao-1-6-escopo-inicial"></a>
 
 ## 1.6 Escopo Inicial
 
@@ -124,11 +317,15 @@ O escopo inicial concentra-se na proposta e prototipação de uma solução. O t
 
 A avaliação desta etapa reúne procedimentos distintos: inspeção funcional e heurística interna/preliminar relatada pelos autores, e sessões exploratórias de interface com oito participantes no Figma, instrumentadas pelo Useberry. Essas sessões não constituem teste de integração ou execução da API Python. Os resultados são descritivos, sem generalização estatística ou validação em contexto real de prestação de serviço público. Integração com portais governamentais, calibração e estudo comparativo permanecem etapas futuras.
 
+<a id="secao-2-referencial-teorico"></a>
+
 # 2 Referencial Teórico
 
 Avaliar um serviço público digital exige olhar para mais do que a tela final de confirmação. A experiência do cidadão começa quando ele tenta entender onde está o serviço, continua nos caminhos que percorre e termina apenas quando a demanda é resolvida ou abandonada. Por isso, este capítulo reúne os fundamentos que sustentam a proposta do avaliador: conceitos de serviço público, satisfação, qualidade percebida, usabilidade, modelos brasileiros de avaliação e sinais de possível dificuldade observáveis durante a navegação.
 
-O capítulo também parte de uma tradição anterior à digitalização dos serviços: os modelos clássicos de qualidade em serviços. Essa base é importante porque mostra que a percepção do usuário sempre dependeu da comparação entre o que ele esperava receber e o que efetivamente experimentou. No ambiente público digital, essa comparação passa a envolver, além do resultado do serviço, a clareza da informação, a confiança no canal, a facilidade de navegação, o esforço exigido e a capacidade do órgão de responder ao problema identificado ([Grönroos, 1984](#ref-gronroos1984service); [Parasuraman et al., 1988](#ref-parasuraman1988servqual); [DeLone; McLean, 2003](#ref-deloneMclean2003)).
+O capítulo também parte de uma tradição anterior à digitalização dos serviços: os modelos clássicos de qualidade em serviços. Essa base é importante porque mostra que a percepção do usuário sempre dependeu da comparação entre o que ele esperava receber e o que efetivamente experimentou. No ambiente público digital, essa comparação passa a envolver, além do resultado do serviço, a clareza da informação, a confiança no canal, a facilidade de navegação, o esforço exigido e a capacidade do órgão de responder ao problema identificado ([Grönroos, 1984](#ref-gronroos1984service); [Parasuraman; Zeithaml; Berry, 1988](#ref-parasuraman1988servqual); [DeLone; McLean, 2003](#ref-deloneMclean2003)).
+
+<a id="secao-2-1-servicos-e-servicos-publicos"></a>
 
 ## 2.1 Serviços e Serviços Públicos
 
@@ -136,23 +333,29 @@ Serviços diferenciam-se de produtos porque são mais intangíveis, ocorrem como
 
 No setor público, o serviço é parte do relacionamento entre cidadão e Estado. Ele pode envolver uma entrega individualizada, como a emissão de um documento, ou uma entrega de interesse coletivo, como segurança, educação, saúde e infraestrutura. Por isso, a avaliação de serviços públicos possui uma dimensão adicional: além de medir satisfação ou qualidade, ela se conecta ao exercício da cidadania, à prestação de contas e ao aperfeiçoamento da administração pública ([Brasil, 2017b](#ref-brasil2017lei13460); [Brasil, 2021](#ref-brasil2021lei14129); [Lima; Pereira, 2020a](#ref-limaPereira2020modulo1)).
 
-Com a digitalização, muitos serviços passaram a ser acessados por portais, aplicativos e sistemas integrados. Essa mudança amplia o alcance da prestação pública, mas também cria novas exigências de usabilidade, clareza, confiabilidade e disponibilidade. A usabilidade pode ser entendida como resultado de uso associado à efetividade, eficiência e satisfação em um contexto definido ([ISO, 2018](#ref-iso9241112018)). O usuário não avalia apenas o resultado final do serviço; ele também avalia o caminho percorrido, a linguagem utilizada, o esforço exigido, a facilidade de navegação e a capacidade do canal digital de resolver sua demanda.
+Com a digitalização, muitos serviços passaram a ser acessados por portais, aplicativos e sistemas integrados. Essa mudança amplia o alcance da prestação pública, mas também cria novas exigências de usabilidade, clareza, confiabilidade e disponibilidade. A usabilidade pode ser entendida como resultado de uso associado à efetividade, eficiência e satisfação em um contexto definido ([International Organization for Standardization, 2018](#ref-iso9241112018)). O usuário não avalia apenas o resultado final do serviço; ele também avalia o caminho percorrido, a linguagem utilizada, o esforço exigido, a facilidade de navegação e a capacidade do canal digital de resolver sua demanda.
+
+<a id="secao-2-1-1-servico-digital-interacao-e-resultado-pretendido"></a>
 
 ### 2.1.1 Serviço digital, interação e resultado pretendido
 
 Neste trabalho, serviço público digital é o arranjo de informações, procedimentos, pessoas, regras e recursos tecnológicos pelo qual o cidadão busca um resultado de interesse público. O portal é um canal desse arranjo. Encontrar uma página ou concluir uma interação não significa necessariamente obter o documento, benefício ou solução pretendida. A orientação institucional de resolver o problema completo do usuário ajuda a delimitar essa diferença ([Government Digital Service, 2026](#ref-govuk2026wholeProblem)).
 
-A avaliação distingue quatro objetos: **qualidade do software**, relativa às propriedades da aplicação e da API; **qualidade da interação**, relativa às condições e resultados do uso da interface; **qualidade percebida do serviço**, relativa ao julgamento declarado sobre aspectos da prestação; e **efetividade do serviço**, relativa ao alcance do resultado pretendido. A primeira é tratada pelo modelo de qualidade de produto ISO/IEC 25010:2023; a usabilidade em contexto considera efetividade, eficiência e satisfação conforme ISO 9241-11; os atributos de serviço e a conclusão real exigem evidências próprias ([ISO; IEC, 2023](#ref-iso250102023); [ISO, 2018](#ref-iso9241112018)).
+A avaliação distingue quatro objetos: **qualidade do software**, relativa às propriedades da aplicação e da API; **qualidade da interação**, relativa às condições e resultados do uso da interface; **qualidade percebida do serviço**, relativa ao julgamento declarado sobre aspectos da prestação; e **efetividade do serviço**, relativa ao alcance do resultado pretendido. A primeira é tratada pelo modelo de qualidade de produto ISO/IEC 25010:2023; a usabilidade em contexto considera efetividade, eficiência e satisfação conforme ISO 9241-11; os atributos de serviço e a conclusão real exigem evidências próprias ([International Organization for Standardization e International Electrotechnical Commission, 2023](#ref-iso250102023); [International Organization for Standardization, 2018](#ref-iso9241112018)).
 
 Por exemplo, uma API pode aceitar e armazenar corretamente uma avaliação sem que o cidadão tenha conseguido declarar o imposto. Uma interface pode ser fácil de navegar, mas conduzir à consulta quando a necessidade era declarar. Uma nota favorável não prova que a obrigação foi cumprida. A conclusão de tarefa registrada no Figma é efetividade da tarefa simulada, não entrega de um serviço público real. O avaliador apoia investigação sobre a jornada; não executa nem certifica essa entrega.
 
+<a id="secao-2-2-avaliacao-de-servicos"></a>
+
 ## 2.2 Avaliação de Serviços
 
-A avaliação de serviços pode ser entendida como uma investigação qualitativa ou quantitativa sobre a qualidade do serviço e a satisfação do usuário, considerando a relação entre expectativa e experiência concreta ([Lima; Pereira, 2020a](#ref-limaPereira2020modulo1)). Em outras palavras, avaliar um serviço significa observar se a entrega realizada corresponde ao que o usuário precisava, esperava ou considerava adequado. Modelos clássicos de qualidade de serviço indicam que a percepção do usuário é formada por lacunas entre o serviço esperado e o serviço recebido. O modelo de qualidade percebida de [Grönroos (1984)](#ref-gronroos1984service) e o modelo SERVQUAL de [Parasuraman et al. (1988)](#ref-parasuraman1988servqual) consolidaram a ideia de que qualidade em serviços depende de fatores como confiabilidade, responsividade, segurança, empatia e aspectos tangíveis. Embora esses modelos tenham origem no setor privado, eles influenciaram diversas iniciativas posteriores de avaliação de serviços públicos e serviços digitais.
+A avaliação de serviços pode ser entendida como uma investigação qualitativa ou quantitativa sobre a qualidade do serviço e a satisfação do usuário, considerando a relação entre expectativa e experiência concreta ([Lima; Pereira, 2020a](#ref-limaPereira2020modulo1)). Em outras palavras, avaliar um serviço significa observar se a entrega realizada corresponde ao que o usuário precisava, esperava ou considerava adequado. Modelos clássicos de qualidade de serviço indicam que a percepção do usuário é formada por lacunas entre o serviço esperado e o serviço recebido. O modelo de qualidade percebida de [Grönroos (1984)](#ref-gronroos1984service) e o modelo SERVQUAL de [Parasuraman, Zeithaml e Berry (1988)](#ref-parasuraman1988servqual) consolidaram a ideia de que qualidade em serviços depende de fatores como confiabilidade, responsividade, segurança, empatia e aspectos tangíveis. Embora esses modelos tenham origem no setor privado, eles influenciaram diversas iniciativas posteriores de avaliação de serviços públicos e serviços digitais.
 
-No SERVQUAL, essas dimensões aparecem como tangibilidade, confiabilidade, responsividade, garantia e empatia. A contribuição central do modelo é tratar a qualidade percebida como diferença entre expectativa prévia e percepção após a experiência. Para serviços públicos, entretanto, essa leitura exige adaptação: o cidadão geralmente não escolhe entre prestadores concorrentes e muitas vezes depende daquele serviço para exercer um direito, cumprir uma obrigação ou acessar um benefício. Assim, a expectativa não é formada apenas por comparação de mercado, mas também por experiências anteriores com o Estado, comunicação institucional, relatos de outros usuários e, mais recentemente, pela comparação com serviços digitais privados que oferecem interfaces mais rápidas e responsivas ([Parasuraman et al., 1988](#ref-parasuraman1988servqual); [Lima; Pereira, 2020c](#ref-limaPereira2020modulo2)).
+No SERVQUAL, essas dimensões aparecem como tangibilidade, confiabilidade, responsividade, garantia e empatia. A contribuição central do modelo é tratar a qualidade percebida como diferença entre expectativa prévia e percepção após a experiência. Para serviços públicos, entretanto, essa leitura exige adaptação: o cidadão geralmente não escolhe entre prestadores concorrentes e muitas vezes depende daquele serviço para exercer um direito, cumprir uma obrigação ou acessar um benefício. Assim, a expectativa não é formada apenas por comparação de mercado, mas também por experiências anteriores com o Estado, comunicação institucional, relatos de outros usuários e, mais recentemente, pela comparação com serviços digitais privados que oferecem interfaces mais rápidas e responsivas ([Parasuraman; Zeithaml; Berry, 1988](#ref-parasuraman1988servqual); [Lima; Pereira, 2020b](#ref-limaPereira2020modulo2)).
 
-Nos serviços digitais, a avaliação passou a incorporar fatores ligados ao uso de sistemas de informação, como qualidade do sistema, qualidade da informação, qualidade do serviço, intenção de uso, satisfação do usuário e benefícios percebidos. Os materiais da Enap destacam que, à medida que cidadãos passaram a interagir com sistemas governamentais digitais, tornou-se necessário adotar modelos capazes de avaliar não apenas páginas ou portais, mas a experiência do usuário ao longo da prestação do serviço ([Lima; Pereira, 2020c](#ref-limaPereira2020modulo2); [DeLone; McLean, 2003](#ref-deloneMclean2003); [Pedrosa et al., 2019](#ref-pedrosa2019qualidadeGovbr)).
+Nos serviços digitais, a avaliação passou a incorporar fatores ligados ao uso de sistemas de informação, como qualidade do sistema, qualidade da informação, qualidade do serviço, intenção de uso, satisfação do usuário e benefícios percebidos. Os materiais da Enap destacam que, à medida que cidadãos passaram a interagir com sistemas governamentais digitais, tornou-se necessário adotar modelos capazes de avaliar não apenas páginas ou portais, mas a experiência do usuário ao longo da prestação do serviço ([Lima; Pereira, 2020b](#ref-limaPereira2020modulo2); [DeLone; McLean, 2003](#ref-deloneMclean2003); [Pedrosa et al., 2019](#ref-pedrosa2019qualidadeGovbr)).
+
+<a id="secao-2-3-satisfacao-e-qualidade-percebida"></a>
 
 ## 2.3 Satisfação e Qualidade Percebida
 
@@ -161,6 +364,8 @@ Satisfação e qualidade percebida são conceitos próximos, mas não idênticos
 No contexto público, a distinção entre satisfação e qualidade percebida é importante porque uma nota geral, sozinha, nem sempre indica o que deve ser melhorado. Um usuário pode avaliar mal um serviço por demora, linguagem confusa, instabilidade do sistema, falta de atendimento ou excesso de etapas. Portanto, um avaliador de serviços públicos precisa combinar uma avaliação simples, como nota ou estrelas, com mecanismos que ajudem a qualificar o motivo da avaliação.
 
 Essa lógica aparece na evolução dos instrumentos brasileiros de avaliação. O BRASP considera a qualidade percebida como um elemento central para compreender a experiência do usuário e apoiar o aprimoramento dos serviços ([Silva et al., 2019](#ref-silva2019brasp)). A proposta de modelo unificado busca integrar qualidade técnica, qualidade percebida, efetividade e satisfação, reduzindo o custo de resposta para o cidadão e tornando os resultados mais úteis para a gestão ([Silva; Menezes, 2022](#ref-silva2022modeloUnificado)).
+
+<a id="secao-2-4-qualidade-de-servicos-eletronicos-e-governo-eletronico-e-s-qual-e-recs-qual-e-e-govqual"></a>
 
 ## 2.4 Qualidade de Serviços Eletrônicos e Governo Eletrônico: E-S-QUAL, E-RecS-QUAL e e-GovQual
 
@@ -173,6 +378,8 @@ Os seis atributos do formulário não reproduzem os itens de E-S-QUAL/E-RecS-QUA
 No domínio governamental, [Papadomichelaki e Mentzas (2012)](#ref-papadomichelaki2012egovqual) desenvolveram e-GovQual para sites públicos nos quais o cidadão procura informação ou serviço. A escala final reúne 21 itens em confiabilidade, eficiência, suporte ao cidadão e confiança. Esse modelo oferece o elo entre qualidade eletrônica e prestação pública digital, sem reduzir a avaliação à transação comercial.
 
 Neste trabalho, e-GovQual orienta examinar a consistência da prestação, a facilidade de acesso à informação, os caminhos de suporte e a confiança na coleta. São relações conceituais de projeto: o formulário não reproduz seus 21 itens, e os seis atributos não geram um escore e-GovQual. A validação relatada por Papadomichelaki e Mentzas não se transfere ao CES adaptado nem a este protótipo. O modelo internacional antecede, nesta progressão, os instrumentos brasileiros e o BRASP discutidos a seguir.
+
+<a id="secao-2-5-avaliacao-de-servicos-publicos-no-brasil"></a>
 
 ## 2.5 Avaliação de Serviços Públicos no Brasil
 
@@ -199,15 +406,19 @@ Do ponto de vista técnico, relatórios produzidos no âmbito da Universidade de
 
 O avanço desses modelos demonstra que a avaliação pública precisa equilibrar rigor metodológico e simplicidade operacional. Instrumentos longos e complexos podem gerar dados ricos, mas tendem a aumentar o esforço do respondente. Por outro lado, instrumentos muito curtos podem ampliar a adesão, mas produzir dados insuficientes para orientar melhorias. Esse equilíbrio é especialmente relevante para a proposta deste TCC, que busca um avaliador simples para o cidadão e útil para a gestão.
 
+<a id="secao-2-6-brasp-api-de-avaliacao-e-modelo-unificado"></a>
+
 ## 2.6 BRASP, API de Avaliação e Modelo Unificado
 
 O Modelo Brasileiro de Avaliação de Serviços Públicos (BRASP) foi desenvolvido para construir e validar instrumentos de avaliação da qualidade adaptados à realidade brasileira. O modelo considera três modalidades de prestação: serviços digitizados, serviços parcialmente digitizados e serviços presenciais ([Silva et al., 2019](#ref-silva2019brasp)). Essa diferenciação é relevante porque a experiência do usuário muda de acordo com o canal. Um serviço presencial pode depender mais de atendimento, espera e estrutura física; um serviço digital pode depender mais de facilidade de uso, clareza, disponibilidade e segurança; e um serviço híbrido pode combinar problemas de ambos os contextos.
 
-Nos materiais da Enap, o modelo brasileiro de avaliação é apresentado como instrumento para identificar fatores relacionados à satisfação do usuário, localizar pontos críticos e gerar comparações capazes de acompanhar a evolução dos serviços. Essa leitura é coerente com o BRASP e com a proposta de modelo unificado, que organizam satisfação, qualidade percebida, qualidade técnica e efetividade como dimensões complementares de análise ([Lima; Pereira, 2020d](#ref-limaPereira2020modulo3); [Silva et al., 2019](#ref-silva2019brasp); [Silva; Menezes, 2022](#ref-silva2022modeloUnificado)). A pesquisa de satisfação aparece ancorada em uma pergunta geral sobre a experiência com o serviço, enquanto a qualidade percebida é investigada por atributos que ajudam a explicar essa experiência.
+Nos materiais da Enap, o modelo brasileiro de avaliação é apresentado como instrumento para identificar fatores relacionados à satisfação do usuário, localizar pontos críticos e gerar comparações capazes de acompanhar a evolução dos serviços. Essa leitura é coerente com o BRASP e com a proposta de modelo unificado, que organizam satisfação, qualidade percebida, qualidade técnica e efetividade como dimensões complementares de análise ([Lima; Pereira, 2020c](#ref-limaPereira2020modulo3); [Silva et al., 2019](#ref-silva2019brasp); [Silva; Menezes, 2022](#ref-silva2022modeloUnificado)). A pesquisa de satisfação aparece ancorada em uma pergunta geral sobre a experiência com o serviço, enquanto a qualidade percebida é investigada por atributos que ajudam a explicar essa experiência.
 
 A API de avaliação do governo brasileiro segue uma lógica semelhante. Segundo o relatório sobre os atributos da API, a satisfação é medida por uma estratégia simples inspirada no CSAT, com resposta por opções associadas a estrelas, e a qualidade percebida é explorada por atributos como clareza das informações, custo ou esforço para obtenção do serviço, disponibilidade, eficácia, facilidade de uso, qualidade dos canais de comunicação e tempo para obtenção do serviço ([Silva, 2024](#ref-silva2024atributosApi)). Essa abordagem se aproxima da proposta deste trabalho, pois combina avaliação rápida com categorização do motivo da nota.
 
 A proposta de modelo unificado reforça essa direção ao articular quatro eixos: qualidade técnica, qualidade percebida, satisfação do usuário e efetividade ([Silva; Menezes, 2022](#ref-silva2022modeloUnificado)). Para um avaliador de serviços públicos, esses eixos podem orientar tanto a coleta quanto a visualização de dados. A satisfação indica o julgamento geral do cidadão; a qualidade percebida explica a experiência por atributos; a qualidade técnica pode apoiar análises de disponibilidade, integração e consistência; e a efetividade aproxima a avaliação da pergunta central: o serviço resolveu a necessidade do usuário?
+
+<a id="secao-2-7-usabilidade-inclusao-digital-e-metricas-de-experiencia"></a>
 
 ## 2.7 Usabilidade, Inclusão Digital e Métricas de Experiência
 
@@ -215,7 +426,7 @@ A usabilidade em serviços públicos digitais possui impacto mais amplo do que e
 
 A representatividade também é um ponto relevante. Serviços públicos atendem usuários com diferentes níveis de letramento digital, conectividade, idade, familiaridade com formulários e capacidade de compreender linguagem institucional. Os dados do PPA Participativo 2024-2027 indicam que participação digital em larga escala pode conviver com barreiras de uso e de retorno ao cidadão ([Brasil. Ministério da Gestão e da Inovação em Serviços Públicos, 2024](#ref-brasilMgi2024ppaParticipativo)). Da mesma forma, pesquisas sobre acesso às tecnologias de informação no Brasil mostram que o uso de serviços digitais ainda depende de condições desiguais de acesso, dispositivos e habilidades ([Comitê Gestor da Internet no Brasil, 2025](#ref-cetic2025ticDomicilios2024)). Para este TCC, isso reforça a necessidade de uma coleta de feedback simples, opcional e de baixo esforço.
 
-O CSAT e o CES abordam julgamentos diferentes. A satisfação expressa a avaliação do cidadão sobre a experiência com a etapa do serviço; o CES aborda a facilidade ou o esforço percebido nessa interação. A proposta usa estrelas como operacionalização local de satisfação, atributos para detalhar aspectos do serviço e um item CES para facilidade percebida. Nenhum deles é obtido diretamente da telemetria. A discussão profissional de [Dixon; Freeman; Toman (2010)](#ref-dixon2010effort) motiva atenção ao esforço, mas sua origem em atendimento comercial não demonstra validade em serviços públicos.
+O CSAT e o CES abordam julgamentos diferentes. A satisfação expressa a avaliação do cidadão sobre a experiência com a etapa do serviço; o CES aborda a facilidade ou o esforço percebido nessa interação. A proposta usa estrelas como operacionalização local de satisfação, atributos para detalhar aspectos do serviço e um item CES para facilidade percebida. Nenhum deles é obtido diretamente da telemetria. A discussão profissional de [Dixon, Freeman e Toman (2010)](#ref-dixon2010effort) motiva atenção ao esforço, mas sua origem em atendimento comercial não demonstra validade em serviços públicos.
 
 A literatura profissional de [Dixon, Toman e DeLisi (2013)](#ref-dixon2013effortless) desenvolve a abordagem de experiência com menor esforço no atendimento comercial. Para a formulação por concordância, a apresentação de [Dixon (2016, slide 72)](#ref-dixon2016ces) mostra o CES 2.0 com afirmação sobre facilidade para lidar com uma questão. Esse material primário distingue a formulação posterior da referência de 2010, que não é utilizada para atribuir origem à redação ou à escala adotadas aqui. A conferência visual desse slide identifica seis opções visíveis, não sete; ele fundamenta a formulação por concordância, não o número de categorias adotado neste projeto. A frase em português, o recorte por etapa e as sete categorias são decisões de adaptação deste projeto, ainda sem validação com cidadãos.
 
@@ -225,19 +436,23 @@ A média CES descritiva é a soma das respostas válidas dividida pelo número d
 
 O item se refere à etapa vivenciada até o convite, inclusive quando a tarefa não foi concluída. A expressão “realizar o que eu precisava” pode, porém, ser interpretada como tarefa já concluída; o piloto de compreensão deverá verificar esse risco antes de manter a redação em convite intermediário. Portanto, facilidade declarada não comprova entrega do resultado pretendido pelo cidadão. O momento da coleta pode influenciar recordação e interpretação. Resultados sobre avaliação retrospectiva motivam investigar esse efeito, sem demonstrar a vantagem do acionamento neste cenário ([Kahneman et al., 1993](#ref-kahneman1993peakEnd)). O esforço para preencher o próprio formulário é outra variável e requer medida específica.
 
+<a id="secao-2-8-experiencia-do-usuario-e-avaliacoes-inspiradas-em-plataformas-digitais"></a>
+
 ## 2.8 Experiência do Usuário e Avaliações Inspiradas em Plataformas Digitais
 
 Plataformas digitais privadas popularizaram formas de avaliação de baixo esforço: nota de uma a cinco estrelas, comentários curtos, seleção de motivos e visualização agregada das avaliações. A referência a aplicações como plataformas de entrega deve ser entendida como inspiração de interação, e não como modelo de governança. Em uma plataforma privada, a avaliação frequentemente orienta reputação, consumo e concorrência. Em serviços públicos, ela deve orientar direitos, transparência, participação social e melhoria da entrega estatal.
 
-Mesmo com essa diferença, a familiaridade do usuário com mecanismos simples de avaliação pode ser aproveitada. Um avaliador de serviços públicos pode reduzir barreiras de participação se oferecer uma interface direta, com poucos passos e linguagem compreensível. A nota geral permite captar a percepção imediata; os atributos permitem interpretar os motivos; e comentários opcionais podem revelar problemas não previstos pelo formulário. Essa escolha está alinhada ao design centrado no usuário, que orienta o desenvolvimento de sistemas interativos a partir das necessidades, capacidades e limitações das pessoas que irão utilizá-los ([ISO, 2019](#ref-iso92412102019)).
+Mesmo com essa diferença, a familiaridade do usuário com mecanismos simples de avaliação pode ser aproveitada. Um avaliador de serviços públicos pode reduzir barreiras de participação se oferecer uma interface direta, com poucos passos e linguagem compreensível. A nota geral permite captar a percepção imediata; os atributos permitem interpretar os motivos; e comentários opcionais podem revelar problemas não previstos pelo formulário. Essa escolha está alinhada ao design centrado no usuário, que orienta o desenvolvimento de sistemas interativos a partir das necessidades, capacidades e limitações das pessoas que irão utilizá-los ([International Organization for Standardization, 2019](#ref-iso92412102019)).
 
-Para que a avaliação seja útil ao gestor, o sistema também precisa organizar os dados coletados. Isso envolve agrupar avaliações por serviço, período, órgão, canal e atributo; identificar itens recorrentes; apresentar médias e distribuições; e permitir comparação temporal. A literatura de melhoria de serviços reforça que as avaliações devem alimentar ciclos de melhoria contínua, funcionando como linha de base para decisões e como indicador para acompanhar a evolução do serviço ([Lima; Pereira, 2020b](#ref-limaPereira2020modulo4); [Government Digital Service, 2021b](#ref-govuk2021usingData); [Brasil, 2026](#ref-govbrFerramentaAvaliacao)).
+Para que a avaliação seja útil ao gestor, o sistema também precisa organizar os dados coletados. Isso envolve agrupar avaliações por serviço, período, órgão, canal e atributo; identificar itens recorrentes; apresentar médias e distribuições; e permitir comparação temporal. A literatura de melhoria de serviços reforça que as avaliações devem alimentar ciclos de melhoria contínua, funcionando como linha de base para decisões e como indicador para acompanhar a evolução do serviço ([Lima; Pereira, 2020d](#ref-limaPereira2020modulo4); [Government Digital Service, 2021b](#ref-govuk2021usingData); [Brasil, 2026](#ref-govbrFerramentaAvaliacao)).
+
+<a id="secao-2-8-1-posicionamento-em-relacao-a-solucoes-existentes"></a>
 
 ### 2.8.1 Posicionamento em relação a soluções existentes
 
 Embora o protótipo dialogue com ferramentas existentes de avaliação e análise de experiência, sua contribuição não está em substituí-las nem em afirmar superioridade. A contribuição está em combinar, em um MVP com regras explícitas e voltado a serviços públicos, sinais simples de possível dificuldade durante a navegação, coleta contextual por formulário curto e organização administrativa dos dados por serviço e atributo.
 
-A ferramenta oficial de avaliação do gov.br constitui uma referência institucional para medir satisfação em serviços públicos digitais. Ferramentas comerciais como Hotjar e Microsoft Clarity oferecem funcionalidades de analytics comportamental, mapas de calor, gravações de sessão e feedback. Suas páginas de documentação são utilizadas neste trabalho somente para caracterização tecnológica das funcionalidades declaradas, e não como evidência científica de eficácia ou adequação ao setor público ([Brasil, 2026](#ref-govbrFerramentaAvaliacao); [HOTJAR, 2026](#ref-hotjar2026); [MICROSOFT, 2026](#ref-microsoftClarity2026)). O Government Digital Service, por sua vez, é uma fonte institucional e metodológica sobre uso de dados de desempenho na melhoria de serviços digitais ([Government Digital Service, 2021b](#ref-govuk2021usingData)).
+A ferramenta oficial de avaliação do gov.br constitui uma referência institucional para medir satisfação em serviços públicos digitais. Ferramentas comerciais como Hotjar e Microsoft Clarity oferecem funcionalidades de analytics comportamental, mapas de calor, gravações de sessão e feedback. Suas páginas de documentação são utilizadas neste trabalho somente para caracterização tecnológica das funcionalidades declaradas, e não como evidência científica de eficácia ou adequação ao setor público ([Brasil, 2026](#ref-govbrFerramentaAvaliacao); [Hotjar, 2026](#ref-hotjar2026); [Microsoft, 2026](#ref-microsoftClarity2026)). O Government Digital Service, por sua vez, é uma fonte institucional e metodológica sobre uso de dados de desempenho na melhoria de serviços digitais ([Government Digital Service, 2021b](#ref-govuk2021usingData)).
 
 O Quadro [2](#tab:posicionamento-solucoes) sintetiza esse posicionamento.
 
@@ -257,27 +472,33 @@ Fonte: elaborada pelos autores (2026).
 
 A comparação é documental e de posicionamento: baseia-se nas funcionalidades declaradas pelas fontes institucionais e comerciais, sem teste independente ou auditoria técnica das soluções. Assim, delimita a lacuna explorada pelo trabalho sem transformar documentação de ferramentas em evidência científica.
 
+<a id="secao-2-9-metricas-de-navegacao-e-sinais-de-dificuldade"></a>
+
 ## 2.9 Métricas de Navegação e Sinais de Dificuldade
 
 Além do feedback declarado pelo usuário, serviços digitais podem ser avaliados por sinais observados durante a jornada. A taxa de conclusão, por exemplo, mede a proporção de transações iniciadas que chegam ao ponto definido como conclusão do serviço; sua leitura depende de identificar início, etapas intermediárias, abandono e término do fluxo ([Government Digital Service, 2021a](#ref-govuk2021completionRate)). Métricas de tempo, cliques, páginas visitadas e retorno a etapas anteriores também podem indicar dificuldade quando comparadas a faixas esperadas.
 
-O uso dessas métricas aproxima a avaliação de serviços públicos da avaliação de sistemas de informação. O modelo de sucesso de sistemas de informação de [DeLone; McLean (2003)](#ref-deloneMclean2003) relaciona qualidade do sistema, qualidade da informação, qualidade do serviço, uso, satisfação do usuário e benefícios líquidos. Para a solução proposta, cliques, tempo e sequência de navegação são evidências comportamentais de possível esforço ou dificuldade. Eles não medem qualidade percebida. Estrelas, atributos e comentários constituem evidências declaradas sobre a experiência. O CES é autorrelato de facilidade percebida, e não uma transformação da quantidade de cliques ou do tempo. A contribuição analítica está em relacionar essas fontes sem fundi-las: a telemetria localiza o contexto e o feedback permite interpretar a percepção.
+O uso dessas métricas aproxima a avaliação de serviços públicos da avaliação de sistemas de informação. O modelo de sucesso de sistemas de informação de [DeLone e McLean (2003)](#ref-deloneMclean2003) relaciona qualidade do sistema, qualidade da informação, qualidade do serviço, uso, satisfação do usuário e benefícios líquidos. Para a solução proposta, cliques, tempo e sequência de navegação são evidências comportamentais de possível esforço ou dificuldade. Eles não medem qualidade percebida. Estrelas, atributos e comentários constituem evidências declaradas sobre a experiência. O CES é autorrelato de facilidade percebida, e não uma transformação da quantidade de cliques ou do tempo. A contribuição analítica está em relacionar essas fontes sem fundi-las: a telemetria localiza o contexto e o feedback permite interpretar a percepção.
 
 O registro de eventos de navegação exige cuidado metodológico e jurídico. A coleta deve ser limitada ao necessário para a finalidade de melhoria do serviço, com uso de identificador técnico e minimização dos campos registrados, sem presumir anonimização. A Lei Geral de Proteção de Dados Pessoais estabelece princípios para o tratamento de dados, inclusive em meios digitais, com objetivo de proteger liberdade, privacidade e desenvolvimento da personalidade da pessoa natural ([Brasil, 2018](#ref-brasil2018lgpd)). Por isso, a proposta deste TCC considera o registro de cliques e tempo como mecanismo de análise agregada, não como instrumento de vigilância individual.
 
 <a id="sec:feedback-contextual"></a>
 
+<a id="secao-2-10-feedback-contextual-e-acionamento-por-sinais-de-uso"></a>
+
 ## 2.10 Feedback Contextual e Acionamento por Sinais de Uso
 
-O feedback contextual busca aproximar a coleta declarada do ponto da jornada em que uma experiência ocorre. Essa proposta dialoga com o Experience Sampling Method (ESM), desenvolvido para coletar autorrelatos durante a vida cotidiana ([Larson; Csikszentmihalyi, 1983](#ref-larson1983experienceSampling); [Hektner et al., 2007](#ref-hektner2007experienceSampling)). No presente trabalho, essa relação é conceitual: o convite acionado por um evento de navegação não representa, por si só, a aplicação integral de um protocolo de ESM.
+O feedback contextual busca aproximar a coleta declarada do ponto da jornada em que uma experiência ocorre. Essa proposta dialoga com o Experience Sampling Method (ESM), desenvolvido para coletar autorrelatos durante a vida cotidiana ([Larson; Csikszentmihalyi, 1983](#ref-larson1983experienceSampling); [Hektner; Schmidt; Csikszentmihalyi, 2007](#ref-hektner2007experienceSampling)). No presente trabalho, essa relação é conceitual: o convite acionado por um evento de navegação não representa, por si só, a aplicação integral de um protocolo de ESM.
 
 A proximidade temporal pode reduzir a dependência de recordações retrospectivas e permitir investigar relatos mais situados. Estudos sobre avaliação retrospectiva mostram que o desfecho pode influenciar o julgamento de uma experiência ([Kahneman et al., 1993](#ref-kahneman1993peakEnd)); esse resultado não comprova que perguntar durante uma dificuldade de navegação produza respostas melhores. A formulação, as opções de resposta e o contexto da pergunta também influenciam o autorrelato ([Schwarz, 1999](#ref-schwarz1999selfReports)).
 
-A eventual vantagem de obter um comentário mais específico precisa ser confrontada com o custo da interrupção. O estudo de [Mark et al. (2008)](#ref-mark2008interruptedWork) identificou maior estresse associado a interrupções em tarefas de trabalho. Esse achado oferece um motivo para investigar a intrusão do convite, sem estabelecer seu efeito no cenário deste TCC. Por isso, a pergunta contextual deve ser curta e opcional, e sua adequação precisa ser avaliada pelos usuários.
+A eventual vantagem de obter um comentário mais específico precisa ser confrontada com o custo da interrupção. O estudo de [Mark, Gudith e Klocke (2008)](#ref-mark2008interruptedWork) identificou maior estresse associado a interrupções em tarefas de trabalho. Esse achado oferece um motivo para investigar a intrusão do convite, sem estabelecer seu efeito no cenário deste TCC. Por isso, a pergunta contextual deve ser curta e opcional, e sua adequação precisa ser avaliada pelos usuários.
 
 No protótipo deste TCC, os gatilhos comportamentais foram reduzidos a regras simples e explícitas: excesso de cliques, tempo acima da faixa esperada e persistência do sinal após a sugestão de redirecionamento. Esses sinais não substituem a percepção do usuário, mas indicam quando faz sentido solicitar uma avaliação de baixo esforço. A escolha por regras explícitas preserva a rastreabilidade do MVP e evita que a solução dependa de modelos estatísticos complexos antes de haver dados reais suficientes para calibração.
 
 Esse tipo de coleta também precisa respeitar a carga cognitiva do cidadão. Questionários longos ou tecnicamente ambíguos aumentam esforço, erro e abandono. A Teoria da Carga Cognitiva indica que a memória de trabalho humana possui capacidade limitada; portanto, interfaces de feedback devem usar linguagem direta, poucas perguntas, opções de resposta claras e campos textuais opcionais ([Sweller, 1988](#ref-sweller1988cognitiveLoad)). O formulário atual reúne satisfação por estrelas, atributos, CES opcional e comentário opcional. Essa decisão de projeto não demonstra esforço reduzido ou utilidade dos dados, propriedades que dependem de avaliação específica.
+
+<a id="secao-2-11-sintese-do-referencial"></a>
 
 ## 2.11 Síntese do Referencial
 
@@ -285,9 +506,13 @@ O referencial teórico indica que a proposta de um avaliador de serviços públi
 
 Com base nesses princípios, este TCC propõe um avaliador inspirado em interfaces simples de plataformas digitais, mas fundamentado em modelos de avaliação de serviços públicos, usabilidade, design centrado no usuário e sucesso de sistemas de informação. A solução deve permitir que o usuário avalie um serviço de forma rápida e compreensível, enquanto eventos de navegação e resultados agregados oferecem ao gestor indícios sobre quais aspectos do serviço precisam de priorização e aperfeiçoamento.
 
+<a id="secao-3-metodologia"></a>
+
 # 3 Metodologia
 
 Este capítulo organiza o percurso pela DSR, distinguindo atividades executadas, documentação formalizada posteriormente e avaliações ainda planejadas. O artefato técnico atual e as interfaces históricas do Figma são componentes relacionados, com bases de evidência separadas.
+
+<a id="secao-3-1-estrategia-de-pesquisa-e-fontes"></a>
 
 ## 3.1 Estratégia de Pesquisa e Fontes
 
@@ -301,7 +526,7 @@ As fontes foram diferenciadas por natureza e finalidade. Artigos e livros acadê
 
 - **Legislação:** [Brasil, 2011](#ref-brasil2011lei12527); [Brasil, 2017a](#ref-brasil2017decreto9094); [Brasil, 2017b](#ref-brasil2017lei13460); [Brasil, 2018](#ref-brasil2018lgpd); [Brasil, 2021](#ref-brasil2021lei14129); [Brasil, 2022](#ref-brasil2022decreto11260); [Brasil. Secretaria de Governo Digital, 2022](#ref-brasil2022portaria548).
 
-- **Documentação ou pesquisa institucional:** [Brasil, 2026](#ref-govbrFerramentaAvaliacao); [Brasil. Ministério da Gestão e da Inovação em Serviços Públicos, 2024](#ref-brasilMgi2024ppaParticipativo); [Comitê Gestor da Internet no Brasil, 2025](#ref-cetic2025ticDomicilios2024); [Government Digital Service, 2021a](#ref-govuk2021completionRate); [Government Digital Service, 2021b](#ref-govuk2021usingData); [Government Digital Service, 2026](#ref-govuk2026wholeProblem); [IPC NSW, 2020](#ref-ipc2020privacy); [Cavoukian, 2011](#ref-cavoukian2011pbd).
+- **Documentação ou pesquisa institucional:** [Brasil, 2026](#ref-govbrFerramentaAvaliacao); [Brasil. Ministério da Gestão e da Inovação em Serviços Públicos, 2024](#ref-brasilMgi2024ppaParticipativo); [Comitê Gestor da Internet no Brasil, 2025](#ref-cetic2025ticDomicilios2024); [Government Digital Service, 2021a](#ref-govuk2021completionRate); [Government Digital Service, 2021b](#ref-govuk2021usingData); [Government Digital Service, 2026](#ref-govuk2026wholeProblem); [Information and Privacy Commission NSW, 2020](#ref-ipc2020privacy); [Cavoukian, 2011](#ref-cavoukian2011pbd).
 
 - **Literatura profissional:** [Caroli, 2018](#ref-caroli2018leanInception); [Cooper, 1999](#ref-cooper1999inmates); [Fowler; Caroli, 2022](#ref-fowler2022leanInception); [Kalbach, 2016](#ref-kalbach2016mapping); [Dixon; Freeman; Toman, 2010](#ref-dixon2010effort); [Dixon; Toman; DeLisi, 2013](#ref-dixon2013effortless); [Dixon, 2016](#ref-dixon2016ces).
 
@@ -309,39 +534,48 @@ As fontes foram diferenciadas por natureza e finalidade. Artigos e livros acadê
 
 - **Documentação comercial:** [Hotjar, 2026](#ref-hotjar2026); [Microsoft, 2026](#ref-microsoftClarity2026); [Useberry, c2026](#ref-useberryFigma); [SurveyMonkey, 2026](#ref-surveymonkey2026ces).
 
-- **Normas técnicas:** [ISO, 2018](#ref-iso9241112018); [ISO, 2019](#ref-iso92412102019); [ISO; IEC, 2023](#ref-iso250102023); [W3C, 2024](#ref-wcag22).
+- **Normas técnicas:** [International Organization for Standardization, 2018](#ref-iso9241112018); [International Organization for Standardization, 2019](#ref-iso92412102019); [International Organization for Standardization e International Electrotechnical Commission, 2023](#ref-iso250102023); [World Wide Web Consortium, 2024](#ref-wcag22).
 
-- **Material didático institucional:** [Lima; Pereira, 2020a](#ref-limaPereira2020modulo1); [Lima; Pereira, 2020c](#ref-limaPereira2020modulo2); [Lima; Pereira, 2020d](#ref-limaPereira2020modulo3); [Lima; Pereira, 2020b](#ref-limaPereira2020modulo4).
+- **Material didático institucional:** [Lima; Pereira, 2020a](#ref-limaPereira2020modulo1); [Lima; Pereira, 2020b](#ref-limaPereira2020modulo2); [Lima; Pereira, 2020c](#ref-limaPereira2020modulo3); [Lima; Pereira, 2020d](#ref-limaPereira2020modulo4).
 
 - **Relatório técnico institucional:** [Pedrosa et al., 2019](#ref-pedrosa2019qualidadeGovbr); [Silva, 2024](#ref-silva2024atributosApi); [Silva et al., 2019](#ref-silva2019brasp); [Silva; Menezes, 2022](#ref-silva2022modeloUnificado).
 
-As fontes acrescentadas nesta consolidação incluem o artigo de E-S-QUAL/E-RecS-QUAL, o método DSRM e o artigo de Fawcett sobre matriz de confusão como literatura científica; ISO/IEC 25010:2023 e WCAG 2.2 como referências normativas de qualidade e acessibilidade; e o material sobre Privacy by Design como orientação institucional de projeto ([Parasuraman; Zeithaml; Malhotra, 2005](#ref-parasuraman2005esqual); [Peffers et al., 2007](#ref-peffers2007dsrm); [Fawcett, 2006](#ref-fawcett2006roc); [ISO; IEC, 2023](#ref-iso250102023); [W3C, 2024](#ref-wcag22); [IPC NSW, 2020](#ref-ipc2020privacy)). O guia de serviço completo do GDS é documentação institucional. Essa classificação não transfere validade de um contexto de aplicação para outro.
+As fontes acrescentadas nesta consolidação incluem o artigo de E-S-QUAL/E-RecS-QUAL, o método DSRM e o artigo de Fawcett sobre matriz de confusão como literatura científica; ISO/IEC 25010:2023 e WCAG 2.2 como referências normativas de qualidade e acessibilidade; e o material sobre Privacy by Design como orientação institucional de projeto ([Parasuraman; Zeithaml; Malhotra, 2005](#ref-parasuraman2005esqual); [Peffers et al., 2007](#ref-peffers2007dsrm); [Fawcett, 2006](#ref-fawcett2006roc); [International Organization for Standardization e International Electrotechnical Commission, 2023](#ref-iso250102023); [World Wide Web Consortium, 2024](#ref-wcag22); [Information and Privacy Commission NSW, 2020](#ref-ipc2020privacy)). O guia de serviço completo do GDS é documentação institucional. Essa classificação não transfere validade de um contexto de aplicação para outro.
+
+<a id="secao-3-2-identificacao-do-problema-e-motivacao"></a>
 
 ## 3.2 Identificação do Problema e Motivação
 
 O problema é a dificuldade de relacionar julgamentos declarados ao contexto de navegação em que são solicitados. Derivam-se cinco necessidades de projeto: **N01**, avaliar a etapa com linguagem e esforço de resposta compatíveis com o cidadão; **N02**, registrar contexto sem equipará-lo à percepção; **N03**, transformar evidências em hipóteses de melhoria acompanháveis; **N04**, gerir regras e dados de forma controlada; e **N05**, verificar o software e planejar avaliação independente. São necessidades de projeto derivadas do problema e da discussão de concepção, não resultados de nova elicitação com gestores externos.
 
+<a id="secao-3-3-objetivos-e-requisitos-da-solucao"></a>
+
 ## 3.3 Objetivos e Requisitos da Solução
 
 Os objetivos da seção 1.4 são desdobrados em requisitos funcionais, não funcionais, regras de negócio, histórias de usuário e critérios de aceitação no Apêndice H. A matriz de Engenharia de Software liga N01–N05 a esses requisitos, componentes e evidências. Ela difere da rastreabilidade conceitual entre construtos e dados: a primeira organiza construção e verificação; a segunda delimita o significado das medidas.
 
+<a id="secao-3-3-1-concepcao-e-delimitacao-com-lean-inception"></a>
+
 ### 3.3.1 Concepção e Delimitação com Lean Inception
 
-A Lean Inception foi utilizada como técnica de concepção para alinhar visão de produto, escopo e MVP. A abordagem de [Caroli (2018)](#ref-caroli2018leanInception) auxilia equipes a definir o produto certo antes de ampliar o desenvolvimento; [Fowler; Caroli (2022)](#ref-fowler2022leanInception) também a descreve como uma inception focada em compreender funcionalidades, clientes e Canvas MVP. Neste trabalho, a técnica organizou a definição do sistema de avaliação contextual e ajudou a transformar a ideia inicial em um conjunto priorizado de funcionalidades.
+A Lean Inception foi utilizada como técnica de concepção para alinhar visão de produto, escopo e MVP. A abordagem de [Caroli (2018)](#ref-caroli2018leanInception) auxilia equipes a definir o produto certo antes de ampliar o desenvolvimento; [Fowler e Caroli (2022)](#ref-fowler2022leanInception) também a descrevem como uma inception focada em compreender funcionalidades, clientes e Canvas MVP. Neste trabalho, a técnica organizou a definição do sistema de avaliação contextual e ajudou a transformar a ideia inicial em um conjunto priorizado de funcionalidades.
 
-O tema inicial foi organizado pelo orientador em dois recortes: este trabalho, desenvolvido pelos autores, e outro, desenvolvido por Wesley Pedrosa dos Santos. Parte das atividades de concepção foi compartilhada entre os trabalhos. Wesley participou de parte dessas atividades, sem participar de toda a Lean Inception. Os registros de visão do produto, funcionalidades e demais artefatos de concepção tiveram origem nesse contexto compartilhado; as figuras foram produzidas por Fernando Gabriel dos Santos Carrijo.
+O tema inicial foi organizado pelo orientador em dois recortes. Este trabalho, desenvolvido por Julio Cesar Gomes de Souza Crispim e Fernando Gabriel dos Santos Carrijo, aborda avaliação contextual de serviços públicos digitais, indicadores de navegação, CSAT, CES e modelos de qualidade percebida. O outro recorte é desenvolvido por Wesley Pedrosa dos Santos.
 
-A discussão das quatro perspectivas listadas a seguir não contou com Wesley. As perspectivas estão associadas às contribuições dos participantes, sem atribuir-lhes vínculo institucional ou condição de especialista independente:
+As atividades de concepção parcialmente compartilhadas abrangeram o alinhamento do problema, a visão do produto, a dinâmica É / Não É / Faz / Não Faz e o levantamento e a priorização iniciais das funcionalidades e do MVP. Wesley participou apenas de parte dessas atividades, não de toda a Lean Inception nem da discussão das quatro perspectivas apresentada a seguir.
 
-- **Felipe**, atendimento público, representando dúvidas recorrentes e dificuldades relatadas por cidadãos;
+Os registros visuais históricos tiveram elaboração visual de Fernando Gabriel dos Santos Carrijo; seu conteúdo resultou dessas atividades parcialmente compartilhadas, com contribuições de Julio e Fernando e participação parcial de Wesley. Os originais permanecem no acervo digital de concepção, separado deste manuscrito, cuja proveniência está descrita no Apêndice L.
 
-- **Lucas**, gestão digital, representando a necessidade de indicadores acionáveis para priorização de melhorias;
+As quatro perspectivas foram associadas às contribuições dos participantes, sem lhes atribuir vínculo institucional ou condição de especialista independente:
 
-- **Diassis**, estudante da UnB, representando viabilidade técnica, escopo acadêmico, segurança e LGPD;
+- **Felipe:** atendimento público; dúvidas e dificuldades dos cidadãos;
+- **Lucas:** gestão digital; indicadores para priorizar melhorias;
+- **Diassis:** estudante da UnB; viabilidade técnica, escopo, segurança e LGPD;
+- **Bruno:** estudante da UnB; experiência, jornada, interface e validação.
 
-- **Bruno**, estudante da UnB, representando experiência do usuário, jornada, clareza de interface e validação.
+Lucas, participante da discussão, e Lucas Almeida, persona fictícia da seção 4.3, são referências distintas. A participação parcial de Wesley nas atividades compartilhadas é registrada como colaboração de concepção; este manuscrito tem como autores Julio e Fernando. Essa colaboração não constitui avaliação independente. A dinâmica foi uma atividade de alinhamento interno e não substitui especificação de requisitos, teste de usabilidade ou avaliação por especialistas.
 
-Lucas, participante da discussão, e Lucas Almeida, persona fictícia da seção 4.3, são referências distintas. A colaboração parcial de Wesley nas atividades compartilhadas de concepção é distinta dessa discussão e não constitui avaliação independente do sistema. A dinâmica foi uma atividade interna de alinhamento e delimitação do produto, não uma validação externa. As decisões da Lean Inception não substituem especificação de requisitos, teste de usabilidade ou avaliação por especialistas independentes.
+<a id="secao-3-3-2-atividades-de-concepcao"></a>
 
 ### 3.3.2 Atividades de Concepção
 
@@ -367,6 +601,8 @@ A agenda da Lean Inception foi organizada para que as funcionalidades surgissem 
 
 A construção de personas foi baseada na tradição de design centrado no usuário. [Cooper (1999)](#ref-cooper1999inmates) apresenta personas como arquétipos usados para orientar decisões de produto. O mapeamento de jornada seguiu a lógica de visualização de experiências discutida por [Kalbach (2016)](#ref-kalbach2016mapping), com identificação de pontos de contato, fricções e oportunidades de intervenção. As personas também consideraram o cenário brasileiro de uso de tecnologias digitais, descrito pela TIC Domicílios 2024 ([Comitê Gestor da Internet no Brasil, 2025](#ref-cetic2025ticDomicilios2024)), e a existência de mecanismos oficiais de avaliação de serviços públicos digitais ([Brasil, 2026](#ref-govbrFerramentaAvaliacao)).
 
+<a id="secao-3-4-design-e-desenvolvimento"></a>
+
 ## 3.4 Design e Desenvolvimento
 
 O desenvolvimento adotou prototipação incremental, com a finalidade de explorar decisões de solução e reduzir incertezas ([Sommerville, 2011](#ref-Sommerville2011)). A Lean Inception foi conduzida entre 18 e 27 de junho de 2026; a avaliação das interfaces no Figma ocorreu em 28 de junho de 2026. A existência de uma implementação funcional em Python antes das sessões não significa que ela tenha sido usada pelos participantes. Não se atribuem os resultados do Figma à API.
@@ -383,19 +619,25 @@ As ondas 1 a 3 constituíram o MVP planejado, mas foram implementadas apenas em 
 
 A implementação foi posteriormente atualizada para incorporar CES opcional de 1 a 7. Essa versão é posterior às sessões de 28 de junho de 2026. A atualização do formulário e dos indicadores não acrescenta medidas à coleta histórica nem permite atribuir CES aos participantes já avaliados.
 
+<a id="secao-3-5-demonstracao"></a>
+
 ## 3.5 Demonstração
 
 A demonstração técnica usa páginas simuladas, requisições HTTP, SQLite e um painel local. Dados sintéticos permitem observar uma condição operacional, o convite, a persistência de uma resposta, a edição de configurações e o registro de ações de melhoria. Executar esse encadeamento demonstra funções disponíveis no ambiente local, sem provar benefício ao cidadão ou capacidade de integração governamental. Os testes da implementação atual são descritos na seção 4.19.
 
 O estudo histórico utilizou Figma e Useberry. Sua demonstração de interfaces e seus oito registros não são demonstração de endpoints ou da persistência da API. A nova implementação de CES, configuração e gestão não foi retroativamente avaliada naquela amostra.
 
+<a id="secao-3-6-avaliacao"></a>
+
 ## 3.6 Avaliação
 
 A avaliação distingue **verificação**, que confronta software e critérios de aceitação, de **validação**, que investiga se a solução atende ao problema e às necessidades dos interessados. Os testes automatizados locais oferecem evidências parciais de verificação; não validam os construtos, a utilidade do painel ou a hipótese comparativa. O Apêndice I seleciona características de qualidade e apresenta o plano de verificação e validação. O Apêndice K separa protocolos de cidadãos, gestores e especialistas.
 
+<a id="secao-3-6-1-hipoteses-e-criterios-da-avaliacao-exploratoria"></a>
+
 ### 3.6.1 Hipóteses e Critérios da Avaliação Exploratória
 
-As hipóteses direcionais propostas para um estudo futuro são: **H1**, em tarefas e condições equivalentes, o fluxo contextual terá maior proporção de participantes que enviam feedback do que o fluxo com formulário final; **H2**, os comentários enviados no fluxo contextual terão maior escore de especificidade do que os enviados no fluxo com formulário final, segundo rubrica definida antes da coleta. As hipóteses não foram testadas por esta avaliação exploratória. A regra de exposição ao convite e os denominadores deverão ser definidos previamente, com divulgação das respostas tanto por participante alocado quanto por participante exposto.
+A comparação entre feedback contextual e formulário final constitui hipótese para o TCC 2. H1: o convite contextual produz maior taxa de resposta que o formulário apresentado somente ao final. H2: o convite contextual produz comentários mais específicos sobre a etapa vivenciada. Antes da coleta, serão definidas as variáveis dependentes: taxas de resposta e de conclusão, esforço percebido, qualidade/especificidade do comentário, interrupção provocada e adequação do momento da pergunta. A avaliação atual não testou essas hipóteses; denominadores, codificação e critérios de análise serão fixados no protocolo do TCC 2.
 
 As variáveis previstas têm diferentes condições de observação nesta etapa:
 
@@ -422,11 +664,15 @@ Para a inspeção interna do artefato foram organizados sete critérios, retomad
 
 A apresentação dos resultados como exploratórios é uma regra de interpretação comum a todos os critérios, sem afirmação de superioridade ou generalização.
 
+<a id="secao-3-6-2-procedimentos-do-estudo-historico"></a>
+
 ### 3.6.2 Procedimentos do Estudo Histórico
 
-O relato do trabalho distingue três procedimentos. O primeiro é a inspeção funcional interna da implementação, com observação do registro de eventos, regras e indicadores descritos pelos autores, sem relatório histórico de execução de testes anexado; esse registro não se confunde com a execução automatizada posterior documentada na seção 4.19. O segundo é uma **avaliação heurística interna/preliminar**, também dos autores. O terceiro é a avaliação de fluxos de interface no Figma com oito participantes; os resultados desse procedimento não devem ser apresentados como verificação da API.
+O relato distingue três procedimentos: verificação funcional interna da implementação; **avaliação heurística interna/preliminar**, conduzida pelos autores; e teste exploratório de usabilidade no Figma com oito cidadãos, que não corresponde à verificação de API. Para o TCC 2, planeja-se avaliação heurística externa por especialistas, separada do teste de usabilidade com cidadãos. Essa avaliação externa ainda não foi executada.
 
 A avaliação exploratória de interface ocorreu em 28 de junho de 2026, com oito participantes externos ao grupo de desenvolvimento, quatro em cada fluxo. A alocação entre os grupos foi auxiliada por inteligência artificial e descrita como sorteio, sem registro auditável do mecanismo. Não se assume aleatorização verificável. O Figma foi instrumentado pelo Useberry para registro automático de cliques e tempos. O fluxo A previa formulário final e o B convite contextual; o popup de redirecionamento fez parte de ambos. A tarefa consistiu em localizar e iniciar a declaração do Imposto sobre a Renda da Pessoa Física (IRPF) de 2026, com limite de dez minutos. As sessões foram individuais e moderadas, sob coordenação de Julio Cesar Gomes de Souza Crispim e Fernando Gabriel dos Santos Carrijo, com TCLE que mencionava o Useberry e o registro de interações. A gravação se limitou à tela e aos eventos de interação, sem áudio ou vídeo de câmera dos participantes. Os comentários apresentados no Apêndice G provêm do questionário pós-sessão. O convite no fluxo B podia decorrer de tempo, entrada em tela ou clique no Figma. No fluxo A, resposta significa realizar a avaliação no formulário final; no B, aceitar o convite e realizar a avaliação sobre a experiência, não apenas abrir o convite. Os valores temporais, as telas e as interações específicas não estão discriminados neste protocolo. Esse procedimento permite observação formativa de interface, sem estabelecer funcionamento dos gatilhos do backend ou efeitos causais entre fluxos.
+
+<a id="secao-3-6-3-tratamento-e-significado-dos-dados"></a>
 
 ### 3.6.3 Tratamento e Significado dos Dados
 
@@ -451,13 +697,21 @@ Fonte: elaboração dos autores com base no modelo de dados, no instrumento atua
 
 A tabela explicita o significado pretendido, o dado observável e sua disponibilidade. Não demonstra validade de construto, equivalência entre fontes ou causalidade. O sistema relaciona as evidências por contexto técnico de sessão e serviço quando disponíveis, sem somá-las em uma pontuação única. O estudo Figma/Useberry continua separado da base da API.
 
+<a id="secao-3-7-comunicacao"></a>
+
 ## 3.7 Comunicação
 
+Os registros históricos de concepção e as evidências técnicas já publicadas estão disponíveis no [repositório do projeto](https://github.com/Juliovskys/latex-tcc), no registro permanente `d24af5d8ccfa088c7857983fe4d24b08af5337b0`. O [acervo de concepção](https://github.com/Juliovskys/latex-tcc/tree/d24af5d8ccfa088c7857983fe4d24b08af5337b0/latex/figuras/apendices) e as [evidências da execução automatizada](https://github.com/Juliovskys/latex-tcc/tree/d24af5d8ccfa088c7857983fe4d24b08af5337b0/docs/evidencias) podem ser consultados nessa versão. O registro da execução técnica identifica como commit-base `935050f9ea7ffa443a1742ec956776762d756090`; os hashes nele registrados identificam os arquivos efetivamente testados. Esses localizadores se referem ao acervo e à evidência técnica existente, não a uma nova avaliação empírica.
+
 A comunicação reúne o manuscrito, os artefatos de requisitos/rastreabilidade, os protocolos, o código e seus testes. As capturas da implementação atual identificam a versão e seu caráter demonstrativo. Os registros históricos do estudo permanecem separados da atualização técnica. A publicação de resultados de usuários, gestores ou especialistas exige executar e documentar os respectivos protocolos; o planejamento não é relatado como resultado.
+
+<a id="secao-4-desenvolvimento-da-solucao"></a>
 
 # 4 Desenvolvimento da Solução
 
 Este capítulo apresenta o desenvolvimento do sistema de avaliação contextual a partir dos artefatos da Lean Inception e da implementação do protótipo. O desenvolvimento foi orientado pela hipótese de que o feedback contextual, acionado próximo a um sinal de possível dificuldade, pode ampliar a participação e produzir evidências declaradas mais específicas do que uma avaliação estática exibida apenas ao final da jornada. A avaliação exploratória desta etapa não é suficiente para confirmar essa hipótese.
+
+<a id="secao-4-1-visao-geral-do-produto"></a>
 
 ## 4.1 Visão Geral do Produto
 
@@ -465,17 +719,21 @@ O sistema de avaliação contextual foi definido como uma solução de feedback 
 
 A visão do produto reúne cidadãos que precisam realizar uma tarefa e gestores que precisam interpretar sinais de uso. O sistema propõe relacionar o contexto da navegação a declarações curtas de satisfação, atributos e facilidade percebida, para orientar investigação e melhoria do serviço. Os benefícios de participação e utilidade permanecem hipóteses de avaliação.
 
-As sínteses desta seção apresentam a concepção do produto e sua delimitação atual. Os registros visuais da Lean Inception, produzidos por Fernando Gabriel dos Santos Carrijo, permanecem no acervo do projeto. O escopo de coleta foi atualizado após o estudo de interface; não se atribui essa atualização à execução histórica da dinâmica. As capacidades implementadas são discriminadas nas seções 3.4 e 4.7 a 4.19; os registros históricos estão inventariados no Apêndice A.
+As sínteses desta seção apresentam a concepção do produto e sua delimitação atual. Os registros visuais históricos tiveram elaboração visual de Fernando Gabriel dos Santos Carrijo e conteúdo resultante das atividades parcialmente compartilhadas descritas na seção 3.3.1. Os originais permanecem no acervo digital de concepção, separado deste manuscrito. O escopo de coleta foi atualizado após o estudo de interface; não se atribui essa atualização à execução histórica da dinâmica. As capacidades implementadas são discriminadas nas seções 3.4 e 4.7 a 4.19; os registros históricos estão inventariados no Apêndice A e sua proveniência está descrita no Apêndice L.
 
 A dinâmica É / Não É / Faz / Não Faz delimitou o escopo inicial. O produto é uma implementação local demonstrativa, com integração a portais reais prevista como evolução. Também é um apoio à melhoria de serviços digitais e à decisão administrativa. Não é um substituto de ouvidoria, não é chatbot, não solicita nome ou CPF na interface e não representa uma implantação governamental completa. A delimitação distingue coleta de indícios, julgamento declarado e resolução efetiva da necessidade; o protótipo não executa a prestação do serviço público.
 
 Na implementação Python, o sistema registra cliques instrumentados, recebe duração informada à API, aplica regras e disponibiliza um formulário com satisfação por estrelas, atributos, CES opcional e comentário opcional. A duração é demonstrada por envio simulado, sem cronômetro automático no cliente. O formulário não solicita identificação civil ou credenciais de login; o contrato atual de eventos rejeita identificador de usuário, URL completa e coordenadas e exige autorização local. Não há garantia de anonimização, resolução automática do problema do serviço ou integração governamental real.
+
+<a id="secao-4-2-objetivos-do-produto"></a>
 
 ## 4.2 Objetivos do Produto
 
 A dinâmica de objetivos do produto separou o que o MVP precisava provar daquilo que seria apenas evolução futura. Os objetivos levantados foram: capturar sinais de possível dificuldade durante a navegação, solicitar feedback no momento adequado, reduzir o esforço de resposta, gerar dados agregados e acionáveis, coletar dados comparáveis entre fluxo contextual e fluxo estático, preservar privacidade e validar o MVP em protótipo controlado.
 
 Foram priorizados três objetivos essenciais. O primeiro é capturar sinais de possível dificuldade, pois sem eventos de navegação não há como identificar o momento adequado para solicitar feedback. O segundo é solicitar feedback contextual, pois essa é a diferença principal em relação a formulários tradicionais. O terceiro é coletar dados comparáveis, porque a hipótese do MVP depende da comparação entre um fluxo estático e um fluxo contextual.
+
+<a id="secao-4-3-personas"></a>
 
 ## 4.3 Personas
 
@@ -487,6 +745,8 @@ A segunda persona é Lucas Almeida, gestor público de serviço digital. Lucas p
 
 A equipe técnica e de UX foi reconhecida como persona secundária de evolução. Ela seria importante em um piloto real, especialmente para configurar regras, acompanhar integrações e interpretar dados técnicos, mas não é essencial para validar o MVP em ambiente de protótipo.
 
+<a id="secao-4-4-jornadas"></a>
+
 ## 4.4 Jornadas
 
 A jornada principal descreve Carlos tentando usar um serviço público digital. Ele acessa um portal público, procura um serviço, encontra termos confusos, clica repetidamente, permanece tempo acima do esperado, tem os sinais registrados pelo avaliador, recebe feedback contextual e pode responder ou ignorar a avaliação. Em seguida, os dados são enviados ao painel para que a persona gestora investigue um possível ponto de atrito.
@@ -494,6 +754,8 @@ A jornada principal descreve Carlos tentando usar um serviço público digital. 
 O ponto crítico ocorre entre a dificuldade observada e o abandono da jornada. É nesse intervalo que o feedback contextual se diferencia de uma avaliação estática. A proposta é perguntar quando a experiência ainda está recente, sem exigir um formulário longo e sem pressupor que um sinal comportamental comprove dificuldade.
 
 Foram definidos dois fluxos comparáveis. No fluxo A, o cidadão navega, enfrenta dúvidas e recebe um formulário apenas ao final da jornada. No fluxo B, o cidadão clica ou demora além do esperado, o sistema registra o sinal e solicita feedback contextual. A comparação futura seguirá H1 e H2 da seção 3.6.1. A apresentação de alertas no painel é uma capacidade de implementação distinta do teste dessas hipóteses.
+
+<a id="secao-4-5-funcionalidades-priorizadas"></a>
 
 ## 4.5 Funcionalidades Priorizadas
 
@@ -519,11 +781,15 @@ As funcionalidades essenciais definidas para o MVP foram implementadas com os se
 
 Funcionalidades como inteligência artificial para resumir comentários, integração com portal real, autenticação avançada, separação multi-organização completa e calibração estatística refinada foram deixadas fora do MVP inicial. Essas funcionalidades ampliam o escopo técnico e dependem de dados reais, autorização institucional ou governança de produção.
 
+<a id="secao-4-6-sequenciamento-e-canvas-mvp"></a>
+
 ## 4.6 Sequenciamento e Canvas MVP
 
 O sequenciador definiu as ondas 1 a 3 como escopo do MVP. A implementação foi parcial, conforme a seção 3.4: API e interfaces no Figma materializam partes distintas do desenho. As regras por serviço já estão implementadas, embora tenham sido inicialmente associadas à onda 4; ranking, indicadores A/B, filtros e comentários recentes não estão disponíveis no painel. A preparação para piloto real permanece futura.
 
 O Canvas MVP consolidou o planejamento de uma solução contextual com identificadores técnicos, formulário curto e indicadores administrativos. O resultado alcançado foi uma implementação local parcial e um estudo exploratório das interfaces no Figma. A execução integrada do MVP planejado e seus benefícios comparativos continuam sujeitos a desenvolvimento e avaliação.
+
+<a id="secao-4-7-arquitetura-do-prototipo"></a>
 
 ## 4.7 Arquitetura do Protótipo
 
@@ -537,9 +803,11 @@ A Figura [1](#fig:prototipo-portal) mostra a página de portal público usada no
 
 **Figura 1 — Página de portal público usada no protótipo.**
 
-![Figura 1 — Página de portal público usada no protótipo](figuras/prototipo-portal-atual.png)
+![Figura 1 — Página de portal público usada no protótipo](figuras/prototipo-portal-final.jpg)
 
 Fonte: captura da implementação Python atual, produzida na conferência local do protótipo (2026).
+
+<a id="secao-4-8-api-e-endpoints"></a>
 
 ## 4.8 API e Endpoints
 
@@ -568,6 +836,8 @@ Fonte: elaboração dos autores com base nos endpoints da implementação Python
 
 Nota: todas as rotas com prefixo `/api/admin/` exigem chave administrativa.
 
+<a id="secao-4-9-regras-de-deteccao-de-possivel-dificuldade"></a>
+
 ## 4.9 Regras de Detecção de Possível Dificuldade
 
 A detecção de possível dificuldade foi implementada com regras explícitas no backend. A API mantém, para cada serviço, um limite de cliques e um tempo médio esperado. Um alerta por clique é criado quando a contagem de cliques da mesma sessão, no mesmo serviço, fica **maior** que o limite configurado. Um alerta por duração informada é criado quando esse valor fica **maior** que o tempo de referência multiplicado pelo fator configurado; o fator inicial é 1,5.
@@ -578,7 +848,7 @@ O alerta é um registro administrativo distinto do convite. Um campo legado de a
 
 Essas regras operacionalizam o conceito de feedback contextual discutido na Seção [2.10](#sec:feedback-contextual): o sistema não pergunta aleatoriamente, mas usa sinais de uso para decidir quando solicitar uma manifestação do usuário. O acionamento não confirma que houve dificuldade nem mede qualidade percebida; ele apenas seleciona um contexto para coleta do feedback declarado.
 
-A lógica aproxima-se da coleta contingente a eventos discutida na literatura de Experience Sampling Method (ESM), com uma adaptação ao contexto de software. A literatura de ESM descreve procedimentos de coleta de autorrelatos no cotidiano ([Larson; Csikszentmihalyi, 1983](#ref-larson1983experienceSampling); [Hektner et al., 2007](#ref-hektner2007experienceSampling)). O Quadro [5](#tab:formas-coleta-situada) organiza formas de acionamento para discutir o desenho do MVP; não representa uma classificação validada por este estudo. Neste protótipo, cliques acima do limite, tempo acima da faixa esperada e persistência após redirecionamento funcionam como sinais comportamentais de possível dificuldade. Eles não são equivalentes a uma confirmação de dificuldade e não expressam qualidade percebida; indicam apenas um momento plausível para solicitar feedback declarado. Por isso, o convite deve ser opcional, curto e não bloqueante.
+A lógica aproxima-se da coleta contingente a eventos discutida na literatura de Experience Sampling Method (ESM), com uma adaptação ao contexto de software. A literatura de ESM descreve procedimentos de coleta de autorrelatos no cotidiano ([Larson; Csikszentmihalyi, 1983](#ref-larson1983experienceSampling); [Hektner; Schmidt; Csikszentmihalyi, 2007](#ref-hektner2007experienceSampling)). O Quadro [5](#tab:formas-coleta-situada) organiza formas de acionamento para discutir o desenho do MVP; não representa uma classificação validada por este estudo. Neste protótipo, cliques acima do limite, tempo acima da faixa esperada e persistência após redirecionamento funcionam como sinais comportamentais de possível dificuldade. Eles não são equivalentes a uma confirmação de dificuldade e não expressam qualidade percebida; indicam apenas um momento plausível para solicitar feedback declarado. Por isso, o convite deve ser opcional, curto e não bloqueante.
 
 O Quadro [5](#tab:formas-coleta-situada) explicita essa adaptação metodológica.
 
@@ -615,6 +885,8 @@ Fonte: elaborada pelos autores (2026).
 
 O Quadro [6](#tab:sensibilidade-limiares) é uma análise de projeto elaborada pelos autores, distinta das sessões empíricas com participantes. Ela organiza efeitos esperados e riscos dos parâmetros; não mede taxas reais de acionamento nem calibra limiares para produção.
 
+<a id="secao-4-9-1-simulacao-sintetica-dos-limiares"></a>
+
 ### 4.9.1 Simulação Sintética dos Limiares
 
 Foi registrada uma análise sintética com 1.000 sessões de cliques e durações log-normais, medianas de 7 cliques e 60 segundos e cenários identificados por 10, 13 e 18 cliques. Os arquivos de execução e resultados intermediários não estão disponíveis. O valor da semente e os parâmetros de dispersão não foram preservados no relato. A Tabela [1](#tab:simulacao-sintetica-limiares) apresenta a síntese numérica dessa etapa, sem possibilidade de reprodução a partir dos materiais disponíveis.
@@ -650,6 +922,8 @@ Os valores iniciais de demonstração, antes de alterações administrativas, s�
 Fonte: elaboração dos autores com base nos valores iniciais configurados no backend Python (2026).
 
 A página inicial do governo é tratada como contexto capaz de recomendar um serviço prioritário. O serviço de Imposto de Renda foi marcado como importante e de alto tráfego. O serviço genérico representa uma situação comum, na qual a API registra o acionamento da regra e pode gerar um convite sem sugerir redirecionamento. Em todos os casos, o alerta administrativo registra somente que uma regra operacional foi acionada. O gestor visualiza o evento como indício para investigação, e não como diagnóstico automático de dificuldade ou de baixa qualidade percebida.
+
+<a id="secao-4-10-fluxos-implementados"></a>
 
 ## 4.10 Fluxos Implementados
 
@@ -699,9 +973,11 @@ A Figura [2](#fig:prototipo-feedback) apresenta a tela de feedback contextual, c
 
 **Figura 2 — Formulário de feedback contextual do protótipo.**
 
-![Figura 2 — Formulário de feedback contextual do protótipo](figuras/prototipo-feedback-ces.png)
+![Figura 2 — Formulário de feedback contextual do protótipo](figuras/prototipo-feedback-final.jpg)
 
 Fonte: captura da versão funcional com CES, produzida na atualização do protótipo (2026). Não corresponde às interfaces Figma utilizadas no estudo exploratório.
+
+<a id="secao-4-11-painel-administrativo-e-indicadores"></a>
 
 ## 4.11 Painel Administrativo e Indicadores
 
@@ -719,9 +995,11 @@ A Figura [3](#fig:painel-atual) apresenta dados e registro de ação no painel a
 
 **Figura 3 — Dados e registro de ação de melhoria no painel.**
 
-![Figura 3 — Dados e registro de ação de melhoria no painel](figuras/prototipo-painel-visao.png)
+![Figura 3 — Dados e registro de ação de melhoria no painel](figuras/prototipo-painel-final.jpg)
 
 Fonte: captura da implementação local com dados sintéticos (2026); não representa resultados de cidadãos ou gestores.
+
+<a id="secao-4-12-resultado-do-desenvolvimento"></a>
 
 ## 4.12 Resultado do Desenvolvimento
 
@@ -729,9 +1007,11 @@ O desenvolvimento resultou em uma implementação local parcial das ondas 1 a 3.
 
 A implementação funcional e a avaliação de interface representam frentes distintas do trabalho. O desenho prevê formulário final no fluxo A e convite contextual no B. As sessões com oito participantes, descritas na seção [4.14](#sec:avaliacao-participantes), ocorreram no Figma/Useberry. Seus resultados não verificam integração com SQLite, funcionamento dos endpoints ou aderência dos convites às regras do código Python.
 
+<a id="secao-4-13-avaliacao-preliminar-do-artefato"></a>
+
 ## 4.13 Avaliação Preliminar do Artefato
 
-Na evolução posterior do formulário, foram executados seis testes automatizados específicos de satisfação e CES, com bases temporárias e dados sintéticos. Eles verificam as sete categorias, respostas ausentes, rejeição de valores inválidos, agregações por serviço, migração com cópia de segurança e separação de versões do item de satisfação. O código está em `prototype-api/test_feedback_ces.py`. Um envio sintético também foi conferido no navegador. Esses procedimentos verificam aspectos técnicos do contrato atual; não são novas sessões com cidadãos, validação do instrumento, teste das hipóteses ou execução de um plano completo de verificação e validação.
+A execução automatizada local de 15 de outubro de 2026, documentada na seção 4.19, compreende sete testes específicos de satisfação e CES, com bases temporárias e dados sintéticos, e doze testes de governança, totalizando 19. Os sete casos do formulário verificam as sete categorias, respostas ausentes, rejeição de valores inválidos, agregações por serviço, migração com cópia de segurança, separação de versões dos itens e presença do CES opcional. O código está em `prototype-api/test_feedback_ces.py`, e os casos são identificados em H.6. Um envio sintético também foi conferido no navegador. Esses procedimentos verificam aspectos técnicos do contrato atual; não são novas sessões com cidadãos, validação do instrumento, teste das hipóteses ou execução de um plano completo de verificação e validação.
 
 O quadro heurístico preserva a inspeção interna anterior às últimas alterações; suas recomendações não são um novo julgamento da versão atual. Os recursos posteriormente implementados precisam de reavaliação. A análise interna do artefato distingue inspeção funcional e **avaliação heurística interna/preliminar** dos autores. A organização heurística tomou como referência [Nielsen (1994)](#ref-nielsen1994heuristic), sem equivaler a inspeção externa. O registro daquela inspeção não discrimina avaliadores, data ou severidade e não contém relatório completo de execução. Os testes automatizados posteriores possuem saída e identificação dos arquivos na seção 4.19. Os resultados abaixo devem ser lidos como apreciação interna da implementação e do desenho de interface.
 
@@ -776,6 +1056,8 @@ A leitura heurística interna/preliminar indicou que a interface apresenta o est
 
 <a id="sec:avaliacao-participantes"></a>
 
+<a id="secao-4-14-avaliacao-exploratoria-com-participantes"></a>
+
 ## 4.14 Avaliação Exploratória com Participantes
 
 Em 28 de junho de 2026 foi conduzida uma avaliação exploratória de interface com oito participantes externos ao grupo de desenvolvimento. As tarefas foram realizadas no Figma, com registro automático de cliques e tempos pelo Useberry. A documentação do fornecedor caracteriza a integração para testes de protótipos; não constitui evidência independente dos dados desta coleta ([Useberry, c2026](#ref-useberryFigma)). Quatro participantes realizaram o fluxo A, com formulário final, e quatro o B, com convite contextual. A alocação foi auxiliada por inteligência artificial e descrita como sorteio, sem registro auditável de seu mecanismo. O popup de redirecionamento fez parte de ambos os fluxos; não há registro individual de sua exibição ou aceitação. A tarefa consistia em localizar e iniciar a declaração do IRPF 2026, com limite de dez minutos. As sessões foram individuais e moderadas, sob coordenação de Julio Cesar Gomes de Souza Crispim e Fernando Gabriel dos Santos Carrijo, com TCLE que mencionava o Useberry e o registro de interações. A gravação se limitou à tela e aos eventos de interação, sem áudio ou vídeo de câmera dos participantes.
@@ -812,11 +1094,15 @@ Os comentários do Apêndice G são respostas ao questionário pós-sessão, inc
 
 Quatro temas descritivos merecem registro: ambiguidade entre consultar e declarar, nos relatos de P01, P03 e P05; percepção de oportunidade do convite em P02 e P08; decisão de ignorá-lo em P06; e baixa familiaridade de P07 com GOV.BR e Figma. São observações pós-sessão e do moderador, não medidas de eficácia do feedback. Os convites no Figma podiam decorrer de tempo, tela ou clique; as medidas agregadas da Tabela [2](#tab:resultados-preliminares-fluxos) não identificam a configuração ou a sequência específica de eventos de cada caso. Os limiares da API não explicam os casos P04 e P06, pois pertencem a outro componente do artefato.
 
+<a id="secao-4-15-sintese-critica-do-desenvolvimento"></a>
+
 ## 4.15 Síntese Crítica do Desenvolvimento
 
 A contribuição investigativa desta etapa é formular hipóteses e organizar a distinção entre contexto comportamental e percepção declarada. A contribuição tecnológica é a implementação que permite associar essas fontes. O Quadro [3](#tab:construtos-indicadores-dados) documenta a rastreabilidade conceitual; sua validação e a execução dos instrumentos comparativos propostos no Apêndice K permanecem pendentes. Não se apresenta um modelo de mensuração validado. O estudo no Figma oferece observações formativas de interface e não verifica a execução do backend nem confirma H1 ou H2.
 
 Permanecem como riscos centrais os falsos positivos dos gatilhos, a interrupção inoportuna, a simplificação de problemas complexos em atributos predefinidos e a ausência de avaliação externa por especialistas e gestores. Por isso, o sistema deve ser lido como artefato investigativo e protótipo tecnológico, não como produto pronto ou instrumento cientificamente calibrado.
+
+<a id="secao-4-16-alternativas-de-design-consideradas"></a>
 
 ## 4.16 Alternativas de Design Consideradas
 
@@ -828,10 +1114,10 @@ Durante a definição do MVP, alternativas de design foram consideradas, mas nã
 
 | **Decisão adotada no MVP** | **Alternativa considerada** | **Motivo para não adotar no MVP** | **Consequência da escolha atual** |
 |:---|:---|:---|:---|
-| Regras simples de clique e tempo | Modelo estatístico ou aprendizado de máquina para detectar dificuldade. | Exigiria base histórica, volume de dados e validação inexistentes nesta etapa. | Mantém rastreabilidade, mas reduz precisão. |
+| Regras simples de clique e tempo | Modelo estatístico ou aprendizado de máquina para detectar dificuldade. | Exigiria base histórica, volume de dados e validação inexistentes nesta etapa. | Facilita a inspeção das regras; a precisão dos acionamentos permanece desconhecida sem calibração empírica. |
 | Acionamento por limite de cliques e tempo | Análise de sequência de páginas, retorno a etapas ou padrões de navegação. | Aumentaria a complexidade de instrumentação e análise. | Facilita a demonstração, mas perde sinais mais ricos de desorientação. |
 | Popup de redirecionamento | Banner discreto, mensagem inline ou recomendação no painel lateral. | O popup torna a intervenção mais visível na demonstração. | Aumenta o risco de interrupção e precisa de teste de aceitação. |
-| Atributos predefinidos | Campo aberto obrigatório ou taxonomia oficial completa. | Campo obrigatório aumentaria o esforço; taxonomia extensa poderia reduzir a resposta. | Reduz esforço, mas simplifica problemas complexos. |
+| Atributos predefinidos | Campo aberto obrigatório ou taxonomia oficial completa. | Campo obrigatório poderia aumentar o esforço; taxonomia extensa poderia reduzir a resposta. | Busca reduzir o esforço de resposta, ainda não medido, e pode simplificar problemas complexos. |
 | CES opcional de concordância em sete pontos | Pergunta direta de esforço com escala invertida ou instrumento mais longo. | A facilidade da etapa é aderente ao problema de navegação e permite explicitar uma única orientação de resposta. | A tradução e o recorte contextual requerem avaliação de compreensão; não demonstram validade no setor público. |
 | Sessão com identificador técnico | Login, CPF ou integração com conta gov.br. | A identificação aumentaria o risco de privacidade e a dependência institucional. | Evita solicitação de identificação civil, mas não comprova anonimização. |
 | Painel administrativo básico | Ferramenta completa de analytics ou exportação avançada. | Escopo incompatível com o MVP e com a ausência de implantação real. | Entrega visão inicial, mas não substitui sistema de gestão de melhoria. |
@@ -840,9 +1126,13 @@ Fonte: elaborada pelos autores (2026).
 
 Essas alternativas indicam caminhos de evolução do artefato. A análise de sequência de páginas e retorno a etapas anteriores pode melhorar a detecção sem depender apenas de cliques ou tempo. Uma intervenção menos intrusiva também pode reduzir abandono. Tais escolhas exigem avaliação externa e estudos com usuários para determinar se aumentam a utilidade do feedback contextual ou apenas acrescentam complexidade.
 
+<a id="secao-4-17-gestao-de-configuracoes"></a>
+
 ## 4.17 Gestão de Configurações
 
 O painel permite editar limite de cliques, duração de referência e multiplicador por serviço, exigindo justificativa e versão esperada. A alteração válida atualiza o serviço e acrescenta histórico na mesma transação; uma edição sobre versão obsoleta recebe conflito HTTP 409 e exige nova consulta. A inicialização preserva valores já existentes. Cada alerta conserva a versão de sua ocorrência, sem reclassificação retroativa. Os testes verificam esses comportamentos em base temporária. O histórico fica no mesmo SQLite e não é mecanismo inviolável de auditoria.
+
+<a id="secao-4-18-controles-de-privacidade-e-inclusao"></a>
 
 ## 4.18 Controles de Privacidade e Inclusão
 
@@ -850,11 +1140,15 @@ A coleta de eventos começa após escolha explícita na sessão da aba e pode se
 
 Foram acrescentados rótulos associados, agrupamento das escalas, mensagens de estado, foco visível e controle inicial de foco dos modais. Tais alterações são recursos de implementação, não resultado de avaliação completa de acessibilidade. Os critérios e o plano abrangem páginas públicas e painel, incluindo teclado, leitor de tela, ampliação, contraste e pessoas com diferentes necessidades.
 
+<a id="secao-4-19-verificacao-tecnica-da-implementacao-atual"></a>
+
 ## 4.19 Verificação Técnica da Implementação Atual
 
-A suíte local contém 19 testes automatizados com dados sintéticos e bases temporárias: sete de satisfação/CES e doze de configuração, regras, acesso, privacidade, ações e retenção. Os testes foram executados em Windows, com Python 3.12.14 e SQLite 3.53.1, e passaram na execução automatizada local assistida por agente em 15 de outubro de 2026. A saída está em [verificacao-medio-prazo.txt](evidencias/verificacao-medio-prazo.txt); ambiente, comando, commit-base e hashes SHA-256 dos arquivos estão em [verificacao-medio-prazo.json](evidencias/verificacao-medio-prazo.json). Os metadados identificam o commit de referência e se havia alterações locais; os hashes registram os bytes dos arquivos efetivamente testados. Verificam contratos e cenários selecionados, incluindo preservação após reinicialização, conflito de versão, rejeição de entradas, controle de coleta, médias estratificadas, histórico de ações e prévia/descarte. O procedimento reproduzível está em `prototype-api/README.md` e os casos em `test_feedback_ces.py` e `test_governance.py`.
+A suíte local contém 19 testes automatizados com dados sintéticos e bases temporárias: sete de satisfação/CES e doze de configuração, regras, acesso, privacidade, ações e retenção. Os testes foram executados em Windows, com Python 3.12.14 e SQLite 3.53.1, e passaram na execução automatizada local assistida por agente em 15 de outubro de 2026. A saída está em [docs/evidencias/verificacao-medio-prazo.txt](evidencias/verificacao-medio-prazo.txt); ambiente, comando, commit-base e hashes SHA-256 dos arquivos estão em [docs/evidencias/verificacao-medio-prazo.json](evidencias/verificacao-medio-prazo.json). Os metadados identificam o commit de referência e se havia alterações locais; os hashes registram os bytes dos arquivos efetivamente testados. Verificam contratos e cenários selecionados, incluindo preservação após reinicialização, conflito de versão, rejeição de entradas, controle de coleta, médias estratificadas, histórico de ações e prévia/descarte. O procedimento reproduzível está em `prototype-api/README.md` e os casos em `test_feedback_ces.py` e `test_governance.py`.
 
 Essa evidência não abrange carga, recuperação completa de falhas, auditoria de segurança, avaliação acessível abrangente ou novos participantes. A inspeção no navegador usa dados sintéticos e serve para conferir operação e apresentação local. O Apêndice I registra o plano de verificação e validação restante; o Apêndice K separa as três perspectivas humanas.
+
+<a id="secao-5-consideracoes-finais"></a>
 
 # 5 Considerações Finais
 
@@ -865,6 +1159,8 @@ A fundamentação distingue satisfação, qualidade percebida, efetividade e usa
 A Lean Inception contribuiu para transformar a ideia inicial em um MVP mais delimitado. As dinâmicas de escopo, objetivos, personas, jornadas, brainstorming, revisão técnica, sequenciamento e Canvas MVP permitiram separar o que deveria entrar na primeira versão do que deveria permanecer como evolução. Com isso, o trabalho evitou ampliar o escopo para ouvidoria, chatbot, identificação individual, autenticação avançada ou integração real com portais governamentais.
 
 O protótipo funcional implementa registro de eventos, regras de acionamento, convite de feedback e agregações administrativas em ambiente local. Essa implementação constitui a contribuição tecnológica. A contribuição investigativa é a formulação de hipóteses sobre o momento da coleta e a distinção entre evidências comportamentais e declaradas. A avaliação no Figma examina o desenho da interface; não demonstra integração funcional nem valida um modelo de mensuração.
+
+<a id="secao-5-1-resultados-em-relacao-aos-objetivos"></a>
 
 ## 5.1 Resultados em Relação aos Objetivos
 
@@ -877,6 +1173,8 @@ O terceiro objetivo específico foi construir API, páginas navegáveis, coleta 
 O quarto objetivo específico foi estruturar dados e indicadores para analisar eventos, avaliações e possíveis pontos de investigação. A implementação contém estruturas de eventos, alertas e feedbacks, além de consultas para agregação. A avaliação de interface no Figma oferece outro conjunto de registros, sem comprovar sua integração a essa base. O Quadro [3](#tab:construtos-indicadores-dados) explicita construtos, indicadores e dados. A execução da operacionalização comparativa proposta no Apêndice K e a validação desse mapeamento permanecem pendentes; não foi demonstrado que a estrutura atual basta para testar todas as hipóteses.
 
 A consolidação de Engenharia de Software acrescenta requisitos e critérios de aceitação, rastreabilidade e modelo de qualidade do produto, além de planos de verificação/validação e protocolos separados para cidadãos, gestores e especialistas (Apêndices H–K). A gestão versionada de parâmetros, os controles locais de dados e as ações com acompanhamento materializam parte dessa especificação; a verificação técnica parcial não valida benefício em contexto real.
+
+<a id="secao-5-2-limitacoes"></a>
 
 ## 5.2 Limitações
 
@@ -894,6 +1192,8 @@ Não houve comparação empírica com ferramentas existentes; o Quadro 2 é um p
 
 Também não houve integração com portais governamentais reais. Essa decisão manteve o escopo compatível com o TCC e evitou dependências de autorização institucional, segurança, governança e privacidade. Assim, os resultados devem ser interpretados como demonstração técnica local e parcial, não como comprovação de viabilidade integrada ou de impacto em produção.
 
+<a id="secao-5-3-trabalhos-futuros"></a>
+
 ## 5.3 Trabalhos Futuros
 
 Os trabalhos futuros devem avançar em quatro frentes. A primeira é testar a hipótese comparativa com amostra maior, participantes mais diversos e protocolo previamente definido. No fluxo A, o usuário recebe um formulário estático ao final; no fluxo B, o sistema usa sinais comportamentais para solicitar feedback contextual. As variáveis dependentes devem incluir taxa de resposta, taxa de conclusão, esforço percebido, qualidade e especificidade dos comentários, abandono ou interrupção provocada e percepção de adequação do momento da pergunta. Só depois dessa coleta será possível avaliar, com evidência mais consistente, se um fluxo apresenta vantagens no cenário estudado.
@@ -904,6 +1204,8 @@ A terceira frente é a preparação para piloto autorizado. Os controles locais 
 
 Uma quarta frente é a avaliação externa do artefato. A avaliação heurística interna/preliminar deve ser complementada por inspeção independente de especialistas em usabilidade, Engenharia de Software ou governo digital e por walkthrough com gestores públicos. Essa etapa deve permanecer separada do teste de usabilidade com cidadãos, pois responde a perguntas técnicas e gerenciais distintas.
 
+<a id="secao-5-4-conclusao"></a>
+
 ## 5.4 Conclusão
 
 O trabalho apresenta uma implementação local parcial e observações exploratórias de interface, que permitem delimitar uma proposta de avaliação contextual de serviços públicos digitais. A viabilidade do fluxo integrado e sua utilidade para cidadãos e gestores ainda exigem avaliação. Os resultados não demonstram que a proposta resolva o problema de relacionar contexto e avaliação com maior eficácia do que instrumentos existentes.
@@ -913,6 +1215,8 @@ A implementação explicita como eventos e respostas podem ser organizados em um
 O percurso do trabalho também mostra que a solução não nasce apenas de uma decisão técnica de implementação. Ela foi delimitada por fundamentos de governo digital, qualidade percebida, usabilidade, privacidade e Lean Inception, e por artefatos de produto que explicitaram personas, jornadas, escopo, features, sequenciamento e critérios de verificação. Isso torna a proposta mais defensável como trabalho de Engenharia de Software, pois conecta problema, método, protótipo e indicadores.
 
 A contribuição investigativa é a formulação de hipóteses sobre o momento da coleta, acompanhada da distinção entre evidências comportamentais e declaradas. A contribuição tecnológica é um protótipo com regras explícitas, feedback estruturado e agregações administrativas. A rastreabilidade conceitual está documentada no Quadro [3](#tab:construtos-indicadores-dados); ainda são necessários sua avaliação, execução do protocolo comparativo e testes independentes. A proposta oferece uma base de desenvolvimento e investigação; seus benefícios, sua calibração e sua adequação a um serviço público real permanecem questões em aberto.
+
+<a id="secao-referencias"></a>
 
 # Referências
 
@@ -1054,15 +1358,15 @@ LIMA, Oto Buregio; PEREIRA, Wander Cleber. **Avaliação da qualidade de serviç
 
 <a id="ref-limaPereira2020modulo2"></a>
 
-LIMA, Oto Buregio; PEREIRA, Wander Cleber. **Avaliação da qualidade de serviços como base para gestão e melhoria de serviços públicos: Módulo 2: Histórico e evolução dos modelos de avaliação de serviço**. Brasília: Escola Nacional de Administração Pública, 2020c.
+LIMA, Oto Buregio; PEREIRA, Wander Cleber. **Avaliação da qualidade de serviços como base para gestão e melhoria de serviços públicos: Módulo 2: Histórico e evolução dos modelos de avaliação de serviço**. Brasília: Escola Nacional de Administração Pública, 2020b.
 
 <a id="ref-limaPereira2020modulo3"></a>
 
-LIMA, Oto Buregio; PEREIRA, Wander Cleber. **Avaliação da qualidade de serviços como base para gestão e melhoria de serviços públicos: Módulo 3: Aplicação de ferramentas de avaliação a um serviço específico**. Brasília: Escola Nacional de Administração Pública, 2020d.
+LIMA, Oto Buregio; PEREIRA, Wander Cleber. **Avaliação da qualidade de serviços como base para gestão e melhoria de serviços públicos: Módulo 3: Aplicação de ferramentas de avaliação a um serviço específico**. Brasília: Escola Nacional de Administração Pública, 2020c.
 
 <a id="ref-limaPereira2020modulo4"></a>
 
-LIMA, Oto Buregio; PEREIRA, Wander Cleber. **Avaliação da qualidade de serviços como base para gestão e melhoria de serviços públicos: Módulo 4: Melhoria dos serviços públicos**. Brasília: Escola Nacional de Administração Pública, 2020b.
+LIMA, Oto Buregio; PEREIRA, Wander Cleber. **Avaliação da qualidade de serviços como base para gestão e melhoria de serviços públicos: Módulo 4: Melhoria dos serviços públicos**. Brasília: Escola Nacional de Administração Pública, 2020d.
 
 <a id="ref-manfreda2008webSurveys"></a>
 
@@ -1144,9 +1448,13 @@ USEBERRY. **Figma integration: Test Figma prototypes in Useberry**. c2026. Dispo
 
 WORLD WIDE WEB CONSORTIUM. **Web Content Accessibility Guidelines (WCAG) 2.2**. 2024. W3C Recommendation, 12 dez. 2024. Disponível em: [https://www.w3.org/TR/2024/REC-WCAG22-20241212/](https://www.w3.org/TR/2024/REC-WCAG22-20241212/). Acesso em: 15 out. 2026.
 
+<a id="secao-apendice-a-sintese-da-lean-inception"></a>
+
 # Apêndice A — Síntese da Lean Inception
 
 A Lean Inception foi usada como técnica de concepção na DSR para definir o MVP do sistema de avaliação contextual. A atividade reuniu internamente quatro perspectivas de discussão: Felipe, atendimento público; Lucas, gestão digital; Diassis, viabilidade técnica; e Bruno, experiência do usuário. Esses perfis orientaram o alinhamento do produto e não constituem validação externa do artefato.
+
+<a id="secao-a-1-agenda"></a>
 
 ## A.1 Agenda
 
@@ -1168,9 +1476,13 @@ A Lean Inception foi usada como técnica de concepção na DSR para definir o MV
 
 - Canvas MVP.
 
+<a id="secao-a-2-escopo-delimitado"></a>
+
 ## A.2 Escopo Delimitado
 
 O produto é uma solução de feedback contextual com identificadores técnicos e dados agregados, voltada à melhoria de serviços públicos digitais. Não é ouvidoria, chatbot, sistema de espionagem, ferramenta de identificação individual ou implantação governamental completa.
+
+<a id="secao-a-3-mvp"></a>
 
 ## A.3 MVP
 
@@ -1182,21 +1494,33 @@ O MVP planejado reuniu as ondas 1, 2 e 3, implementadas parcialmente:
 
 3.  painel básico: consulta de alertas e agregações de eventos e respostas; taxas e comparações entre fluxos foram previstas, mas não estão instrumentadas na API atual.
 
+<a id="secao-a-4-inventario-dos-registros-visuais-historicos"></a>
+
 ## A.4 Inventário dos registros visuais históricos
 
-Os quatro registros de visão, delimitação e funcionalidades, produzidos por Fernando Gabriel dos Santos Carrijo, estão reproduzidos no Apêndice L com seus arquivos originais. O acervo histórico permite confrontar a síntese textual com os artefatos disponíveis, sem substituí-los por imagens reconstruídas. A nota de contextualização distingue esses registros das decisões e capacidades da versão atual.
+O acervo digital de concepção reúne quatro registros originais: visão do produto, primeiro registro de delimitação, segundo registro de delimitação e funcionalidades do MVP. Esses registros tiveram elaboração visual de Fernando Gabriel dos Santos Carrijo e conteúdo resultante das atividades de concepção parcialmente compartilhadas descritas na seção 3.3.1, com contribuições de Julio e Fernando e participação parcial de Wesley Pedrosa dos Santos.
 
-Esses registros contêm formulações preliminares e capacidades planejadas que foram revistas. São documentos de concepção; não comprovam implementação, anonimização, resultado experimental ou a execução integral de uma oficina. Sua origem nas atividades parcialmente compartilhadas entre os dois trabalhos e a colaboração parcial de Wesley estão descritas na seção 3.3.1; essa colaboração não corresponde à participação em toda a Lean Inception ou na discussão com Felipe, Lucas, Diassis e Bruno. As decisões vigentes são as especificadas neste manuscrito.
+Os originais são preservados no acervo, separado deste manuscrito. Sua proveniência e os limites de interpretação estão descritos no Apêndice L. As datas individuais de produção não estão identificadas. A colaboração parcial de Wesley não corresponde à participação em toda a Lean Inception ou na discussão com Felipe, Lucas, Diassis e Bruno.
+
+Os registros contêm formulações preliminares e capacidades planejadas que foram revistas. São documentos de concepção; não comprovam implementação, anonimização, resultado experimental ou execução integral de uma oficina. As decisões vigentes são as especificadas neste manuscrito.
+
+<a id="secao-apendice-b-fluxo-conceitual-do-sistema-de-avaliacao-contextual"></a>
 
 # Apêndice B — Fluxo Conceitual do sistema de avaliação contextual
+
+<a id="secao-b-1-fluxo-de-navegacao"></a>
 
 ## B.1 Fluxo de navegação
 
 O desenho parte do acesso a uma página pública ou de serviço. Na implementação Python, o cliente agrupa cliques de elementos instrumentados por identificador técnico e envia os eventos à API. A duração é recebida por endpoint e demonstrada por envio simulado de 120 segundos, sem cronômetro automático. A API compara os valores recebidos com parâmetros por serviço. No estudo de interface, a medição automática de tempo e cliques foi realizada pelo Useberry, em tarefas no Figma, separadamente desse backend.
 
+<a id="secao-b-2-deteccao-e-redirecionamento"></a>
+
 ## B.2 Detecção e redirecionamento
 
 Se os sinais estiverem dentro da faixa esperada, a navegação segue normalmente. Se houver excesso de cliques ou tempo, a API registra o acionamento de uma regra como evidência comportamental de possível dificuldade. Esse registro não equivale a qualidade percebida nem a diagnóstico automático. Em serviços comuns, a navegação pode continuar sem popup. Em serviços marcados como prioritários ou de alto tráfego, a API pode retornar uma ação para sugerir redirecionamento.
+
+<a id="secao-b-3-feedback-e-painel"></a>
 
 ## B.3 Feedback e painel
 
@@ -1212,11 +1536,17 @@ Quando a contagem de cliques ou a duração informada atende às condições ope
 
 Na implementação atual, o administrador autenticado consulta alertas e agregações de eventos e respostas. A frequência de atributos e as ações com acompanhamento estão implementadas. A comparação entre fluxos permanece prevista, sem instrumentação A/B na API.
 
+<a id="secao-apendice-c-endpoints-e-indicadores-do-prototipo"></a>
+
 # Apêndice C — Endpoints e Indicadores do Protótipo
+
+<a id="secao-c-1-endpoints"></a>
 
 ## C.1 Endpoints
 
 O protótipo local usa API HTTP e SQLite. O inventário de rotas, incluindo permissão/interrupção, configurações, ações e retenção, está no Quadro [4](#tab:endpoints-prototipo). Os contratos e estados HTTP constam em `prototype-api/README.md`. As rotas administrativas exigem chave; o formulário voluntário independe de autorização de telemetria.
+
+<a id="secao-c-2-indicadores"></a>
 
 ## C.2 Indicadores
 
@@ -1233,6 +1563,8 @@ A implementação Python disponibiliza os seguintes dados administrativos:
 
 O endpoint também fornece frequência de atributos e sessões distintas alertadas. Taxa de resposta por fluxo, ranking e comentários recentes não estão implementados. Configurações e ações possuem rotas administrativas próprias.
 
+<a id="secao-apendice-d-roteiro-de-demonstracao-tecnica"></a>
+
 # Apêndice D — Roteiro de Demonstração Técnica
 
 Este roteiro orienta a demonstração local do artefato com dados sintéticos. Não é protocolo de avaliação com cidadãos, gestores ou especialistas; esses procedimentos estão separados no Apêndice K.
@@ -1247,7 +1579,11 @@ Este roteiro orienta a demonstração local do artefato com dados sintéticos. N
 
 Registrar versão, ambiente e evidências conforme o Apêndice I. A demonstração não testa H1/H2 nem utilidade gerencial.
 
+<a id="secao-apendice-e-descricao-do-tcle-utilizado"></a>
+
 # Apêndice E — Descrição do TCLE Utilizado
+
+<a id="secao-e-1-descricao-do-tcle"></a>
 
 ## E.1 Descrição do TCLE
 
@@ -1255,7 +1591,11 @@ O estudo foi conduzido mediante Termo de Consentimento Livre e Esclarecido, com 
 
 O TCLE foi apresentado antes de cada sessão. Os termos assinados foram arquivados pelos pesquisadores e mantidos separados da base com identificadores pseudônimos. A versão integral do documento permanece em arquivo digital sob guarda dos autores.
 
+<a id="secao-apendice-f-questionario-pos-sessao"></a>
+
 # Apêndice F — Questionário Pós-Sessão
+
+<a id="secao-f-1-perguntas"></a>
 
 ## F.1 Perguntas
 
@@ -1271,9 +1611,13 @@ Após a tarefa, os participantes responderam às seguintes perguntas:
 
 5.  Algum comentário sobre sua experiência?
 
+<a id="secao-apendice-g-registros-anonimizados-da-avaliacao-com-participantes"></a>
+
 # Apêndice G — Registros Anonimizados da Avaliação com Participantes
 
 Os registros apresentam as classificações de tarefa, métricas do estudo Figma/Useberry, respostas ao questionário pós-sessão e observações do moderador. No campo “Respondeu ao feedback”, Sim indica realização da avaliação no formulário final no fluxo A e aceite do convite seguido de realização da avaliação no fluxo B; Não indica que o critério do respectivo fluxo não foi atendido. Essa classificação não transforma os comentários pós-sessão em comentários do formulário. Para leitura, “N.A.” foi expandido para “Não se aplica” e a nota de facilidade explicita a escala de 1 a 5. Os comentários literais são respostas pós-sessão, não comentários do formulário de feedback. As observações são apresentadas separadamente e não constituem medida de especificidade. O conjunto apresentado não inclui a exportação primária do Useberry. As intervenções registradas em P05 e P07 devem ser consideradas na interpretação dos resultados.
+
+<a id="secao-g-1-p01-fluxo-a"></a>
 
 ## G.1 P01 — Fluxo A
 
@@ -1285,6 +1629,8 @@ Comentário literal:
 
 Observações do moderador: Leu a lista de serviços antes de clicar em Fazer minha declaração; concluiu sem pedir ajuda.
 
+<a id="secao-g-2-p02-fluxo-b"></a>
+
 ## G.2 P02 — Fluxo B
 
 Data: 28/06/2026. Perfil: Cidadão — Assistente administrativo. Já usou GOV.BR: Sim. Concluiu: Sim. Tempo: 07:18. Cliques: 18. Convite apareceu: Sim. Respondeu ao feedback: Sim. Facilidade: 4/5. Encontrou: Sim.
@@ -1294,6 +1640,8 @@ Comentário literal:
 > A pergunta apareceu quando eu estava parado no formulário. Achei bom porque deu para explicar minha dúvida na hora.
 
 Observações do moderador: Hesitou no campo de serviço; respondeu ao convite contextual com comentário específico.
+
+<a id="secao-g-3-p03-fluxo-a"></a>
 
 ## G.3 P03 — Fluxo A
 
@@ -1305,6 +1653,8 @@ Comentário literal:
 
 Observações do moderador: Voltou duas vezes para a primeira tela; não respondeu ao formulário final.
 
+<a id="secao-g-4-p04-fluxo-b"></a>
+
 ## G.4 P04 — Fluxo B
 
 Data: 28/06/2026. Perfil: Estudante FCTE — Engenharia de Software. Já usou GOV.BR: Sim. Concluiu: Sim. Tempo: 05:56. Cliques: 13. Convite apareceu: Não. Respondeu ao feedback: Não se aplica. Facilidade: 5/5. Encontrou: Sim.
@@ -1314,6 +1664,8 @@ Comentário literal:
 > Foi tranquilo. Eu fui direto no botão principal e entendi que era um protótipo.
 
 Observações do moderador: Não recebeu convite contextual porque avançou rapidamente até a confirmação.
+
+<a id="secao-g-5-p05-fluxo-a"></a>
 
 ## G.5 P05 — Fluxo A
 
@@ -1325,6 +1677,8 @@ Comentário literal:
 
 Observações do moderador: Pediu confirmação verbal se o protótipo era seguro; moderador apenas reforçou que deveria agir como faria em casa.
 
+<a id="secao-g-6-p06-fluxo-b"></a>
+
 ## G.6 P06 — Fluxo B
 
 Data: 28/06/2026. Perfil: Cidadão — Microempreendedor individual. Já usou GOV.BR: Sim. Concluiu: Não. Tempo: 10:00. Cliques: 29. Convite apareceu: Sim. Respondeu ao feedback: Não. Facilidade: 2/5. Encontrou: Não.
@@ -1334,6 +1688,8 @@ Comentário literal:
 > Ignorei a pergunta porque queria tentar resolver primeiro, mas depois me perdi e não cheguei ao final.
 
 Observações do moderador: Recebeu convite contextual aos 4 minutos, ignorou e estourou o tempo máximo.
+
+<a id="secao-g-7-p07-fluxo-a"></a>
 
 ## G.7 P07 — Fluxo A
 
@@ -1345,6 +1701,8 @@ Comentário literal:
 
 Observações do moderador: Baixa familiaridade com Figma; recebeu demonstração inicial e teve dificuldade na primeira tela.
 
+<a id="secao-g-8-p08-fluxo-b"></a>
+
 ## G.8 P08 — Fluxo B
 
 Data: 28/06/2026. Perfil: Cidadão — Analista financeiro. Já usou GOV.BR: Sim. Concluiu: Sim. Tempo: 06:49. Cliques: 16. Convite apareceu: Sim. Respondeu ao feedback: Sim. Facilidade: 4/5. Encontrou: Sim.
@@ -1355,9 +1713,13 @@ Comentário literal:
 
 Observações do moderador: Respondeu ao convite contextual; concluiu após retornar ao fluxo principal.
 
+<a id="secao-apendice-h-especificacao-e-rastreabilidade-do-software"></a>
+
 # Apêndice H — Especificação e Rastreabilidade do Software
 
 Esta especificação organiza as necessidades N01–N05 da seção 3.2. Foi formalizada na revisão da implementação; não representa nova elicitação com cidadãos ou gestores. Os critérios de aceitação são decisões de projeto. “Implementado” indica função disponível no protótipo local; não significa validação com o público ou aprovação de conformidade.
+
+<a id="secao-h-1-requisitos-funcionais-e-criterios-de-aceitacao"></a>
 
 ## H.1 Requisitos funcionais e critérios de aceitação
 
@@ -1382,6 +1744,8 @@ Esta especificação organiza as necessidades N01–N05 da seção 3.2. Foi form
 
 Fonte: elaboração dos autores.
 
+<a id="secao-h-2-requisitos-nao-funcionais"></a>
+
 ## H.2 Requisitos não funcionais
 
 <a id="qua:requisitos-nao-funcionais"></a>
@@ -1405,6 +1769,8 @@ Fonte: elaboração dos autores.
 
 Fonte: elaboração dos autores.
 
+<a id="secao-h-3-regras-de-negocio"></a>
+
 ## H.3 Regras de negócio
 
 - **RN01:** telemetria sinaliza contexto; somente declarações sustentam julgamentos de percepção. Alerta não comprova dificuldade.
@@ -1418,6 +1784,8 @@ Fonte: elaboração dos autores.
 - **RN09:** autorização local de telemetria não define, por si, base legal LGPD. Feedback voluntário pode ser realizado sem telemetria.
 - **RN10:** conclusão em simulação de interface não comprova obtenção do resultado de um serviço público real.
 
+<a id="secao-h-4-historias-de-uso"></a>
+
 ## H.4 Histórias de uso
 
 - **HU01 — Cidadão e escolha:** como cidadão, quero decidir sobre a telemetria e interrompê-la, para compreender e controlar a coleta. Aceitação: CA-RF01 e CA-RF11; verificar também a alternativa de feedback sem telemetria.
@@ -1427,6 +1795,8 @@ Fonte: elaboração dos autores.
 - **HU05 — Responsável pela guarda:** quero visualizar os dados vencidos antes do descarte, para aplicar a política definida. Aceitação: CA-RF09; invalidar confirmação se a prévia deixar de corresponder à base.
 - **HU06 — Avaliador:** quero localizar requisito, componente, critério e evidência, para reproduzir verificações e registrar lacunas. Aceitação: matriz H.5 e plano do Apêndice I; não atribuir ao teste técnico validade com usuários.
 
+<a id="secao-h-5-matriz-de-rastreabilidade-do-software"></a>
+
 ## H.5 Matriz de rastreabilidade do software
 
 <a id="qua:rastreabilidade-software"></a>
@@ -1435,7 +1805,7 @@ Fonte: elaboração dos autores.
 
 | Necessidade | Requisitos e regras | Componente concreto | Critério | Teste/evidência e limite |
 | --- | --- | --- | --- | --- |
-| N01/N04 — escolha | RF01/RF11; RNF01/02; RN09 | `server.py`: `Handler.handle_permission`, `validate_collection`, `prototype_script`; `POST /api/session/permission` e `/withdraw` | CA-RF01/11 | G04 verifica autorização, interrupção e minimização; captura `docs/figuras/prototipo-portal-atual.png` documenta aviso. Compreensão e cobertura de CA-RF11 ainda requerem TV06/07. |
+| N01/N04 — escolha | RF01/RF11; RNF01/02; RN09 | `server.py`: `Handler.handle_permission`, `validate_collection`, `prototype_script`; `POST /api/session/permission` e `/withdraw` | CA-RF01/11 | G04 verifica autorização, interrupção e minimização; captura `docs/figuras/prototipo-portal-final.jpg` documenta aviso. Compreensão e cobertura de CA-RF11 ainda requerem TV06/07. |
 | N02 — contexto | RF02/03; RNF12; RN01 | `server.py`: `Handler.handle_click` e `handle_page_time`; `POST /api/events/click` e `/page-time` | CA-RF02/03 | G04, G10 e G11 verificam entradas selecionadas; não existe temporizador automático. Não constituem cobertura integral de RNF12. |
 | N02/N04 — regras | RF04/07; RNF08; RN05/06/07 | `governance.py::update_configuration`; `server.py::evaluate_click_actions`, `evaluate_duration_actions` e `create_alert_once`; `/api/admin/configurations` | CA-RF04/07 | G01/G02: persistência, conflito 409 e entradas; G03: fronteiras e versão no alerta. Calibração e recuperação ampla pendentes. |
 | N01 — percepção | RF05; RN02/03/04 | `server.py`: `feedback_html`, `Handler.handle_feedback_submit`, `migrate_feedback_schema`; `POST /api/feedback` | CA-RF05 | F01/F02/F04/F05/F06 e G08/G11; escalas, ausência, rejeições e migração. Compreensão/validade do item e interpretação dos comentários não testadas por esses casos. |
@@ -1450,6 +1820,8 @@ Fonte: elaboração dos autores.
 | N05 — comparação | RF12; RN04/10 | Instrumentação A/B e exposição ainda ausentes em `server.py`; protocolo K.1 | CA-RF12 | Não implementado e sem caso automatizado. Oito registros Figma não verificam esta capacidade. |
 
 Fonte: elaboração dos autores com base na especificação, no código e nos casos identificados em H.6.
+
+<a id="secao-h-6-catalogo-dos-testes-e-evidencias"></a>
 
 ## H.6 Catálogo dos testes e evidências
 
@@ -1485,11 +1857,15 @@ Fonte: elaboração dos autores com base nos arquivos de teste.
 
 A execução automatizada assistida por agente de 15 de outubro de 2026 está registrada em `docs/evidencias/verificacao-medio-prazo.txt` e `docs/evidencias/verificacao-medio-prazo.json`. O segundo arquivo identifica ambiente, comando, horários, commit-base e hashes dos arquivos testados. Nenhuma evidência de participante é incluída nesses arquivos.
 
+<a id="secao-apendice-i-qualidade-do-produto-e-plano-de-verificacao-e-validacao"></a>
+
 # Apêndice I — Qualidade do Produto e Plano de Verificação e Validação
+
+<a id="secao-i-1-selecao-de-caracteristicas-de-qualidade"></a>
 
 ## I.1 Seleção de características de qualidade
 
-A ISO/IEC 25010:2023 organiza a qualidade do produto em nove características. A seleção abaixo relaciona o modelo ao contexto deste protótipo; os critérios numéricos de aceitação são metas do projeto, não limites prescritos pela norma. A capacidade de interação do produto não substitui a avaliação da experiência e da usabilidade em contexto ([ISO; IEC, 2023](#ref-iso250102023)).
+A ISO/IEC 25010:2023 organiza a qualidade do produto em nove características. A seleção abaixo relaciona o modelo ao contexto deste protótipo; os critérios numéricos de aceitação são metas do projeto, não limites prescritos pela norma. A capacidade de interação do produto não substitui a avaliação da experiência e da usabilidade em contexto ([International Organization for Standardization e International Electrotechnical Commission, 2023](#ref-iso250102023)).
 
 A prioridade imediata é correção funcional, confidencialidade e capacidade de interação, devido ao risco de dados incorretos, exposição e exclusão. Manutenibilidade e adaptabilidade sustentam a evolução das regras. Desempenho, interoperabilidade externa, recuperação e responsabilização individual têm avaliação planejada. As oito características organizam o plano, mas o recorte de subcaracterísticas abaixo limita o que se pretende examinar; não se declara avaliação integral de todas elas.
 
@@ -1512,9 +1888,11 @@ Fonte: elaboração dos autores, com base na ISO/IEC 25010:2023.
 
 A característica segurança operacional (*safety*) não recebe avaliação dedicada nesta etapa: o artefato não executa serviço real nem operação crítica. Isso não significa ausência de riscos. Interrupção da jornada, orientação inadequada e exposição de dados devem ser revistos antes de uma implantação, quando a seleção também precisará ser reconsiderada.
 
+<a id="secao-i-2-plano-de-verificacao-e-validacao"></a>
+
 ## I.2 Plano de verificação e validação
 
-Verificação examina a implementação diante de requisitos e contratos. Validação investiga se o artefato atende às necessidades em condições de uso. Os testes automatizados locais constituem evidência parcial de verificação; o estudo histórico no Figma é evidência formativa daquelas interfaces. Nenhum dos dois substitui as atividades abaixo.
+Este plano prepara o TCC 2 e não relata a execução das atividades previstas. A **verificação do software** pergunta se o sistema foi construído corretamente conforme requisitos e contratos; a **validação da solução** investiga se ele resolve adequadamente o problema em uso. O Quadro 18 prevê testes funcionais, integração/API, usabilidade, acessibilidade, desempenho e segurança. As evidências atuais são parciais e não substituem essas atividades.
 
 <a id="qua:plano-vv"></a>
 
@@ -1537,7 +1915,11 @@ Fonte: elaboração dos autores.
 
 Antes de cada execução, devem ser registrados versão do código, data, executor, sistema operacional, hardware, Python, SQLite, navegador, configuração e massa de dados. Cada caso deve conter entrada, resultado esperado, resultado obtido, situação (aprovado, reprovado ou bloqueado) e localização da evidência. Usar base isolada e dados sintéticos para ensaios técnicos; registrar defeito, correção e reexecução quando houver falha. A aprovação de casos não autoriza afirmar qualidade global nem conformidade normativa integral. Coleta com pessoas depende do enquadramento ético e institucional previamente definido.
 
+<a id="secao-apendice-j-privacidade-e-acessibilidade-por-requisitos"></a>
+
 # Apêndice J — Privacidade e Acessibilidade por Requisitos
+
+<a id="secao-j-1-privacidade-desde-a-concepcao"></a>
 
 ## J.1 Privacidade desde a concepção
 
@@ -1545,7 +1927,7 @@ A aplicação de Privacy by Design exige transformar princípios em decisões ve
 
 No Brasil, o art. 6º da LGPD fundamenta, entre outros, finalidade, adequação, necessidade, transparência, segurança e prevenção. O art. 46, § 2º, exige considerar as medidas de segurança desde a concepção do produto ou serviço até sua execução ([Brasil, 2018](#ref-brasil2018lgpd)). Essa base não substitui a definição institucional de papéis e de hipótese legal para tratamento.
 
-A orientação da [IPC NSW (2020)](#ref-ipc2020privacy) complementa os cuidados de projeto. Os controles abaixo são parciais e não constituem parecer de conformidade jurídica.
+A orientação da [Information and Privacy Commission NSW (2020)](#ref-ipc2020privacy) complementa os cuidados de projeto. Os controles abaixo são parciais e não constituem parecer de conformidade jurídica.
 
 1. **Finalidade e escolha — RNF02/RF01/RF11:** explicar que eventos servem à demonstração e à investigação de melhorias; iniciar telemetria somente após autorização local; oferecer recusa, interrupção e feedback independente. A escolha é registrada por sessão de aba e versão do aviso. Não equivale, por si, à definição da base legal institucional.
 2. **Minimização — RNF01/RF02:** registrar identificador técnico, serviço, página, tipo de evento e data necessários ao encadeamento. O contrato novo rejeita identificador de usuário, URL completa e coordenadas. Registros antigos podem conter campos históricos; não se presume que a migração os anonimize. Comentários livres devem evitar dados pessoais.
@@ -1555,9 +1937,11 @@ A orientação da [IPC NSW (2020)](#ref-ipc2020privacy) complementa os cuidados 
 6. **Ciclo de vida:** cópias de migração, backups, TCLEs e gravações do Useberry não são alcançados pelo expurgo da aplicação. Exigem inventário, prazo, responsável, controles e descarte próprios. A retenção de ações abertas e de configurações deve integrar a política institucional e ser revista periodicamente.
 7. **Preparação para coleta real:** definir controlador, operadores, finalidade, base legal, contato para exercício de direitos, fluxo de atendimento, incidentes, guarda e descarte. Examinar o enquadramento ético com o orientador e a instância competente antes de nova coleta. O texto não afirma aprovação pelo CEP nem atribui papéis jurídicos a pessoas sem definição institucional.
 
+<a id="secao-j-2-requisitos-e-plano-de-acessibilidade"></a>
+
 ## J.2 Requisitos e plano de acessibilidade
 
-A WCAG 2.2 fornece critérios para avaliar conteúdo e interação web. Foram selecionados os critérios abaixo por sua relação com formulário, navegação e convite. Essa seleção não é uma auditoria completa nem autoriza declarar conformidade AA ([W3C, 2024](#ref-wcag22)).
+A acessibilidade é incorporada como **requisito de qualidade** e será avaliada no TCC 2. Isso é essencial em serviços públicos, pois barreiras podem impedir o exercício de direitos ou o cumprimento de obrigações, e o referencial reconhece desigualdades de acesso, dispositivos e letramento digital. O Quadro 19 seleciona critérios da WCAG 2.2 e define evidências futuras; não representa auditoria completa nem declaração de conformidade AA.
 
 <a id="qua:acessibilidade"></a>
 
@@ -1578,9 +1962,13 @@ Fonte: elaboração dos autores, com base na WCAG 2.2.
 
 O plano abrange portal, serviços, formulário, modais, aviso de coleta e painel. Combina inspeção manual, ferramentas automatizadas e uso com leitor de tela, além de participantes com diferentes necessidades quando possível. Cada falha deve indicar página, passos, critério, evidência, impacto e correção; reavaliar após o ajuste. A implementação inclui rótulos, agrupamentos, estados e controle inicial de foco, mas a avaliação completa permanece planejada. A compreensão do CES e a adequação do momento do convite também precisam de pessoas; um verificador automático não responde a essas questões.
 
+<a id="secao-apendice-k-protocolos-das-tres-perspectivas-de-avaliacao"></a>
+
 # Apêndice K — Protocolos das Três Perspectivas de Avaliação
 
-Os protocolos são prospectivos. Não descrevem novas avaliações já executadas e não substituem os oito registros históricos. Recrutamento, tamanho amostral, instrumentos completos e tratamento ético deverão ser definidos antes da coleta, com o orientador e as instâncias pertinentes. A amostra histórica não justifica poder estatístico para testar H1/H2.
+Este apêndice planeja, para o TCC 2, três perspectivas de avaliação ainda não executadas: cidadãos, para experiência e esforço; gestores públicos, para utilidade dos indicadores; e especialistas/engenheiros, para qualidade técnica, arquitetura, segurança e usabilidade. A falta de avaliação externa permanece uma limitação. Os protocolos serão detalhados antes da coleta. As observações das oito sessões históricas podem orientar o refinamento dos instrumentos; essa amostra não sustenta inferências confirmatórias sobre H1 e H2.
+
+<a id="secao-k-1-cidadaos-uso-compreensao-e-comparacao"></a>
 
 ## K.1 Cidadãos: uso, compreensão e comparação
 
@@ -1598,9 +1986,11 @@ Para H1, comparar proporções de resposta com denominadores explícitos. Para H
 
 Para comparar facilidade entre grupos, aplicar o mesmo item pós-tarefa, no mesmo momento, separadamente do CES contextual opcional. Não combinar essas duas ocasiões como se fossem uma medida única. Esforço de preenchimento e interrupção precisam de medidas próprias. Definir previamente análise, tratamento de ausências e critérios de interrupção; considerar tamanho de efeito e incerteza, sem escolher testes em função do resultado desejado. Encerrar sem prejuízo a pedido do participante.
 
+<a id="secao-k-1-1-calibracao-dos-sinais-comportamentais-tv10"></a>
+
 ### K.1.1 Calibração dos sinais comportamentais — TV10
 
-Este protocolo prospectivo atende ao item 15 das orientações. Sua execução depende de nova coleta e permanece no longo prazo. Os oito casos históricos não constituem uma base rotulada para calibrar as regras da API. O plano distingue referência declarada e classificação operacional; a matriz de confusão permite examinar acertos e erros de um classificador ([Fawcett, 2006](#ref-fawcett2006roc)). As escolhas de coleta, partição e seleção descritas a seguir são propostas deste projeto, não recomendações universais dessa fonte.
+Esta seção planeja a calibração dos sinais comportamentais para nova coleta no TCC 2. Será verificado se cliques, tempo, retornos e abandono correspondem à dificuldade percebida. Os gatilhos serão comparados a rótulos independentes para identificar verdadeiros positivos, falsos positivos, verdadeiros negativos e falsos negativos ([Fawcett, 2006](#ref-fawcett2006roc)). Os oito participantes históricos não foram rotulados para esse fim; portanto, trata-se de protocolo prospectivo, não calibração realizada.
 
 **Unidade e referência independente.** Adotar um episódio de uma etapa de tarefa, identificado por participante pseudônimo, sessão, serviço e etapa. Registrar início, fim, cliques instrumentados, duração efetivamente medida, interrupções, versão das regras e acionamentos. Essa instrumentação por etapa e a medição automática de duração ainda precisam ser implementadas; os totais históricos do Useberry não devem ser misturados aos contadores da API. Se houver apenas uma etapa por sessão/serviço, explicitar essa restrição.
 
@@ -1617,6 +2007,8 @@ Na coleta de calibração, desativar redirecionamentos e convites durante a etap
 O relatório deverá guardar versões do instrumento e código, critérios de exclusão, parâmetros comparados, partição, rótulos e matriz por serviço, respeitando o plano de guarda. A análise de incerteza deverá considerar episódios agrupados por participante; o método e o tamanho necessário devem ser definidos antes da coleta principal. Não há estimativas de sensibilidade, especificidade ou erro produzidas nesta revisão. A execução e a avaliação dessa calibração continuam pendentes.
 
 
+<a id="secao-k-2-gestores-interpretacao-decisao-e-acompanhamento"></a>
+
 ## K.2 Gestores: interpretação, decisão e acompanhamento
 
 **Objetivo:** avaliar se gestores compreendem os indicadores e conseguem usá-los em uma decisão documentada. Recrutar pessoas com atribuições reais de gestão do serviço, distinguindo-as das personas e da discussão interna. Como meta operacional inicial, planejar cinco gestores de ao menos dois contextos de serviço; documentar seleção e funções. A meta é exploratória, não amostra estatisticamente representativa, e poderá ser revista antes do recrutamento.
@@ -1629,6 +2021,8 @@ Na entrevista, perguntar: que decisão o painel ajudaria a tomar; que informaç�
 
 Registrar acerto de interpretação, erros, tarefas concluídas, dúvidas, tempo de execução e utilidade percebida em entrevista. A capacidade de declarar “evidência insuficiente” é um resultado relevante. Preservar a linha inicial e documentar o acompanhamento sem atribuir causalidade a mudanças da média. Esse protocolo avalia utilidade potencial do painel, não impacto efetivo de política pública.
 
+<a id="secao-k-3-especialistas-inspecao-independente"></a>
+
 ## K.3 Especialistas: inspeção independente
 
 **Objetivo:** examinar aderência a requisitos, qualidade técnica, acessibilidade e usabilidade por inspeção. Selecionar profissionais independentes do desenvolvimento, com perfis que cubram Engenharia de Software, experiência do usuário, acessibilidade e segurança; declarar experiência e conflitos de interesse. Como meta inicial de planejamento, convidar quatro especialistas independentes para cobrir Engenharia de Software, UX, acessibilidade e segurança; registrar quando um profissional cobrir mais de um perfil. Essa meta não garante cobertura suficiente e poderá ser revista antes da execução.
@@ -1637,40 +2031,17 @@ Entregar versão identificada, requisitos, matriz H.5 e plano I.2. Separar inspe
 
 Cada avaliador registra individualmente página/componente, requisito ou heurística, passos, evidência, impacto e recomendação. Propõe-se severidade de projeto de 0 (sem problema) a 4 (impede tarefa essencial), com justificativa; consolidar depois, preservando divergências e autoria. Os autores corrigem e reexecutam os casos afetados. Parecer de agente automatizado pode auxiliar revisão, mas não conta como especialista humano independente nem como execução desses protocolos.
 
-# Apêndice L — Registros históricos da concepção compartilhada
+<a id="secao-apendice-l-proveniencia-e-guarda-dos-registros-de-concepcao"></a>
 
-Os quatro registros a seguir foram produzidos por Fernando Gabriel dos Santos Carrijo no contexto das atividades de concepção parcialmente compartilhadas, descritas na seção 3.3.1. São reproduzidos sem alteração do conteúdo das imagens. As datas individuais de produção não estão identificadas.
+# Apêndice L — Proveniência e guarda dos registros de concepção
 
-As imagens contêm o título e o instrumento anteriores, incluindo NPS, bem como metas e expressões como “anônima”, “detecta dificuldade” e “validado”. Essas formulações pertencem aos registros históricos e não descrevem a especificação vigente. Sua reprodução não significa adoção do instrumento anterior, comprovação de anonimização, diagnóstico de dificuldade, implementação integral ou validação científica. O manuscrito atual distingue a implementação Python, o estudo histórico Figma/Useberry e os protocolos futuros.
+Os quatro registros visuais originais inventariados em A.4 documentam as atividades de concepção parcialmente compartilhadas descritas na seção 3.3.1. Tiveram elaboração visual de Fernando Gabriel dos Santos Carrijo e conteúdo resultante das contribuições de Julio e Fernando e da participação parcial de Wesley Pedrosa dos Santos. As datas individuais de produção não estão identificadas.
 
-## L.1 Visão do produto — registro histórico
+Os arquivos originais permanecem preservados no acervo digital do projeto, separado deste manuscrito. O inventário permite identificar os seguintes registros:
 
-<a id="fig:historico-visao-produto"></a>
+- Visão do produto: `lean-inception-visao-produto.png`.
+- Delimitação do produto — primeiro registro: `lean-inception-e-nao-e-faz-nao-faz-1.png`.
+- Delimitação do produto — segundo registro: `lean-inception-e-nao-e-faz-nao-faz-2.png`.
+- Funcionalidades do MVP: `lean-inception-features-mvp.png`.
 
-![Figura 4 — Visão do produto — registro histórico](../latex/figuras/apendices/lean-inception-visao-produto.png)
-
-Fonte: Fernando Gabriel dos Santos Carrijo; registro histórico de concepção, com data individual não identificada.
-
-## L.2 Delimitação do produto — primeiro registro histórico
-
-<a id="fig:historico-delimitacao-1"></a>
-
-![Figura 5 — Delimitação do produto — primeiro registro histórico](../latex/figuras/apendices/lean-inception-e-nao-e-faz-nao-faz-1.png)
-
-Fonte: Fernando Gabriel dos Santos Carrijo; registro histórico de concepção, com data individual não identificada.
-
-## L.3 Delimitação do produto — segundo registro histórico
-
-<a id="fig:historico-delimitacao-2"></a>
-
-![Figura 6 — Delimitação do produto — segundo registro histórico](../latex/figuras/apendices/lean-inception-e-nao-e-faz-nao-faz-2.png)
-
-Fonte: Fernando Gabriel dos Santos Carrijo; registro histórico de concepção, com data individual não identificada.
-
-## L.4 Funcionalidades do MVP — registro histórico
-
-<a id="fig:historico-funcionalidades"></a>
-
-![Figura 7 — Funcionalidades do MVP — registro histórico](../latex/figuras/apendices/lean-inception-features-mvp.png)
-
-Fonte: Fernando Gabriel dos Santos Carrijo; registro histórico de concepção, com data individual não identificada.
+Esses documentos registram concepção e planejamento históricos, com formulações posteriormente revistas. Não constituem evidência de implementação, anonimização, diagnóstico de dificuldade, conclusão das funcionalidades ou validação do sistema. A descrição vigente distingue a implementação Python, o estudo histórico de interface no Figma/Useberry e os protocolos prospectivos de avaliação.

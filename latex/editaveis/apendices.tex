@@ -1,12 +1,13 @@
 % Gerado a partir de docs/tcc.md por scripts/sincronizar_tcc.py.
 \begin{apendicesenv}
+\setlength{\parskip}{0pt}
 \partapendices
 % Gerado a partir de docs/tcc.md por scripts/sincronizar_tcc.py.
 \chapter{Síntese da Lean Inception}\label{sec:apendice-a}
 
 A Lean Inception foi usada como técnica de concepção na DSR para definir o MVP do sistema de avaliação contextual. A atividade reuniu internamente quatro perspectivas de discussão: Felipe, atendimento público; Lucas, gestão digital; Diassis, viabilidade técnica; e Bruno, experiência do usuário. Esses perfis orientaram o alinhamento do produto e não constituem validação externa do artefato.
 
-\section{Agenda}\label{agenda}
+\section{Agenda}\label{sec:a-1}
 
 \begin{itemize}
 \item
@@ -29,11 +30,11 @@ A Lean Inception foi usada como técnica de concepção na DSR para definir o MV
   Canvas MVP.
 \end{itemize}
 
-\section{Escopo Delimitado}\label{escopo-delimitado}
+\section{Escopo Delimitado}\label{sec:a-2}
 
 O produto é uma solução de feedback contextual com identificadores técnicos e dados agregados, voltada à melhoria de serviços públicos digitais. Não é ouvidoria, chatbot, sistema de espionagem, ferramenta de identificação individual ou implantação governamental completa.
 
-\section{MVP}\label{mvp}
+\section{MVP}\label{sec:a-3}
 
 O MVP planejado reuniu as ondas 1, 2 e 3, implementadas parcialmente:
 
@@ -47,46 +48,39 @@ O MVP planejado reuniu as ondas 1, 2 e 3, implementadas parcialmente:
   painel básico: consulta de alertas e agregações de eventos e respostas; taxas e comparações entre fluxos foram previstas, mas não estão instrumentadas na API atual.
 \end{enumerate}
 
-\section{Inventário dos registros visuais históricos}\label{inventuxe1rio-dos-registros-visuais-histuxf3ricos}
+\section{Inventário dos registros visuais históricos}\label{sec:a-4}
 
-Os quatro registros de visão, delimitação e funcionalidades, produzidos por Fernando Gabriel dos Santos Carrijo, estão reproduzidos no Apêndice L com seus arquivos originais. O acervo histórico permite confrontar a síntese textual com os artefatos disponíveis, sem substituí-los por imagens reconstruídas. A nota de contextualização distingue esses registros das decisões e capacidades da versão atual.
+O acervo digital de concepção reúne quatro registros originais: visão do produto, primeiro registro de delimitação, segundo registro de delimitação e funcionalidades do MVP. Esses registros tiveram elaboração visual de Fernando Gabriel dos Santos Carrijo e conteúdo resultante das atividades de concepção parcialmente compartilhadas descritas na seção \ref{sec:3-3-1}, com contribuições de Julio e Fernando e participação parcial de Wesley Pedrosa dos Santos.
 
-Esses registros contêm formulações preliminares e capacidades planejadas que foram revistas. São documentos de concepção; não comprovam implementação, anonimização, resultado experimental ou a execução integral de uma oficina. Sua origem nas atividades parcialmente compartilhadas entre os dois trabalhos e a colaboração parcial de Wesley estão descritas na seção 3.3.1; essa colaboração não corresponde à participação em toda a Lean Inception ou na discussão com Felipe, Lucas, Diassis e Bruno. As decisões vigentes são as especificadas neste manuscrito.
+Os originais são preservados no acervo, separado deste manuscrito. Sua proveniência e os limites de interpretação estão descritos no Apêndice \ref{sec:apendice-l}. As datas individuais de produção não estão identificadas. A colaboração parcial de Wesley não corresponde à participação em toda a Lean Inception ou na discussão com Felipe, Lucas, Diassis e Bruno.
+
+Os registros contêm formulações preliminares e capacidades planejadas que foram revistas. São documentos de concepção; não comprovam implementação, anonimização, resultado experimental ou execução integral de uma oficina. As decisões vigentes são as especificadas neste manuscrito.
 
 \chapter{Fluxo Conceitual do sistema de avaliação contextual}\label{sec:apendice-b}
 
-\section{Fluxo de navegação}\label{fluxo-de-navegauxe7uxe3o}
+\section{Fluxo de navegação}\label{sec:b-1}
 
 O desenho parte do acesso a uma página pública ou de serviço. Na implementação Python, o cliente agrupa cliques de elementos instrumentados por identificador técnico e envia os eventos à API. A duração é recebida por endpoint e demonstrada por envio simulado de 120 segundos, sem cronômetro automático. A API compara os valores recebidos com parâmetros por serviço. No estudo de interface, a medição automática de tempo e cliques foi realizada pelo Useberry, em tarefas no Figma, separadamente desse backend.
 
-\section{Detecção e redirecionamento}\label{detecuxe7uxe3o-e-redirecionamento}
+\section{Detecção e redirecionamento}\label{sec:b-2}
 
 Se os sinais estiverem dentro da faixa esperada, a navegação segue normalmente. Se houver excesso de cliques ou tempo, a API registra o acionamento de uma regra como evidência comportamental de possível dificuldade. Esse registro não equivale a qualidade percebida nem a diagnóstico automático. Em serviços comuns, a navegação pode continuar sem popup. Em serviços marcados como prioritários ou de alto tráfego, a API pode retornar uma ação para sugerir redirecionamento.
 
-\section{Feedback e painel}\label{feedback-e-painel}
+\section{Feedback e painel}\label{sec:b-3}
 
 Quando a contagem de cliques ou a duração informada atende às condições operacionais, a API pode retornar uma ação para disponibilizar o convite de feedback. O feedback contém:
 
-\begin{itemize}
-\item
-  satisfação com a etapa por estrelas;
-\item
-  seleção de características do problema, como clareza, tempo, esforço, usabilidade, atendimento e eficácia;
-\item
-  item CES opcional de facilidade percebida em sete categorias;
-\item
-  comentário opcional.
-\end{itemize}
+satisfação com a etapa por estrelas; seleção de características do problema, como clareza, tempo, esforço, usabilidade, atendimento e eficácia; item CES opcional de facilidade percebida em sete categorias; comentário opcional.
 
 Na implementação atual, o administrador autenticado consulta alertas e agregações de eventos e respostas. A frequência de atributos e as ações com acompanhamento estão implementadas. A comparação entre fluxos permanece prevista, sem instrumentação A/B na API.
 
 \chapter{Endpoints e Indicadores do Protótipo}\label{sec:apendice-c}
 
-\section{Endpoints}\label{endpoints}
+\section{Endpoints}\label{sec:c-1}
 
 O protótipo local usa API HTTP e SQLite. O inventário de rotas, incluindo permissão/interrupção, configurações, ações e retenção, está no Quadro \ref{tab:endpoints-prototipo}. Os contratos e estados HTTP constam em \texttt{\seqsplit{prototype-api/README.md}}. As rotas administrativas exigem chave; o formulário voluntário independe de autorização de telemetria.
 
-\section{Indicadores}\label{indicadores}
+\section{Indicadores}\label{sec:c-2}
 
 A implementação Python disponibiliza os seguintes dados administrativos:
 
@@ -114,7 +108,7 @@ O endpoint também fornece frequência de atributos e sessões distintas alertad
 
 \chapter{Roteiro de Demonstração Técnica}\label{sec:apendice-d}
 
-Este roteiro orienta a demonstração local do artefato com dados sintéticos. Não é protocolo de avaliação com cidadãos, gestores ou especialistas; esses procedimentos estão separados no Apêndice K.
+Este roteiro orienta a demonstração local do artefato com dados sintéticos. Não é protocolo de avaliação com cidadãos, gestores ou especialistas; esses procedimentos estão separados no Apêndice \ref{sec:apendice-k}.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -135,11 +129,11 @@ Este roteiro orienta a demonstração local do artefato com dados sintéticos. N
   Examinar a prévia de retenção em base de teste, executar o descarte autorizado e conferir os registros restantes.
 \end{enumerate}
 
-Registrar versão, ambiente e evidências conforme o Apêndice I. A demonstração não testa H1/H2 nem utilidade gerencial.
+Registrar versão, ambiente e evidências conforme o Apêndice \ref{sec:apendice-i}. A demonstração não testa H1/H2 nem utilidade gerencial.
 
 \chapter{Descrição do TCLE Utilizado}\label{sec:apendice-e}
 
-\section{Descrição do TCLE}\label{descriuxe7uxe3o-do-tcle}
+\section{Descrição do TCLE}\label{sec:e-1}
 
 O estudo foi conduzido mediante Termo de Consentimento Livre e Esclarecido, com identificação institucional, dos pesquisadores e do orientador, objetivo, procedimentos, riscos, benefícios, sigilo, direito de desistência, armazenamento e assinatura. O Useberry registrou eventos de interação e gravação de tela, conforme previsto no TCLE. Não houve gravação de áudio ou vídeo de câmera dos participantes.
 
@@ -147,7 +141,7 @@ O TCLE foi apresentado antes de cada sessão. Os termos assinados foram arquivad
 
 \chapter{Questionário Pós-Sessão}\label{sec:apendice-f}
 
-\section{Perguntas}\label{perguntas}
+\section{Perguntas}\label{sec:f-1}
 
 Após a tarefa, os participantes responderam às seguintes perguntas:
 
@@ -169,7 +163,7 @@ Após a tarefa, os participantes responderam às seguintes perguntas:
 
 Os registros apresentam as classificações de tarefa, métricas do estudo Figma/\allowbreak Useberry, respostas ao questionário pós-sessão e observações do moderador. No campo ``Respondeu ao feedback'', Sim indica realização da avaliação no formulário final no fluxo A e aceite do convite seguido de realização da avaliação no fluxo B; Não indica que o critério do respectivo fluxo não foi atendido. Essa classificação não transforma os comentários pós-sessão em comentários do formulário. Para leitura, ``N.A.'' foi expandido para ``Não se aplica'' e a nota de facilidade explicita a escala de 1 a 5. Os comentários literais são respostas pós-sessão, não comentários do formulário de feedback. As observações são apresentadas separadamente e não constituem medida de especificidade. O conjunto apresentado não inclui a exportação primária do Useberry. As intervenções registradas em P05 e P07 devem ser consideradas na interpretação dos resultados.
 
-\section{P01 --- Fluxo A}\label{p01--fluxo-a}
+\section{P01 --- Fluxo A}\label{sec:g-1}
 
 Data: 28/06/2026. Perfil: Estudante FCTE --- Engenharia de Software. Já usou GOV.BR: Sim. Concluiu: Sim. Tempo: 06:42. Cliques: 15. Convite apareceu: Não se aplica. Respondeu ao feedback: Sim. Facilidade: 4/5. Encontrou: Sim.
 
@@ -181,7 +175,7 @@ Eu achei parecido com o gov.br e consegui entender o caminho, mas demorei um pou
 
 Observações do moderador: Leu a lista de serviços antes de clicar em Fazer minha declaração; concluiu sem pedir ajuda.
 
-\section{P02 --- Fluxo B}\label{p02--fluxo-b}
+\section{P02 --- Fluxo B}\label{sec:g-2}
 
 Data: 28/06/2026. Perfil: Cidadão --- Assistente administrativo. Já usou GOV.BR: Sim. Concluiu: Sim. Tempo: 07:18. Cliques: 18. Convite apareceu: Sim. Respondeu ao feedback: Sim. Facilidade: 4/5. Encontrou: Sim.
 
@@ -193,7 +187,7 @@ A pergunta apareceu quando eu estava parado no formulário. Achei bom porque deu
 
 Observações do moderador: Hesitou no campo de serviço; respondeu ao convite contextual com comentário específico.
 
-\section{P03 --- Fluxo A}\label{p03--fluxo-a}
+\section{P03 --- Fluxo A}\label{sec:g-3}
 
 Data: 28/06/2026. Perfil: Cidadão --- Autônoma. Já usou GOV.BR: Sim. Concluiu: Parcial. Tempo: 09:21. Cliques: 24. Convite apareceu: Não se aplica. Respondeu ao feedback: Não. Facilidade: 2/5. Encontrou: Parcialmente.
 
@@ -205,7 +199,7 @@ Eu fui clicando, mas não tive certeza se estava fazendo a declaração ou só c
 
 Observações do moderador: Voltou duas vezes para a primeira tela; não respondeu ao formulário final.
 
-\section{P04 --- Fluxo B}\label{p04--fluxo-b}
+\section{P04 --- Fluxo B}\label{sec:g-4}
 
 Data: 28/06/2026. Perfil: Estudante FCTE --- Engenharia de Software. Já usou GOV.BR: Sim. Concluiu: Sim. Tempo: 05:56. Cliques: 13. Convite apareceu: Não. Respondeu ao feedback: Não se aplica. Facilidade: 5/5. Encontrou: Sim.
 
@@ -217,7 +211,7 @@ Foi tranquilo. Eu fui direto no botão principal e entendi que era um protótipo
 
 Observações do moderador: Não recebeu convite contextual porque avançou rapidamente até a confirmação.
 
-\section{P05 --- Fluxo A}\label{p05--fluxo-a}
+\section{P05 --- Fluxo A}\label{sec:g-5}
 
 Data: 28/06/2026. Perfil: Cidadão --- Professora da educação básica. Já usou GOV.BR: Sim. Concluiu: Sim. Tempo: 08:04. Cliques: 20. Convite apareceu: Não se aplica. Respondeu ao feedback: Sim. Facilidade: 3/5. Encontrou: Sim.
 
@@ -229,7 +223,7 @@ Consegui terminar, mas alguns nomes são muito parecidos. Eu esperava uma explic
 
 Observações do moderador: Pediu confirmação verbal se o protótipo era seguro; moderador apenas reforçou que deveria agir como faria em casa.
 
-\section{P06 --- Fluxo B}\label{p06--fluxo-b}
+\section{P06 --- Fluxo B}\label{sec:g-6}
 
 Data: 28/06/2026. Perfil: Cidadão --- Microempreendedor individual. Já usou GOV.BR: Sim. Concluiu: Não. Tempo: 10:00. Cliques: 29. Convite apareceu: Sim. Respondeu ao feedback: Não. Facilidade: 2/5. Encontrou: Não.
 
@@ -241,7 +235,7 @@ Ignorei a pergunta porque queria tentar resolver primeiro, mas depois me perdi e
 
 Observações do moderador: Recebeu convite contextual aos 4 minutos, ignorou e estourou o tempo máximo.
 
-\section{P07 --- Fluxo A}\label{p07--fluxo-a}
+\section{P07 --- Fluxo A}\label{sec:g-7}
 
 Data: 28/06/2026. Perfil: Cidadão --- Aposentado. Já usou GOV.BR: Não. Concluiu: Não. Tempo: 10:00. Cliques: 22. Convite apareceu: Não se aplica. Respondeu ao feedback: Não. Facilidade: 1/5. Encontrou: Não.
 
@@ -253,7 +247,7 @@ Eu não entendi onde começava. Para mim parecia ter muita informação na tela.
 
 Observações do moderador: Baixa familiaridade com Figma; recebeu demonstração inicial e teve dificuldade na primeira tela.
 
-\section{P08 --- Fluxo B}\label{p08--fluxo-b}
+\section{P08 --- Fluxo B}\label{sec:g-8}
 
 Data: 28/06/2026. Perfil: Cidadão --- Analista financeiro. Já usou GOV.BR: Sim. Concluiu: Sim. Tempo: 06:49. Cliques: 16. Convite apareceu: Sim. Respondeu ao feedback: Sim. Facilidade: 4/5. Encontrou: Sim.
 
@@ -267,9 +261,9 @@ Observações do moderador: Respondeu ao convite contextual; concluiu após reto
 
 \chapter{Especificação e Rastreabilidade do Software}\label{sec:apendice-h}
 
-Esta especificação organiza as necessidades N01--N05 da seção 3.2. Foi formalizada na revisão da implementação; não representa nova elicitação com cidadãos ou gestores. Os critérios de aceitação são decisões de projeto. ``Implementado'' indica função disponível no protótipo local; não significa validação com o público ou aprovação de conformidade.
+Esta especificação organiza as necessidades N01--N05 da seção \ref{sec:3-2}. Foi formalizada na revisão da implementação; não representa nova elicitação com cidadãos ou gestores. Os critérios de aceitação são decisões de projeto. ``Implementado'' indica função disponível no protótipo local; não significa validação com o público ou aprovação de conformidade.
 
-\section{Requisitos funcionais e critérios de aceitação}\label{requisitos-funcionais-e-crituxe9rios-de-aceitauxe7uxe3o}
+\section{Requisitos funcionais e critérios de aceitação}\label{sec:h-1}
 
 \begingroup\footnotesize\SingleSpacing
 \setlength{\tabcolsep}{4pt}
@@ -305,6 +299,7 @@ Critério de aceitação
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\multicolumn{3}{@{}p{\textwidth}@{}}{\fonte{elaboração dos autores.}}\tabularnewline
 \endlastfoot
 RF01 & Permitir escolha sobre telemetria e sua interrupção. & CA-RF01: sem autorização na sessão, evento recebe 403; após autorização, é aceito; depois da interrupção, novos eventos recebem 403. \\
 RF02 & Registrar cliques instrumentados por sessão e serviço. & CA-RF02: persistir contexto mínimo; rejeitar identificador de usuário, URL completa e coordenadas no contrato novo. \\
@@ -323,9 +318,9 @@ RF12 & Registrar estudo comparativo prospectivo. & CA-RF12: guardar alocação, 
 
 \endgroup
 
-Fonte: elaboração dos autores.
+\clearpage
 
-\section{Requisitos não funcionais}\label{requisitos-nuxe3o-funcionais}
+\section{Requisitos não funcionais}\label{sec:h-2}
 
 \begingroup\footnotesize\SingleSpacing
 \setlength{\tabcolsep}{4pt}
@@ -361,12 +356,13 @@ Critério e situação
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\multicolumn{3}{@{}p{\textwidth}@{}}{\fonte{elaboração dos autores.}}\tabularnewline
 \endlastfoot
 RNF01 & Minimização de dados. & Não coletar identificação civil, URL completa ou coordenadas no contrato atual; examinar banco e requisições. Identificador técnico não garante anonimização. \\
 RNF02 & Transparência e escolha. & Aviso acessível antes da coleta; recusa e interrupção disponíveis; feedback independente da autorização de telemetria. Implementado localmente. \\
 RNF03 & Controle de acesso. & Chave exigida nas rotas administrativas; implantação externa deve acrescentar TLS, contas individuais e autorização por papel. Estes últimos controles não estão implementados. \\
 RNF04 & Retenção limitada. & Prazo local padrão de 30 dias, configurável entre 1 e 3.650 dias, com prévia e execução manual. São parâmetros de demonstração; prazo institucional e guarda de cópias exigem definição própria. \\
-RNF05 & Operação por teclado. & Percorrer controles, abrir e fechar convite e retornar o foco sem bloqueio. Avaliação manual abrangente prevista no Apêndice J. \\
+RNF05 & Operação por teclado. & Percorrer controles, abrir e fechar convite e retornar o foco sem bloqueio. Avaliação manual abrangente prevista no Apêndice \ref{sec:apendice-j}. \\
 RNF06 & Identificação e comunicação acessíveis. & Rótulos associados, agrupamento de opções, foco visível e mensagens de estado perceptíveis; testar também com leitor de tela. Implementação parcial, avaliação pendente. \\
 RNF07 & Legibilidade e adaptação. & Verificar contraste, ampliação de 200\% e largura de 320 pixels CSS nas páginas; correções locais não constituem conformidade WCAG global. \\
 RNF08 & Integridade de versões e históricos. & Atualização de configuração e registro de histórico na mesma transação; preservar retrato inicial da ação; recusar versão obsoleta. Testado localmente. \\
@@ -379,9 +375,7 @@ RNF12 & Validação de entradas. & Corpo JSON de até 64 KiB, limites de campos,
 
 \endgroup
 
-Fonte: elaboração dos autores.
-
-\section{Regras de negócio}\label{regras-de-neguxf3cio}
+\section{Regras de negócio}\label{sec:h-3}
 
 \begin{itemize}
 \tightlist
@@ -407,7 +401,7 @@ Fonte: elaboração dos autores.
   \textbf{RN10:} conclusão em simulação de interface não comprova obtenção do resultado de um serviço público real.
 \end{itemize}
 
-\section{Histórias de uso}\label{histuxf3rias-de-uso}
+\section{Histórias de uso}\label{sec:h-4}
 
 \begin{itemize}
 \tightlist
@@ -422,10 +416,10 @@ Fonte: elaboração dos autores.
 \item
   \textbf{HU05 --- Responsável pela guarda:} quero visualizar os dados vencidos antes do descarte, para aplicar a política definida. Aceitação: CA-RF09; invalidar confirmação se a prévia deixar de corresponder à base.
 \item
-  \textbf{HU06 --- Avaliador:} quero localizar requisito, componente, critério e evidência, para reproduzir verificações e registrar lacunas. Aceitação: matriz H.5 e plano do Apêndice I; não atribuir ao teste técnico validade com usuários.
+  \textbf{HU06 --- Avaliador:} quero localizar requisito, componente, critério e evidência, para reproduzir verificações e registrar lacunas. Aceitação: matriz H.5 e plano do Apêndice \ref{sec:apendice-i}; não atribuir ao teste técnico validade com usuários.
 \end{itemize}
 
-\section{Matriz de rastreabilidade do software}\label{matriz-de-rastreabilidade-do-software}
+\section{Matriz de rastreabilidade do software}\label{sec:h-5}
 
 \begingroup\footnotesize\SingleSpacing
 \setlength{\tabcolsep}{4pt}
@@ -471,8 +465,9 @@ Teste/evidência e limite
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\multicolumn{5}{@{}p{\textwidth}@{}}{\fonte{elaboração dos autores com base na especificação, no código e nos casos identificados em H.6.}}\tabularnewline
 \endlastfoot
-N01/N04 --- escolha & RF01/RF11; RNF01/\allowbreak 02; RN09 & \texttt{\seqsplit{server.py}}: \texttt{\seqsplit{Handler.handle\_permission}}, \texttt{\seqsplit{validate\_collection}}, \texttt{\seqsplit{prototype\_script}}; \texttt{\seqsplit{POST /api/session/permission}} e \texttt{\seqsplit{/withdraw}} & CA-RF01/11 & G04 verifica autorização, interrupção e minimização; captura \texttt{\seqsplit{docs/figuras/prototipo-portal-atual.png}} documenta aviso. Compreensão e cobertura de CA-RF11 ainda requerem TV06/07. \\
+N01/N04 --- escolha & RF01/RF11; RNF01/\allowbreak 02; RN09 & \texttt{\seqsplit{server.py}}: \texttt{\seqsplit{Handler.handle\_permission}}, \texttt{\seqsplit{validate\_collection}}, \texttt{\seqsplit{prototype\_script}}; \texttt{\seqsplit{POST /api/session/permission}} e \texttt{\seqsplit{/withdraw}} & CA-RF01/11 & G04 verifica autorização, interrupção e minimização; captura \texttt{\seqsplit{docs/figuras/prototipo-portal-final.jpg}} documenta aviso. Compreensão e cobertura de CA-RF11 ainda requerem TV06/07. \\
 N02 --- contexto & RF02/\allowbreak 03; RNF12; RN01 & \texttt{\seqsplit{server.py}}: \texttt{\seqsplit{Handler.handle\_click}} e \texttt{\seqsplit{handle\_page\_time}}; \texttt{\seqsplit{POST /api/events/click}} e \texttt{\seqsplit{/page-time}} & CA-RF02/03 & G04, G10 e G11 verificam entradas selecionadas; não existe temporizador automático. Não constituem cobertura integral de RNF12. \\
 N02/N04 --- regras & RF04/\allowbreak 07; RNF08; RN05/\allowbreak 06/\allowbreak 07 & \texttt{\seqsplit{governance.py::update\_configuration}}; \texttt{\seqsplit{server.py::evaluate\_click\_actions}}, \texttt{\seqsplit{evaluate\_duration\_actions}} e \texttt{\seqsplit{create\_alert\_once}}; \texttt{\seqsplit{/api/admin/configurations}} & CA-RF04/07 & G01/G02: persistência, conflito 409 e entradas; G03: fronteiras e versão no alerta. Calibração e recuperação ampla pendentes. \\
 N01 --- percepção & RF05; RN02/\allowbreak 03/\allowbreak 04 & \texttt{\seqsplit{server.py}}: \texttt{\seqsplit{feedback\_html}}, \texttt{\seqsplit{Handler.handle\_feedback\_submit}}, \texttt{\seqsplit{migrate\_feedback\_schema}}; \texttt{\seqsplit{POST /api/feedback}} & CA-RF05 & F01/F02/F04/F05/F06 e G08/G11; escalas, ausência, rejeições e migração. Compreensão/validade do item e interpretação dos comentários não testadas por esses casos. \\
@@ -480,9 +475,9 @@ N03 --- leitura & RF06; RN02 & \texttt{\seqsplit{server.py::Handler.handle\_get\
 N03 --- ação & RF08; RNF08; RN08 & \texttt{\seqsplit{governance.py::create\_improvement}}, \texttt{\seqsplit{update\_improvement}}, \texttt{\seqsplit{snapshot}}; \texttt{\seqsplit{/api/admin/improvements}}; \texttt{\seqsplit{admin.html}} & CA-RF08 & G06 verifica retrato inicial e acompanhamento; G09 cobre descarte do histórico de ações concluídas. Utilidade e impacto não demonstrados. \\
 N04 --- guarda & RF09; RNF04 & \texttt{\seqsplit{governance.py::purge\_expired}}; \texttt{\seqsplit{GET/POST /api/admin/retention}} & CA-RF09 & G07/G09/G12: prévia, confirmação, conflito, identidade/conteúdo dos registros e registros restantes. Cópias/arquivos externos e política institucional não são avaliados pelos testes. \\
 N04 --- acesso & RF10; RNF03/\allowbreak 12 & \texttt{\seqsplit{server.py::Handler.authorized}}, \texttt{\seqsplit{do\_GET}}, \texttt{\seqsplit{do\_POST}}; \texttt{\seqsplit{/api/admin/*}} & CA-RF10 & G05 verifica acesso sem chave e origem incompatível; G11 verifica entradas/escape selecionados. Auditoria global, TLS e contas individuais pendentes. \\
-N01/N05 --- inclusão & RF05/\allowbreak 11; RNF05/\allowbreak 06/\allowbreak 07 & \texttt{\seqsplit{server.py}}: \texttt{\seqsplit{feedback\_html}}, \texttt{\seqsplit{prototype\_script}}, \texttt{\seqsplit{prototype\_modal\_html}}; \texttt{\seqsplit{admin.html}} & Apêndice J & F06 confere presença do CES opcional; captura do formulário e conferência local não substituem TV07. Leitor de tela, contraste e avaliação com pessoas ainda previstos. \\
+N01/N05 --- inclusão & RF05/\allowbreak 11; RNF05/\allowbreak 06/\allowbreak 07 & \texttt{\seqsplit{server.py}}: \texttt{\seqsplit{feedback\_html}}, \texttt{\seqsplit{prototype\_script}}, \texttt{\seqsplit{prototype\_modal\_html}}; \texttt{\seqsplit{admin.html}} & Apêndice \ref{sec:apendice-j} & F06 confere presença do CES opcional; captura do formulário e conferência local não substituem TV07. Leitor de tela, contraste e avaliação com pessoas ainda previstos. \\
 N05 --- manutenção & RNF10/\allowbreak 11 & \texttt{\seqsplit{server.py}}, \texttt{\seqsplit{governance.py}}, \texttt{\seqsplit{admin.html}} e arquivos de teste em \texttt{\seqsplit{prototype-api/}} & TV03 & G01 e F05 cobrem reinicialização/migração; recuperação e compatibilidade adicional permanecem planejadas. \\
-N05 --- desempenho & RNF09 & Servidor HTTP em \texttt{\seqsplit{server.py}} e SQLite & TV04 & Não executado; cenário e meta de projeto no Apêndice I. \\
+N05 --- desempenho & RNF09 & Servidor HTTP em \texttt{\seqsplit{server.py}} e SQLite & TV04 & Não executado; cenário e meta de projeto no Apêndice \ref{sec:apendice-i}. \\
 N02/N05 --- calibração & RF04/\allowbreak 12; RN01/\allowbreak 05 & Instrumentação e base rotulada futuras; protocolo K.1.1 & TV10 & Planejado, sem resultado empírico ou caso automatizado de calibração. \\
 N05 --- comparação & RF12; RN04/\allowbreak 10 & Instrumentação A/B e exposição ainda ausentes em \texttt{\seqsplit{server.py}}; protocolo K.1 & CA-RF12 & Não implementado e sem caso automatizado. Oito registros Figma não verificam esta capacidade. \\
 \end{longtable}
@@ -490,11 +485,9 @@ N05 --- comparação & RF12; RN04/\allowbreak 10 & Instrumentação A/B e exposi
 
 \endgroup
 
-Fonte: elaboração dos autores com base na especificação, no código e nos casos identificados em H.6.
+\section{Catálogo dos testes e evidências}\label{sec:h-6}
 
-\section{Catálogo dos testes e evidências}\label{catuxe1logo-dos-testes-e-eviduxeancias}
-
-Os módulos citados no Quadro 15 pertencem a \texttt{\seqsplit{prototype-api/}}. A notação \texttt{\seqsplit{arquivo::Classe.método}} identifica um teste existente, não apenas uma descrição de intenção. Os identificadores abaixo são usados na matriz para evitar repetir nomes extensos. Um caso pode cobrir somente parte do critério; a aprovação não equivale a cobertura integral do requisito ou à validação humana.
+Os módulos citados no Quadro \ref{qua:rastreabilidade-software} pertencem a \texttt{\seqsplit{prototype-api/}}. A notação \texttt{\seqsplit{arquivo::Classe.método}} identifica um teste existente, não apenas uma descrição de intenção. Os identificadores abaixo são usados na matriz para evitar repetir nomes extensos. Um caso pode cobrir somente parte do critério; a aprovação não equivale a cobertura integral do requisito ou à validação humana.
 
 \begingroup\footnotesize\SingleSpacing
 \setlength{\tabcolsep}{4pt}
@@ -525,6 +518,7 @@ Caso de teste
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\multicolumn{2}{@{}p{\textwidth}@{}}{\fonte{elaboração dos autores com base nos arquivos de teste.}}\tabularnewline
 \endlastfoot
 F01 & \texttt{\seqsplit{prototype-api/test\_feedback\_ces.py::FeedbackCESTest.test\_optional\_answers\_and\_all\_seven\_categories}} \\
 F02 & \texttt{\seqsplit{prototype-api/test\_feedback\_ces.py::FeedbackCESTest.test\_invalid\_values\_are\_rejected\_without\_creating\_records}} \\
@@ -550,13 +544,11 @@ G12 & \texttt{\seqsplit{prototype-api/test\_governance.py::GovernanceTest.test\_
 
 \endgroup
 
-Fonte: elaboração dos autores com base nos arquivos de teste.
-
 A execução automatizada assistida por agente de 15 de outubro de 2026 está registrada em \texttt{\seqsplit{docs/evidencias/verificacao-medio-prazo.txt}} e \texttt{\seqsplit{docs/evidencias/verificacao-medio-prazo.json}}. O segundo arquivo identifica ambiente, comando, horários, commit-base e hashes dos arquivos testados. Nenhuma evidência de participante é incluída nesses arquivos.
 
 \chapter{Qualidade do Produto e Plano de Verificação e Validação}\label{sec:apendice-i}
 
-\section{Seleção de características de qualidade}\label{seleuxe7uxe3o-de-caracteruxedsticas-de-qualidade}
+\section{Seleção de características de qualidade}\label{sec:i-1}
 
 A ISO/IEC 25010:2023 organiza a qualidade do produto em nove características. A seleção abaixo relaciona o modelo ao contexto deste protótipo; os critérios numéricos de aceitação são metas do projeto, não limites prescritos pela norma. A capacidade de interação do produto não substitui a avaliação da experiência e da usabilidade em contexto \cite{iso250102023}.
 
@@ -601,6 +593,7 @@ Evidência disponível e limite
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\multicolumn{4}{@{}p{\textwidth}@{}}{\fonte{elaboração dos autores, com base na ISO/IEC 25010:2023.}}\tabularnewline
 \endlastfoot
 Adequação funcional & Correção funcional & Coletar e agregar sem misturar contexto e percepção; RF02--08. & Testes de entradas, médias, versões e ações; benefício para o usuário ainda não avaliado. \\
 Eficiência de desempenho & Comportamento temporal & Instrumentação não deve tornar a navegação excessivamente lenta; RNF09. & Meta e cenário definidos; ensaio de carga não executado. \\
@@ -615,13 +608,11 @@ Flexibilidade & Adaptabilidade & Adaptar parâmetros por serviço e executar em 
 
 \endgroup
 
-Fonte: elaboração dos autores, com base na ISO/IEC 25010:2023.
-
 A característica segurança operacional (\emph{safety}) não recebe avaliação dedicada nesta etapa: o artefato não executa serviço real nem operação crítica. Isso não significa ausência de riscos. Interrupção da jornada, orientação inadequada e exposição de dados devem ser revistos antes de uma implantação, quando a seleção também precisará ser reconsiderada.
 
-\section{Plano de verificação e validação}\label{plano-de-verificauxe7uxe3o-e-validauxe7uxe3o}
+\section{Plano de verificação e validação}\label{sec:i-2}
 
-Verificação examina a implementação diante de requisitos e contratos. Validação investiga se o artefato atende às necessidades em condições de uso. Os testes automatizados locais constituem evidência parcial de verificação; o estudo histórico no Figma é evidência formativa daquelas interfaces. Nenhum dos dois substitui as atividades abaixo.
+Este plano prepara o TCC 2 e não relata a execução das atividades previstas. A \textbf{verificação do software} pergunta se o sistema foi construído corretamente conforme requisitos e contratos; a \textbf{validação da solução} investiga se ele resolve adequadamente o problema em uso. O Quadro \ref{qua:plano-vv} prevê testes funcionais, integração/API, usabilidade, acessibilidade, desempenho e segurança. As evidências atuais são parciais e não substituem essas atividades.
 
 \begingroup\footnotesize\SingleSpacing
 \setlength{\tabcolsep}{4pt}
@@ -662,6 +653,7 @@ Situação
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\multicolumn{4}{@{}p{\textwidth}@{}}{\fonte{elaboração dos autores.}}\tabularnewline
 \endlastfoot
 TV01 & Funcional: sessão, formulário, regras, configuração e ações. & Executar CA-RF01--11 aplicáveis; resultado esperado/obtido e evidência por caso. & Subconjunto automatizado executado localmente; demais cenários por completar. \\
 TV02 & Integração/API: estados HTTP, persistência, entradas, ausências e versões. & Rejeições sem gravação indevida; migração com cópia; médias e histórico coerentes. & Subconjunto automatizado executado; integração com serviço externo pendente. \\
@@ -678,13 +670,11 @@ TV10 & Calibração comportamental --- item 15. & Executar K.1.1: cliques, dura�
 
 \endgroup
 
-Fonte: elaboração dos autores.
-
 Antes de cada execução, devem ser registrados versão do código, data, executor, sistema operacional, hardware, Python, SQLite, navegador, configuração e massa de dados. Cada caso deve conter entrada, resultado esperado, resultado obtido, situação (aprovado, reprovado ou bloqueado) e localização da evidência. Usar base isolada e dados sintéticos para ensaios técnicos; registrar defeito, correção e reexecução quando houver falha. A aprovação de casos não autoriza afirmar qualidade global nem conformidade normativa integral. Coleta com pessoas depende do enquadramento ético e institucional previamente definido.
 
 \chapter{Privacidade e Acessibilidade por Requisitos}\label{sec:apendice-j}
 
-\section{Privacidade desde a concepção}\label{privacidade-desde-a-concepuxe7uxe3o}
+\section{Privacidade desde a concepção}\label{sec:j-1}
 
 A aplicação de Privacy by Design exige transformar princípios em decisões verificáveis durante o desenvolvimento. \citeonline{cavoukian2011pbd}, na versão revisada do documento publicado originalmente em 2009, apresenta sete princípios: prevenção, proteção por padrão, incorporação ao projeto, funcionalidade sem falsas escolhas, proteção durante o ciclo de vida, transparência e respeito ao usuário. Eles orientam decisões, não conferem certificação ao protótipo.
 
@@ -711,9 +701,9 @@ A orientação da \citeonline{ipc2020privacy} complementa os cuidados de projeto
   \textbf{Preparação para coleta real:} definir controlador, operadores, finalidade, base legal, contato para exercício de direitos, fluxo de atendimento, incidentes, guarda e descarte. Examinar o enquadramento ético com o orientador e a instância competente antes de nova coleta. O texto não afirma aprovação pelo CEP nem atribui papéis jurídicos a pessoas sem definição institucional.
 \end{enumerate}
 
-\section{Requisitos e plano de acessibilidade}\label{requisitos-e-plano-de-acessibilidade}
+\section{Requisitos e plano de acessibilidade}\label{sec:j-2}
 
-A WCAG 2.2 fornece critérios para avaliar conteúdo e interação web. Foram selecionados os critérios abaixo por sua relação com formulário, navegação e convite. Essa seleção não é uma auditoria completa nem autoriza declarar conformidade AA \cite{wcag22}.
+A acessibilidade é incorporada como \textbf{requisito de qualidade} e será avaliada no TCC 2. Isso é essencial em serviços públicos, pois barreiras podem impedir o exercício de direitos ou o cumprimento de obrigações, e o referencial reconhece desigualdades de acesso, dispositivos e letramento digital. O Quadro \ref{qua:acessibilidade} seleciona critérios da WCAG 2.2 e define evidências futuras; não representa auditoria completa nem declaração de conformidade AA.
 
 \begingroup\footnotesize\SingleSpacing
 \setlength{\tabcolsep}{4pt}
@@ -749,6 +739,7 @@ Verificação prevista
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\multicolumn{3}{@{}p{\textwidth}@{}}{\fonte{elaboração dos autores, com base na WCAG 2.2.}}\tabularnewline
 \endlastfoot
 Estrutura e rótulos & 1.3.1; 3.3.2 & Inspecionar títulos, regiões, rótulos e agrupamentos das escalas; conferir leitura e compreensão. \\
 Contraste & 1.4.3 & Medir texto e estados da interface, inclusive erros e foco; registrar pares de cores e resultados. \\
@@ -763,15 +754,13 @@ Mensagens de estado & 4.1.3 & Conferir anúncio de carregamento, falha e envio c
 
 \endgroup
 
-Fonte: elaboração dos autores, com base na WCAG 2.2.
-
 O plano abrange portal, serviços, formulário, modais, aviso de coleta e painel. Combina inspeção manual, ferramentas automatizadas e uso com leitor de tela, além de participantes com diferentes necessidades quando possível. Cada falha deve indicar página, passos, critério, evidência, impacto e correção; reavaliar após o ajuste. A implementação inclui rótulos, agrupamentos, estados e controle inicial de foco, mas a avaliação completa permanece planejada. A compreensão do CES e a adequação do momento do convite também precisam de pessoas; um verificador automático não responde a essas questões.
 
 \chapter{Protocolos das Três Perspectivas de Avaliação}\label{sec:apendice-k}
 
-Os protocolos são prospectivos. Não descrevem novas avaliações já executadas e não substituem os oito registros históricos. Recrutamento, tamanho amostral, instrumentos completos e tratamento ético deverão ser definidos antes da coleta, com o orientador e as instâncias pertinentes. A amostra histórica não justifica poder estatístico para testar H1/H2.
+Este apêndice planeja, para o TCC 2, três perspectivas de avaliação ainda não executadas: cidadãos, para experiência e esforço; gestores públicos, para utilidade dos indicadores; e especialistas/engenheiros, para qualidade técnica, arquitetura, segurança e usabilidade. A falta de avaliação externa permanece uma limitação. Os protocolos serão detalhados antes da coleta. As observações das oito sessões históricas podem orientar o refinamento dos instrumentos; essa amostra não sustenta inferências confirmatórias sobre H1 e H2.
 
-\section{Cidadãos: uso, compreensão e comparação}\label{cidaduxe3os-uso-compreensuxe3o-e-comparauxe7uxe3o}
+\section{Cidadãos: uso, compreensão e comparação}\label{sec:k-1}
 
 \textbf{Objetivo:} verificar compreensão do item CES, realização de tarefas e benefícios/custos do convite. Realizar primeiro um piloto de compreensão: pedir ao participante que explique a pergunta e as âncoras com suas palavras e diferencie facilidade da etapa de satisfação e de esforço para preencher o formulário. Verificar explicitamente se ``realizar o que eu precisava'' sugere tarefa concluída mesmo quando o convite ocorre no meio da jornada. Ajustar e versionar o item antes do estudo principal se necessário.
 
@@ -787,9 +776,9 @@ Para H1, comparar proporções de resposta com denominadores explícitos. Para H
 
 Para comparar facilidade entre grupos, aplicar o mesmo item pós-tarefa, no mesmo momento, separadamente do CES contextual opcional. Não combinar essas duas ocasiões como se fossem uma medida única. Esforço de preenchimento e interrupção precisam de medidas próprias. Definir previamente análise, tratamento de ausências e critérios de interrupção; considerar tamanho de efeito e incerteza, sem escolher testes em função do resultado desejado. Encerrar sem prejuízo a pedido do participante.
 
-\subsection{Calibração dos sinais comportamentais --- TV10}\label{calibrauxe7uxe3o-dos-sinais-comportamentais--tv10}
+\subsection{Calibração dos sinais comportamentais --- TV10}\label{sec:k-1-1}
 
-Este protocolo prospectivo atende ao item 15 das orientações. Sua execução depende de nova coleta e permanece no longo prazo. Os oito casos históricos não constituem uma base rotulada para calibrar as regras da API. O plano distingue referência declarada e classificação operacional; a matriz de confusão permite examinar acertos e erros de um classificador \cite{fawcett2006roc}. As escolhas de coleta, partição e seleção descritas a seguir são propostas deste projeto, não recomendações universais dessa fonte.
+Esta seção planeja a calibração dos sinais comportamentais para nova coleta no TCC 2. Será verificado se cliques, tempo, retornos e abandono correspondem à dificuldade percebida. Os gatilhos serão comparados a rótulos independentes para identificar verdadeiros positivos, falsos positivos, verdadeiros negativos e falsos negativos \cite{fawcett2006roc}. Os oito participantes históricos não foram rotulados para esse fim; portanto, trata-se de protocolo prospectivo, não calibração realizada.
 
 \textbf{Unidade e referência independente.} Adotar um episódio de uma etapa de tarefa, identificado por participante pseudônimo, sessão, serviço e etapa. Registrar início, fim, cliques instrumentados, duração efetivamente medida, interrupções, versão das regras e acionamentos. Essa instrumentação por etapa e a medição automática de duração ainda precisam ser implementadas; os totais históricos do Useberry não devem ser misturados aos contadores da API. Se houver apenas uma etapa por sessão/serviço, explicitar essa restrição.
 
@@ -805,7 +794,7 @@ Na coleta de calibração, desativar redirecionamentos e convites durante a etap
 
 O relatório deverá guardar versões do instrumento e código, critérios de exclusão, parâmetros comparados, partição, rótulos e matriz por serviço, respeitando o plano de guarda. A análise de incerteza deverá considerar episódios agrupados por participante; o método e o tamanho necessário devem ser definidos antes da coleta principal. Não há estimativas de sensibilidade, especificidade ou erro produzidas nesta revisão. A execução e a avaliação dessa calibração continuam pendentes.
 
-\section{Gestores: interpretação, decisão e acompanhamento}\label{gestores-interpretauxe7uxe3o-decisuxe3o-e-acompanhamento}
+\section{Gestores: interpretação, decisão e acompanhamento}\label{sec:k-2}
 
 \textbf{Objetivo:} avaliar se gestores compreendem os indicadores e conseguem usá-los em uma decisão documentada. Recrutar pessoas com atribuições reais de gestão do serviço, distinguindo-as das personas e da discussão interna. Como meta operacional inicial, planejar cinco gestores de ao menos dois contextos de serviço; documentar seleção e funções. A meta é exploratória, não amostra estatisticamente representativa, e poderá ser revista antes do recrutamento.
 
@@ -817,7 +806,7 @@ Na entrevista, perguntar: que decisão o painel ajudaria a tomar; que informaç�
 
 Registrar acerto de interpretação, erros, tarefas concluídas, dúvidas, tempo de execução e utilidade percebida em entrevista. A capacidade de declarar ``evidência insuficiente'' é um resultado relevante. Preservar a linha inicial e documentar o acompanhamento sem atribuir causalidade a mudanças da média. Esse protocolo avalia utilidade potencial do painel, não impacto efetivo de política pública.
 
-\section{Especialistas: inspeção independente}\label{especialistas-inspeuxe7uxe3o-independente}
+\section{Especialistas: inspeção independente}\label{sec:k-3}
 
 \textbf{Objetivo:} examinar aderência a requisitos, qualidade técnica, acessibilidade e usabilidade por inspeção. Selecionar profissionais independentes do desenvolvimento, com perfis que cubram Engenharia de Software, experiência do usuário, acessibilidade e segurança; declarar experiência e conflitos de interesse. Como meta inicial de planejamento, convidar quatro especialistas independentes para cobrir Engenharia de Software, UX, acessibilidade e segurança; registrar quando um profissional cobrir mais de um perfil. Essa meta não garante cobertura suficiente e poderá ser revista antes da execução.
 
@@ -825,57 +814,23 @@ Entregar versão identificada, requisitos, matriz H.5 e plano I.2. Separar inspe
 
 Cada avaliador registra individualmente página/componente, requisito ou heurística, passos, evidência, impacto e recomendação. Propõe-se severidade de projeto de 0 (sem problema) a 4 (impede tarefa essencial), com justificativa; consolidar depois, preservando divergências e autoria. Os autores corrigem e reexecutam os casos afetados. Parecer de agente automatizado pode auxiliar revisão, mas não conta como especialista humano independente nem como execução desses protocolos.
 
-\chapter{Registros históricos da concepção compartilhada}\label{sec:apendice-l}
+\chapter{Proveniência e guarda dos registros de concepção}\label{sec:apendice-l}
 
-Os quatro registros a seguir foram produzidos por Fernando Gabriel dos Santos Carrijo no contexto das atividades de concepção parcialmente compartilhadas, descritas na seção 3.3.1. São reproduzidos sem alteração do conteúdo das imagens. As datas individuais de produção não estão identificadas.
+Os quatro registros visuais originais inventariados em A.4 documentam as atividades de concepção parcialmente compartilhadas descritas na seção \ref{sec:3-3-1}. Tiveram elaboração visual de Fernando Gabriel dos Santos Carrijo e conteúdo resultante das contribuições de Julio e Fernando e da participação parcial de Wesley Pedrosa dos Santos. As datas individuais de produção não estão identificadas.
 
-As imagens contêm o título e o instrumento anteriores, incluindo NPS, bem como metas e expressões como ``anônima'', ``detecta dificuldade'' e ``validado''. Essas formulações pertencem aos registros históricos e não descrevem a especificação vigente. Sua reprodução não significa adoção do instrumento anterior, comprovação de anonimização, diagnóstico de dificuldade, implementação integral ou validação científica. O manuscrito atual distingue a implementação Python, o estudo histórico Figma/\allowbreak Useberry e os protocolos futuros.
+Os arquivos originais permanecem preservados no acervo digital do projeto, separado deste manuscrito. O inventário permite identificar os seguintes registros:
 
-\clearpage
+\begin{itemize}
+\tightlist
+\item
+  Visão do produto: \texttt{\seqsplit{lean-inception-visao-produto.png}}.
+\item
+  Delimitação do produto --- primeiro registro: \texttt{\seqsplit{lean-inception-e-nao-e-faz-nao-faz-1.png}}.
+\item
+  Delimitação do produto --- segundo registro: \texttt{\seqsplit{lean-inception-e-nao-e-faz-nao-faz-2.png}}.
+\item
+  Funcionalidades do MVP: \texttt{\seqsplit{lean-inception-features-mvp.png}}.
+\end{itemize}
 
-\section{Visão do produto --- registro histórico}\label{visuxe3o-do-produto--registro-histuxf3rico}
-
-\begin{figure}[!ht]
-\centering
-\caption{Visão do produto --- registro histórico}\label{fig:historico-visao-produto}
-\includegraphics[width=\textwidth,height=.70\textheight,keepaspectratio]{figuras/apendices/lean-inception-visao-produto.png}
-
-\par\small\raggedright Fonte: Fernando Gabriel dos Santos Carrijo; registro histórico de concepção, com data individual não identificada.
-\end{figure}
-
-\clearpage
-
-\section{Delimitação do produto --- primeiro registro histórico}\label{delimitauxe7uxe3o-do-produto--primeiro-registro-histuxf3rico}
-
-\begin{figure}[!ht]
-\centering
-\caption{Delimitação do produto --- primeiro registro histórico}\label{fig:historico-delimitacao-1}
-\includegraphics[width=\textwidth,height=.70\textheight,keepaspectratio]{figuras/apendices/lean-inception-e-nao-e-faz-nao-faz-1.png}
-
-\par\small\raggedright Fonte: Fernando Gabriel dos Santos Carrijo; registro histórico de concepção, com data individual não identificada.
-\end{figure}
-
-\clearpage
-
-\section{Delimitação do produto --- segundo registro histórico}\label{delimitauxe7uxe3o-do-produto--segundo-registro-histuxf3rico}
-
-\begin{figure}[!ht]
-\centering
-\caption{Delimitação do produto --- segundo registro histórico}\label{fig:historico-delimitacao-2}
-\includegraphics[width=\textwidth,height=.70\textheight,keepaspectratio]{figuras/apendices/lean-inception-e-nao-e-faz-nao-faz-2.png}
-
-\par\small\raggedright Fonte: Fernando Gabriel dos Santos Carrijo; registro histórico de concepção, com data individual não identificada.
-\end{figure}
-
-\clearpage
-
-\section{Funcionalidades do MVP --- registro histórico}\label{funcionalidades-do-mvp--registro-histuxf3rico}
-
-\begin{figure}[!ht]
-\centering
-\caption{Funcionalidades do MVP --- registro histórico}\label{fig:historico-funcionalidades}
-\includegraphics[width=\textwidth,height=.70\textheight,keepaspectratio]{figuras/apendices/lean-inception-features-mvp.png}
-
-\par\small\raggedright Fonte: Fernando Gabriel dos Santos Carrijo; registro histórico de concepção, com data individual não identificada.
-\end{figure}
+Esses documentos registram concepção e planejamento históricos, com formulações posteriormente revistas. Não constituem evidência de implementação, anonimização, diagnóstico de dificuldade, conclusão das funcionalidades ou validação do sistema. A descrição vigente distingue a implementação Python, o estudo histórico de interface no Figma/\allowbreak Useberry e os protocolos prospectivos de avaliação.
 \end{apendicesenv}

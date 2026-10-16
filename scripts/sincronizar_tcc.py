@@ -12,6 +12,8 @@ import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+REPOSITORY = 'https://github.com/Juliovskys/latex-tcc'
+ARCHIVE_COMMIT = 'd24af5d8ccfa088c7857983fe4d24b08af5337b0'
 HEADER = '% Gerado a partir de docs/tcc.md por scripts/sincronizar_tcc.py.\n'
 WIDTHS = {
     1: [.28, .12, .60], 2: [.18, .23, .25, .34], 3: [.42, .58],
@@ -70,6 +72,9 @@ def main():
         return key
 
     def prepare(text):
+        # Os identificadores do sumário portátil são substituídos por rótulos
+        # semânticos do LaTeX; podem estar no fim do capítulo anterior no MD.
+        text = re.sub(r'<a id="secao-[^"]+"></a>\s*', '', text)
         text = re.sub(r'<sup>([^<]+)</sup>',
                       lambda m: token('\\textsuperscript{' + m[1] + '}'), text)
         # Resolver grupos antes dos vínculos individuais para permitir sufixos a/b
@@ -88,7 +93,27 @@ def main():
         text = re.sub(r'\[([^\]]+)\]\(#ref-([^)]+)\)', narrative_citation, text)
         text = re.sub(r'\[[^\]]+\]\(#((?:tab|qua|fig|sec):[^)]+)\)',
                       lambda m: token('\\ref{' + m[1] + '}'), text)
-        text = re.sub(r'^(#+)\s+(?:\d+(?:\.\d+)*|[A-L](?:\.\d+)+)\s+', r'\1 ', text, flags=re.M)
+        # Remissões encadeadas e intervalos usam os mesmos rótulos dos títulos.
+        def section_chain(match):
+            return match[1] + ' ' + re.sub(
+                r'\d+(?:\.\d+)*',
+                lambda n: token('\\ref{sec:' + n[0].replace('.', '-') + '}'), match[2])
+        text = re.sub(r'\b(seções|Seções)\s+(\d+(?:\.\d+)*(?:\s*(?:,|e|a|–|-)\s*\d+(?:\.\d+)*)+)',
+                      section_chain, text)
+        text = re.sub(r'\b(Apêndices|apêndices)\s+([A-L](?:\s*[–-]\s*[A-L]))',
+                      lambda m: m[1] + ' ' + re.sub(r'[A-L]', lambda n: token(
+                          '\\ref{sec:apendice-' + n[0].lower() + '}'), m[2]), text)
+        # Remissões ainda escritas em texto puro também usam contadores.
+        for (kind, number), label in CROSSREFS.items():
+            text = re.sub(r'\b' + re.escape(kind) + r'\s+' + re.escape(number) + r'(?!\d|\.\d)',
+                          lambda m, ident=label, word=kind: m[0] if re.match(r'\s+[—–]', text[m.end():])
+                          else word + ' ' + token('\\ref{' + ident + '}'), text)
+        def numbered_heading(match):
+            level, number, title = match.groups()
+            ident = 'sec:' + number.lower().replace('.', '-')
+            return '<a id="' + ident + '"></a>\n\n' + level + ' ' + title
+        text = re.sub(r'^(#+)\s+(\d+(?:\.\d+)*|[A-L](?:\.\d+)+)\s+(.+)$',
+                      numbered_heading, text, flags=re.M)
         text = re.sub(r'^# Apêndice ([A-L]) — (.+)$',
                       lambda m: '<a id="sec:apendice-' + m[1].lower() + '"></a>\n\n# ' + m[2], text, flags=re.M)
         return text
@@ -133,7 +158,7 @@ def main():
         if node.get('t') == 'Link':
             target = node['c'][2][0]
             if not re.match(r'^(?:https?://|#)', target):
-                target = 'https://github.com/Juliovskys/latex-tcc/blob/docs/tcc-medio-prazo/docs/' + target
+                target = REPOSITORY + '/blob/' + ARCHIVE_COMMIT + '/docs/' + target
                 node['c'][2][0] = target
         return {key: inline_code(value) for key, value in node.items()}
 
@@ -158,28 +183,52 @@ def main():
         blocks = doc['blocks']
         output = []
         pending = None
+        aliases = []
         caption = None
         kind = None
         historical = False
+        compact_feedback_list = False
+        table_source = None
         for block in blocks:
+            header_aliases = []
             if block['t'] == 'RawBlock' and block['c'][0] == 'html':
                 match = re.fullmatch(r'<a id="([^"]+)"></a>', block['c'][1].strip())
                 if match:
+                    if pending:
+                        aliases.append(pending)
                     pending = match[1]
                 continue
             if block['t'] == 'Header' and pending:
                 block['c'][1][0] = pending
                 pending = None
+                header_aliases, aliases = aliases, []
             if block['t'] == 'Header':
+                compact_feedback_list = plain(block['c'][2]) == 'Feedback e painel'
+                if plain(block['c'][2]) == 'Requisitos não funcionais':
+                    # O quadro cabe inteiro quando a seção começa em página
+                    # própria; evita uma última linha isolada após o rodapé.
+                    output.append(raw('\\clearpage'))
                 if block['c'][0] == 1:
                     historical = plain(block['c'][2]) == 'Registros históricos da concepção compartilhada'
                 elif historical and block['c'][0] == 2:
                     output.append(raw('\\clearpage'))
+            if compact_feedback_list and block['t'] == 'BulletList':
+                # Os quatro campos já terminam em ponto e vírgula. Apresentá-los
+                # em linha evita uma página com apenas o fim do apêndice B.
+                fields = []
+                for item in block['c']:
+                    assert len(item) == 1 and item[0]['t'] in ('Plain', 'Para')
+                    if fields:
+                        fields.append({'t': 'Space'})
+                    fields.extend(item[0]['c'])
+                block = {'t': 'Para', 'c': fields}
             if block['t'] == 'Para':
                 html = ''.join(n['c'][1] for n in block['c']
                                if n['t'] == 'RawInline' and n['c'][0] == 'html')
                 match = re.fullmatch(r'<a id="([^"]+)"></a>', html)
                 if match:
+                    if pending:
+                        aliases.append(pending)
                     pending = match[1]
                     continue
                 content = plain(block['c'])
@@ -204,11 +253,28 @@ def main():
                     caption = 'figure-source'
                     continue
                 if caption == 'figure-source' and content.startswith('Fonte:'):
-                    source = writer([block], doc).strip()
-                    output.append(raw('\\par\\small\\raggedright ' + source + '\n\\end{figure}'))
+                    source = writer([block], doc).strip().removeprefix('Fonte:').strip()
+                    output.append(raw('\\fonte{' + source + '}\n\\end{figure}'))
                     caption = None
                     continue
+                if content.startswith('Fonte:'):
+                    source = writer([block], doc).strip().removeprefix('Fonte:').strip()
+                    if table_source is not None:
+                        index, columns = table_source
+                        # O último rodapé pertence à tabela: a fonte não pode
+                        # migrar sozinha para a página seguinte.
+                        footer = ('\\multicolumn{' + str(columns) + '}{@{}p{\\textwidth}@{}}{'
+                                  '\\fonte{' + source + '}}\\tabularnewline\n\\endlastfoot')
+                        output[index]['c'][1] = output[index]['c'][1].replace('\\endlastfoot', footer, 1)
+                        table_source = None
+                    else:
+                        output.append(raw('\\fonte{' + source + '}'))
+                    continue
             if block['t'] == 'Table':
+                if pending == 'tab:regras-dificuldade':
+                    # O quadro de três regras é lido como unidade. Evitar que
+                    # sua última linha seja expulsa pelo rodapé da longtable.
+                    output.append(raw('\\clearpage'))
                 if caption:
                     weights = TABLE_WIDTHS.get(pending, [1 / len(block['c'][2])] * len(block['c'][2]))
                     block['c'][0][0] = pending
@@ -231,6 +297,7 @@ def main():
                     table_tex = '\\begin{TCCquadro}\n' + table_tex + '\\end{TCCquadro}\n'
                 table_tex = table_tex.replace('\\endfirsthead\n', '\\endfirsthead\n\\caption[]{' +
                                               caption_text + ' (continuação)}\\tabularnewline\n', 1)
+                table_source = (len(output) + 1, len(block['c'][2]))
                 output.extend([raw('\\begingroup\\footnotesize\\SingleSpacing\n'
                                    '\\setlength{\\tabcolsep}{4pt}\n'
                                    '\\setlength{\\LTpre}{.6\\baselineskip}\n'
@@ -239,10 +306,22 @@ def main():
                 kind = None
                 continue
             output.append(inline_code(block))
+            for alias in header_aliases:
+                output.append(raw('\\label{' + alias + '}'))
         assert pending is None and caption is None, (pending, caption)
         return HEADER + writer(output, doc)
 
     manuscript = (ROOT / 'docs/tcc.md').read_text(encoding='utf-8')
+    CROSSREFS = {(kind, number): ident for ident, kind, number in re.findall(
+        r'<a id="((?:tab|qua|fig):[^"]+)"></a>\s*\n(?:\*\*)?(Tabela|Quadro|Figura) (\d+) —', manuscript)}
+    for ident, number in re.findall(r'<a id="(fig:[^"]+)"></a>\s*\n!\[Figura (\d+)', manuscript):
+        CROSSREFS['Figura', number] = ident
+    for level, number in re.findall(r'^(#+) (\d+(?:\.\d+)*|[A-L](?:\.\d+)+) ', manuscript, re.M):
+        if len(level) > 1:
+            for word in ('seção', 'Seção', 'seções', 'Seções'):
+                CROSSREFS[word, number] = 'sec:' + number.lower().replace('.', '-')
+    for letter in re.findall(r'^# Apêndice ([A-L]) —', manuscript, re.M):
+        CROSSREFS['Apêndice', letter] = 'sec:apendice-' + letter.lower()
     pieces = re.split(r'(?m)^(# [^\n]+)\n', manuscript)
     sections = {pieces[i][2:]: pieces[i + 1] for i in range(1, len(pieces), 2)}
     editable = ROOT / 'latex/editaveis'
@@ -270,7 +349,7 @@ def main():
     (editable / 'abreviaturas.tex').write_text(HEADER + '\\begin{siglas}\n' + '\n'.join(siglas) + '\n\\end{siglas}\n', encoding='utf-8')
     appendices = [(title, body) for title, body in sections.items() if title.startswith('Apêndice ')]
     combined = '\n'.join('# ' + title + '\n' + body for title, body in appendices)
-    (editable / 'apendices.tex').write_text(HEADER + '\\begin{apendicesenv}\n\\partapendices\n' + convert(combined) + '\\end{apendicesenv}\n', encoding='utf-8')
+    (editable / 'apendices.tex').write_text(HEADER + '\\begin{apendicesenv}\n\\setlength{\\parskip}{0pt}\n\\partapendices\n' + convert(combined) + '\\end{apendicesenv}\n', encoding='utf-8')
     listing = '\n'.join('\\item[' + title.split(' — ')[0] + '] ' + title.split(' — ')[1] +
                         '\\dotfill\\pageref{sec:apendice-' + title.split(' — ')[0][-1].lower() + '}'
                         for title, _ in appendices)
