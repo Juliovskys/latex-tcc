@@ -1,0 +1,105 @@
+             Universidade de Brasília – UnB
+Faculdade de Ciências e Tecnologias em Engenharia – FCTE
+                 Engenharia de Software
+
+
+
+
+      Avaliação Contextual de Serviços Públicos
+    Digitais: concepção e desenvolvimento de um
+    sistema baseado em indicadores de navegação
+                 e qualidade percebida
+
+
+
+                                                     Autores:
+                            Julio Cesar Gomes de Souza Crispim
+                            Fernando Gabriel dos Santos Carrijo
+
+                                                 Orientador:
+                           Wander Cleber Maria Pereira da Silva
+
+
+
+
+                      Brasília, DF
+                          2026
+                Julio Cesar Gomes de Souza Crispim
+                Fernando Gabriel dos Santos Carrijo
+
+
+
+
+  Avaliação Contextual de Serviços Públicos Digitais:
+concepção e desenvolvimento de um sistema baseado em
+    indicadores de navegação e qualidade percebida
+
+
+
+
+                                 Monografia submetida ao curso de graduação
+                                 em Engenharia de Software da Universidade
+                                 de Brasília, como requisito parcial para ob-
+                                 tenção do Título de Bacharel em Engenharia
+                                 de Software.
+
+
+
+
+                    Universidade de Brasília – UnB
+       Faculdade de Ciências e Tecnologias em Engenharia – FCTE
+
+
+
+
+        Orientador: Wander Cleber Maria Pereira da Silva
+
+
+
+
+                            Brasília, DF
+                                2026
+Ficha catalográfica a ser emitida pela Biblioteca Central da Universidade de Bra-
+sília.
+                    Julio Cesar Gomes de Souza Crispim
+                    Fernando Gabriel dos Santos Carrijo
+
+
+
+
+   Avaliação Contextual de Serviços Públicos Digitais:
+concepção e desenvolvimento de um sistema baseado em
+    indicadores de navegação e qualidade percebida
+
+
+                                       Monografia submetida ao curso de graduação
+                                       em Engenharia de Software da Universidade
+                                       de Brasília, como requisito parcial para ob-
+                                       tenção do Título de Bacharel em Engenharia
+                                       de Software.
+
+
+
+
+    Demais integrantes da banca e data de aprovação a registrar na folha oficial.
+
+
+
+
+                  Wander Cleber Maria Pereira da Silva
+                              Orientador
+
+
+
+
+                                  Convidado 1
+
+
+
+
+                                  Convidado 2
+
+
+                                 Brasília, DF
+                                    2026
+

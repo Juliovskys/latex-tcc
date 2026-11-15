@@ -19,6 +19,10 @@
   {\end{minipage}\par\medskip}
 
 \newlength{\TTCellWidth}
+% Contador neutro usado apenas para satisfazer versões recentes de longtable,
+% que avançam obrigatoriamente o tipo definido em \LTcaptype. Os contadores
+% visíveis de quadro e tabela continuam sendo controlados por \TTLabel.
+\newcounter{tclongtable}
 \newcommand{\TTTitle}[3]{\centering\textbf{#1~\ref*{#2} -- #3}\par\smallskip}
 \newcommand{\TTSource}[1]{\raggedright\footnotesize Fonte: #1\par}
 \newcommand{\TTEndMark}[1]{\raggedleft\footnotesize (#1)\par}
@@ -67,7 +71,7 @@
     \patchcmd{\LT@array}{\refstepcounter{table}}{}{}{%
       \PackageError{estrutura-revisao}{Contador de longtable incompatível}{}%
     }%
-  }{\def\LTcaptype{none}}%
+  }{\def\LTcaptype{tclongtable}}%
   \begin{longtable}{#6}
   \multicolumn{#5}{@{}p{\linewidth}@{}}{%
     \TTLabel{#1}{\TCList}{#2}{#3}\TTTitle{\TCKind}{#2}{#3}}\\
