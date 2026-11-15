@@ -15,7 +15,7 @@ FIXOS_SOURCES = informacoes.tex fichaCatalografica.tex \
 FIXOS_FILES = $(addprefix $(FIXOS_DIR)/, $(FIXOS_SOURCES))
 
 EDITAVEIS_DIR = editaveis
-EDITAVEIS_SOURCES = informacoes.tex resumo.tex abstract.tex \
+EDITAVEIS_SOURCES = informacoes.tex resumo.tex abstract.tex estrutura-revisao.tex \
 					listaapendices.tex abreviaturas.tex introducao.tex \
 					referencialteorico.tex metodologia.tex desenvolvimento.tex consideracoes.tex textoepostexto.tex \
 					elementosdotexto.tex elementosdopostexto.tex \
@@ -30,24 +30,27 @@ PS_FILE   = $(addsuffix .ps, $(basename $(MAIN_FILE)))
 PDF_FILE  = $(addsuffix .pdf, $(basename $(MAIN_FILE)))
 
 SOURCES = $(FIXOS_FILES) $(EDITAVEIS_FILES)
+FIGURAS = $(wildcard figuras/*.eps)
 
 .PHONY: all clean dist-clean
 
 all: 
 	@make $(TARGET)
      
-$(TARGET): $(MAIN_FILE) $(SOURCES) bibliografia.bib
-	$(LATEX) $(MAIN_FILE) $(SOURCES)
+$(TARGET): $(MAIN_FILE) $(SOURCES) fixos/customizacoes.sty bibliografia.bib $(FIGURAS)
+	$(LATEX) -interaction=nonstopmode -halt-on-error $(MAIN_FILE)
 	$(BIBTEX) $(AUX_FILE)
-	$(LATEX) $(MAIN_FILE) $(SOURCES)
-	$(LATEX) $(MAIN_FILE) $(SOURCES)
+	$(LATEX) -interaction=nonstopmode -halt-on-error $(MAIN_FILE)
+	$(LATEX) -interaction=nonstopmode -halt-on-error $(MAIN_FILE)
+	$(LATEX) -interaction=nonstopmode -halt-on-error $(MAIN_FILE)
+	$(LATEX) -interaction=nonstopmode -halt-on-error $(MAIN_FILE)
 	$(DVIPS) $(DVI_FILE)
 	$(PS2PDF) $(PS_FILE)
 	@cp $(PDF_FILE) $(TARGET)
 
 clean:
 	rm -f *~ *.dvi *.ps *.backup *.aux *.log
-	rm -f *.lof *.lot *.bbl *.blg *.brf *.toc *.idx
+	rm -f *.lof *.loq *.lot *.bbl *.blg *.brf *.toc *.out *.idx
 	rm -f *.pdf
 	
 dist: clean

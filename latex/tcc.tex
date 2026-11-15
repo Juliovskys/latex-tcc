@@ -8,6 +8,7 @@
 \input{editaveis/informacoes}
 \input{fixos/informacoes}
 \input{fixos/setup}
+\input{editaveis/estrutura-revisao}
 
 % Permite pequenos ajustes de espaçamento para evitar linhas que ultrapassem
 % as margens em títulos, referências e parágrafos com termos técnicos.
@@ -15,16 +16,20 @@
 
 \begin{document}
 
-\frenchspacing 
+\frenchspacing
+\hypersetup{pageanchor=false}
 \imprimircapa
-\imprimirfolhaderosto*
+\hypersetup{pageanchor=true}
+\setcounter{page}{1}
+\begin{folhaderosto*}[\folhaderostoname]
+  \folhaderostocontent
+\end{folhaderosto*}
 
 \input{fixos/fichaCatalografica}
 \input{fixos/folhaDeAprovacao}
 \input{editaveis/resumo}
 \input{editaveis/abstract}
 \input{fixos/listasAutomaticas}
-\input{editaveis/listaapendices}
 \input{editaveis/abreviaturas}
 \input{fixos/indiceAutomatico}
 
@@ -40,6 +45,7 @@
 
 \postextual
 
+\citeoption{tcc-autor-data}
 \bibliography{bibliografia} 
 \input{editaveis/apendices}
 \printindex

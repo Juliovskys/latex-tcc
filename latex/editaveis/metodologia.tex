@@ -1,198 +1,175 @@
 \chapter{Metodologia}
+\label{cap:3}
 
-Este capítulo apresenta o caminho seguido para transformar a ideia do Avaliador
-de Serviços Públicos em um protótipo demonstrável. A metodologia combinou
-pesquisa aplicada, revisão bibliográfica e normativa, Design Science Research,
-prototipação incremental e Lean Inception, de modo que a definição do produto e
-a implementação técnica avançassem de forma coerente.
+A metodologia abrange a concepção do MVP, o piloto formativo e a verificação técnica do artefato.
 
-\section{Caracterização da Pesquisa}
+\section{Estratégia de Pesquisa e Fontes}
+\label{sec:3.1}
 
-A pesquisa é aplicada, pois busca propor uma solução computacional para um
-problema associado à avaliação e melhoria de serviços públicos digitais. Quanto
-aos objetivos, possui caráter exploratório, uma vez que organiza fundamentos
-existentes e os transforma em um artefato inicial. O artefato foi submetido a uma
-avaliação exploratória preliminar em ambiente controlado, ainda sem validação em
-contexto real de prestação de serviço público.
+A pesquisa aplicada segue a Design Science Research (DSR) e organiza o trabalho em dois ciclos \cite{hevner2004,peffers2007}.
 
-A estratégia metodológica se aproxima da Design Science Research. Para
-\citeonline{hevner2004designscience}, pesquisas em sistemas de informação podem
-produzir conhecimento por meio da construção e avaliação de artefatos, como
-modelos, métodos, arquiteturas e sistemas. O artefato deste TCC é um protótipo
-composto por API, páginas simuladas, formulário de feedback e painel
-administrativo.
+\textbf{Ciclo 1 --- concepção e piloto formativo.} A Lean Inception delimitou o MVP. O Figma materializou as jornadas em um protótipo de baixa fidelidade usado em oito sessões formativas instrumentadas pelo Useberry.
 
-As referências foram usadas de acordo com sua natureza. A literatura científica
-sustenta os conceitos, relações teóricas e escolhas metodológicas; as normas
-técnicas fornecem definições e critérios; a legislação estabelece obrigações e
-princípios jurídicos; documentos institucionais caracterizam políticas, modelos
-e práticas governamentais; e a documentação de ferramentas comerciais descreve
-somente funcionalidades declaradas pelos fornecedores. Páginas de Hotjar e
-Microsoft Clarity, portanto, não são tratadas como evidência científica de
-eficácia, mas como fontes de caracterização tecnológica para o posicionamento do
-protótipo.
+\textbf{Ciclo 2 --- implementação e verificação técnica.} A versão local em Python materializa o mesmo artefato. A formalização posterior de requisitos e critérios de aceitação constitui uma iteração de projeto que consolidou a primeira versão e orientou sua evolução.
 
-\section{Lean Inception}
+O artefato é uma instanciação, pois põe em funcionamento páginas, API, regras, persistência e painel. Os princípios de projeto são distinguir sinal comportamental de percepção declarada, oferecer convite opcional e não bloqueante, explicitar e versionar regras e minimizar os dados coletados.
 
-A Lean Inception foi utilizada como protocolo metodológico para alinhar visão de
-produto, escopo e MVP. A abordagem de \citeonline{caroli2018leanInception}
-auxilia equipes a definir o produto certo antes de ampliar o desenvolvimento;
-\citeonline{fowler2022leanInception} também a descreve como uma inception focada
-em compreender funcionalidades, clientes e Canvas MVP. Neste trabalho, a técnica
-organizou a definição do Avaliador de Serviços Públicos e ajudou a transformar a
-ideia inicial em um conjunto priorizado de funcionalidades.
+A avaliação do ciclo 2 é artificial e técnica, com testes, simulação e demonstração controlados. O FEDS fornece o enquadramento dessa estratégia ao distinguir avaliação artificial de avaliação em contexto natural \cite{venable2016}. A escolha decorre do escopo de graduação e da decisão sobre coleta descrita na seção\nobreakspace{}\ref{sec:3.6.2}.
 
-Foram considerados internamente quatro perfis de discussão, cada um com uma
-perspectiva relevante para o problema:
+A fundamentação reúne literatura acadêmica, legislação, normas, relatórios institucionais e documentação técnica. A documentação disponível da busca inicial permite identificar as fontes citadas, mas carece de um registro completo das bases, expressões, datas e decisões de seleção. A complementação para a seção\nobreakspace{}\ref{sec:2.12} foi dirigida a quatro temas: detecção de problemas de navegação, interceptação de visitantes, não resposta e avaliação federal. Foram consultados artigos e metadados nas páginas dos editores, um artigo no repositório institucional da Universidade de Manchester e documentos nos portais governamentais do Canadá e do Brasil. A seção apresenta uma síntese narrativa.
 
-\begin{itemize}
-    \item \textbf{Felipe}, atendimento público, representando dúvidas
-    recorrentes e dificuldades relatadas por cidadãos;
-    \item \textbf{Lucas}, gestão digital, representando a necessidade de
-    indicadores acionáveis para priorização de melhorias;
-    \item \textbf{Diassis}, estudante da UnB, representando viabilidade técnica,
-    escopo acadêmico, segurança e LGPD;
-    \item \textbf{Bruno}, estudante da UnB, representando experiência do usuário,
-    jornada, clareza de interface e validação.
-\end{itemize}
+\noindent Ver Quadro~\ref{qua:3}.
 
-Essa dinâmica foi uma atividade interna de alinhamento e delimitação do produto,
-e não uma validação externa do artefato. As decisões da Lean Inception orientaram
-o escopo do MVP, mas não substituem teste de usabilidade, avaliação por
-especialistas independentes ou implantação em portal público real.
+\begin{TCTabela}{quadro}{qua:3}{Atividades da DSR e localização no trabalho}
+  {\dimexpr\linewidth-6\tabcolsep-4\arrayrulewidth\relax}{3}{|>{\raggedright\arraybackslash}p{0.24\TTCellWidth}|>{\raggedright\arraybackslash}p{0.38\TTCellWidth}|>{\raggedright\arraybackslash}p{0.38\TTCellWidth}|}
+  {\textbf{Atividade} & \textbf{Ciclo 1} & \textbf{Ciclo 2}}
+  {elaboração dos autores.}
+Problema e motivação & Seções\nobreakspace{}\ref{sec:1.1}, \ref{sec:1.2} e \ref{sec:3.2} & Seção\nobreakspace{}\ref{sec:4.15} \\ \hline
+Objetivos & Seção\nobreakspace{}\ref{sec:3.3} e Apêndice\nobreakspace{}\ref{ap:A} & Seções\nobreakspace{}\ref{sec:1.3}, \ref{sec:1.4} e Apêndice\nobreakspace{}\ref{ap:H} \\ \hline
+Projeto e desenvolvimento & Seção\nobreakspace{}\ref{sec:3.3} & Seções\nobreakspace{}\ref{sec:3.4} e \ref{sec:4.6} a \ref{sec:4.12} \\ \hline
+Demonstração & Piloto, seção\nobreakspace{}\ref{sec:4.14} & Seção\nobreakspace{}\ref{sec:3.5} e Apêndice\nobreakspace{}\ref{ap:D} \\ \hline
+Avaliação & Seção\nobreakspace{}\ref{sec:3.6.2} & Seções\nobreakspace{}\ref{sec:3.6.3} e \ref{sec:4.19} e Apêndice\nobreakspace{}\ref{ap:I} \\ \hline
+Comunicação & Apêndices\nobreakspace{}\ref{ap:A}, \ref{ap:F}, \ref{ap:G} e \ref{ap:L} & Seção\nobreakspace{}\ref{sec:3.7}, capítulo\nobreakspace{}\ref{cap:5} e apêndices\nobreakspace{}\ref{ap:H} e \ref{ap:I} \\* \hline
+\end{TCTabela}
 
-\section{Etapas da Lean Inception}
+\section{Identificação do Problema e Motivação}
+\label{sec:3.2}
 
-A agenda da Lean Inception foi organizada para que as funcionalidades surgissem a
-partir da jornada do usuário, e não apenas de possibilidades técnicas. As etapas
-executadas foram:
+O problema é a dificuldade de relacionar julgamentos declarados ao contexto de navegação em que são solicitados. Derivam-se cinco necessidades de projeto: N01, avaliar a etapa com linguagem e esforço de resposta compatíveis com o cidadão; N02, registrar contexto sem equipará-lo à percepção; N03, transformar evidências em hipóteses de melhoria acompanháveis; N04, gerir regras e dados de forma controlada; e N05, verificar a aplicação e revisar as regras em ensaios sintéticos rastreáveis, com análise dos erros por perfil. São necessidades de projeto derivadas do problema e da discussão de concepção, não resultados de nova elicitação com gestores externos.
 
-\begin{enumerate}
-    \item \textbf{Kick-off}: alinhamento do problema, da hipótese e dos limites do
-    MVP;
-    \item \textbf{É / Não É / Faz / Não Faz}: delimitação do produto como solução
-    de feedback contextual, não como ouvidoria, chatbot, ferramenta de
-    identificação individual ou sistema governamental completo;
-    \item \textbf{Objetivos do Produto}: definição de objetivos como capturar
-    sinais de dificuldade, solicitar feedback no momento adequado, preservar
-    privacidade e gerar dados acionáveis;
-    \item \textbf{Personas}: definição de Carlos Pereira, cidadão usuário de
-    serviço público digital, e Lucas Almeida, gestor público de serviço digital;
-    \item \textbf{Jornadas}: comparação entre um fluxo com formulário estático ao
-    final e um fluxo com feedback contextual durante a dificuldade;
-    \item \textbf{Brainstorming de features}: levantamento de funcionalidades
-    relacionadas a coleta de sinais, regras, feedback, painel e integração;
-    \item \textbf{Revisão técnica, de negócio e UX}: avaliação relativa de
-    esforço, valor para gestão e impacto na experiência do usuário;
-    \item \textbf{Sequenciador}: organização das funcionalidades em ondas de
-    entrega;
-    \item \textbf{Canvas MVP}: consolidação da menor versão viável para validação
-    inicial.
-\end{enumerate}
+\section{Objetivos e Requisitos da Solução}
+\label{sec:3.3}
 
-A construção de personas foi baseada na tradição de design centrado no usuário.
-\citeonline{cooper1999inmates} apresenta personas como arquétipos usados para
-orientar decisões de produto. O mapeamento de jornada seguiu a lógica de
-visualização de experiências discutida por \citeonline{kalbach2016mapping}, com
-identificação de pontos de contato, fricções e oportunidades de intervenção.
-As personas também consideraram o cenário brasileiro de uso de tecnologias
-digitais, descrito pela TIC Domicílios 2024 \cite{cetic2025ticDomicilios2024}, e
-a existência de mecanismos oficiais de avaliação de serviços públicos digitais
-\cite{govbrFerramentaAvaliacao}.
+Os objetivos da seção\nobreakspace{}\ref{sec:1.4} são desdobrados em requisitos funcionais, não funcionais, regras de negócio, histórias de usuário e critérios de aceitação no Apêndice\nobreakspace{}\ref{ap:H}. A matriz de Engenharia de Software liga N01--N05 a esses requisitos, componentes e evidências. Ela difere da rastreabilidade conceitual entre construtos e dados: a primeira organiza construção e verificação; a segunda delimita o significado das medidas.
 
-\section{Metodologia do Desenvolvimento da Solução}
+\subsection{Concepção e Delimitação com Lean Inception}
+\label{sec:3.3.1}
 
-O desenvolvimento adotou prototipação incremental. Segundo
-\citeonline{Sommerville2007}, protótipos ajudam a explorar requisitos e reduzir
-incertezas antes de uma solução definitiva. Uma versão funcional inicial já
-existia cerca de três semanas antes da avaliação. A Lean Inception foi conduzida
-entre 18 e 27 de junho de 2026 para revisar e delimitar o MVP, e os ajustes finais
-usados na avaliação exploratória foram realizados em 28 de junho de 2026. A
-implementação foi dividida em ondas, seguindo o sequenciador da Lean Inception.
+A Lean Inception foi utilizada como técnica de concepção para alinhar visão de produto, escopo e MVP. A abordagem de \citeonline{caroli2018} auxilia equipes a definir o produto certo antes de ampliar o desenvolvimento; \citeonline{fowler2022} também a descrevem como uma inception focada em compreender funcionalidades, clientes e Canvas MVP. Neste trabalho, a técnica organizou a definição do sistema de avaliação contextual e ajudou a transformar a ideia inicial em um conjunto priorizado de funcionalidades.
 
-\begin{enumerate}
-    \item \textbf{Onda 1 -- Base técnica de coleta}: sessão técnica anônima,
-    registro de cliques e tempo, e formulário estático comparativo;
-    \item \textbf{Onda 2 -- Detecção e feedback contextual}: regra simples de
-    detecção, feedback contextual e formulário com estrelas, atributos, NPS e
-    comentário opcional;
-    \item \textbf{Onda 3 -- Painel básico}: visualização de sessões com
-    dificuldade, ranking de alertas e taxa de resposta dos fluxos;
-    \item \textbf{Onda 4 -- Incremento de qualidade}: regras por serviço, filtros
-    no painel e comentários recentes;
-    \item \textbf{Onda 5 -- Evolução para piloto controlado}: separação por
-    organização, autenticação, chave de API e script instalável em site real.
-\end{enumerate}
+O tema inicial foi organizado pelo orientador em dois recortes. Este trabalho, desenvolvido por Julio Cesar Gomes de Souza Crispim e Fernando Gabriel dos Santos Carrijo, aborda avaliação contextual de serviços públicos digitais, indicadores de navegação, CSAT, facilidade declarada e modelos de qualidade percebida. O outro recorte é desenvolvido por Wesley Pedrosa dos Santos.
 
-O MVP obrigatório corresponde às três primeiras ondas. Essa decisão mantém a
-solução pequena o suficiente para o escopo acadêmico e, ao mesmo tempo, permite
-testar o fluxo ponta a ponta: o cidadão navega, o sistema detecta dificuldade, o
-feedback contextual é solicitado, os dados são armazenados e o gestor visualiza
-indicadores agregados.
+As atividades de concepção parcialmente compartilhadas abrangeram o alinhamento do problema, a visão do produto, a dinâmica É / Não É / Faz / Não Faz e o levantamento e a priorização iniciais das funcionalidades e do MVP. Wesley participou apenas de parte dessas atividades, não de toda a Lean Inception nem da discussão das quatro perspectivas apresentada a seguir.
 
-\section{Hipótese e Critérios da Avaliação Preliminar}
+Os registros visuais históricos tiveram elaboração visual de Fernando Gabriel dos Santos Carrijo; seu conteúdo resultou dessas atividades parcialmente compartilhadas, com contribuições de Julio e Fernando e participação parcial de Wesley. Os originais permanecem no acervo digital de concepção, separado deste manuscrito, cuja proveniência está descrita no Apêndice\nobreakspace{}\ref{ap:L}.
 
-A hipótese comparativa do trabalho é que o feedback solicitado de forma
-contextual, próximo a um sinal de possível dificuldade, pode produzir maior
-participação e evidências declaradas mais específicas do que um formulário
-apresentado somente ao final da jornada. Essa hipótese não foi considerada
-confirmada pela avaliação exploratória. Sua verificação robusta requer amostra
-maior, controle de cenário e análise previamente definida.
-
-As variáveis dependentes previstas para o estudo comparativo são: taxa de
-resposta; taxa de conclusão da tarefa; esforço percebido; qualidade e
-especificidade do comentário; abandono ou interrupção associado ao convite; e
-percepção de adequação do momento da pergunta. Tempo e quantidade de cliques são
-variáveis comportamentais auxiliares de contexto, não medidas de qualidade
-percebida.
-
-Foram definidos os seguintes critérios de verificação e avaliação preliminar:
+As quatro perspectivas foram associadas às contribuições dos participantes, sem lhes atribuir vínculo institucional ou condição de especialista independente:
 
 \begin{itemize}
-    \item o protótipo deve registrar cliques, tempo e eventos em uma sessão
-    técnica anônima;
-    \item o convite de feedback contextual deve aparecer apenas quando uma regra
-    de dificuldade for acionada;
-    \item o sistema deve permitir comparar o fluxo A, com formulário estático, e
-    o fluxo B, com feedback contextual;
-    \item o painel deve apresentar pelo menos um gargalo identificável no
-    protótipo;
-    \item os resultados dos dois fluxos devem ser descritos como indícios
-    exploratórios, sem afirmação de superioridade ou generalização estatística.
+\item
+  Felipe: atendimento público; dúvidas e dificuldades dos cidadãos;
+\item
+  Lucas: gestão digital; indicadores para priorizar melhorias;
+\item
+  Diassis: estudante da UnB; viabilidade técnica, escopo, segurança e LGPD;
+\item
+  Bruno: estudante da UnB; experiência, jornada, interface e validação.
 \end{itemize}
 
-\section{Procedimentos da Avaliação Exploratória}
+Lucas, participante da discussão, e Lucas Almeida, persona fictícia da seção\nobreakspace{}\ref{sec:4.3}, são referências distintas. A participação parcial de Wesley nas atividades compartilhadas é registrada como colaboração de concepção; este manuscrito tem como autores Julio e Fernando. Essa colaboração não constitui avaliação independente. A dinâmica foi uma atividade de alinhamento interno e não substitui especificação de requisitos, teste de usabilidade ou avaliação por especialistas.
 
-A avaliação do artefato combinou três procedimentos. O primeiro foi a verificação
-funcional do fluxo, observando registro de eventos, acionamento das regras,
-abertura do feedback e apresentação de indicadores. O segundo foi uma
-\textbf{avaliação heurística interna/preliminar}, conduzida pelos próprios
-autores a partir das telas e decisões do protótipo. Essa inspeção não é
-apresentada como avaliação externa por especialistas.
+\subsection{Atividades de Concepção}
+\label{sec:3.3.2}
 
-O terceiro procedimento foi uma avaliação exploratória preliminar de usabilidade
-com oito participantes externos ao grupo de desenvolvimento, realizada em 28 de
-junho de 2026. Quatro participantes executaram o fluxo A, com formulário ao final
-da jornada, e quatro executaram o fluxo B, com convite de feedback contextual.
-A tarefa consistiu em localizar e iniciar a declaração do IRPF 2026 no protótipo,
-com limite de dez minutos. As sessões foram individuais e moderadas; todos os
-participantes eram maiores de 18 anos e assinaram Termo de Consentimento Livre e
-Esclarecido. O tamanho e a seleção da amostra permitem apenas descrição e
-interpretação exploratória, sem inferência estatística.
+A agenda da Lean Inception foi organizada para que as funcionalidades surgissem a partir da jornada do usuário, e não apenas de possibilidades técnicas. As etapas executadas foram:
 
-\section{Tratamento dos Dados}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Kick-off: alinhamento do problema, da hipótese e dos limites do MVP;
+\item
+  É / Não É / Faz / Não Faz: delimitação do produto como solução de feedback contextual, não como ouvidoria, chatbot, ferramenta de identificação individual ou sistema governamental completo;
+\item
+  Objetivos do Produto: definição de objetivos como capturar sinais de possível dificuldade, solicitar feedback no momento adequado, preservar privacidade e gerar dados acionáveis;
+\item
+  Personas: definição de Carlos Pereira, cidadão usuário de serviço público digital, e Lucas Almeida, gestor público de serviço digital;
+\item
+  Jornadas: comparação entre um fluxo com formulário estático ao final e um fluxo com feedback contextual durante a dificuldade;
+\item
+  Brainstorming de features: levantamento de funcionalidades relacionadas a coleta de sinais, regras, feedback, painel e integração;
+\item
+  Revisão técnica, de negócio e UX: avaliação relativa de esforço, valor para gestão e impacto na experiência do usuário;
+\item
+  Sequenciador: organização das funcionalidades em ondas de entrega;
+\item
+  Canvas MVP: consolidação da menor versão viável para validação inicial.
+\end{enumerate}
 
-Os dados do protótipo foram organizados em dois grupos. O primeiro contém
-evidências comportamentais produzidas pela telemetria de interação:
-identificador técnico de sessão, página, serviço, origem do evento, clique e
-tempo de permanência. Esses dados indicam contexto e possível esforço, mas não
-medem qualidade percebida. O segundo contém evidências declaradas pelo usuário:
-estrelas, atributos do problema, NPS e comentário opcional. É nesse segundo grupo
-que se situam satisfação e qualidade percebida.
+A construção de personas foi baseada na tradição de design centrado no usuário. \citeonline{cooper1999} apresenta personas como arquétipos usados para orientar decisões de produto. O mapeamento de jornada seguiu a lógica de visualização de experiências discutida por \citeonline{kalbach2016}, com identificação de pontos de contato, fricções e oportunidades de intervenção. As personas também consideraram o cenário brasileiro de uso de tecnologias digitais, descrito pela TIC Domicílios 2024 \cite{cgi2025}, e a existência de mecanismos oficiais de avaliação de serviços públicos digitais \cite{brasil2026}.
 
-A análise foi pensada para apoiar o gestor público com indicadores agregados,
-como sessões com dificuldade, alertas por serviço, média de estrelas, NPS e
-atributos recorrentes. A coleta evita nome, CPF, e-mail e login, respeitando a
-lógica de minimização de dados da LGPD \cite{brasil2018lgpd}. Em uma implantação
-real, ainda seriam necessários aviso de coleta, governança, controle de acesso,
-retenção definida e autorização institucional.
+\section{Design e Desenvolvimento}
+\label{sec:3.4}
+
+A Lean Inception ocorreu entre 18 e 27 de junho de 2026. O Figma materializou as jornadas do piloto formativo, realizado em 28 de junho. O desenvolvimento usou prototipação incremental \cite{sommerville2011} e organizou o trabalho em coleta e jornadas, regras e feedback, painel, governança e preparação para integração futura.
+
+O protótipo A/B 1.0.0 é o artefato deste trabalho. O cliente mede tempo em aba visível e em foco, e a API distingue sessão, oferta, apresentação e resposta. Os registros das jornadas alimentam o painel por fluxo. O Quadro\nobreakspace{}\ref{qua:5} relaciona as jornadas ao código, e as seções\nobreakspace{}\ref{sec:4.9} e \ref{sec:4.19} registram a simulação e a verificação técnica.
+
+\textbf{Contribuições dos autores e uso de IA.} Trabalhamos em dupla em todas as fases do projeto, da concepção e da especificação dos fluxos à implementação, à revisão e aos testes do protótipo. Usamos IA generativa como apoio no planejamento das etapas e na organização das tarefas. Nesta revisão do manuscrito, usamos o Codex para auxiliar a reorganização do texto, a execução das verificações automatizadas e a documentação dos resultados. A execução assistida é identificada nas seções\nobreakspace{}\ref{sec:4.13} e \ref{sec:4.19}. O Apêndice\nobreakspace{}\ref{ap:D} e o README do código registram o percurso de demonstração e os comandos para executar e explicar cada módulo na defesa.
+
+\section{Demonstração}
+\label{sec:3.5}
+
+A demonstração integrada percorre a navegação, o cronômetro, o convite, a exposição e a persistência. O painel do protótipo A/B consolida os registros por fluxo. O Apêndice\nobreakspace{}\ref{ap:D} apresenta o roteiro e a seção\nobreakspace{}\ref{sec:4.19} documenta o ensaio inicial. O piloto no Figma produziu observações de interface, descritas na seção\nobreakspace{}\ref{sec:4.14}.
+
+\section{Avaliação}
+\label{sec:3.6}
+
+A avaliação reúne o piloto formativo e a verificação técnica da instanciação.
+
+\subsection{Critérios da triagem automatizada}
+\label{sec:3.6.1}
+
+A triagem automatizada do Quadro\nobreakspace{}\ref{qua:12} examina estados, controle da navegação, contexto do convite, leitura do painel e prevenção de erro. A seção\nobreakspace{}\ref{sec:4.19} documenta a verificação técnica do A/B.
+
+\subsection{Procedimentos do piloto formativo}
+\label{sec:3.6.2}
+
+Oito sessões individuais moderadas usaram o Figma. A integração com o Useberry permite registrar cliques e fluxos de navegação \cite{useberry2026}. Quatro pessoas por fluxo deveriam localizar e iniciar a declaração do IRPF 2026 em até dez minutos. A seção\nobreakspace{}\ref{sec:4.14} descreve as contagens e as observações.
+
+O piloto foi conduzido com TCLE, pseudônimos e gravação restrita à tela e aos eventos de interação, sem áudio ou câmera. Não houve apreciação por Comitê de Ética em Pesquisa. Por esse motivo, não se realizou nova coleta com participantes.
+
+\subsection{Plano de avaliação técnica do TCC 2}
+\label{sec:3.6.3}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+
+\item
+  \textbf{Verificação funcional.} Executar testes unitários, de integração e ponta a ponta dos fluxos A e B. Medir cobertura de linhas e ramos e vincular os casos aos critérios do Apêndice\nobreakspace{}\ref{ap:H}.
+\item
+  \textbf{Simulação reproduzível.} Gerar sessões rotuladas como direto, hesitante, perdido, leitor lento e tecnologia assistiva. Fixar o rótulo sintético de referência independentemente do gatilho. Publicar script, comando, versão, semente, parâmetros, definições e saídas brutas.
+\item
+  \textbf{Sensibilidade.} Reexecutar as mesmas sessões sob diferentes limiares de cliques e tempo. Apresentar verdadeiros e falsos positivos e negativos por perfil e configuração, com denominadores e taxas quando definidas.
+\item
+  \textbf{Qualidade técnica.} Medir latência, vazão e erros sob carga controlada. Executar verificação automatizada de acessibilidade e verificações manuais de teclado, foco e contraste. Conferir permissões administrativas, validação de entradas e interrupção da telemetria.
+\item
+  \textbf{Demonstração.} Percorrer A e B até o painel. Conferir tempo medido, exposição efetiva, dispensa, resposta e denominadores por fluxo.
+\end{enumerate}
+
+O Apêndice\nobreakspace{}\ref{ap:I} detalha a verificação. O Apêndice\nobreakspace{}\ref{ap:K} preserva os protocolos prospectivos.
+
+\textbf{Revisão das regras no TCC 2}
+
+O TCC 2 terá como entrega principal uma revisão versionada das regras. Primeiro, deverá fundamentar as dimensões dos perfis na literatura, separar hipóteses de engenharia de parâmetros sustentados por dados e criar trajetórias com e sem dificuldade nos mesmos perfis, com sobreposição de cliques, tempo e retornos. Leitura prolongada ou uso de tecnologia assistiva podem ocorrer com e sem dificuldade. Perder-se pode ocorrer com cliques frequentes ou escassos. O gerador deverá documentar sobreposição, pesos, faixas e sementes.
+
+Em seguida, a grade completa orientará a revisão, com alternativas como combinação de sinais ou exigência de persistência antes de interromper. Fixar os critérios antes do ajuste, incluindo acurácia balanceada e taxas de falsos positivos e negativos por perfil. Relatar a variação entre sementes e comparar alerta e convite separadamente. Congelar a regra candidata e executá-la ao lado da regra inicial em sementes e combinações de perfis reservadas. A entrega incluirá a comparação pareada, a justificativa da decisão, a configuração versionada e os casos de fronteira. As verificações de carga e acessibilidade complementarão a entrega, priorizando a latência do painel e o achado H-A/B-01.
+
+\noindent Ver Quadro~\ref{qua:4}.
+
+\begin{TCTabela}{quadro}{qua:4}{Rastreabilidade entre construtos, indicadores e dados}
+  {\dimexpr\linewidth-6\tabcolsep-4\arrayrulewidth\relax}{3}{|>{\raggedright\arraybackslash}p{0.26\TTCellWidth}|>{\raggedright\arraybackslash}p{0.32\TTCellWidth}|>{\raggedright\arraybackslash}p{0.42\TTCellWidth}|}
+  {\textbf{Construto ou dimensão} & \textbf{Indicador} & \textbf{Fonte e interpretação}}
+  {elaboração a partir do manuscrito e do esquema SQLite do protótipo A/B.}
+Satisfação com a etapa & Estrelas de 1 a 5 e número de respostas válidas. & As respostas exibidas no painel ficam em \texttt{feedback.\allowbreak{}satisfaction}. \\ \hline
+Qualidade percebida & Atributos de clareza, tempo, esforço, usabilidade, atendimento e eficácia. & \texttt{feedback.\allowbreak{}attributes} guarda as categorias no protótipo A/B. A ausência de seleção pode corresponder a ausência de resposta no item. \\ \hline
+Facilidade percebida & ``Foi fácil usar esta etapa do serviço.'' Concordância opcional de 1 a 7. & \texttt{feedback.\allowbreak{}ease} e \texttt{feedback.\allowbreak{}item\_\allowbreak{}versions} no protótipo A/B. O dado representa autorrelato sobre a etapa. \\ \hline
+Interação observada & Cliques instrumentados, tempo ativo e retornos. & \texttt{events} e \texttt{page\_\allowbreak{}metrics} no protótipo A/B. No piloto, tempos e cliques foram registrados separadamente pelo Useberry. \\ \hline
+Conclusão de tarefa & Desfecho da jornada simulada. & \texttt{sessions.\allowbreak{}outcome} no protótipo A/B. O Apêndice\nobreakspace{}\ref{ap:G} preserva as classificações Sim, Parcial e Não do piloto. \\ \hline
+Exposição & Apresentação efetiva de formulário ou convite. & \texttt{offers} indica elegibilidade. \texttt{presentation\allowbreak{}s} registra exibições identificadas. \\ \hline
+Experiência relatada & Comentário opcional. & \texttt{feedback.\allowbreak{}comment} guarda a resposta do formulário. O Apêndice\nobreakspace{}\ref{ap:G} guarda, separadamente, relatos pós-sessão do piloto. \\* \hline
+\end{TCTabela}
+
+\section{Comunicação}
+\label{sec:3.7}
+
+O código demonstrado e os comandos de reprodução acompanham o manuscrito no bundle Git do protótipo, no arquivo \texttt{prototipo-\allowbreak{}ab.\allowbreak{}bundle} que acompanha a entrega. A referência é o commit de importação \texttt{d5183d5a64a1\allowbreak{}5d1647f6bc03\allowbreak{}2a31406accc5\allowbreak{}f272}. Esse commit fixa a cópia entregue e foi criado para permitir sua verificação local com \texttt{git clone pr\allowbreak{}ototipo-\allowbreak{}ab.\allowbreak{}bundle proto\allowbreak{}tipo-\allowbreak{}ab}. Nesta etapa, a distribuição é pelo bundle Git local. O commit de 14 de novembro de 2026 registra a importação do código e fixa a versão reproduzível desta entrega. O Apêndice\nobreakspace{}\ref{ap:D} descreve a demonstração, e o Apêndice\nobreakspace{}\ref{ap:M} e os arquivos de evidência registram a simulação.

@@ -1,32 +1,8 @@
 \begin{resumo}[Abstract]
- \begin{otherlanguage*}{english}
-This work presents the design and initial development of a contextual evaluation
-system for digital public services, in the context of the digital transformation
-of the Brazilian State and the need to make citizen experience evaluation more
-useful for continuous improvement. The research problem concerns evaluations
-displayed only at the end of the user journey, which do not always capture the
-moment when users face difficulty, spend excessive time, repeat clicks, or
-abandon the flow. The methodology combined bibliographic and normative review,
-Design Science Research, incremental prototyping, and Lean Inception. A local
-prototype was developed with an API, simulated public service pages, interaction
-telemetry based on clicks and time, difficulty-detection rules, a feedback form,
-and an administrative dashboard. Telemetry produces behavioral evidence and is
-not treated as a measure of perceived quality; perceived quality depends on
-user-declared feedback such as stars, attributes, NPS, and comments. The
-prototype underwent a preliminary exploratory evaluation in a controlled
-environment with eight participants divided between a final-form flow and a
-contextual-feedback flow. The results cannot be statistically generalized and do
-not demonstrate the superiority of either flow, but provide initial indications
-about task completion, perceived ease, and comment specificity. The study
-concludes that integrating behavioral and declared evidence is a technological
-and investigative contribution that can support further studies, provided that
-thresholds are calibrated, data collection respects privacy, and the comparative
-hypothesis is evaluated with larger samples.
+\begin{otherlanguage*}{english}
+Digital public service evaluations can lose information about the point in the journey where a user encounters a barrier. This study aims to design, implement, and technically verify an evaluation system that links navigation signals to self-reported feedback about a particular step. The research follows Design Science Research in two cycles. In the first, Lean Inception guided product design, and a Figma prototype was used in eight formative sessions, with four participants per flow and click and time data recorded through Useberry. The pilot yielded observations about the interface and how participants understood the journey. In the second, a local Python prototype was developed with an API, SQLite, configurable operational rules, a feedback form, and an administrative dashboard. The A/B prototype records active time, exposure, and responses and aggregates flow-specific denominators in the dashboard. Preliminary verification exercised both flows through the dashboard. Across 1,000 synthetic sessions, the initial rule achieved 50.25\% balanced accuracy, close to the 50\% baseline of a rule with no ability to discriminate between labels. The simulation characterizes how the rules behave under controlled conditions and does not establish their ability to detect difficulties in real use.
 
-   \vspace{\onelineskip}
-
-   \noindent
-   \textbf{Key-words}: digital public services. contextual feedback. service
-   evaluation. user experience. Design Science Research.
- \end{otherlanguage*}
+\vspace{\onelineskip}
+\noindent \textbf{Keywords:} digital public services; contextual feedback; service evaluation; user experience; design science research.
+\end{otherlanguage*}
 \end{resumo}

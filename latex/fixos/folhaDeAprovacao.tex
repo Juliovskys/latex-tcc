@@ -14,7 +14,11 @@
     \vspace*{\fill}
    \end{center}
     
-   Trabalho aprovado. \imprimirlocal, \imprimirdatadaaprovacao:
+   \ifx\imprimirdatadaaprovacao\empty
+     Demais integrantes da banca e data de aprovação a registrar na folha oficial.
+   \else
+     Trabalho aprovado. \imprimirlocal, \imprimirdatadaaprovacao:
+   \fi
 
    \assinatura{\textbf{\imprimirorientador} \\ Orientador} 
    \assinatura{\textbf{\imprimirmembroconvidadoum} \\ Convidado 1}

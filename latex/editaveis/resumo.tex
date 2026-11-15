@@ -1,31 +1,6 @@
 \begin{resumo}
-Este trabalho apresenta a concepção e o desenvolvimento inicial de um sistema de
-avaliação contextual de serviços públicos digitais, no contexto da transformação
-digital do Estado brasileiro e da necessidade de tornar a avaliação da
-experiência do cidadão mais útil para a melhoria contínua. O problema investigado
-parte da baixa utilidade de avaliações exibidas apenas ao final da jornada, pois
-elas nem sempre capturam o momento em que o usuário encontra dificuldade,
-demora, repete cliques ou abandona o fluxo. A metodologia combinou revisão
-bibliográfica e normativa, Design Science Research, prototipação incremental e
-Lean Inception. Como resultado, foi desenvolvido um protótipo local com API,
-páginas simuladas de serviço público, telemetria de interação por cliques e tempo,
-regras de detecção de dificuldade, formulário de feedback e painel
-administrativo. A telemetria produz evidências comportamentais e não é tratada
-como medida de qualidade percebida; esta depende do feedback declarado pelo
-usuário, como estrelas, atributos, NPS e comentário. O protótipo foi submetido a
-uma avaliação exploratória preliminar, em ambiente controlado, com oito
-participantes divididos entre fluxo com formulário final e fluxo com feedback
-contextual. Os resultados não permitem generalização estatística nem demonstram
-superioridade de um fluxo, mas oferecem indícios iniciais sobre conclusão de
-tarefas, facilidade percebida e especificidade dos comentários. Conclui-se que a
-integração entre evidências comportamentais e declaradas é uma contribuição
-tecnológica e investigativa capaz de apoiar estudos posteriores, desde que os
-limiares sejam calibrados, a coleta respeite a privacidade e a hipótese
-comparativa seja avaliada com amostras maiores.
+A avaliação de serviços públicos digitais pode perder informações sobre o momento da navegação em que o cidadão encontra uma barreira. Este trabalho tem como objetivo projetar, implementar e verificar tecnicamente um avaliador que associe sinais de navegação a avaliações declaradas sobre uma etapa do serviço. A pesquisa segue a Design Science Research em dois ciclos. No primeiro, a Lean Inception orientou a concepção, e um protótipo no Figma foi usado em oito sessões formativas, com quatro participantes por fluxo e registro de cliques e tempos pelo Useberry. O piloto reuniu observações sobre a interface e a compreensão da jornada. No segundo ciclo, foi desenvolvido um protótipo local em Python com API, SQLite, regras operacionais configuráveis, formulário e painel administrativo. O protótipo A/B registra tempo ativo, apresentação e resposta e consolida os denominadores por fluxo no painel. A verificação preliminar integrou as jornadas ao painel. Nas 1.000 sessões sintéticas, a regra inicial obteve 50,25\% de acurácia balanceada, próxima dos 50\% de uma regra sem capacidade de distinguir os rótulos. A simulação caracteriza as regras sob condições controladas e não estabelece sua capacidade de detectar dificuldade em uso real.
 
 \vspace{\onelineskip}
-
-\noindent
-\textbf{Palavras-chave}: serviços públicos digitais. feedback contextual.
-avaliação de serviços. experiência do usuário. Design Science Research.
+\noindent \textbf{Palavras-chave:} serviços públicos digitais; feedback contextual; avaliação de serviços; experiência do usuário; design science research.
 \end{resumo}

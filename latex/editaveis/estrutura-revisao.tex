@@ -1,0 +1,93 @@
+% Ambientes para as ilustrações, quadros e tabelas do manuscrito revisado.
+\usepackage{longtable}
+\usepackage{xurl}
+\def\UrlLeft{}
+\def\UrlRight{}
+\hypersetup{linktoc=page,breaklinks=true}
+\setpnumwidth{2.4em}
+\setrmarg{3.1em}
+
+\newlistof{listofquadros}{loq}{Lista de quadros}
+\newlistentry{quadro}{loq}{0}
+\renewcommand{\cftquadropresnum}{Quadro\space}
+\renewcommand{\cftquadroaftersnum}{\space--\space}
+\setlength{\cftquadronumwidth}{6em}
+
+\newfixedcaption{\TCCaptionFigure}{figure}
+\newenvironment{TCFigura}
+  {\par\medskip\noindent\begin{minipage}{\linewidth}\centering}
+  {\end{minipage}\par\medskip}
+
+\newlength{\TTCellWidth}
+\newcommand{\TTTitle}[3]{\centering\textbf{#1~\ref*{#2} -- #3}\par\smallskip}
+\newcommand{\TTSource}[1]{\raggedright\footnotesize Fonte: #1\par}
+\newcommand{\TTEndMark}[1]{\raggedleft\footnotesize (#1)\par}
+\newcommand{\TTLabel}[4]{%
+  \refstepcounter{#1}%
+  \label{#3}\label{#3:ini}%
+  \addcontentsline{#2}{#1}{\protect\numberline{\csname the#1\endcsname}#4}%
+}
+\newcommand{\TTTableFormat}[1]{%
+  \small
+  \setlength{\parskip}{0pt}%
+  \setlength{\tabcolsep}{4pt}%
+  \renewcommand{\arraystretch}{1.15}%
+  \setlength{\TTCellWidth}{#1}%
+}
+
+% Quadros pequenos mantêm título, linhas e fonte juntos.
+\newenvironment{TCQuadroSimples}[6]{%
+  \par\smallskip\noindent\begin{minipage}{\linewidth}%
+  \TTTableFormat{#3}%
+  \TTLabel{quadro}{loq}{#1}{#2}\TTTitle{Quadro}{#1}{#2}%
+  \def\TCShortSource{\label{#1:fim}\TTSource{#6}}%
+  \begin{tabular}{#4}
+  \hline
+  #5 \\ \hline
+}{%
+  \end{tabular}\par\smallskip\TCShortSource
+  \end{minipage}\par\smallskip
+}
+
+\makeatletter
+\pdfstringdefDisableCommands{\let\uppercase\@firstofone}
+% A identificação em cada lista é feita no primeiro cabeçalho real, pois um
+% quadro ou tabela pode começar na página seguinte à chamada no texto.
+\newenvironment{TCTabela}[8]{%
+  \TTTableFormat{#4}%
+  \setlength{\LTpre}{.35\baselineskip}%
+  \setlength{\LTpost}{.65\baselineskip}%
+  \ifstrequal{#1}{quadro}{%
+    \def\TCKind{Quadro}\def\TCList{loq}\def\TCBottomRule{\noalign{}}%
+  }{%
+    \def\TCKind{Tabela}\def\TCList{lot}\let\TCBottomRule\hline
+  }%
+  % Suprime o contador interno de longtable: o rótulo usa o tipo declarado.
+  \@ifundefined{LTcaptype}{%
+    \patchcmd{\LT@array}{\refstepcounter{table}}{}{}{%
+      \PackageError{estrutura-revisao}{Contador de longtable incompatível}{}%
+    }%
+  }{\def\LTcaptype{none}}%
+  \begin{longtable}{#6}
+  \multicolumn{#5}{@{}p{\linewidth}@{}}{%
+    \TTLabel{#1}{\TCList}{#2}{#3}\TTTitle{\TCKind}{#2}{#3}}\\
+  \hline
+  #7 \\ \hline
+  \endfirsthead
+  \multicolumn{#5}{@{}p{\linewidth}@{}}{%
+    \TTTitle{\TCKind}{#2}{#3\space (continuação)}}\\
+  \hline
+  #7 \\ \hline
+  \endhead
+  \TCBottomRule
+  \multicolumn{#5}{@{}p{\linewidth}@{}}{\TTEndMark{continua}\TTSource{#8}}\\
+  \endfoot
+  \TCBottomRule
+  \multicolumn{#5}{@{}p{\linewidth}@{}}{%
+    \ifnum\getpagerefnumber{#2:ini}<\getpagerefnumber{#2:fim}\relax
+      \TTEndMark{conclusão}%
+    \fi
+    \label{#2:fim}\TTSource{#8}}\\
+  \endlastfoot
+}{\end{longtable}}
+\makeatother
